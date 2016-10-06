@@ -8,20 +8,42 @@
 
 /* Begin PBXBuildFile section */
 		42C3063C1D61324400975758 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C3063B1D61324400975758 /* AppDelegate.swift */; };
-		42C3063E1D61324400975758 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C3063D1D61324400975758 /* ViewController.swift */; };
 		42C306411D61324400975758 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42C3063F1D61324400975758 /* Main.storyboard */; };
 		42C306431D61324400975758 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42C306421D61324400975758 /* Assets.xcassets */; };
 		42C306461D61324400975758 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42C306441D61324400975758 /* LaunchScreen.storyboard */; };
+		4832610F1DA709810075E988 /* NearbyArtCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4832610E1DA709810075E988 /* NearbyArtCollectionViewCell.swift */; };
+		4896B7D41DA70BFE00D4C628 /* InstallationDetailTagsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4896B7D31DA70BFE00D4C628 /* InstallationDetailTagsCell.swift */; };
+		4896B7D61DA70C1200D4C628 /* InstallationDetailNearbyArtCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4896B7D51DA70C1200D4C628 /* InstallationDetailNearbyArtCell.swift */; };
+		48D1B7E81DA47CC200A00DFB /* InstallationCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D1B7E71DA47CC200A00DFB /* InstallationCollectionViewController.swift */; };
+		48D1B7EA1DA47DE400A00DFB /* InstallationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D1B7E91DA47DE400A00DFB /* InstallationCollectionViewCell.swift */; };
+		48D1B7F31DA5558100A00DFB /* ArtInstallation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D1B7F21DA5558100A00DFB /* ArtInstallation.swift */; };
+		48D1B7F51DA5698200A00DFB /* InstallationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D1B7F41DA5698200A00DFB /* InstallationDetailViewController.swift */; };
+		48D1B7FB1DA57D7C00A00DFB /* UIColor+SAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D1B7FA1DA57D7C00A00DFB /* UIColor+SAO.swift */; };
+		48D1B7FE1DA582DF00A00DFB /* DropShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D1B7FD1DA582DF00A00DFB /* DropShadowView.swift */; };
+		48D1B8011DA58CE300A00DFB /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D1B8001DA58CE300A00DFB /* TagView.swift */; };
+		48D1B8041DA596EF00A00DFB /* WrappingStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D1B8031DA596EF00A00DFB /* WrappingStackView.swift */; };
+		48D1B8071DA5AB0600A00DFB /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D1B8061DA5AB0600A00DFB /* TestViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		42C306381D61324400975758 /* Street Art Orlando.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Street Art Orlando.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		42C3063B1D61324400975758 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		42C3063D1D61324400975758 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		42C306401D61324400975758 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		42C306421D61324400975758 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		42C306451D61324400975758 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		42C306471D61324400975758 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4832610E1DA709810075E988 /* NearbyArtCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyArtCollectionViewCell.swift; sourceTree = "<group>"; };
+		4896B7D31DA70BFE00D4C628 /* InstallationDetailTagsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstallationDetailTagsCell.swift; sourceTree = "<group>"; };
+		4896B7D51DA70C1200D4C628 /* InstallationDetailNearbyArtCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstallationDetailNearbyArtCell.swift; sourceTree = "<group>"; };
+		48D1B7E71DA47CC200A00DFB /* InstallationCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstallationCollectionViewController.swift; sourceTree = "<group>"; };
+		48D1B7E91DA47DE400A00DFB /* InstallationCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstallationCollectionViewCell.swift; sourceTree = "<group>"; };
+		48D1B7F21DA5558100A00DFB /* ArtInstallation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtInstallation.swift; sourceTree = "<group>"; };
+		48D1B7F41DA5698200A00DFB /* InstallationDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstallationDetailViewController.swift; sourceTree = "<group>"; };
+		48D1B7FA1DA57D7C00A00DFB /* UIColor+SAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+SAO.swift"; sourceTree = "<group>"; };
+		48D1B7FD1DA582DF00A00DFB /* DropShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropShadowView.swift; sourceTree = "<group>"; };
+		48D1B8001DA58CE300A00DFB /* TagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
+		48D1B8031DA596EF00A00DFB /* WrappingStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrappingStackView.swift; sourceTree = "<group>"; };
+		48D1B8061DA5AB0600A00DFB /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +76,129 @@
 		42C3063A1D61324400975758 /* Street Art Orlando */ = {
 			isa = PBXGroup;
 			children = (
-				42C3063B1D61324400975758 /* AppDelegate.swift */,
-				42C3063D1D61324400975758 /* ViewController.swift */,
+				48D1B7F81DA57D3E00A00DFB /* Library */,
+				48D1B7F11DA5555B00A00DFB /* Model */,
+				48D1B7E51DA47C7500A00DFB /* Controllers */,
+				48D1B7EE1DA54EB400A00DFB /* Storyboards */,
+				48D1B7EF1DA54EC900A00DFB /* Resources */,
+				48D1B7F01DA54EDA00A00DFB /* Supporting Files */,
+			);
+			path = "Street Art Orlando";
+			sourceTree = "<group>";
+		};
+		48D1B7E51DA47C7500A00DFB /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				48D1B8051DA5AAF900A00DFB /* Test */,
+				48D1B7ED1DA4833A00A00DFB /* InstallationDetailViewController */,
+				48D1B7E61DA47C8F00A00DFB /* InstallationCollectionViewController */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		48D1B7E61DA47C8F00A00DFB /* InstallationCollectionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				48D1B7E71DA47CC200A00DFB /* InstallationCollectionViewController.swift */,
+				48D1B7E91DA47DE400A00DFB /* InstallationCollectionViewCell.swift */,
+			);
+			path = InstallationCollectionViewController;
+			sourceTree = "<group>";
+		};
+		48D1B7ED1DA4833A00A00DFB /* InstallationDetailViewController */ = {
+			isa = PBXGroup;
+			children = (
+				48D1B7F41DA5698200A00DFB /* InstallationDetailViewController.swift */,
+				4832610E1DA709810075E988 /* NearbyArtCollectionViewCell.swift */,
+				4896B7D31DA70BFE00D4C628 /* InstallationDetailTagsCell.swift */,
+				4896B7D51DA70C1200D4C628 /* InstallationDetailNearbyArtCell.swift */,
+			);
+			path = InstallationDetailViewController;
+			sourceTree = "<group>";
+		};
+		48D1B7EE1DA54EB400A00DFB /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
 				42C3063F1D61324400975758 /* Main.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		48D1B7EF1DA54EC900A00DFB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
 				42C306421D61324400975758 /* Assets.xcassets */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		48D1B7F01DA54EDA00A00DFB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				42C3063B1D61324400975758 /* AppDelegate.swift */,
 				42C306441D61324400975758 /* LaunchScreen.storyboard */,
 				42C306471D61324400975758 /* Info.plist */,
 			);
-			path = "Street Art Orlando";
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		48D1B7F11DA5555B00A00DFB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				48D1B7F21DA5558100A00DFB /* ArtInstallation.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		48D1B7F81DA57D3E00A00DFB /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				48D1B8021DA596D400A00DFB /* WrappingStackView */,
+				48D1B7FF1DA58CCF00A00DFB /* TagView */,
+				48D1B7FC1DA582B300A00DFB /* DropShadowView */,
+				48D1B7F91DA57D4F00A00DFB /* Extensions */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		48D1B7F91DA57D4F00A00DFB /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				48D1B7FA1DA57D7C00A00DFB /* UIColor+SAO.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		48D1B7FC1DA582B300A00DFB /* DropShadowView */ = {
+			isa = PBXGroup;
+			children = (
+				48D1B7FD1DA582DF00A00DFB /* DropShadowView.swift */,
+			);
+			path = DropShadowView;
+			sourceTree = "<group>";
+		};
+		48D1B7FF1DA58CCF00A00DFB /* TagView */ = {
+			isa = PBXGroup;
+			children = (
+				48D1B8001DA58CE300A00DFB /* TagView.swift */,
+			);
+			path = TagView;
+			sourceTree = "<group>";
+		};
+		48D1B8021DA596D400A00DFB /* WrappingStackView */ = {
+			isa = PBXGroup;
+			children = (
+				48D1B8031DA596EF00A00DFB /* WrappingStackView.swift */,
+			);
+			path = WrappingStackView;
+			sourceTree = "<group>";
+		};
+		48D1B8051DA5AAF900A00DFB /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				48D1B8061DA5AB0600A00DFB /* TestViewController.swift */,
+			);
+			name = Test;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -91,11 +228,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Code For Orlando";
 				TargetAttributes = {
 					42C306371D61324400975758 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = L67Z545F8Q;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -135,8 +274,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42C3063E1D61324400975758 /* ViewController.swift in Sources */,
+				48D1B8071DA5AB0600A00DFB /* TestViewController.swift in Sources */,
+				48D1B7EA1DA47DE400A00DFB /* InstallationCollectionViewCell.swift in Sources */,
+				48D1B7F51DA5698200A00DFB /* InstallationDetailViewController.swift in Sources */,
+				48D1B8041DA596EF00A00DFB /* WrappingStackView.swift in Sources */,
+				4832610F1DA709810075E988 /* NearbyArtCollectionViewCell.swift in Sources */,
+				48D1B7F31DA5558100A00DFB /* ArtInstallation.swift in Sources */,
+				48D1B7FE1DA582DF00A00DFB /* DropShadowView.swift in Sources */,
+				48D1B7FB1DA57D7C00A00DFB /* UIColor+SAO.swift in Sources */,
 				42C3063C1D61324400975758 /* AppDelegate.swift in Sources */,
+				48D1B7E81DA47CC200A00DFB /* InstallationCollectionViewController.swift in Sources */,
+				4896B7D61DA70C1200D4C628 /* InstallationDetailNearbyArtCell.swift in Sources */,
+				4896B7D41DA70BFE00D4C628 /* InstallationDetailTagsCell.swift in Sources */,
+				48D1B8011DA58CE300A00DFB /* TagView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,8 +326,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -222,8 +374,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -242,6 +396,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -251,10 +406,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = L67Z545F8Q;
 				INFOPLIST_FILE = "Street Art Orlando/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.codefororlando.Street-Art-Orlando";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -262,10 +419,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = L67Z545F8Q;
 				INFOPLIST_FILE = "Street Art Orlando/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.codefororlando.Street-Art-Orlando";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -288,6 +447,7 @@
 				42C3064C1D61324400975758 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
