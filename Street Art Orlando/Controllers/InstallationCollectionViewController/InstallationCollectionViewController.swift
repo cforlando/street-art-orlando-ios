@@ -20,6 +20,8 @@ private struct Constants {
     static let menuImage = "VerticalEllipsis"
     
     static let detailSegue = "InstallationDetail"
+    static let menuSegue = "ShowCornerMenu"
+    static let licenseSegue = "ShowLicenseInfo"
 }
 
 class InstallationCollectionViewController: UIViewController {
@@ -29,13 +31,6 @@ class InstallationCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: UIImage(named: Constants.menuImage),
-            style: .plain,
-            target: self,
-            action: #selector(menuTapped(_:))
-        )
-
         navigationController?.navigationBar.barTintColor = UIColor.themeColor
         navigationController?.navigationBar.tintColor = UIColor.white
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
@@ -47,20 +42,50 @@ class InstallationCollectionViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
-    func menuTapped(_ sender: UIBarButtonItem) {
-        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        actionSheet.addAction(UIAlertAction(title: Constants.menuLabels.licenses, style: .default, handler: nil))
-        actionSheet.addAction(UIAlertAction(title: Constants.menuLabels.signOut, style: .default, handler: nil))
-        actionSheet.addAction(UIAlertAction(title: Constants.menuLabels.cancel, style: .cancel, handler: nil))
-            
-        present(actionSheet, animated: true)
-    }
-    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier! {
+        case Constants.detailSegue:
+            if let detailViewController = segue.destination as? InstallationDetailViewController {
+                navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+                
+                if let indexPath = collectionView.indexPathsForSelectedItems?.first {
+                    detailViewController.installation = SampleData.dataSource[indexPath.row]
+                }
+            }
+            
+        case Constants.menuSegue:
+            if let menuViewController = segue.destination as? CornerMenuViewController {
+                menuViewController.transitioningDelegate = menuViewController
+                menuViewController.action = {
+                    [unowned self] (action) in
+                    
+                    switch action {
+                    case .license:
+                        self.dismiss(animated: true) {
+                            self.performSegue(withIdentifier: Constants.licenseSegue, sender: nil)
+                        }
+                        break
+                        
+                    case .signOut:
+                        self.dismiss(animated: true) {
+                            if let mainViewController = self.storyboard?.instantiateViewController(withIdentifier: "SignIn") {
+                                (UIApplication.shared.delegate as! AppDelegate).switchToViewController(viewController: mainViewController)
+                            }
+
+                        }
+                        break
+                    }
+                }
+            }
+            
+        default:
+            break;
+        }
+        
         guard segue.identifier == Constants.detailSegue else { return }
         
         if let detailViewController = segue.destination as? InstallationDetailViewController {

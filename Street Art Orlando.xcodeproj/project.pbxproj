@@ -22,7 +22,11 @@
 		48D1B7FE1DA582DF00A00DFB /* DropShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D1B7FD1DA582DF00A00DFB /* DropShadowView.swift */; };
 		48D1B8011DA58CE300A00DFB /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D1B8001DA58CE300A00DFB /* TagView.swift */; };
 		48D1B8041DA596EF00A00DFB /* WrappingStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D1B8031DA596EF00A00DFB /* WrappingStackView.swift */; };
-		48D1B8071DA5AB0600A00DFB /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D1B8061DA5AB0600A00DFB /* TestViewController.swift */; };
+		48DBA81E1DABE5B300F77B4D /* CornerMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DBA81D1DABE5B300F77B4D /* CornerMenuView.swift */; };
+		48DBA8201DABE5C300F77B4D /* CornerMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48DBA81F1DABE5C300F77B4D /* CornerMenuView.xib */; };
+		48DBA8231DABEAB600F77B4D /* CornerMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DBA8221DABEAB600F77B4D /* CornerMenuViewController.swift */; };
+		48DBA8261DAC04A500F77B4D /* LicensesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DBA8251DAC04A500F77B4D /* LicensesViewController.swift */; };
+		48DBA82C1DAC075F00F77B4D /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DBA82B1DAC075F00F77B4D /* SignInViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,7 +47,11 @@
 		48D1B7FD1DA582DF00A00DFB /* DropShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropShadowView.swift; sourceTree = "<group>"; };
 		48D1B8001DA58CE300A00DFB /* TagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		48D1B8031DA596EF00A00DFB /* WrappingStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrappingStackView.swift; sourceTree = "<group>"; };
-		48D1B8061DA5AB0600A00DFB /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		48DBA81D1DABE5B300F77B4D /* CornerMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CornerMenuView.swift; sourceTree = "<group>"; };
+		48DBA81F1DABE5C300F77B4D /* CornerMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CornerMenuView.xib; sourceTree = "<group>"; };
+		48DBA8221DABEAB600F77B4D /* CornerMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CornerMenuViewController.swift; sourceTree = "<group>"; };
+		48DBA8251DAC04A500F77B4D /* LicensesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicensesViewController.swift; sourceTree = "<group>"; };
+		48DBA82B1DAC075F00F77B4D /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,7 +97,9 @@
 		48D1B7E51DA47C7500A00DFB /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				48D1B8051DA5AAF900A00DFB /* Test */,
+				48DBA82A1DAC073E00F77B4D /* SignInViewController */,
+				48DBA8241DAC048B00F77B4D /* Licenses */,
+				48DBA8211DABEA9100F77B4D /* CornerMenuViewController */,
 				48D1B7ED1DA4833A00A00DFB /* InstallationDetailViewController */,
 				48D1B7E61DA47C8F00A00DFB /* InstallationCollectionViewController */,
 			);
@@ -153,6 +163,7 @@
 		48D1B7F81DA57D3E00A00DFB /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				48DBA81C1DABE59400F77B4D /* CornerMenuView */,
 				48D1B8021DA596D400A00DFB /* WrappingStackView */,
 				48D1B7FF1DA58CCF00A00DFB /* TagView */,
 				48D1B7FC1DA582B300A00DFB /* DropShadowView */,
@@ -193,12 +204,37 @@
 			path = WrappingStackView;
 			sourceTree = "<group>";
 		};
-		48D1B8051DA5AAF900A00DFB /* Test */ = {
+		48DBA81C1DABE59400F77B4D /* CornerMenuView */ = {
 			isa = PBXGroup;
 			children = (
-				48D1B8061DA5AB0600A00DFB /* TestViewController.swift */,
+				48DBA81D1DABE5B300F77B4D /* CornerMenuView.swift */,
+				48DBA81F1DABE5C300F77B4D /* CornerMenuView.xib */,
 			);
-			name = Test;
+			path = CornerMenuView;
+			sourceTree = "<group>";
+		};
+		48DBA8211DABEA9100F77B4D /* CornerMenuViewController */ = {
+			isa = PBXGroup;
+			children = (
+				48DBA8221DABEAB600F77B4D /* CornerMenuViewController.swift */,
+			);
+			path = CornerMenuViewController;
+			sourceTree = "<group>";
+		};
+		48DBA8241DAC048B00F77B4D /* Licenses */ = {
+			isa = PBXGroup;
+			children = (
+				48DBA8251DAC04A500F77B4D /* LicensesViewController.swift */,
+			);
+			path = Licenses;
+			sourceTree = "<group>";
+		};
+		48DBA82A1DAC073E00F77B4D /* SignInViewController */ = {
+			isa = PBXGroup;
+			children = (
+				48DBA82B1DAC075F00F77B4D /* SignInViewController.swift */,
+			);
+			path = SignInViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,6 +297,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48DBA8201DABE5C300F77B4D /* CornerMenuView.xib in Resources */,
 				42C306461D61324400975758 /* LaunchScreen.storyboard in Resources */,
 				42C306431D61324400975758 /* Assets.xcassets in Resources */,
 				42C306411D61324400975758 /* Main.storyboard in Resources */,
@@ -274,7 +311,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48D1B8071DA5AB0600A00DFB /* TestViewController.swift in Sources */,
 				48D1B7EA1DA47DE400A00DFB /* InstallationCollectionViewCell.swift in Sources */,
 				48D1B7F51DA5698200A00DFB /* InstallationDetailViewController.swift in Sources */,
 				48D1B8041DA596EF00A00DFB /* WrappingStackView.swift in Sources */,
@@ -284,9 +320,13 @@
 				48D1B7FB1DA57D7C00A00DFB /* UIColor+SAO.swift in Sources */,
 				42C3063C1D61324400975758 /* AppDelegate.swift in Sources */,
 				48D1B7E81DA47CC200A00DFB /* InstallationCollectionViewController.swift in Sources */,
+				48DBA81E1DABE5B300F77B4D /* CornerMenuView.swift in Sources */,
 				4896B7D61DA70C1200D4C628 /* InstallationDetailNearbyArtCell.swift in Sources */,
+				48DBA8261DAC04A500F77B4D /* LicensesViewController.swift in Sources */,
+				48DBA82C1DAC075F00F77B4D /* SignInViewController.swift in Sources */,
 				4896B7D41DA70BFE00D4C628 /* InstallationDetailTagsCell.swift in Sources */,
 				48D1B8011DA58CE300A00DFB /* TagView.swift in Sources */,
+				48DBA8231DABEAB600F77B4D /* CornerMenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

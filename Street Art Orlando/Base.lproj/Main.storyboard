@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="8SX-DT-g92">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="eH1-CS-XvI">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -10,7 +10,7 @@
         <!--Navigation Controller-->
         <scene sceneID="dal-qW-XHA">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8SX-DT-g92" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="StreetArtCollectionNavController" automaticallyAdjustsScrollViewInsets="NO" id="8SX-DT-g92" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="dgw-jx-r2J">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -25,56 +25,95 @@
             </objects>
             <point key="canvasLocation" x="612" y="45"/>
         </scene>
-        <!--Test View Controller-->
-        <scene sceneID="Awe-T2-9lW">
+        <!--Sign In View Controller-->
+        <scene sceneID="5pA-11-QiY">
             <objects>
-                <viewController id="faZ-jz-plt" customClass="TestViewController" customModule="Street_Art_Orlando" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignIn" id="eH1-CS-XvI" customClass="SignInViewController" customModule="Street_Art_Orlando" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="d0g-jQ-pUD"/>
-                        <viewControllerLayoutGuide type="bottom" id="uds-N4-53l"/>
+                        <viewControllerLayoutGuide type="top" id="T0d-u1-5fN"/>
+                        <viewControllerLayoutGuide type="bottom" id="jp6-Gz-vTu"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="BjO-9v-hwI">
+                    <view key="view" contentMode="scaleToFill" id="3M4-Ar-d45">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L3z-gV-Xit" customClass="TagStackView" customModule="Street_Art_Orlando" customModuleProvider="target">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="tags" value="Scupture;Graffiti;Modern;Limited Time"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="itemSpacing">
-                                        <real key="value" value="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="lineSpacing">
-                                        <real key="value" value="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BIP-tu-SIk" customClass="TagView" customModule="Street_Art_Orlando" customModuleProvider="target">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="text" value="Testing Tag"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
-                                        <real key="value" value="14"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Etg-sf-QRU">
+                                <frame key="frameInset" minX="164" minY="318" width="47" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Sign In"/>
+                                <connections>
+                                    <action selector="signIn:" destination="eH1-CS-XvI" eventType="touchUpInside" id="CJN-Ar-Ggk"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="BIP-tu-SIk" firstAttribute="leading" secondItem="BjO-9v-hwI" secondAttribute="leadingMargin" id="Ihd-PP-uVd"/>
-                            <constraint firstItem="L3z-gV-Xit" firstAttribute="trailing" secondItem="BjO-9v-hwI" secondAttribute="trailingMargin" id="g48-z1-HxK"/>
-                            <constraint firstItem="L3z-gV-Xit" firstAttribute="top" secondItem="BIP-tu-SIk" secondAttribute="bottom" constant="45.5" id="kX5-RW-hlB"/>
-                            <constraint firstItem="BIP-tu-SIk" firstAttribute="top" secondItem="d0g-jQ-pUD" secondAttribute="bottom" id="qSd-kj-fZV"/>
-                            <constraint firstItem="L3z-gV-Xit" firstAttribute="leading" secondItem="BjO-9v-hwI" secondAttribute="leadingMargin" id="r2l-1l-Pok"/>
-                        </constraints>
                     </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="D3R-tW-6Mf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="617" y="-625"/>
+        </scene>
+        <!--Corner Menu View Controller-->
+        <scene sceneID="Nsg-4u-Dce">
+            <objects>
+                <viewController id="6DM-mq-dcO" customClass="CornerMenuViewController" customModule="Street_Art_Orlando" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fsK-nR-kgf"/>
+                        <viewControllerLayoutGuide type="bottom" id="X75-5q-mIU"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="qU6-zM-ExO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NkR-qU-AW8">
+                                <frame key="frameInset" minX="195" minY="64" width="160" height="104"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3UE-D9-YFR">
+                                        <frame key="frameInset" minX="12" minY="12" width="80" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Licenses">
+                                            <color key="titleColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="licensesTapped:" destination="6DM-mq-dcO" eventType="touchUpInside" id="Wmf-iF-FEt"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k93-Ko-u9y">
+                                        <frame key="frameInset" minX="12" minY="56" width="78" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Sign Out">
+                                            <color key="titleColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="signOutTapped:" destination="6DM-mq-dcO" eventType="touchUpInside" id="LPx-kB-DjA"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="S2X-6g-6KQ" appends="YES" id="cdI-OB-Znx"/>
+                        </connections>
+                    </view>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="tagViewStack" destination="L3z-gV-Xit" id="DmI-Jq-jrH"/>
+                        <outlet property="menuView" destination="NkR-qU-AW8" id="rv4-OD-4hW"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="PvL-Li-HPT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q5o-xt-6YB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="S2X-6g-6KQ">
+                    <connections>
+                        <action selector="tapToDismissHandler:" destination="6DM-mq-dcO" id="Mgl-6m-M4P"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="623.20000000000005" y="701.19940029985014"/>
+            <point key="canvasLocation" x="1432.8" y="-659.82008995502258"/>
         </scene>
         <!--Street Art Orlando-->
         <scene sceneID="qgp-hU-Ghp">
@@ -154,14 +193,60 @@
                             <constraint firstItem="AuC-1H-K4a" firstAttribute="top" secondItem="Dtf-RA-JWy" secondAttribute="top" id="lel-rk-drE"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Street Art Orlando" id="TSz-Z3-Vas"/>
+                    <navigationItem key="navigationItem" title="Street Art Orlando" id="TSz-Z3-Vas">
+                        <barButtonItem key="rightBarButtonItem" image="VerticalEllipsis" id="3Wk-ww-qv8">
+                            <connections>
+                                <segue destination="6DM-mq-dcO" kind="presentation" identifier="ShowCornerMenu" modalPresentationStyle="overCurrentContext" id="Ykb-Dw-ylt"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="AuC-1H-K4a" id="bgA-yD-ndm"/>
+                        <segue destination="Dp3-7R-Mgb" kind="presentation" identifier="ShowLicenseInfo" id="MzQ-Xn-SIk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uJW-FW-hmG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1387" y="45"/>
+        </scene>
+        <!--Licenses-->
+        <scene sceneID="21K-LC-eGJ">
+            <objects>
+                <viewController id="ZmU-7l-jhx" customClass="LicensesViewController" customModule="Street_Art_Orlando" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hPt-XU-nWB"/>
+                        <viewControllerLayoutGuide type="bottom" id="LLS-dJ-72y"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="LTz-62-ojM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HJ8-0I-RXA">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <mutableString key="text">Licenses  Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="HJ8-0I-RXA" firstAttribute="trailing" secondItem="LTz-62-ojM" secondAttribute="trailingMargin" id="0ba-ZM-2qQ"/>
+                            <constraint firstItem="HJ8-0I-RXA" firstAttribute="leading" secondItem="LTz-62-ojM" secondAttribute="leadingMargin" id="ED2-6i-cil"/>
+                            <constraint firstItem="HJ8-0I-RXA" firstAttribute="top" secondItem="hPt-XU-nWB" secondAttribute="bottom" constant="8" symbolic="YES" id="MfA-kl-9s3"/>
+                            <constraint firstItem="LLS-dJ-72y" firstAttribute="top" secondItem="HJ8-0I-RXA" secondAttribute="bottom" constant="8" symbolic="YES" id="Q6t-Gz-rJv"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Licenses" id="SQ0-x9-QBU">
+                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="pj5-rj-pyW">
+                            <connections>
+                                <action selector="done:" destination="ZmU-7l-jhx" id="Uff-Lw-si0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l6c-KW-u2R" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3679.1999999999998" y="-459.22038980509751"/>
         </scene>
         <!--Installation Detail View Controller-->
         <scene sceneID="42v-xn-avT">
@@ -477,7 +562,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eod-Wf-kLM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2056.8000000000002" y="44.527736131934034"/>
+            <point key="canvasLocation" x="2390" y="184"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="yjJ-q4-WvB">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Dp3-7R-Mgb" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="dRm-fY-k94">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ZmU-7l-jhx" kind="relationship" relationship="rootViewController" id="xY7-RC-ur8"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="spR-ly-oRz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2740" y="-459.22038980509751"/>
         </scene>
     </scenes>
     <resources>
@@ -485,5 +588,6 @@
         <image name="HeartIcon" width="30" height="30"/>
         <image name="LocationIcon" width="30" height="30"/>
         <image name="TagIcon" width="30" height="30"/>
+        <image name="VerticalEllipsis" width="44" height="44"/>
     </resources>
 </document>
