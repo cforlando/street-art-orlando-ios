@@ -42,6 +42,11 @@ class InstallationCollectionViewController: UIViewController {
         navigationController?.navigationBar.barStyle = .black
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
     func menuTapped(_ sender: UIBarButtonItem) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         actionSheet.addAction(UIAlertAction(title: Constants.menuLabels.licenses, style: .default, handler: nil))
