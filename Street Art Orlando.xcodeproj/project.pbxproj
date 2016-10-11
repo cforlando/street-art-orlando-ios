@@ -27,6 +27,7 @@
 		48DBA8231DABEAB600F77B4D /* CornerMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DBA8221DABEAB600F77B4D /* CornerMenuViewController.swift */; };
 		48DBA8261DAC04A500F77B4D /* LicensesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DBA8251DAC04A500F77B4D /* LicensesViewController.swift */; };
 		48DBA82C1DAC075F00F77B4D /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DBA82B1DAC075F00F77B4D /* SignInViewController.swift */; };
+		48DBA82F1DAC0BAA00F77B4D /* AddTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DBA82E1DAC0BAA00F77B4D /* AddTagViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		48DBA8221DABEAB600F77B4D /* CornerMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CornerMenuViewController.swift; sourceTree = "<group>"; };
 		48DBA8251DAC04A500F77B4D /* LicensesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicensesViewController.swift; sourceTree = "<group>"; };
 		48DBA82B1DAC075F00F77B4D /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		48DBA82E1DAC0BAA00F77B4D /* AddTagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTagViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 		48D1B7E51DA47C7500A00DFB /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				48DBA82D1DAC0B8300F77B4D /* AddTagViewController */,
 				48DBA82A1DAC073E00F77B4D /* SignInViewController */,
 				48DBA8241DAC048B00F77B4D /* Licenses */,
 				48DBA8211DABEA9100F77B4D /* CornerMenuViewController */,
@@ -237,6 +240,14 @@
 			path = SignInViewController;
 			sourceTree = "<group>";
 		};
+		48DBA82D1DAC0B8300F77B4D /* AddTagViewController */ = {
+			isa = PBXGroup;
+			children = (
+				48DBA82E1DAC0BAA00F77B4D /* AddTagViewController.swift */,
+			);
+			path = AddTagViewController;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -323,6 +334,7 @@
 				48DBA81E1DABE5B300F77B4D /* CornerMenuView.swift in Sources */,
 				4896B7D61DA70C1200D4C628 /* InstallationDetailNearbyArtCell.swift in Sources */,
 				48DBA8261DAC04A500F77B4D /* LicensesViewController.swift in Sources */,
+				48DBA82F1DAC0BAA00F77B4D /* AddTagViewController.swift in Sources */,
 				48DBA82C1DAC075F00F77B4D /* SignInViewController.swift in Sources */,
 				4896B7D41DA70BFE00D4C628 /* InstallationDetailTagsCell.swift in Sources */,
 				48D1B8011DA58CE300A00DFB /* TagView.swift in Sources */,

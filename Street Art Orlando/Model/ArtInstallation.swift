@@ -29,6 +29,22 @@ struct ArtInstallation {
     var primaryImage: UIImage? {
         return UIImage(named: imageNames.first ?? "ImageNotFound")
     }
+    
+    func separatedTagsString() -> String {
+        var tagsString: String = ""
+        
+        for tag in tags {
+            if !tag.tagName.isEmpty {
+                if !tagsString.isEmpty {
+                    tagsString += ";"
+                }
+                
+                tagsString += tag.tagName
+            }
+        }
+        
+        return tagsString
+    }
 }
 
 struct SampleData {
@@ -36,7 +52,12 @@ struct SampleData {
         ArtInstallation(
             imageNames: ["1"],
             location: SAOLocation(locationName: "201 S Rosalind Ave"),
-            tags: [],
+            tags: [
+                SAOTag(tagName: "Scupture"),
+                SAOTag(tagName: "Graffiti"),
+                SAOTag(tagName: "Modern"),
+                SAOTag(tagName: "Limited Time")
+            ],
             likes: 0,
             nearbyArt: []
         ),

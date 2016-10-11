@@ -10,15 +10,9 @@ import UIKit
 
 class InstallationDetailTagsCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    @IBOutlet weak var tagsView: TagStackView!
+    
+    func configure(withInstallation installation: ArtInstallation) {
+        tagsView.tags = installation.separatedTagsString()
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

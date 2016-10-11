@@ -58,12 +58,26 @@ class InstallationDetailViewController: UIViewController {
     }
     
     @IBAction func tag(_ sender: UIButton) {
+        performSegue(withIdentifier: Identifiers.addTagSegue, sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Identifiers.addTagSegue {
+            if let addTagViewController = segue.destination as? AddTagViewController {
+                addTagViewController.transitioningDelegate = addTagViewController
+                addTagViewController.addTagString = { [unowned self] (tagString) in
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }
+        }
     }
 }
 
-private struct CellIdentifiers {
+private struct Identifiers {
     static let tagsCell = "TagsCell"
     static let nearCell = "NearbyArtCell"
+    
+    static let addTagSegue = "AddTag"
 }
 
 extension InstallationDetailViewController: UITableViewDataSource, UITableViewDelegate {
@@ -73,11 +87,15 @@ extension InstallationDetailViewController: UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.tagsCell, for: indexPath) as! InstallationDetailTagsCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.tagsCell, for: indexPath) as! InstallationDetailTagsCell
+
+            if let installation = installation {
+                cell.configure(withInstallation: installation)
+            }
             
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.nearCell, for: indexPath) as! InstallationDetailNearbyArtCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.nearCell, for: indexPath) as! InstallationDetailNearbyArtCell
             
             return cell
         }

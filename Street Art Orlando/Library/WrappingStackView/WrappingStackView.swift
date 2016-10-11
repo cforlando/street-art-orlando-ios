@@ -34,12 +34,14 @@ class TagStackView: UIView {
             let tagStrings = tags.components(separatedBy: ";")
             print(tagStrings)
             for tagString in tagStrings {
-                let tagView = TagView()
-                tagView.text = tagString
-                tagView.sizeToFit()
-                
-                tagViews.append(tagView)
-                addSubview(tagView)
+                if !tagString.isEmpty {
+                    let tagView = TagView()
+                    tagView.text = tagString
+                    tagView.sizeToFit()
+                    
+                    tagViews.append(tagView)
+                    addSubview(tagView)
+                }
             }
             
             invalidateIntrinsicContentSize()

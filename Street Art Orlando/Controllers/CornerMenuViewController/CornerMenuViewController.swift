@@ -82,14 +82,14 @@ class CornerMenuAnimatedTransitionController : NSObject, UIViewControllerAnimate
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        let containerView = transitionContext.containerView
+        
         let duration = transitionDuration(using: transitionContext)
         if !reverse {
             if let toView = transitionContext.view(forKey: .to),
                 let toViewController = transitionContext.viewController(forKey: .to) as? CornerMenuViewController {
                 
                 toView.frame = transitionContext.finalFrame(for: toViewController)
-                containerView.addSubview(toView)
+                transitionContext.containerView.addSubview(toView)
                 toView.backgroundColor = UIColor(white: 0.0, alpha: 0.0)
                 toViewController.closeMenu()
                 
