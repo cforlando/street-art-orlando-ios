@@ -72,32 +72,28 @@ class AddTagAnimatedTransitionController: NSObject, UIViewControllerAnimatedTran
         if !reverse {
             if let toView = transitionContext.view(forKey: .to),
                 let toViewController = transitionContext.viewController(forKey: .to) as? AddTagViewController {
-                toView.alpha = 0
+                toView.backgroundColor = UIColor.clear
                 toView.frame = transitionContext.finalFrame(for: toViewController)
                 containerView.addSubview(toView)
                 
                 toViewController.prepareForAnimation()
                 
                 UIView.animate(
-                    withDuration: duration / 2,
+                    withDuration: duration * 0.7,
                     delay: 0,
-                    usingSpringWithDamping: 1,
-                    initialSpringVelocity: 6,
                     options: .curveEaseOut,
                     animations: {
-                        toView.alpha = 1
+                        toView.backgroundColor = UIColor(white: 0, alpha: 0.3)
                     },
-                    completion: { (completed) in
-                        transitionContext.completeTransition(completed)
-                })
-                
-                
+                    completion: nil)
+
+
                 UIView.animate(
                     withDuration: duration,
                     delay: 0,
                     usingSpringWithDamping: 0.7,
                     initialSpringVelocity: 6,
-                    options: .curveEaseOut,
+                    options: .curveLinear,
                     animations: {
                         toViewController.centerInputView()
                     },
@@ -108,12 +104,11 @@ class AddTagAnimatedTransitionController: NSObject, UIViewControllerAnimatedTran
             }
         } else {
             if let fromView = transitionContext.view(forKey: .from) {
+                
                 UIView.animate(
                     withDuration: duration,
                     delay: 0,
-                    usingSpringWithDamping: 1,
-                    initialSpringVelocity: 6,
-                    options: .curveEaseOut,
+                    options: .curveLinear,
                     animations: {
                         fromView.alpha = 0
                     },
@@ -125,3 +120,49 @@ class AddTagAnimatedTransitionController: NSObject, UIViewControllerAnimatedTran
         }
     }
 }
+
+
+// If built for iOS 10+ then use these instead
+// - FORWARD
+//                let fadeAnimator = UIViewPropertyAnimator(
+//                    duration: duration * 0.8,
+//                    curve: .easeOut
+//                ) {
+//                    toView.backgroundColor = UIColor(white: 0, alpha: 0.3)
+//                }
+//
+//                fadeAnimator.startAnimation()
+//
+//                let bounceTiming = UISpringTimingParameters (
+//                    dampingRatio: 0.7,
+//                    initialVelocity: CGVector(dx: 6, dy: 6)
+//                )
+//
+//                let bounceUpAnimator = UIViewPropertyAnimator (
+//                    duration: duration,
+//                    timingParameters: bounceTiming
+//                )
+//
+//                bounceUpAnimator.addAnimations {
+//                    toViewController.centerInputView()
+//                }
+//
+//                bounceUpAnimator.addCompletion { (_) in
+//                    transitionContext.completeTransition(true)
+//                }
+//
+//                bounceUpAnimator.startAnimation()
+//
+// - REVERSE
+//                let fadeAnimator = UIViewPropertyAnimator(
+//                    duration: duration * 0.8,
+//                    curve: .linear
+//                ) {
+//                    fromView.alpha = 0
+//                }
+//
+//                fadeAnimator.addCompletion { (_) in
+//                    transitionContext.completeTransition(true)
+//                }
+//
+//                fadeAnimator.startAnimation()

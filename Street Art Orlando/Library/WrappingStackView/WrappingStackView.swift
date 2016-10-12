@@ -32,7 +32,7 @@ class TagStackView: UIView {
             tagViews = []
             
             let tagStrings = tags.components(separatedBy: ";")
-            print(tagStrings)
+            
             for tagString in tagStrings {
                 if !tagString.isEmpty {
                     let tagView = TagView()
