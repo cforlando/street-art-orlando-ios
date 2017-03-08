@@ -28,6 +28,7 @@
 		48DBA8261DAC04A500F77B4D /* LicensesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DBA8251DAC04A500F77B4D /* LicensesViewController.swift */; };
 		48DBA82C1DAC075F00F77B4D /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DBA82B1DAC075F00F77B4D /* SignInViewController.swift */; };
 		48DBA82F1DAC0BAA00F77B4D /* AddTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DBA82E1DAC0BAA00F77B4D /* AddTagViewController.swift */; };
+		BFA2ACAC1E7081580093E47A /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA2ACAB1E7081580093E47A /* ApiClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		48DBA8251DAC04A500F77B4D /* LicensesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicensesViewController.swift; sourceTree = "<group>"; };
 		48DBA82B1DAC075F00F77B4D /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		48DBA82E1DAC0BAA00F77B4D /* AddTagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTagViewController.swift; sourceTree = "<group>"; };
+		BFA2ACAB1E7081580093E47A /* ApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApiClient.swift; path = API/ApiClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				48D1B7F81DA57D3E00A00DFB /* Library */,
+				BFA2ACAA1E707CCF0093E47A /* API */,
 				48D1B7F11DA5555B00A00DFB /* Model */,
 				48D1B7E51DA47C7500A00DFB /* Controllers */,
 				48D1B7EE1DA54EB400A00DFB /* Storyboards */,
@@ -248,6 +251,14 @@
 			path = AddTagViewController;
 			sourceTree = "<group>";
 		};
+		BFA2ACAA1E707CCF0093E47A /* API */ = {
+			isa = PBXGroup;
+			children = (
+				BFA2ACAB1E7081580093E47A /* ApiClient.swift */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -333,6 +344,7 @@
 				48D1B7E81DA47CC200A00DFB /* InstallationCollectionViewController.swift in Sources */,
 				48DBA81E1DABE5B300F77B4D /* CornerMenuView.swift in Sources */,
 				4896B7D61DA70C1200D4C628 /* InstallationDetailNearbyArtCell.swift in Sources */,
+				BFA2ACAC1E7081580093E47A /* ApiClient.swift in Sources */,
 				48DBA8261DAC04A500F77B4D /* LicensesViewController.swift in Sources */,
 				48DBA82F1DAC0BAA00F77B4D /* AddTagViewController.swift in Sources */,
 				48DBA82C1DAC075F00F77B4D /* SignInViewController.swift in Sources */,
