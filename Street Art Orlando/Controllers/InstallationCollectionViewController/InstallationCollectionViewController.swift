@@ -27,6 +27,7 @@ private struct Constants {
 }
 
 class InstallationCollectionViewController: UIViewController {
+  fileprivate var _installations: [ArtInstallation]?
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -37,6 +38,20 @@ class InstallationCollectionViewController: UIViewController {
         navigationController?.navigationBar.tintColor = UIColor.white
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
         navigationController?.navigationBar.barStyle = .black
+      
+      ApiClient.shared().fetchInstallations { [weak self] result in
+        switch result {
+        case .Failure(let error):
+          // TODO(jpr): auto retry? show user error with a retry button?
+          print("Error fetching installations: \(error)")
+        case .Success(let installations):
+          print("Successfully fetched \(installations.count) installations")
+          if let sSelf = self {
+            sSelf._installations = installations
+            sSelf.collectionView.reloadData()
+          }
+        }
+      }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,7 +70,7 @@ class InstallationCollectionViewController: UIViewController {
                 navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
                 
                 if let indexPath = collectionView.indexPathsForSelectedItems?.first {
-                    detailViewController.installation = SampleData.dataSource[indexPath.row]
+                  detailViewController.installation = _installations?[indexPath.row]
                 }
             }
             
@@ -94,28 +109,26 @@ class InstallationCollectionViewController: UIViewController {
             navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
             
             if let indexPath = collectionView.indexPathsForSelectedItems?.first {
-                detailViewController.installation = SampleData.dataSource[indexPath.row]
+              detailViewController.installation = _installations?[indexPath.row]
             }
         }
     }
 }
 
 extension InstallationCollectionViewController : UICollectionViewDataSource, UICollectionViewDelegate {
-
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return SampleData.dataSource.count
+      return (_installations ?? []).count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.cellReuseIdentifier, for: indexPath) as! InstallationCollectionViewCell
+      assert(_installations?[indexPath.row] != nil, "Unable to retrieve insallation for indexpath: \(indexPath)")
+      let installation = _installations![indexPath.row] as ArtInstallation
+      
+      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.cellReuseIdentifier, for: indexPath) as! InstallationCollectionViewCell
+      cell.imageView.image = installation.primaryImage
+      cell.locationLabel.text = installation.location.locationName
         
-        let installation = SampleData.dataSource[indexPath.row]
-        
-        
-        cell.imageView.image = installation.primaryImage
-        cell.locationLabel.text = installation.location.locationName
-        
-        return cell
+      return cell
     }
 }
 
