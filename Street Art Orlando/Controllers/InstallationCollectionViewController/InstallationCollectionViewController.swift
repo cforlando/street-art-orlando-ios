@@ -18,10 +18,12 @@ private struct Constants {
     }
     
     static let menuImage = "VerticalEllipsis"
-    
-    static let detailSegue = "InstallationDetail"
-    static let menuSegue = "ShowCornerMenu"
-    static let licenseSegue = "ShowLicenseInfo"
+  
+  struct segues {
+    static let detail = "InstallationDetail"
+    static let menu = "ShowCornerMenu"
+    static let license = "ShowLicenseInfo"
+  }
 }
 
 class InstallationCollectionViewController: UIViewController {
@@ -48,7 +50,7 @@ class InstallationCollectionViewController: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier! {
-        case Constants.detailSegue:
+        case Constants.segues.detail:
             if let detailViewController = segue.destination as? InstallationDetailViewController {
                 navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
                 
@@ -57,7 +59,7 @@ class InstallationCollectionViewController: UIViewController {
                 }
             }
             
-        case Constants.menuSegue:
+        case Constants.segues.menu:
             if let menuViewController = segue.destination as? CornerMenuViewController {
                 menuViewController.transitioningDelegate = menuViewController
                 menuViewController.action = {
@@ -66,7 +68,7 @@ class InstallationCollectionViewController: UIViewController {
                     switch action {
                     case .license:
                         self.dismiss(animated: true) {
-                            self.performSegue(withIdentifier: Constants.licenseSegue, sender: nil)
+                            self.performSegue(withIdentifier: Constants.segues.license, sender: nil)
                         }
                         break
                         
@@ -86,7 +88,7 @@ class InstallationCollectionViewController: UIViewController {
             break;
         }
         
-        guard segue.identifier == Constants.detailSegue else { return }
+        guard segue.identifier == Constants.segues.detail else { return }
         
         if let detailViewController = segue.destination as? InstallationDetailViewController {
             navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
