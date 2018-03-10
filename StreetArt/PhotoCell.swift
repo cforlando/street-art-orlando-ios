@@ -1,0 +1,102 @@
+//
+//  PhotoCell.swift
+//  StreetArt
+//
+//  Created by Axel Rivera on 3/6/18.
+//  Copyright © 2018 Axel Rivera. All rights reserved.
+//
+
+import UIKit
+import SnapKit
+
+class PhotoCell: UICollectionViewCell {
+
+    struct Constants {
+        static let height: CGFloat = 250.0
+    }
+
+    var imageView: UIImageView!
+    var textView: UIView!
+    var textLabel: UILabel!
+
+    var overlayView: UIView!
+
+    convenience init() {
+        self.init(frame: .zero)
+    }
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+
+        self.layer.cornerRadius = 3.0
+        self.layer.masksToBounds = true
+
+        overlayView = UIView()
+        overlayView.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        overlayView.alpha = 0
+
+        self.contentView.addSubview(overlayView)
+
+        imageView = UIImageView()
+        imageView.backgroundColor = .gray
+
+        self.contentView.addSubview(imageView)
+
+        textView = UIView()
+        textView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+
+        self.contentView.addSubview(textView)
+
+        textLabel = UILabel()
+        textLabel.font = UIFont.systemFont(ofSize: 14.0)
+        textLabel.textColor = .white
+        textLabel.numberOfLines = 2
+        textLabel.textAlignment = .center
+
+        textView.addSubview(textLabel)
+
+        // AutoLayout
+
+        overlayView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+
+        imageView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+
+        textView.snp.makeConstraints { (make) in
+            make.height.equalTo(44.0)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+
+        textLabel.snp.makeConstraints { (make) in
+            make.left.equalToSuperview().offset(5.0)
+            make.right.equalToSuperview().offset(5.0)
+            make.centerY.equalToSuperview()
+        }
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+
+    override var isHighlighted: Bool {
+        willSet(newValue) {
+            if newValue {
+                self.contentView.bringSubview(toFront: overlayView)
+                overlayView.alpha = 1.0
+            } else {
+                self.contentView.sendSubview(toBack: overlayView)
+                overlayView.alpha = 0.0
+            }
+        }
+    }
+
+}
+
+extension PhotoCell {
+
+}
