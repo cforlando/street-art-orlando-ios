@@ -19,6 +19,7 @@
 		1670D968204F97B900E223ED /* StreetArt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1670D967204F97B900E223ED /* StreetArt.swift */; };
 		1684513E2054534900013A07 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 1684513D2054534900013A07 /* UIImage+Resize.m */; };
 		168451412054545400013A07 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168451402054545400013A07 /* AppConfig.swift */; };
+		16845145205483BB00013A07 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16845144205483BB00013A07 /* PhotoViewController.swift */; };
 		16AB45B1205217DC008B6F8C /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AB45B0205217DC008B6F8C /* UIColor+Additions.swift */; };
 		16AB45B3205217FA008B6F8C /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AB45B2205217FA008B6F8C /* Utils.swift */; };
 		16AB45B52052182E008B6F8C /* FileUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AB45B42052182E008B6F8C /* FileUtils.swift */; };
@@ -60,6 +61,7 @@
 		1684513D2054534900013A07 /* UIImage+Resize.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
 		168451402054545400013A07 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		168451422054574B00013A07 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		16845144205483BB00013A07 /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		16AB45B0205217DC008B6F8C /* UIColor+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
 		16AB45B2205217FA008B6F8C /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		16AB45B42052182E008B6F8C /* FileUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUtils.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 			children = (
 				1670D93A204F698200E223ED /* MainViewController.swift */,
 				1670D965204F96E300E223ED /* AddViewController.swift */,
+				16845144205483BB00013A07 /* PhotoViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -175,9 +178,9 @@
 		1670D963204F96A800E223ED /* Constants */ = {
 			isa = PBXGroup;
 			children = (
+				168451402054545400013A07 /* AppConfig.swift */,
 				1670D958204F6B5B00E223ED /* Strings.swift */,
 				16AB45B6205218A4008B6F8C /* Color.swift */,
-				168451402054545400013A07 /* AppConfig.swift */,
 			);
 			name = Constants;
 			sourceTree = "<group>";
@@ -458,6 +461,7 @@
 				1684513E2054534900013A07 /* UIImage+Resize.m in Sources */,
 				16E600232050C1160002B4F0 /* PhotoUploadCell.swift in Sources */,
 				16AB45B1205217DC008B6F8C /* UIColor+Additions.swift in Sources */,
+				16845145205483BB00013A07 /* PhotoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

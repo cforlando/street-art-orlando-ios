@@ -12,7 +12,7 @@ import SnapKit
 class PhotoCell: UICollectionViewCell {
 
     struct Constants {
-        static let height: CGFloat = 250.0
+        static let height: CGFloat = Defaults.defaultImageHeight
     }
 
     var imageView: UIImageView!
@@ -39,6 +39,8 @@ class PhotoCell: UICollectionViewCell {
 
         imageView = UIImageView()
         imageView.backgroundColor = .gray
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
 
         self.contentView.addSubview(imageView)
 
@@ -74,7 +76,7 @@ class PhotoCell: UICollectionViewCell {
 
         textLabel.snp.makeConstraints { (make) in
             make.left.equalToSuperview().offset(5.0)
-            make.right.equalToSuperview().offset(5.0)
+            make.right.equalToSuperview().offset(-5.0)
             make.centerY.equalToSuperview()
         }
     }
@@ -98,5 +100,10 @@ class PhotoCell: UICollectionViewCell {
 }
 
 extension PhotoCell {
+
+    func set(streetArt: StreetArt?) {
+        imageView.image = streetArt?.image
+        textLabel.text = streetArt?.name
+    }
 
 }

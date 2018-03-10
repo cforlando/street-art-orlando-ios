@@ -19,6 +19,8 @@ class MainViewController: UIViewController {
     var collectionView: UICollectionView!
     var flowLayout: UICollectionViewFlowLayout!
 
+    var dataSource = ContentSectionArray()
+
     var shouldUpdateConstraints = true
 
     init() {
@@ -53,7 +55,7 @@ class MainViewController: UIViewController {
         flowLayout.minimumInteritemSpacing = Constants.spacing
 
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        collectionView.backgroundColor = .lightGray
+        collectionView.backgroundColor = Color.secondary.withAlphaComponent(0.2)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -65,6 +67,8 @@ class MainViewController: UIViewController {
         collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: CellIdentifier)
 
         self.view.addSubview(collectionView)
+
+        updateDataSource()
     }
 
     override func viewWillLayoutSubviews() {
@@ -87,6 +91,29 @@ class MainViewController: UIViewController {
 }
 
 // MARK: -
+
+extension MainViewController {
+
+    func updateDataSource() {
+        var content: ContentRow!
+        var rows = ContentRowArray()
+        var sections = ContentSectionArray()
+
+        for _ in 0..<25 {
+            content = ContentRow(object: StreetArt.sample)
+            content.identifier = CellIdentifier
+
+            rows.append(content)
+        }
+
+        sections.append(ContentSection(title: nil, rows: rows))
+
+        dataSource = sections
+        collectionView.reloadData()
+    }
+
+}
+
 // MARK: Selector Methods
 
 extension MainViewController {
@@ -125,18 +152,26 @@ extension MainViewController {
 extension MainViewController: UICollectionViewDataSource {
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return dataSource.count
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return dataSource[section].rows.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier, for: indexPath) as! PhotoCell
-        cell.textLabel.text = "Sample Text"
+        let row = dataSource[indexPath.section].rows[indexPath.row]
+        let identifier = row.identifier ?? String()
 
-        return cell
+        if identifier == CellIdentifier {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier, for: indexPath) as! PhotoCell
+
+            cell.set(streetArt: row.object as? StreetArt)
+
+            return cell
+        }
+
+        return UICollectionViewCell()
     }
 
 }
@@ -146,7 +181,20 @@ extension MainViewController: UICollectionViewDataSource {
 extension MainViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        let row = dataSource[indexPath.section].rows[indexPath.row]
+        let identifier = row.identifier ?? String()
+
+        switch identifier {
+        case CellIdentifier:
+            guard let streetArt = row.object as? StreetArt else {
+                return
+            }
+
+            let controller = PhotoViewController(streetArt: streetArt)
+            self.navigationController?.pushViewController(controller, animated: true)
+        default:
+            break
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {

@@ -11,7 +11,7 @@ import UIKit
 class PhotoUploadCell: UITableViewCell {
 
     struct Constants {
-        static let height: CGFloat = 250.0
+        static let height: CGFloat = Defaults.defaultImageHeight
     }
 
     var photoImageView: UIImageView!

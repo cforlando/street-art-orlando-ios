@@ -8,6 +8,7 @@
 
 import UIKit
 
-struct Constants {
-    static let maxImageHeightInPixels: CGFloat = 2048
+struct Defaults {
+    static let maxImageResizeInPixels: CGFloat = 2048.0
+    static let defaultImageHeight: CGFloat = 250.0
 }

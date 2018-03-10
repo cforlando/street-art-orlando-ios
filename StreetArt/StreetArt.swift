@@ -11,5 +11,23 @@ import Foundation
 class StreetArt {
 
     var name = String()
+    var image = UIImage()
+
+    init() {
+        // Empty Object
+    }
+
+    init(name: String, image: UIImage) {
+        self.name = name
+        self.image = image
+    }
+
+}
+
+extension StreetArt {
+
+    class var sample: StreetArt {
+        return StreetArt(name: "Fight Club by Danny Rock", image: #imageLiteral(resourceName: "mills50-art"))
+    }
 
 }

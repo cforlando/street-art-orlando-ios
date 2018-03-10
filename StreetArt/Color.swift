@@ -9,7 +9,8 @@
 import UIKit
 
 struct Color {
-    static let highlight = UIColor(hexString: "260354")
+    static let highlight = UIColor(hexString: "612B9B")
+    static let secondary = UIColor(hexString: "FFE198")
     static let text = UIColor.darkText
     static let support = UIColor.lightText
     static let tableSeparator = UIColor(hexString: "c8c7cc")

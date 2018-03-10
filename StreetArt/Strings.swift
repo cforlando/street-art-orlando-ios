@@ -17,6 +17,8 @@ let EDIT_TITLE = "Edit Art"
 
 let SELECT_PHOTO_ALERT_TITLE = "Select photo from:"
 
+let PHOTO_TITLE = "Street Art"
+
 let OK_TEXT = "Ok"
 let SUBMIT_TEXT = "Submit"
 let SAVE_TEXT = "Save"

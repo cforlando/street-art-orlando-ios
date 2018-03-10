@@ -344,7 +344,7 @@ extension AddViewController: UIImagePickerControllerDelegate, UINavigationContro
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            self.image = image.cfo_scaleAndRotate(withMaxResolution: Constants.maxImageHeightInPixels)
+            self.image = image.cfo_scaleAndRotate(withMaxResolution: Defaults.maxImageResizeInPixels)
             updateDataSource()
         }
 
