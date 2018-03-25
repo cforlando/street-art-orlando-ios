@@ -15,13 +15,14 @@ class MainViewController: UIViewController {
     }
 
     let CellIdentifier = "Cell"
+    let LoadingIdentifier = "Loading"
 
     var collectionView: UICollectionView!
     var flowLayout: UICollectionViewFlowLayout!
 
-    var dataSource = ContentSectionArray()
+    var loadingView: LoadingSubmissionsView!
 
-    var shouldUpdateConstraints = true
+    var dataSource = ContentSectionArray()
 
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -49,6 +50,8 @@ class MainViewController: UIViewController {
             action: #selector(addAction(_:))
         )
 
+        loadingView = LoadingSubmissionsView()
+
         flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
         flowLayout.minimumLineSpacing = Constants.spacing
@@ -66,20 +69,24 @@ class MainViewController: UIViewController {
 
         collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: CellIdentifier)
 
+        collectionView.register(LoadingSubmissionsView.self,
+                                forSupplementaryViewOfKind: UICollectionElementKindSectionFooter,
+                                withReuseIdentifier: LoadingIdentifier
+        )
+
         self.view.addSubview(collectionView)
 
-        updateDataSource()
-    }
+        // AutoLayout
 
-    override func viewWillLayoutSubviews() {
-        if shouldUpdateConstraints {
-            collectionView.snp.remakeConstraints { (make) in
-                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.topMargin)
-                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottomMargin)
-                make.left.equalToSuperview()
-                make.right.equalToSuperview()
-            }
-            shouldUpdateConstraints = false
+        collectionView.snp.remakeConstraints { (make) in
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.topMargin)
+            make.bottom.equalToSuperview()
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+        }
+
+        ApiClient.shared.fetchSubmissions { (submissions) in
+
         }
     }
 
@@ -99,12 +106,7 @@ extension MainViewController {
         var rows = ContentRowArray()
         var sections = ContentSectionArray()
 
-        for _ in 0..<25 {
-            content = ContentRow(object: StreetArt.sample)
-            content.identifier = CellIdentifier
-
-            rows.append(content)
-        }
+    
 
         sections.append(ContentSection(title: nil, rows: rows))
 
@@ -131,7 +133,7 @@ extension MainViewController {
 
         let controller = AddViewController()
 
-        controller.saveBlock = { [weak self] (streetArt) in
+        controller.saveBlock = { [weak self] (submission) in
             self?.navigationController?.dismiss(animated: true, completion: nil)
         }
 
@@ -166,12 +168,16 @@ extension MainViewController: UICollectionViewDataSource {
         if identifier == CellIdentifier {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier, for: indexPath) as! PhotoCell
 
-            cell.set(streetArt: row.object as? StreetArt)
+            cell.set(submission: row.object as? Submission)
 
             return cell
         }
 
         return UICollectionViewCell()
+    }
+
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        return loadingView
     }
 
 }
@@ -186,11 +192,11 @@ extension MainViewController: UICollectionViewDelegate {
 
         switch identifier {
         case CellIdentifier:
-            guard let streetArt = row.object as? StreetArt else {
+            guard let submission = row.object as? Submission else {
                 return
             }
 
-            let controller = PhotoViewController(streetArt: streetArt)
+            let controller = PhotoViewController(submission: submission)
             self.navigationController?.pushViewController(controller, animated: true)
         default:
             break

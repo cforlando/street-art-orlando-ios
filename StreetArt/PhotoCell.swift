@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import AlamofireImage
 
 class PhotoCell: UICollectionViewCell {
 
@@ -101,9 +102,13 @@ class PhotoCell: UICollectionViewCell {
 
 extension PhotoCell {
 
-    func set(streetArt: StreetArt?) {
-        imageView.image = streetArt?.image
-        textLabel.text = streetArt?.name
+    func set(submission: Submission?) {
+        if let url = submission?.thumbURL {
+            imageView.af_setImage(withURL: url)
+        } else {
+            imageView.image = nil
+        }
+        textLabel.text = submission?.name
     }
 
 }

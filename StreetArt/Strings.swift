@@ -31,3 +31,7 @@ let USE_CAMERA_TEXT = "Camera"
 let USE_PHOTO_LIBRARY_TEXT = "Photo Library"
 
 let PHOTOS_NOT_SUPPORTED_ALERT = "Photos not supported in this device."
+
+let UPLOAD_REQUIRED_TITLE = "Upload"
+let UPLOAD_REQUIRED_NAME = "Name Required"
+let UPLOAD_REQUIRED_IMAGE = "Image Required"

@@ -7,7 +7,9 @@ target 'StreetArt' do
 
   # Pods for StreetArt
   pod 'Alamofire', '~> 4.6.0'
+  pod 'AlamofireImage', '~> 3.3.0'
   pod 'SnapKit', '~> 4.0.0'
+  pod 'SwiftyJSON', '~> 4.0.0'
 
   target 'StreetArtTests' do
     inherit! :search_paths

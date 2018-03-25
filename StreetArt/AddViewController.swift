@@ -24,7 +24,7 @@ class AddViewController: UIViewController {
     var dataSource = ContentSectionArray()
     var image: UIImage?
 
-    var saveBlock: ((StreetArt?) -> Void)?
+    var saveBlock: ((SubmissionUpload?) -> Void)?
     var cancelBlock: (() -> Void)?
 
     var shouldUpdateConstraints = true
@@ -75,22 +75,16 @@ class AddViewController: UIViewController {
         nameField.autocapitalizationType = .words
         nameField.placeholder = ADD_NAME_PLACEHOLDER
 
-        updateDataSource()
-    }
+        // AutoLayout
 
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-
-        if shouldUpdateConstraints {
-            tableView.snp.makeConstraints { (make) in
-                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
-                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
-                make.left.equalToSuperview()
-                make.right.equalToSuperview()
-            }
-
-            shouldUpdateConstraints = false
+        tableView.snp.makeConstraints { (make) in
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+            make.bottom.equalToSuperview()
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
         }
+
+        updateDataSource()
     }
 
     override func didReceiveMemoryWarning() {
@@ -182,7 +176,35 @@ extension AddViewController {
 extension AddViewController {
 
     @objc func saveAction(_ sender: AnyObject?) {
-        saveBlock?(StreetArt())
+        var errorMessages = [String]()
+
+        let emptySet = CharacterSet.whitespacesAndNewlines
+
+        let name = (nameField.text ?? String()).trimmingCharacters(in: emptySet)
+        if name.isEmpty {
+            errorMessages.append(UPLOAD_REQUIRED_NAME)
+        }
+
+        if image == nil {
+            errorMessages.append(UPLOAD_REQUIRED_IMAGE)
+        }
+
+        if !errorMessages.isEmpty {
+            let message = errorMessages.joined(separator: "\n")
+            let alertView = UIAlertController(title: UPLOAD_REQUIRED_TITLE, message: message, preferredStyle: .alert)
+
+            let doneAction = UIAlertAction(title: OK_TEXT, style: .cancel, handler: nil)
+            alertView.addAction(doneAction)
+
+            self.navigationController?.present(alertView, animated: true, completion: nil)
+            return
+        }
+
+        let upload = SubmissionUpload()
+        upload.name = name
+        upload.image = image!
+
+        saveBlock?(upload)
     }
 
     @objc func dismissAction(_ sender: AnyObject?) {

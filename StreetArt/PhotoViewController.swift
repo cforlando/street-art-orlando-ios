@@ -15,15 +15,15 @@ class PhotoViewController: UIViewController {
 
     var tableView: UITableView!
 
-    var streetArt: StreetArt!
+    var submission: Submission!
     var dataSource = ContentSectionArray()
 
     var imageView: UIImageView!
 
-    init(streetArt: StreetArt) {
+    init(submission: Submission) {
         super.init(nibName: nil, bundle: nil)
         self.title = PHOTO_TITLE
-        self.streetArt = streetArt
+        self.submission = submission
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -49,7 +49,10 @@ class PhotoViewController: UIViewController {
         imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.image = streetArt.image
+
+        if let url = submission.imageURL {
+            imageView.af_setImage(withURL: url)
+        }
 
         imageView.frame = CGRect(x: 0.0, y: 0.0, width: 0.0, height: Defaults.defaultImageHeight)
 
@@ -59,7 +62,7 @@ class PhotoViewController: UIViewController {
 
         tableView.snp.makeConstraints { (make) in
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+            make.bottom.equalToSuperview()
             make.left.equalToSuperview()
             make.right.equalToSuperview()
         }
@@ -88,7 +91,7 @@ extension PhotoViewController {
         var rows = ContentRowArray()
         var sections = ContentSectionArray()
 
-        content = ContentRow(text: streetArt.name)
+        content = ContentRow(text: submission.name)
         content.groupIdentifier = CellIdentifier
 
         rows.append(content)

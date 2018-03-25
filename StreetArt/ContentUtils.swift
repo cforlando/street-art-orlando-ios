@@ -9,7 +9,6 @@
 import UIKit
 
 typealias ContentSectionArray = [ContentSection]
-typealias ContentRowArray = [ContentRow]
 
 struct ContentSection {
 
@@ -25,6 +24,8 @@ struct ContentSection {
         self.rows = rows
     }
 }
+
+typealias ContentRowArray = [ContentRow]
 
 struct ContentRow {
 
