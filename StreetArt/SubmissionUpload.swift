@@ -24,11 +24,11 @@ class SubmissionUpload {
 extension SubmissionUpload {
 
     var base64ImageString: String? {
-        guard let image = self.image else {
+        guard let string = self.image?.toBase64String() else {
             return nil
         }
 
-        return image.toBase64String()
+        return "data:image/jpeg;base64," + string
     }
 
 }

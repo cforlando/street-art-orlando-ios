@@ -54,6 +54,11 @@
                 <key>NSThirdPartyExceptionAllowsInsecureHTTPLoads</key>
                 <true/>
             </dict>
+            <key>sao-sharingan.fwd.wf</key>
+            <dict>
+                <key>NSAllowsArbitraryLoads</key>
+                <true/>
+            </dict>
         </dict>
     </dict>
 </dict>

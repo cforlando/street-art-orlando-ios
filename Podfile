@@ -6,10 +6,11 @@ target 'StreetArt' do
   use_frameworks!
 
   # Pods for StreetArt
-  pod 'Alamofire', '~> 4.6.0'
-  pod 'AlamofireImage', '~> 3.3.0'
+  pod 'Alamofire', '~> 4.6.0', inhibit_warnings: true
+  pod 'AlamofireImage', '~> 3.3.0', inhibit_warnings: true
   pod 'SnapKit', '~> 4.0.0'
   pod 'SwiftyJSON', '~> 4.0.0'
+  pod 'PKHUD', '~> 5.0.0'
 
   target 'StreetArtTests' do
     inherit! :search_paths

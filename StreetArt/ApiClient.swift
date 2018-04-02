@@ -11,7 +11,7 @@ import Alamofire
 
 class ApiClient {
     struct URLHosts {
-        static let forward = "https://sao-sharingan.fwd.wf/api/v1/"
+        static let forward = "https://sao-sharingan.fwd.wf/api/"
         static let localhost = "http://localhost:3000/"
 
         // Production constants should never be changed
@@ -21,10 +21,10 @@ class ApiClient {
     struct Config {
         #if OSA_PRODUCTION
         // Used for App Store Builds. DO NOT CHANGE!!
-        static let URLString = URLHosts.production  // DO NOT CHANGE EVER!!!
+        static let URLString = URLHosts.forward  // DO NOT CHANGE EVER!!!
         #else
         // Used for DEBUG BUILDS ONLY
-        static let URLString = URLHosts.localhost
+        static let URLString = URLHosts.forward
         #endif
     }
 
@@ -54,6 +54,7 @@ class ApiClient {
         let configuration = URLSessionConfiguration.default
 
         var headers = SessionManager.defaultHTTPHeaders
+        headers["Accept"] = "application/json"
         headers["Content-Type"] = "application/json"
         configuration.httpAdditionalHeaders = headers
 
@@ -92,23 +93,25 @@ extension ApiClient {
             "anonymous": true
         ]
 
-        sessionManager.request(route, method: .post, parameters: parameters).validate().responseSwiftyJSON { [weak self] (response) in
-            guard let _ = self else {
-                return
-            }
+        sessionManager.request(route, method: .post, parameters: parameters)
+            .validate()
+            .responseSwiftyJSON { [weak self] (response) in
+                guard let _ = self else {
+                    return
+                }
 
-            switch response.result {
-            case .success(let json):
-                if let authToken = json["auth_token"].string {
-                    self?.authTokenString = authToken
-                    completionHandler(.success(true))
-                } else {
-                    let error = NSError.customError(message: "unknown error")
+                switch response.result {
+                case .success(let json):
+                    if let authToken = json["auth_token"].string {
+                        self?.authTokenString = authToken
+                        completionHandler(.success(true))
+                    } else {
+                        let error = NSError.customError(message: "unknown error")
+                        completionHandler(.failure(error))
+                    }
+                case .failure(let error):
                     completionHandler(.failure(error))
                 }
-            case .failure(let error):
-                completionHandler(.failure(error))
-            }
         }
     }
 
@@ -120,23 +123,25 @@ extension ApiClient {
             "password": anonymousPassword
         ]
 
-        sessionManager.request(route, method: .post, parameters: parameters).validate().responseSwiftyJSON { [weak self] (response) in
-            guard let _ = self else {
-                return
-            }
+        sessionManager.request(route, method: .post, parameters: parameters)
+            .validate()
+            .responseSwiftyJSON { [weak self] (response) in
+                guard let _ = self else {
+                    return
+                }
 
-            switch response.result {
-            case .success(let json):
-                if let authToken = json["auth_token"].string {
-                    self?.authTokenString = authToken
-                    completionHandler(.success(true))
-                } else {
-                    let error = NSError.customError(message: "unknown error")
+                switch response.result {
+                case .success(let json):
+                    if let authToken = json["auth_token"].string {
+                        self?.authTokenString = authToken
+                        completionHandler(.success(true))
+                    } else {
+                        let error = NSError.customError(message: "unknown error")
+                        completionHandler(.failure(error))
+                    }
+                case .failure(let error):
                     completionHandler(.failure(error))
                 }
-            case .failure(let error):
-                completionHandler(.failure(error))
-            }
         }
     }
 
@@ -150,7 +155,7 @@ extension ApiClient {
         let route = Router.submissions
 
         var parameters: Parameters = [
-            "name": upload.name
+            "title": upload.name
         ]
 
         if let imageString = upload.base64ImageString {
@@ -173,22 +178,28 @@ extension ApiClient {
         }
     }
 
-    func fetchSubmissions(completionHandler: @escaping ((Result<SubmissionContainer>) -> Void)) {
+    func fetchSubmissions(page: Int, completionHandler: @escaping ((Result<SubmissionArray>) -> Void)) {
         let route = Router.submissions
 
-        sessionManager.request(route).validate().responseSwiftyJSON { [weak self] (response) in
+        let parameters = [ "page": page ]
+
+        sessionManager.request(route, parameters: parameters, headers: additionalHeaders).validate().responseSwiftyJSON { [weak self] (response) in
             guard let _ = self else {
                 return
             }
 
             switch response.result {
             case .success(let json):
-                if let container = SubmissionContainer(json: json) {
-                    completionHandler(.success(container))
-                } else {
-                    let error = NSError.customError(message: "unknown error")
-                    completionHandler(.failure(error))
+                let rawArray = json["submissions"].arrayValue
+                var submissions = SubmissionArray()
+
+                for raw in rawArray {
+                    if let submission = Submission(json: raw) {
+                        submissions.append(submission)
+                    }
                 }
+
+                completionHandler(.success(submissions))
             case .failure(let error):
                 completionHandler(.failure(error))
             }

@@ -35,3 +35,9 @@ let PHOTOS_NOT_SUPPORTED_ALERT = "Photos not supported in this device."
 let UPLOAD_REQUIRED_TITLE = "Upload"
 let UPLOAD_REQUIRED_NAME = "Name Required"
 let UPLOAD_REQUIRED_IMAGE = "Image Required"
+
+let LOADING_ERROR_TITLE = "Loading Error"
+let LOADING_ERROR_MESSAGE = "Error loading Street Art"
+
+let UPLOAD_ERROR_TITLE = "Upload Error"
+let UPLOAD_ERROR_MESSAGE = "Error uploading Street Art"

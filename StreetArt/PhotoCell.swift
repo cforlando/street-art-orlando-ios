@@ -108,7 +108,7 @@ extension PhotoCell {
         } else {
             imageView.image = nil
         }
-        textLabel.text = submission?.name
+        textLabel.text = submission?.title
     }
 
 }

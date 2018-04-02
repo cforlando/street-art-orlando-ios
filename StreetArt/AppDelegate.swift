@@ -12,6 +12,8 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+
+    var mainController: MainViewController?
     var navigationController: UINavigationController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -26,8 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.backgroundColor = .white
         window?.tintColor = Color.highlight
 
-        let mainController = MainViewController()
-        navigationController = UINavigationController(rootViewController: mainController)
+        mainController = MainViewController()
+        navigationController = UINavigationController(rootViewController: mainController!)
 
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
@@ -53,9 +55,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 
         if !ApiClient.shared.isAuthenticated {
-            DataManager.shared.authenticateAnonymousUser { (result) in
+            DataManager.shared.authenticateAnonymousUser { [unowned self] (result) in
                 dLog("authentication successful: \(result.isSuccess)")
+                self.mainController?.reloadSubmissions()
             }
+        } else {
+            self.mainController?.reloadSubmissions()
         }
     }
 

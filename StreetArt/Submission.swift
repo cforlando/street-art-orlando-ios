@@ -13,12 +13,24 @@ typealias SubmissionArray = [Submission]
 
 class Submission {
 
-    var name = String()
+    var id = 0
+    var title = String()
+    var description: String?
+
+    var photoURLString = String()
     var thumbURLString = String()
-    var imageURLString = String()
+    var tinyURLString = String()
 
     init?(json: JSON) {
-        guard let name = json["name"].string else {
+        guard let id = json["id"].int else {
+            return nil
+        }
+
+        guard let title = json["title"].string else {
+            return nil
+        }
+
+        guard let photoURLString = json["photo_url"].string else {
             return nil
         }
 
@@ -26,13 +38,17 @@ class Submission {
             return nil
         }
 
-        guard let imageURLString = json["image_url"].string else {
+        guard let tinyURLString = json["tiny_url"].string else {
             return nil
         }
 
-        self.name = name
+        self.id = id
+        self.title = title
+        self.description = json["description"].string
+
+        self.photoURLString = photoURLString
         self.thumbURLString = thumbURLString
-        self.imageURLString = imageURLString
+        self.tinyURLString = tinyURLString
     }
 
 }
@@ -41,47 +57,16 @@ class Submission {
 
 extension Submission {
 
+    var photoURL: URL? {
+        return URL(string: photoURLString)
+    }
+
     var thumbURL: URL? {
         return URL(string: thumbURLString)
     }
 
-    var imageURL: URL? {
-        return URL(string: imageURLString)
-    }
-
-}
-
-// MARK: - Container
-
-class SubmissionContainer {
-    var total: Int = 0
-    var currentPage: Int = 0
-    var perPage: Int = 0
-    var submissions = SubmissionArray()
-
-    init?(json: JSON) {
-        guard let total = json["total"].int else {
-            return nil
-        }
-
-        guard let currentPage = json["current"].int else {
-            return nil
-        }
-
-        guard let perPage = json["per_page"].int else {
-            return nil
-        }
-
-        self.total = total
-        self.currentPage = currentPage
-        self.perPage = perPage
-
-        let submissionsRaw = json["submissions"].arrayValue
-        for raw in submissionsRaw {
-            if let submission = Submission(json: raw) {
-                submissions.append(submission)
-            }
-        }
+    var tinyURL: URL? {
+        return URL(string: tinyURLString)
     }
 
 }

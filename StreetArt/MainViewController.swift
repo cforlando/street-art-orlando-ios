@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PKHUD
 
 class MainViewController: UIViewController {
 
@@ -20,9 +21,12 @@ class MainViewController: UIViewController {
     var collectionView: UICollectionView!
     var flowLayout: UICollectionViewFlowLayout!
 
-    var loadingView: LoadingSubmissionsView!
-
     var dataSource = ContentSectionArray()
+    var submissions = SubmissionArray()
+
+    var isFetching = false
+
+    var page: Int = 1
 
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -50,7 +54,8 @@ class MainViewController: UIViewController {
             action: #selector(addAction(_:))
         )
 
-        loadingView = LoadingSubmissionsView()
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshAction(_:)), for: .valueChanged)
 
         flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
@@ -66,6 +71,8 @@ class MainViewController: UIViewController {
         collectionView.showsVerticalScrollIndicator = true
         collectionView.alwaysBounceVertical = true
         collectionView.isPagingEnabled = false
+
+        collectionView.refreshControl = refreshControl
 
         collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: CellIdentifier)
 
@@ -84,10 +91,6 @@ class MainViewController: UIViewController {
             make.left.equalToSuperview()
             make.right.equalToSuperview()
         }
-
-        ApiClient.shared.fetchSubmissions { (submissions) in
-
-        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -101,17 +104,82 @@ class MainViewController: UIViewController {
 
 extension MainViewController {
 
-    func updateDataSource() {
+    func updateDataSource(submissionsToAdd: SubmissionArray? = nil) {
         var content: ContentRow!
-        var rows = ContentRowArray()
-        var sections = ContentSectionArray()
 
-    
+        if let submissionsToAdd = submissionsToAdd {
+            guard var section = dataSource.first else {
+                return
+            }
 
-        sections.append(ContentSection(title: nil, rows: rows))
+            var rows = section.rows
 
-        dataSource = sections
+            for submission in submissionsToAdd {
+                content = ContentRow(object: submission)
+                content.identifier = CellIdentifier
+
+                rows.append(content)
+            }
+
+            section.rows = rows
+            dataSource = [section]
+        } else {
+            var rows = ContentRowArray()
+            var sections = ContentSectionArray()
+
+            for submission in submissions {
+                content = ContentRow(object: submission)
+                content.identifier = CellIdentifier
+
+                rows.append(content)
+            }
+
+            sections.append(ContentSection(title: nil, rows: rows))
+            dataSource = sections
+        }
+
         collectionView.reloadData()
+    }
+
+    func reloadSubmissions() {
+        if isFetching {
+            return
+        }
+
+        isFetching = true
+
+        ApiClient.shared.fetchSubmissions(page: page) { [unowned self] (result) in
+            self.isFetching = false
+
+            switch result {
+            case .success(let submissions):
+                if self.page == 1 && submissions.isEmpty {
+                    self.submissions = submissions
+                    self.updateDataSource()
+                    return
+                }
+
+                var submissionsToAdd: SubmissionArray?
+                if self.page == 1 {
+                    self.submissions = submissions
+                } else {
+                    self.submissions += submissions
+                    submissionsToAdd = submissions
+                }
+
+                if !submissions.isEmpty {
+                    self.page += 1
+                    self.updateDataSource(submissionsToAdd: submissionsToAdd)
+                }
+            case .failure:
+                let alertController = UIAlertController(title: LOADING_ERROR_TITLE, message: LOADING_ERROR_MESSAGE, preferredStyle: .alert)
+
+                let okAction = UIAlertAction(title: OK_TEXT, style: .cancel, handler: nil)
+                alertController.addAction(okAction)
+
+                self.navigationController?.present(alertController, animated: true, completion: nil)
+            }
+        }
     }
 
 }
@@ -133,8 +201,12 @@ extension MainViewController {
 
         let controller = AddViewController()
 
-        controller.saveBlock = { [weak self] (submission) in
-            self?.navigationController?.dismiss(animated: true, completion: nil)
+        controller.completionBlock = { [weak self] in
+            guard let _ = self else {
+                return
+            }
+
+           self?.navigationController?.dismiss(animated: true, completion: nil)
         }
 
         controller.cancelBlock = { [weak self] in
@@ -142,8 +214,13 @@ extension MainViewController {
         }
 
         let navController = UINavigationController(rootViewController: controller)
-
         self.navigationController?.present(navController, animated: true, completion: nil)
+    }
+
+    @objc func refreshAction(_ refreshControl: UIRefreshControl) {
+        page = 1
+        refreshControl.endRefreshing()
+        reloadSubmissions()
     }
 
 }
@@ -177,6 +254,12 @@ extension MainViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let loadingView = collectionView.dequeueReusableSupplementaryView(
+            ofKind: UICollectionElementKindSectionFooter,
+            withReuseIdentifier: LoadingIdentifier,
+            for: indexPath
+        )
+
         return loadingView
     }
 
@@ -222,6 +305,26 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: Constants.spacing, left: Constants.spacing, bottom: Constants.spacing, right: Constants.spacing)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.frame.size.width, height: 34.0)
+    }
+
+}
+
+// MARK: - UIScrollViewDelegate Methods
+
+extension MainViewController: UIScrollViewDelegate {
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offset = scrollView.contentSize.height - scrollView.frame.size.height
+
+        dLog("y: \(scrollView.contentOffset.y), offset: \(round(offset))")
+
+        if scrollView.contentOffset.y >= round(offset) {
+            reloadSubmissions()
+        }
     }
 
 }

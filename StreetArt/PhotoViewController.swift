@@ -50,7 +50,7 @@ class PhotoViewController: UIViewController {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
 
-        if let url = submission.imageURL {
+        if let url = submission.photoURL {
             imageView.af_setImage(withURL: url)
         }
 
@@ -91,7 +91,7 @@ extension PhotoViewController {
         var rows = ContentRowArray()
         var sections = ContentSectionArray()
 
-        content = ContentRow(text: submission.name)
+        content = ContentRow(text: submission.title)
         content.groupIdentifier = CellIdentifier
 
         rows.append(content)

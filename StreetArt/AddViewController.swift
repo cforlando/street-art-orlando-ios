@@ -8,6 +8,7 @@
 
 import UIKit
 import MobileCoreServices
+import PKHUD
 
 class AddViewController: UIViewController {
 
@@ -24,7 +25,7 @@ class AddViewController: UIViewController {
     var dataSource = ContentSectionArray()
     var image: UIImage?
 
-    var saveBlock: ((SubmissionUpload?) -> Void)?
+    var completionBlock: (() -> Void)?
     var cancelBlock: (() -> Void)?
 
     var shouldUpdateConstraints = true
@@ -204,7 +205,26 @@ extension AddViewController {
         upload.name = name
         upload.image = image!
 
-        saveBlock?(upload)
+        HUD.show(.progress, onView: self.view)
+        ApiClient.shared.uploadSubmission(upload: upload) { [weak self] (result) in
+            HUD.hide()
+
+            guard let _ = self else {
+                return
+            }
+
+            if let _ = result.error {
+                let alertController = UIAlertController(title: UPLOAD_ERROR_TITLE, message: UPLOAD_ERROR_MESSAGE, preferredStyle: .alert)
+
+                let okAction = UIAlertAction(title: OK_TEXT, style: .cancel, handler: nil)
+                alertController.addAction(okAction)
+
+                self?.navigationController?.present(alertController, animated: true, completion: nil)
+                return
+            }
+
+            self?.completionBlock?()
+        }
     }
 
     @objc func dismissAction(_ sender: AnyObject?) {
