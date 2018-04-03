@@ -162,6 +162,11 @@ extension ApiClient {
             parameters["photo"] = imageString
         }
 
+        if let coordinate = upload.coordinate {
+            parameters["latitude"] = coordinate.latitude
+            parameters["longitude"] = coordinate.longitude
+        }
+
         sessionManager.request(route, method: .post, parameters: parameters, headers: additionalHeaders)
             .validate()
             .responseSwiftyJSON { [weak self] (response) in
@@ -178,7 +183,7 @@ extension ApiClient {
         }
     }
 
-    func fetchSubmissions(page: Int, completionHandler: @escaping ((Result<SubmissionArray>) -> Void)) {
+    func fetchSubmissions(page: Int, completionHandler: @escaping ((Result<SubmissionContainer>) -> Void)) {
         let route = Router.submissions
 
         let parameters = [ "page": page ]
@@ -190,16 +195,14 @@ extension ApiClient {
 
             switch response.result {
             case .success(let json):
-                let rawArray = json["submissions"].arrayValue
-                var submissions = SubmissionArray()
+                dLog("submissions: \(json["meta"])")
 
-                for raw in rawArray {
-                    if let submission = Submission(json: raw) {
-                        submissions.append(submission)
-                    }
+                if let container = SubmissionContainer(json: json) {
+                    completionHandler(.success(container))
+                } else {
+                    let error = NSError.customError(message: "unknown error")
+                    completionHandler(.failure(error))
                 }
-
-                completionHandler(.success(submissions))
             case .failure(let error):
                 completionHandler(.failure(error))
             }

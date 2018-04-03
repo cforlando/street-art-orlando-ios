@@ -8,6 +8,7 @@
 
 import UIKit
 import MobileCoreServices
+import CoreLocation
 import PKHUD
 
 class AddViewController: UIViewController {
@@ -24,6 +25,9 @@ class AddViewController: UIViewController {
 
     var dataSource = ContentSectionArray()
     var image: UIImage?
+
+    var locationManager: CLLocationManager!
+    var currentLocation: CLLocation?
 
     var completionBlock: (() -> Void)?
     var cancelBlock: (() -> Void)?
@@ -85,7 +89,23 @@ class AddViewController: UIViewController {
             make.right.equalToSuperview()
         }
 
+        // Setup
+
+        locationManager = CLLocationManager()
         updateDataSource()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        locationManager.delegate = nil
     }
 
     override func didReceiveMemoryWarning() {
@@ -201,10 +221,7 @@ extension AddViewController {
             return
         }
 
-        let upload = SubmissionUpload()
-        upload.name = name
-        upload.image = image!
-
+        let upload = SubmissionUpload(name: name, image: image!, coordinate: currentLocation?.coordinate)
         HUD.show(.progress, onView: self.view)
         ApiClient.shared.uploadSubmission(upload: upload) { [weak self] (result) in
             HUD.hide()
@@ -395,6 +412,27 @@ extension AddViewController: UIImagePickerControllerDelegate, UINavigationContro
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.navigationController?.dismiss(animated: true, completion: nil)
+    }
+
+}
+
+// MARK: - CLlocationManagerDelegate Methods
+
+extension AddViewController: CLLocationManagerDelegate {
+
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        dLog("\(String(status.rawValue))")
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            manager.stopUpdatingLocation()
+            currentLocation = location
+        }
+    }
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        dLog("location failed: \(error)")
     }
 
 }

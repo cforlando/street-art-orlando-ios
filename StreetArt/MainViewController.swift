@@ -21,12 +21,12 @@ class MainViewController: UIViewController {
     var collectionView: UICollectionView!
     var flowLayout: UICollectionViewFlowLayout!
 
-    var dataSource = ContentSectionArray()
     var submissions = SubmissionArray()
 
     var isFetching = false
 
-    var page: Int = 1
+    var nextPage: Int = 1
+    var isLastPage = false
 
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -104,73 +104,31 @@ class MainViewController: UIViewController {
 
 extension MainViewController {
 
-    func updateDataSource(submissionsToAdd: SubmissionArray? = nil) {
-        var content: ContentRow!
-
-        if let submissionsToAdd = submissionsToAdd {
-            guard var section = dataSource.first else {
-                return
-            }
-
-            var rows = section.rows
-
-            for submission in submissionsToAdd {
-                content = ContentRow(object: submission)
-                content.identifier = CellIdentifier
-
-                rows.append(content)
-            }
-
-            section.rows = rows
-            dataSource = [section]
-        } else {
-            var rows = ContentRowArray()
-            var sections = ContentSectionArray()
-
-            for submission in submissions {
-                content = ContentRow(object: submission)
-                content.identifier = CellIdentifier
-
-                rows.append(content)
-            }
-
-            sections.append(ContentSection(title: nil, rows: rows))
-            dataSource = sections
+    func reloadSubmissions(reset: Bool = false) {
+        if isLastPage {
+            return
         }
 
-        collectionView.reloadData()
-    }
-
-    func reloadSubmissions() {
         if isFetching {
             return
         }
 
         isFetching = true
 
-        ApiClient.shared.fetchSubmissions(page: page) { [unowned self] (result) in
+        ApiClient.shared.fetchSubmissions(page: nextPage) { [unowned self] (result) in
             self.isFetching = false
 
             switch result {
-            case .success(let submissions):
-                if self.page == 1 && submissions.isEmpty {
-                    self.submissions = submissions
-                    self.updateDataSource()
-                    return
+            case .success(let container):
+                if reset {
+                    self.submissions = SubmissionArray()
                 }
 
-                var submissionsToAdd: SubmissionArray?
-                if self.page == 1 {
-                    self.submissions = submissions
-                } else {
-                    self.submissions += submissions
-                    submissionsToAdd = submissions
-                }
+                self.isLastPage = container.nextPage == nil
+                self.nextPage = container.nextPage ?? container.currentPage
 
-                if !submissions.isEmpty {
-                    self.page += 1
-                    self.updateDataSource(submissionsToAdd: submissionsToAdd)
-                }
+                self.submissions += container.submissions
+                self.collectionView.reloadData()
             case .failure:
                 let alertController = UIAlertController(title: LOADING_ERROR_TITLE, message: LOADING_ERROR_MESSAGE, preferredStyle: .alert)
 
@@ -218,9 +176,11 @@ extension MainViewController {
     }
 
     @objc func refreshAction(_ refreshControl: UIRefreshControl) {
-        page = 1
+        nextPage = 1
+        isLastPage = false
+
+        reloadSubmissions(reset: true)
         refreshControl.endRefreshing()
-        reloadSubmissions()
     }
 
 }
@@ -231,26 +191,20 @@ extension MainViewController {
 extension MainViewController: UICollectionViewDataSource {
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return dataSource.count
+        return 1
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource[section].rows.count
+        return submissions.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let row = dataSource[indexPath.section].rows[indexPath.row]
-        let identifier = row.identifier ?? String()
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier, for: indexPath) as! PhotoCell
 
-        if identifier == CellIdentifier {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier, for: indexPath) as! PhotoCell
+        let submission = submissions[indexPath.row]
+        cell.set(submission: submission)
 
-            cell.set(submission: row.object as? Submission)
-
-            return cell
-        }
-
-        return UICollectionViewCell()
+        return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -258,7 +212,13 @@ extension MainViewController: UICollectionViewDataSource {
             ofKind: UICollectionElementKindSectionFooter,
             withReuseIdentifier: LoadingIdentifier,
             for: indexPath
-        )
+        ) as! LoadingSubmissionsView
+
+        if isLastPage {
+            loadingView.loadingView.stopAnimating()
+        } else {
+            loadingView.loadingView.startAnimating()
+        }
 
         return loadingView
     }
@@ -270,20 +230,10 @@ extension MainViewController: UICollectionViewDataSource {
 extension MainViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let row = dataSource[indexPath.section].rows[indexPath.row]
-        let identifier = row.identifier ?? String()
+        let submission = submissions[indexPath.row]
 
-        switch identifier {
-        case CellIdentifier:
-            guard let submission = row.object as? Submission else {
-                return
-            }
-
-            let controller = PhotoViewController(submission: submission)
-            self.navigationController?.pushViewController(controller, animated: true)
-        default:
-            break
-        }
+        let controller = PhotoViewController(submission: submission)
+        self.navigationController?.pushViewController(controller, animated: true)
     }
 
     func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
@@ -318,10 +268,11 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
 extension MainViewController: UIScrollViewDelegate {
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if isLastPage {
+            return
+        }
+
         let offset = scrollView.contentSize.height - scrollView.frame.size.height
-
-        dLog("y: \(scrollView.contentOffset.y), offset: \(round(offset))")
-
         if scrollView.contentOffset.y >= round(offset) {
             reloadSubmissions()
         }

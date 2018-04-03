@@ -7,14 +7,18 @@
 //
 
 import Foundation
+import CoreLocation
 
 class SubmissionUpload {
 
     var name = String()
-    var image: UIImage?
+    var image = UIImage()
+    var coordinate: CLLocationCoordinate2D?
 
-    init() {
-        // Initialization Code
+    init(name: String, image: UIImage, coordinate: CLLocationCoordinate2D? = nil) {
+        self.name = name
+        self.image = image
+        self.coordinate = coordinate
     }
 
 }
@@ -24,7 +28,7 @@ class SubmissionUpload {
 extension SubmissionUpload {
 
     var base64ImageString: String? {
-        guard let string = self.image?.toBase64String() else {
+        guard let string = self.image.toBase64String() else {
             return nil
         }
 
