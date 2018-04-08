@@ -154,12 +154,18 @@ extension ApiClient {
     func uploadSubmission(upload: SubmissionUpload, completionHandler: @escaping ((Result<Bool>) -> Void)) {
         let route = Router.submissions
 
-        var parameters: Parameters = [
-            "title": upload.name
-        ]
+        var parameters = Parameters()
 
         if let imageString = upload.base64ImageString {
             parameters["photo"] = imageString
+        }
+
+        if let title = upload.title {
+            parameters["title"] = title
+        }
+
+        if let artist = upload.artist {
+            parameters["artist"] = artist
         }
 
         if let coordinate = upload.coordinate {

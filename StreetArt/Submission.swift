@@ -8,15 +8,16 @@
 
 import Foundation
 import SwiftyJSON
-import CoreLocation
+import MapKit
 
 typealias SubmissionArray = [Submission]
 
 struct Submission {
 
     var id = 0
-    var title = String()
+    var title: String?
     var description: String?
+    var artist: String?
 
     var latitude: Double?
     var longitude: Double?
@@ -39,10 +40,6 @@ struct Submission {
             return nil
         }
 
-        guard let title = json["title"].string else {
-            return nil
-        }
-
         guard let photoURLString = json["photo_url"].string else {
             return nil
         }
@@ -56,8 +53,9 @@ struct Submission {
         }
 
         self.id = id
-        self.title = title
+        self.title = json["title"].string
         self.description = json["description"].string
+        self.artist = json["artist"].string
 
         self.latitude = json["latitude"].double
         self.longitude = json["longitude"].double
@@ -87,10 +85,26 @@ extension Submission {
 
 }
 
+// MARK: Equal
+
 extension Submission: Equatable {
 
     static func == (lhs: Submission, rhs: Submission) -> Bool {
         return lhs.id == rhs.id
+    }
+
+}
+
+// MARK: Annotation
+
+extension Submission {
+
+    var annotation: SubmissionAnnotation? {
+        guard let coordinate = self.coordinate else {
+            return nil
+        }
+
+        return SubmissionAnnotation(title: title, coordinate: coordinate)
     }
 
 }
@@ -131,6 +145,24 @@ struct SubmissionContainer {
                 submissions.append(submission)
             }
         }
+    }
+
+}
+
+// MARK: - Annotation
+
+class SubmissionAnnotation: NSObject, MKAnnotation {
+
+    init(title: String?, coordinate: CLLocationCoordinate2D) {
+        self.title = title
+        self.coordinate = coordinate
+    }
+
+    var title: String?
+    var coordinate: CLLocationCoordinate2D
+
+    var isValidCoordinate: Bool {
+        return CLLocationCoordinate2DIsValid(coordinate)
     }
 
 }

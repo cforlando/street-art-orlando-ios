@@ -31,6 +31,7 @@ class MainViewController: UIViewController {
     init() {
         super.init(nibName: nil, bundle: nil)
         self.title = MAIN_TITLE
+        self.tabBarItem = UITabBarItem(tabBarSystemItem: .recents, tag: 0)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -45,7 +46,6 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: BACK_TEXT, style: .plain, target: nil, action: nil)
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -74,7 +74,7 @@ class MainViewController: UIViewController {
 
         collectionView.refreshControl = refreshControl
 
-        collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: CellIdentifier)
+        collectionView.register(ContentCell.self, forCellWithReuseIdentifier: CellIdentifier)
 
         collectionView.register(LoadingSubmissionsView.self,
                                 forSupplementaryViewOfKind: UICollectionElementKindSectionFooter,
@@ -104,7 +104,7 @@ class MainViewController: UIViewController {
 
 extension MainViewController {
 
-    func reloadSubmissions(reset: Bool = false) {
+    func reloadSubmissions(reset: Bool = false, refreshing: Bool = false) {
         if isLastPage {
             return
         }
@@ -117,6 +117,10 @@ extension MainViewController {
 
         ApiClient.shared.fetchSubmissions(page: nextPage) { [unowned self] (result) in
             self.isFetching = false
+
+            if refreshing {
+                self.collectionView.refreshControl?.endRefreshing()
+            }
 
             switch result {
             case .success(let container):
@@ -179,8 +183,7 @@ extension MainViewController {
         nextPage = 1
         isLastPage = false
 
-        reloadSubmissions(reset: true)
-        refreshControl.endRefreshing()
+        reloadSubmissions(reset: true, refreshing: true)
     }
 
 }
@@ -199,7 +202,7 @@ extension MainViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier, for: indexPath) as! PhotoCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier, for: indexPath) as! ContentCell
 
         let submission = submissions[indexPath.row]
         cell.set(submission: submission)
@@ -233,6 +236,8 @@ extension MainViewController: UICollectionViewDelegate {
         let submission = submissions[indexPath.row]
 
         let controller = PhotoViewController(submission: submission)
+        controller.hidesBottomBarWhenPushed = true
+
         self.navigationController?.pushViewController(controller, animated: true)
     }
 

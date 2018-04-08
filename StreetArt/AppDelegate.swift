@@ -14,7 +14,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     var mainController: MainViewController?
-    var navigationController: UINavigationController?
+    var favoritesController: FavoritesViewController?
+
+    var tabBarController: UITabBarController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         let titleAttributes: [NSAttributedStringKey: Any] = [
@@ -29,9 +31,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.tintColor = Color.highlight
 
         mainController = MainViewController()
-        navigationController = UINavigationController(rootViewController: mainController!)
+        let mainNavController = UINavigationController(rootViewController: mainController!)
 
-        window?.rootViewController = navigationController
+        favoritesController = FavoritesViewController()
+        let favoritesNavController = UINavigationController(rootViewController: favoritesController!)
+
+        tabBarController = UITabBarController()
+        tabBarController?.viewControllers = [ mainNavController, favoritesNavController ]
+
+        window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
 
         return true

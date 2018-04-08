@@ -2,83 +2,53 @@
 //  PhotoCell.swift
 //  StreetArt
 //
-//  Created by Axel Rivera on 3/6/18.
+//  Created by Axel Rivera on 3/7/18.
 //  Copyright © 2018 Axel Rivera. All rights reserved.
 //
 
 import UIKit
-import SnapKit
-import AlamofireImage
 
-class PhotoCell: UICollectionViewCell {
+protocol PhotoCellDelegate {
+
+    var enableImageReset: Bool { get }
+    func resetImage(photoCell: PhotoCell)
+
+}
+
+class PhotoCell: UITableViewCell {
+
+    enum Placeholder {
+        case camera, frame
+    }
 
     struct Constants {
         static let height: CGFloat = Defaults.defaultImageHeight
     }
 
-    var imageView: UIImageView!
-    var textView: UIView!
-    var textLabel: UILabel!
+    var placeholder = Placeholder.camera
+    var photoImageView: UIImageView!
 
-    var overlayView: UIView!
+    var resetButton: UIButton?
 
-    convenience init() {
-        self.init(frame: .zero)
-    }
+    var delegate: PhotoCellDelegate?
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(placeholder: Placeholder, reuseIdentifier: String?) {
+        super.init(style: .default, reuseIdentifier: reuseIdentifier)
 
-        self.layer.cornerRadius = 3.0
-        self.layer.masksToBounds = true
+        self.selectionStyle = .none
+        self.accessoryType = .none
 
-        overlayView = UIView()
-        overlayView.backgroundColor = UIColor.black.withAlphaComponent(0.3)
-        overlayView.alpha = 0
+        self.placeholder = placeholder
 
-        self.contentView.addSubview(overlayView)
+        photoImageView = UIImageView()
+        photoImageView.contentMode = .center
+        photoImageView.clipsToBounds = true
+        photoImageView.image = placeholderImage
 
-        imageView = UIImageView()
-        imageView.backgroundColor = .gray
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
+        self.contentView.addSubview(photoImageView)
 
-        self.contentView.addSubview(imageView)
-
-        textView = UIView()
-        textView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-
-        self.contentView.addSubview(textView)
-
-        textLabel = UILabel()
-        textLabel.font = UIFont.systemFont(ofSize: 14.0)
-        textLabel.textColor = .white
-        textLabel.numberOfLines = 2
-        textLabel.textAlignment = .center
-
-        textView.addSubview(textLabel)
-
-        // AutoLayout
-
-        overlayView.snp.makeConstraints { (make) in
+        photoImageView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
-        }
-
-        imageView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
-
-        textView.snp.makeConstraints { (make) in
-            make.height.equalTo(44.0)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
-            make.bottom.equalToSuperview()
-        }
-
-        textLabel.snp.makeConstraints { (make) in
-            make.left.equalToSuperview().offset(5.0)
-            make.right.equalToSuperview().offset(-5.0)
-            make.centerY.equalToSuperview()
         }
     }
 
@@ -86,29 +56,109 @@ class PhotoCell: UICollectionViewCell {
         super.init(coder: aDecoder)
     }
 
-    override var isHighlighted: Bool {
-        willSet(newValue) {
-            if newValue {
-                self.contentView.bringSubview(toFront: overlayView)
-                overlayView.alpha = 1.0
-            } else {
-                self.contentView.sendSubview(toBack: overlayView)
-                overlayView.alpha = 0.0
-            }
-        }
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
     }
 
 }
 
+// MARK: - Methods
+
 extension PhotoCell {
 
-    func set(submission: Submission?) {
-        if let url = submission?.thumbURL {
-            imageView.af_setImage(withURL: url)
-        } else {
-            imageView.image = nil
+    func enableResetIfNeeded() {
+        if let _ = resetButton {
+            return
         }
-        textLabel.text = submission?.title
+
+        guard let delegate = self.delegate else {
+            return
+        }
+
+        if delegate.enableImageReset {
+            self.selectionStyle = .default
+
+            resetButton = UIButton(type: .custom)
+            resetButton?.setBackgroundImage(#imageLiteral(resourceName: "trash_icon").tintedImage(color: Color.highlight.withAlphaComponent(0.7)), for: .normal)
+
+            resetButton?.layer.shadowColor = UIColor.black.cgColor
+            resetButton?.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+            resetButton?.layer.shadowOpacity = 0.7
+            resetButton?.layer.shadowRadius = 1.0
+
+            resetButton?.addTarget(self, action: #selector(resetAction(_:)), for: .touchUpInside)
+
+            resetButton?.alpha = 0.0
+
+            self.contentView.addSubview(resetButton!)
+
+            resetButton?.snp.makeConstraints { (make) in
+                make.right.equalToSuperview().offset(-20.0)
+                make.bottom.equalToSuperview().offset(-20.0)
+            }
+        }
+    }
+
+    func set(image: UIImage?) {
+        if let image = image {
+            resetButton?.alpha = 1.0
+            photoImageView.contentMode = .scaleAspectFill
+            photoImageView.image = image
+        } else {
+            resetButton?.alpha = 0.0
+            photoImageView.contentMode = .center
+            photoImageView.image = placeholderImage
+        }
+    }
+
+    func set(url: URL?) {
+        if let url = url {
+            resetButton?.alpha = 1.0
+            photoImageView.af_setImage(withURL: url, placeholderImage: nil) { [weak self] (response) in
+                guard let _ = self else {
+                    return
+                }
+
+                self?.photoImageView.contentMode = .scaleAspectFill
+            }
+        } else {
+            resetButton?.alpha = 0.0
+            photoImageView.contentMode = .center
+            photoImageView.image = placeholderImage
+        }
+    }
+
+    var placeholderImage: UIImage {
+        switch placeholder {
+        case .camera:
+            return type(of: self).cameraPlaceholder
+        case .frame:
+            return type(of: self).framePlaceholder
+        }
+    }
+
+    class var cameraPlaceholder: UIImage {
+        return #imageLiteral(resourceName: "camera_icon").tintedImage(color: Color.highlight.withAlphaComponent(0.75))!
+    }
+
+    class var framePlaceholder: UIImage {
+        return #imageLiteral(resourceName: "frame_icon").tintedImage(color: Color.highlight.withAlphaComponent(0.75))!
+    }
+
+}
+
+// MARK: Selector Methods
+
+extension PhotoCell {
+
+    @objc func resetAction(_ sender: AnyObject?) {
+        guard let delegate = self.delegate else {
+            return
+        }
+
+        delegate.resetImage(photoCell: self)
     }
 
 }

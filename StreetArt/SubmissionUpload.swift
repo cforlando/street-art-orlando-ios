@@ -11,13 +11,15 @@ import CoreLocation
 
 class SubmissionUpload {
 
-    var name = String()
     var image = UIImage()
+    var title: String?
+    var artist: String?
     var coordinate: CLLocationCoordinate2D?
 
-    init(name: String, image: UIImage, coordinate: CLLocationCoordinate2D? = nil) {
-        self.name = name
+    init(image: UIImage, title: String?, artist: String? = nil, coordinate: CLLocationCoordinate2D? = nil) {
         self.image = image
+        self.title = title
+        self.artist = artist
         self.coordinate = coordinate
     }
 

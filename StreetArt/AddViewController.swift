@@ -13,14 +13,16 @@ import PKHUD
 
 class AddViewController: UIViewController {
 
-    let NameCellIdentifier = "NameCell"
-    let ImageCellIdentifier = "ImageCell"
+    let TitleCellIdentifier = "TitleCell"
+    let ArtistCellIdentifier = "ArtistCell"
+    let PhotoCellIdentifier = "PhotoCell"
     let AddImageButtonIdentifier = "AddImageButtonCell"
     let RemoveImageButtonIdentifier = "RemoveImageButtonCell"
 
     var tableView: UITableView!
 
-    var nameField: UITextField!
+    var titleField: UITextField!
+    var artistField: UITextField!
     var imageView: UIImageView!
 
     var dataSource = ContentSectionArray()
@@ -73,12 +75,19 @@ class AddViewController: UIViewController {
             action: #selector(dismissAction(_:))
         )
 
-        nameField = UITextField()
-        nameField.contentVerticalAlignment = .center
-        nameField.keyboardType = .default
-        nameField.returnKeyType = .done
-        nameField.autocapitalizationType = .words
-        nameField.placeholder = ADD_NAME_PLACEHOLDER
+        titleField = UITextField()
+        titleField.contentVerticalAlignment = .center
+        titleField.keyboardType = .default
+        titleField.returnKeyType = .done
+        titleField.autocapitalizationType = .words
+        titleField.placeholder = ADD_NAME_PLACEHOLDER
+
+        artistField = UITextField()
+        artistField.contentVerticalAlignment = .center
+        artistField.keyboardType = .default
+        artistField.returnKeyType = .done
+        artistField.autocapitalizationType = .words
+        artistField.placeholder = ADD_ARTIST_PLACEHOLDER
 
         // AutoLayout
 
@@ -124,40 +133,27 @@ extension AddViewController {
         var rows = ContentRowArray()
         var sections = ContentSectionArray()
 
-        // Name
         content = ContentRow()
-        content.identifier = NameCellIdentifier
+        content.identifier = PhotoCellIdentifier
+        content.object = image
+        content.height = PhotoCell.Constants.height
+
+        rows.append(content)
+        sections.append(ContentSection(title: PHOTO_ART_PHOTO_TEXT, rows: rows))
+
+        rows = ContentRowArray()
+
+        content = ContentRow()
+        content.identifier = TitleCellIdentifier
 
         rows.append(content)
 
-        sections.append(ContentSection(title: nil, rows: rows))
-        rows = ContentRowArray()
+        content = ContentRow()
+        content.identifier = ArtistCellIdentifier
 
-        // Buttons
+        rows.append(content)
+        sections.append(ContentSection(title: PHOTO_ADDITIONAL_INFORMATION_TEXT, rows: rows))
 
-        if let image = self.image {
-            dLog("image found")
-
-            content = ContentRow()
-            content.identifier = ImageCellIdentifier
-            content.object = image
-            content.height = PhotoUploadCell.Constants.height
-
-            rows.append(content)
-
-            content = ContentRow(text: REMOVE_PHOTO_TEXT)
-            content.identifier = RemoveImageButtonIdentifier
-
-            rows.append(content)
-        } else {
-            dLog("image not found")
-            content = ContentRow(text: SELECT_PHOTO_TEXT)
-            content.identifier = AddImageButtonIdentifier
-
-            rows.append(content)
-        }
-
-        sections.append(ContentSection(title: nil, rows: rows))
         dataSource = sections
         tableView.reloadData()
     }
@@ -201,13 +197,18 @@ extension AddViewController {
 
         let emptySet = CharacterSet.whitespacesAndNewlines
 
-        let name = (nameField.text ?? String()).trimmingCharacters(in: emptySet)
-        if name.isEmpty {
-            errorMessages.append(UPLOAD_REQUIRED_NAME)
-        }
-
         if image == nil {
             errorMessages.append(UPLOAD_REQUIRED_IMAGE)
+        }
+
+        var artTitle: String? = (titleField.text ?? String()).trimmingCharacters(in: emptySet)
+        if let stringToCompare = artTitle, stringToCompare.isEmpty {
+            artTitle = nil
+        }
+
+        var artist: String? = (artistField.text ?? String()).trimmingCharacters(in: emptySet)
+        if let stringToCompare = artist, stringToCompare.isEmpty {
+            artist = nil
         }
 
         if !errorMessages.isEmpty {
@@ -221,7 +222,13 @@ extension AddViewController {
             return
         }
 
-        let upload = SubmissionUpload(name: name, image: image!, coordinate: currentLocation?.coordinate)
+        let upload = SubmissionUpload(
+            image: image!,
+            title: artTitle,
+            artist: artist,
+            coordinate: currentLocation?.coordinate
+        )
+
         HUD.show(.progress, onView: self.view)
         ApiClient.shared.uploadSubmission(upload: upload) { [weak self] (result) in
             HUD.hide()
@@ -285,63 +292,45 @@ extension AddViewController: UITableViewDataSource {
         let row = dataSource[indexPath.section].rows[indexPath.row]
         let identifier = row.identifier ?? String()
 
-        if identifier == NameCellIdentifier {
-            var cell = tableView.dequeueReusableCell(withIdentifier: NameCellIdentifier)
+        if identifier == PhotoCellIdentifier {
+            var cell = tableView.dequeueReusableCell(withIdentifier: PhotoCellIdentifier) as? PhotoCell
             if cell == nil {
-                cell = UITableViewCell(style: .default, reuseIdentifier: NameCellIdentifier)
-            }
-
-            let contentWidth = tableView.frame.size.width - (tableView.layoutMargins.right * 2.0)
-            nameField.frame = CGRect(x: 0.0, y: 0.0, width: contentWidth, height: 40.0)
-
-            cell?.accessoryView = nameField
-            cell?.selectionStyle = .none
-
-            return cell!
-        }
-
-        if identifier == ImageCellIdentifier {
-            var cell = tableView.dequeueReusableCell(withIdentifier: ImageCellIdentifier) as? PhotoUploadCell
-            if cell == nil {
-                cell = PhotoUploadCell(reuseIdentifier: ImageCellIdentifier)
+                cell = PhotoCell(placeholder: .camera, reuseIdentifier: PhotoCellIdentifier)
+                cell?.delegate = self
+                cell?.enableResetIfNeeded()
             }
 
             cell?.set(image: row.object as? UIImage)
 
-            cell?.accessoryType = .none
+            return cell!
+        }
+
+        if identifier == TitleCellIdentifier {
+            var cell = tableView.dequeueReusableCell(withIdentifier: TitleCellIdentifier)
+            if cell == nil {
+                cell = UITableViewCell(style: .default, reuseIdentifier: TitleCellIdentifier)
+            }
+
+            let contentWidth = tableView.frame.size.width - (tableView.layoutMargins.right * 2.0)
+            titleField.frame = CGRect(x: 0.0, y: 0.0, width: contentWidth, height: 40.0)
+
+            cell?.accessoryView = titleField
             cell?.selectionStyle = .none
 
             return cell!
         }
 
-        if identifier == AddImageButtonIdentifier {
-            var cell = tableView.dequeueReusableCell(withIdentifier: AddImageButtonIdentifier)
+        if identifier == ArtistCellIdentifier {
+            var cell = tableView.dequeueReusableCell(withIdentifier: ArtistCellIdentifier)
             if cell == nil {
-                cell = UITableViewCell(style: .default, reuseIdentifier: AddImageButtonIdentifier)
-                cell?.textLabel?.textAlignment = .center
-                cell?.textLabel?.textColor = Color.highlight
+                cell = UITableViewCell(style: .default, reuseIdentifier: ArtistCellIdentifier)
             }
 
-            cell?.textLabel?.text = row.text
+            let contentWidth = tableView.frame.size.width - (tableView.layoutMargins.right * 2.0)
+            artistField.frame = CGRect(x: 0.0, y: 0.0, width: contentWidth, height: 40.0)
 
-            cell?.accessoryType = .none
-            cell?.selectionStyle = .default
-
-            return cell!
-        }
-
-        if identifier == RemoveImageButtonIdentifier {
-            var cell = tableView.dequeueReusableCell(withIdentifier: RemoveImageButtonIdentifier)
-            if cell == nil {
-                cell = UITableViewCell(style: .default, reuseIdentifier: RemoveImageButtonIdentifier)
-                cell?.textLabel?.textAlignment = .center
-                cell?.textLabel?.textColor = .red
-            }
-
-            cell?.textLabel?.text = row.text
-
-            cell?.accessoryType = .none
-            cell?.selectionStyle = .default
+            cell?.accessoryView = artistField
+            cell?.selectionStyle = .none
 
             return cell!
         }
@@ -362,7 +351,7 @@ extension AddViewController: UITableViewDelegate {
         let identifier = row.identifier ?? String()
 
         switch identifier {
-        case AddImageButtonIdentifier:
+        case PhotoCellIdentifier:
             let actionSheet = UIAlertController(title: SELECT_PHOTO_ALERT_TITLE, message: nil, preferredStyle: .actionSheet)
 
             if isCameraAvailable() {
@@ -391,8 +380,37 @@ extension AddViewController: UITableViewDelegate {
         }
     }
 
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return dataSource[section].title
+    }
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return dataSource[indexPath.section].rows[indexPath.row].height ?? 44.0
+    }
+
+}
+
+// MARK: - PhotoCellDelegate Methods
+
+extension AddViewController: PhotoCellDelegate{
+
+    var enableImageReset: Bool {
+        return true
+    }
+
+    func resetImage(photoCell: PhotoCell) {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        let resetAction = UIAlertAction(title: ADD_RESET_PHOTO_TEXT, style: .destructive) { [unowned self] (action) in
+            photoCell.set(image: nil)
+            self.image = nil
+        }
+        actionSheet.addAction(resetAction)
+
+        let cancelAction = UIAlertAction(title: CANCEL_TEXT, style: .cancel, handler: nil)
+        actionSheet.addAction(cancelAction)
+
+        self.navigationController?.present(actionSheet, animated: true, completion: nil)
     }
 
 }
