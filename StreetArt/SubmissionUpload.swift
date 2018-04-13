@@ -14,12 +14,12 @@ class SubmissionUpload {
     var image = UIImage()
     var title: String?
     var artist: String?
-    var coordinate: CLLocationCoordinate2D?
+    var locationNote: String?
+    var coordinate: CLLocationCoordinate2D
 
-    init(image: UIImage, title: String?, artist: String? = nil, coordinate: CLLocationCoordinate2D? = nil) {
+    init(image: UIImage, coordinate: CLLocationCoordinate2D, title: String?) {
         self.image = image
         self.title = title
-        self.artist = artist
         self.coordinate = coordinate
     }
 

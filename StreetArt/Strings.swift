@@ -31,6 +31,9 @@ let PHOTO_ART_LOCATION_TEXT = "Art Location"
 let PHOTO_TITLE_TEXT = "Title"
 let PHOTO_ARTIST_TEXT = "Artist"
 let PHOTO_ADDITIONAL_INFORMATION_TEXT = "Additional Information"
+let PHOTO_UPDATE_LOCATION_TEXT = "Update Location"
+let PHOTO_LOCATION_NOTES_TEXT = "Location Notes"
+let PHOTO_LOCATION_NOTES_FOOTER_TEXT = "Add some notes to help other people find this street art."
 
 // MARK: - Search
 
@@ -47,6 +50,7 @@ let FAVORITES_TAB = FAVORITES_TITLE
 let OK_TEXT = "Ok"
 let SUBMIT_TEXT = "Submit"
 let SAVE_TEXT = "Save"
+let UPDATE_TEXT = "Update"
 let CANCEL_TEXT = "Cancel"
 let BACK_TEXT = "Back"
 let TAKE_PHOTO_TEXT = "Take Photo"

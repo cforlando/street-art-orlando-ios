@@ -104,7 +104,7 @@ class MainViewController: UIViewController {
 
 extension MainViewController {
 
-    func reloadSubmissions(reset: Bool = false, refreshing: Bool = false) {
+    func reloadSubmissions(reset: Bool = false) {
         if isLastPage {
             return
         }
@@ -118,8 +118,8 @@ extension MainViewController {
         ApiClient.shared.fetchSubmissions(page: nextPage) { [unowned self] (result) in
             self.isFetching = false
 
-            if refreshing {
-                self.collectionView.refreshControl?.endRefreshing()
+            if let refreshControl = self.collectionView.refreshControl, refreshControl.isRefreshing {
+                refreshControl.endRefreshing()
             }
 
             switch result {
@@ -183,7 +183,7 @@ extension MainViewController {
         nextPage = 1
         isLastPage = false
 
-        reloadSubmissions(reset: true, refreshing: true)
+        reloadSubmissions(reset: true)
     }
 
 }

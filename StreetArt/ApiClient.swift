@@ -15,16 +15,16 @@ class ApiClient {
         static let localhost = "http://localhost:3000/"
 
         // Production constants should never be changed
-        static let production = "https://example.com/"
+        static let production = "https://cfo-street-art.herokuapp.com/api/"
     }
 
     struct Config {
         #if OSA_PRODUCTION
         // Used for App Store Builds. DO NOT CHANGE!!
-        static let URLString = URLHosts.forward  // DO NOT CHANGE EVER!!!
+        static let URLString = URLHosts.production  // DO NOT CHANGE EVER!!!
         #else
         // Used for DEBUG BUILDS ONLY
-        static let URLString = URLHosts.forward
+        static let URLString = URLHosts.production
         #endif
     }
 
@@ -168,10 +168,12 @@ extension ApiClient {
             parameters["artist"] = artist
         }
 
-        if let coordinate = upload.coordinate {
-            parameters["latitude"] = coordinate.latitude
-            parameters["longitude"] = coordinate.longitude
+        if let locationNote = upload.locationNote {
+            parameters["location_note"] = locationNote
         }
+
+        parameters["latitude"] = upload.coordinate.latitude
+        parameters["longitude"] = upload.coordinate.longitude
 
         sessionManager.request(route, method: .post, parameters: parameters, headers: additionalHeaders)
             .validate()

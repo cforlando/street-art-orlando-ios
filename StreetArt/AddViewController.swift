@@ -8,22 +8,32 @@
 
 import UIKit
 import MobileCoreServices
-import CoreLocation
+import MapKit
 import PKHUD
 
 class AddViewController: UIViewController {
 
+    struct Constants {
+        static let notesHeight: CGFloat = 150.0
+    }
+
     let TitleCellIdentifier = "TitleCell"
     let ArtistCellIdentifier = "ArtistCell"
     let PhotoCellIdentifier = "PhotoCell"
-    let AddImageButtonIdentifier = "AddImageButtonCell"
-    let RemoveImageButtonIdentifier = "RemoveImageButtonCell"
+    let MapCellIdentifier = "MapCell"
+    let UpdateLocationCellIdentifier = "UpdateLocationCell"
+    let NotesCellIdentifier = "NotesCell"
 
     var tableView: UITableView!
 
     var titleField: UITextField!
     var artistField: UITextField!
     var imageView: UIImageView!
+    var notesTextView: UITextView!
+
+    var notesIndexPath: IndexPath?
+
+    var mapCell: MapCell!
 
     var dataSource = ContentSectionArray()
     var image: UIImage?
@@ -89,6 +99,15 @@ class AddViewController: UIViewController {
         artistField.autocapitalizationType = .words
         artistField.placeholder = ADD_ARTIST_PLACEHOLDER
 
+        notesTextView = UITextView()
+        notesTextView.font = UIFont.systemFont(ofSize: 14.0)
+        notesTextView.delegate = self
+
+        mapCell = MapCell(reuseIdentifier: nil)
+
+        let region = MKCoordinateRegion(center: Defaults.mapCoordinate, span: Defaults.mapSpan)
+        mapCell.mapView.setRegion(region, animated: false)
+
         // AutoLayout
 
         tableView.snp.makeConstraints { (make) in
@@ -102,14 +121,31 @@ class AddViewController: UIViewController {
 
         locationManager = CLLocationManager()
         updateDataSource()
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardShown(_:)),
+            name: .UIKeyboardDidShow,
+            object: nil
+        )
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardHidden(_:)),
+            name: .UIKeyboardDidHide,
+            object: nil
+        )
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
+
+        if currentLocation == nil {
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.startUpdatingLocation()
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -120,6 +156,11 @@ class AddViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardDidShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardDidHide, object: nil)
     }
 
 }
@@ -133,6 +174,8 @@ extension AddViewController {
         var rows = ContentRowArray()
         var sections = ContentSectionArray()
 
+        // Photo Section
+
         content = ContentRow()
         content.identifier = PhotoCellIdentifier
         content.object = image
@@ -140,6 +183,25 @@ extension AddViewController {
 
         rows.append(content)
         sections.append(ContentSection(title: PHOTO_ART_PHOTO_TEXT, rows: rows))
+
+        // Map Section
+
+        rows = ContentRowArray()
+
+        content = ContentRow(object: nil)
+        content.identifier = MapCellIdentifier
+        content.height = MapCell.Constants.height
+
+        rows.append(content)
+
+        content = ContentRow(text: PHOTO_UPDATE_LOCATION_TEXT)
+        content.identifier = UpdateLocationCellIdentifier
+
+        rows.append(content)
+
+        sections.append(ContentSection(title: PHOTO_ART_LOCATION_TEXT, rows: rows))
+
+        // Additional Info Section
 
         rows = ContentRowArray()
 
@@ -152,7 +214,25 @@ extension AddViewController {
         content.identifier = ArtistCellIdentifier
 
         rows.append(content)
+
         sections.append(ContentSection(title: PHOTO_ADDITIONAL_INFORMATION_TEXT, rows: rows))
+
+        // Notes Section
+
+        rows = ContentRowArray()
+
+        content = ContentRow()
+        content.identifier = NotesCellIdentifier
+        content.height = Constants.notesHeight
+
+        rows.append(content)
+
+        var notesSection = ContentSection(title: PHOTO_LOCATION_NOTES_TEXT, rows: rows)
+        notesSection.footer = PHOTO_LOCATION_NOTES_FOOTER_TEXT
+
+        sections.append(notesSection)
+
+        notesIndexPath = IndexPath(row: rows.count - 1, section: sections.count - 1)
 
         dataSource = sections
         tableView.reloadData()
@@ -193,6 +273,8 @@ extension AddViewController {
 extension AddViewController {
 
     @objc func saveAction(_ sender: AnyObject?) {
+        self.view.endEditing(true)
+
         var errorMessages = [String]()
 
         let emptySet = CharacterSet.whitespacesAndNewlines
@@ -211,6 +293,11 @@ extension AddViewController {
             artist = nil
         }
 
+        var locationNote: String? = notesTextView.text.trimmingCharacters(in: emptySet)
+        if let stringToCompare = locationNote, stringToCompare.isEmpty {
+            locationNote = nil
+        }
+
         if !errorMessages.isEmpty {
             let message = errorMessages.joined(separator: "\n")
             let alertView = UIAlertController(title: UPLOAD_REQUIRED_TITLE, message: message, preferredStyle: .alert)
@@ -222,12 +309,11 @@ extension AddViewController {
             return
         }
 
-        let upload = SubmissionUpload(
-            image: image!,
-            title: artTitle,
-            artist: artist,
-            coordinate: currentLocation?.coordinate
-        )
+        let coordinate = currentLocation?.coordinate ?? Defaults.mapCoordinate
+
+        let upload = SubmissionUpload(image: image!, coordinate: coordinate, title: artTitle)
+        upload.artist = artist
+        upload.locationNote = locationNote
 
         HUD.show(.progress, onView: self.view)
         ApiClient.shared.uploadSubmission(upload: upload) { [weak self] (result) in
@@ -255,18 +341,24 @@ extension AddViewController {
         cancelBlock?()
     }
 
-    func keyboardShown(notification: NSNotification) {
+    @objc func keyboardShown(_ notification: NSNotification) {
         if let kbFrame = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             var contentInset = tableView.contentInset
             contentInset.bottom = kbFrame.size.height
 
             UIView.animate(withDuration: 0.2, animations: {
                 self.tableView.contentInset = contentInset
+
+                if self.notesTextView.isFirstResponder {
+                    if let indexPath = self.notesIndexPath {
+                        self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
+                    }
+                }
             })
         }
     }
 
-    func keyboardHidden(notification: NSNotification) {
+    @objc func keyboardHidden(_ notification: NSNotification) {
         var contentInset = tableView.contentInset
         contentInset.bottom = 0.0
 
@@ -305,6 +397,26 @@ extension AddViewController: UITableViewDataSource {
             return cell!
         }
 
+        if identifier == MapCellIdentifier {
+            return mapCell
+        }
+
+        if identifier == UpdateLocationCellIdentifier {
+            var cell = tableView.dequeueReusableCell(withIdentifier: UpdateLocationCellIdentifier)
+            if cell == nil {
+                cell = UITableViewCell(style: .default, reuseIdentifier: UpdateLocationCellIdentifier)
+                cell?.textLabel?.textColor = Color.highlight
+                cell?.textLabel?.textAlignment = .center
+            }
+
+            cell?.textLabel?.text = row.text
+
+            cell?.accessoryType = .none
+            cell?.selectionStyle = .default
+
+            return cell!
+        }
+
         if identifier == TitleCellIdentifier {
             var cell = tableView.dequeueReusableCell(withIdentifier: TitleCellIdentifier)
             if cell == nil {
@@ -330,6 +442,21 @@ extension AddViewController: UITableViewDataSource {
             artistField.frame = CGRect(x: 0.0, y: 0.0, width: contentWidth, height: 40.0)
 
             cell?.accessoryView = artistField
+            cell?.selectionStyle = .none
+
+            return cell!
+        }
+
+        if identifier == NotesCellIdentifier {
+            var cell = tableView.dequeueReusableCell(withIdentifier: NotesCellIdentifier)
+            if cell == nil {
+                cell = UITableViewCell(style: .default, reuseIdentifier: NotesCellIdentifier)
+            }
+
+            let contentWidth = tableView.frame.size.width - (tableView.layoutMargins.right * 2.0)
+            notesTextView.frame = CGRect(x: 0.0, y: 5.0, width: contentWidth, height: Constants.notesHeight - 10.0)
+
+            cell?.accessoryView = notesTextView
             cell?.selectionStyle = .none
 
             return cell!
@@ -372,9 +499,42 @@ extension AddViewController: UITableViewDelegate {
             actionSheet.addAction(cancelAction)
 
             self.navigationController?.present(actionSheet, animated: true, completion: nil)
-        case RemoveImageButtonIdentifier:
-            image = nil
-            updateDataSource()
+        case UpdateLocationCellIdentifier:
+            let defaultLocation = CLLocation(
+                latitude: Defaults.mapCoordinate.latitude,
+                longitude: Defaults.mapCoordinate.longitude
+            )
+
+            let controller = MapViewController(currentLocation: currentLocation ?? defaultLocation)
+            controller.title = PHOTO_ART_LOCATION_TEXT
+
+            controller.saveBlock = { [weak self] (coordinate) in
+                guard let weakSelf = self else {
+                    return
+                }
+
+                weakSelf.currentLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+
+                for annotation in weakSelf.mapCell.mapView.annotations {
+                    weakSelf.mapCell.mapView.removeAnnotation(annotation)
+                }
+
+                let annotation = SubmissionAnnotation(title: nil, coordinate: coordinate)
+                weakSelf.mapCell.mapView.addAnnotation(annotation)
+
+                let region = MKCoordinateRegion(center: annotation.coordinate, span: Defaults.mapSpan)
+                weakSelf.mapCell.mapView.setRegion(region, animated: false)
+
+                weakSelf.navigationController?.dismiss(animated: true, completion: nil)
+            }
+
+            controller.cancelBlock = { [weak self] in
+                self?.navigationController?.dismiss(animated: true, completion: nil)
+            }
+
+            let navController = UINavigationController(rootViewController: controller)
+
+            self.navigationController?.present(navController, animated: true, completion: nil)
         default:
             break
         }
@@ -382,6 +542,10 @@ extension AddViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return dataSource[section].title
+    }
+
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return dataSource[section].footer
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -443,14 +607,32 @@ extension AddViewController: CLLocationManagerDelegate {
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let _ = currentLocation {
+            return
+        }
+
         if let location = locations.first {
             manager.stopUpdatingLocation()
             currentLocation = location
+
+            let region = MKCoordinateRegion(center: location.coordinate, span: Defaults.mapSpan)
+            mapCell.mapView.setRegion(region, animated: true)
+            mapCell.mapView.addAnnotation(SubmissionAnnotation(title: nil, coordinate: location.coordinate))
         }
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         dLog("location failed: \(error)")
+    }
+
+}
+
+// MARK: - UITextViewDelegate Methods
+
+extension AddViewController: UITextViewDelegate {
+
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        return textView.text.count + (text.count - range.length) <= Defaults.maxCharactersInTextView
     }
 
 }

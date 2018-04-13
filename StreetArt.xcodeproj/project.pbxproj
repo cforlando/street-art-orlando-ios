@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		162042E12078C78D00F3BE99 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162042E02078C78D00F3BE99 /* FavoritesViewController.swift */; };
+		162E8D71207AAAD900A7E2D8 /* MapDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162E8D70207AAAD900A7E2D8 /* MapDot.swift */; };
+		162E8D73207AABE800A7E2D8 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162E8D72207AABE800A7E2D8 /* MapViewController.swift */; };
 		166674CB207947CE00387EC6 /* UIImage+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166674CA207947CE00387EC6 /* UIImage+Additions.swift */; };
 		166A5A342055ACF000FE5791 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166A5A332055ACF000FE5791 /* Settings.swift */; };
 		166A5A362055D12E00FE5791 /* ErrorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166A5A352055D12E00FE5791 /* ErrorUtils.swift */; };
@@ -55,6 +57,8 @@
 		050566F609F9DD2D0FAC63B9 /* Pods_StreetArt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StreetArt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A15AF122F724A134B86B7D8 /* Pods-StreetArtTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StreetArtTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StreetArtTests/Pods-StreetArtTests.debug.xcconfig"; sourceTree = "<group>"; };
 		162042E02078C78D00F3BE99 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		162E8D70207AAAD900A7E2D8 /* MapDot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDot.swift; sourceTree = "<group>"; };
+		162E8D72207AABE800A7E2D8 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		166674CA207947CE00387EC6 /* UIImage+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Additions.swift"; sourceTree = "<group>"; };
 		166A5A332055ACF000FE5791 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		166A5A352055D12E00FE5791 /* ErrorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorUtils.swift; sourceTree = "<group>"; };
@@ -183,6 +187,7 @@
 				1670D965204F96E300E223ED /* AddViewController.swift */,
 				16845144205483BB00013A07 /* PhotoViewController.swift */,
 				162042E02078C78D00F3BE99 /* FavoritesViewController.swift */,
+				162E8D72207AABE800A7E2D8 /* MapViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -206,6 +211,7 @@
 				16E600222050C1160002B4F0 /* PhotoCell.swift */,
 				1670B1232066F16700F4EBFA /* LoadingSubmissionsView.swift */,
 				16876A53207451FE002A7F5D /* MapCell.swift */,
+				162E8D70207AAAD900A7E2D8 /* MapDot.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -497,6 +503,7 @@
 				168451482054962B00013A07 /* ApiClient.swift in Sources */,
 				168451412054545400013A07 /* AppConfig.swift in Sources */,
 				16A5395B205F26AB0051CE4F /* SubmissionUpload.swift in Sources */,
+				162E8D71207AAAD900A7E2D8 /* MapDot.swift in Sources */,
 				16AB45B52052182E008B6F8C /* FileUtils.swift in Sources */,
 				166A5A342055ACF000FE5791 /* Settings.swift in Sources */,
 				16A53959205F15880051CE4F /* Alamofire+SwiftyJSON.swift in Sources */,
@@ -515,6 +522,7 @@
 				1684513E2054534900013A07 /* UIImage+Resize.m in Sources */,
 				16E600232050C1160002B4F0 /* PhotoCell.swift in Sources */,
 				16AB45B1205217DC008B6F8C /* UIColor+Additions.swift in Sources */,
+				162E8D73207AABE800A7E2D8 /* MapViewController.swift in Sources */,
 				16845145205483BB00013A07 /* PhotoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

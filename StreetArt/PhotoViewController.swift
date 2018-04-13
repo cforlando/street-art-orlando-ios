@@ -12,10 +12,6 @@ import MapKit
 
 class PhotoViewController: UIViewController {
 
-    struct Constants {
-        static let mapSpan = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-    }
-
     let CellIdentifier = "Cell"
     let PhotoCellIdentifier = "PhotoCell"
     let MapCellIdentifier = "MapCell"
@@ -57,7 +53,7 @@ class PhotoViewController: UIViewController {
         if let coordinate = submission.coordinate, let annotation = submission.annotation {
             mapCell = MapCell(reuseIdentifier: nil)
 
-            let region = MKCoordinateRegion(center: coordinate, span: Constants.mapSpan)
+            let region = MKCoordinateRegion(center: coordinate, span: Defaults.mapSpan)
             mapCell?.mapView.setRegion(region, animated: false)
             mapCell?.mapView.addAnnotation(annotation)
         }

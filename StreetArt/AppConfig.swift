@@ -7,8 +7,16 @@
 //
 
 import UIKit
+import MapKit
 
 struct Defaults {
     static let maxImageResizeInPixels: CGFloat = 2048.0
     static let defaultImageHeight: CGFloat = 250.0
+
+    static let mapSpan = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+
+    // Orlando, FL
+    static let mapCoordinate = CLLocationCoordinate2D(latitude: 28.538336, longitude: -81.379234)
+
+    static let maxCharactersInTextView: Int = 200
 }
