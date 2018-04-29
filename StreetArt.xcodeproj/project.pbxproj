@@ -10,6 +10,10 @@
 		162042E12078C78D00F3BE99 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162042E02078C78D00F3BE99 /* FavoritesViewController.swift */; };
 		162E8D71207AAAD900A7E2D8 /* MapDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162E8D70207AAAD900A7E2D8 /* MapDot.swift */; };
 		162E8D73207AABE800A7E2D8 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162E8D72207AABE800A7E2D8 /* MapViewController.swift */; };
+		1640259A20951A3600784CAA /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1640259920951A3600784CAA /* SettingsViewController.swift */; };
+		1640259C209527AC00784CAA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1640259B209527AC00784CAA /* LoginViewController.swift */; };
+		164025A32095298E00784CAA /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164025A22095298E00784CAA /* RegisterViewController.swift */; };
+		164025A520952A8900784CAA /* UIButton+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164025A420952A8900784CAA /* UIButton+Additions.swift */; };
 		166674CB207947CE00387EC6 /* UIImage+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166674CA207947CE00387EC6 /* UIImage+Additions.swift */; };
 		166A5A342055ACF000FE5791 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166A5A332055ACF000FE5791 /* Settings.swift */; };
 		166A5A362055D12E00FE5791 /* ErrorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166A5A352055D12E00FE5791 /* ErrorUtils.swift */; };
@@ -32,6 +36,7 @@
 		168451482054962B00013A07 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168451472054962B00013A07 /* ApiClient.swift */; };
 		1684514A2054967200013A07 /* ApiClient+Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168451492054967200013A07 /* ApiClient+Router.swift */; };
 		16876A54207451FE002A7F5D /* MapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16876A53207451FE002A7F5D /* MapCell.swift */; };
+		16906C8D208A66C70097CBDA /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16906C8C208A66C70097CBDA /* FavoriteButton.swift */; };
 		16A53959205F15880051CE4F /* Alamofire+SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A53958205F15880051CE4F /* Alamofire+SwiftyJSON.swift */; };
 		16A5395B205F26AB0051CE4F /* SubmissionUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A5395A205F26AB0051CE4F /* SubmissionUpload.swift */; };
 		16AB45B1205217DC008B6F8C /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AB45B0205217DC008B6F8C /* UIColor+Additions.swift */; };
@@ -59,6 +64,10 @@
 		162042E02078C78D00F3BE99 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		162E8D70207AAAD900A7E2D8 /* MapDot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDot.swift; sourceTree = "<group>"; };
 		162E8D72207AABE800A7E2D8 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		1640259920951A3600784CAA /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		1640259B209527AC00784CAA /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		164025A22095298E00784CAA /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		164025A420952A8900784CAA /* UIButton+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Additions.swift"; sourceTree = "<group>"; };
 		166674CA207947CE00387EC6 /* UIImage+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Additions.swift"; sourceTree = "<group>"; };
 		166A5A332055ACF000FE5791 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		166A5A352055D12E00FE5791 /* ErrorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorUtils.swift; sourceTree = "<group>"; };
@@ -88,6 +97,7 @@
 		168451472054962B00013A07 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		168451492054967200013A07 /* ApiClient+Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiClient+Router.swift"; sourceTree = "<group>"; };
 		16876A53207451FE002A7F5D /* MapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCell.swift; sourceTree = "<group>"; };
+		16906C8C208A66C70097CBDA /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
 		16A53958205F15880051CE4F /* Alamofire+SwiftyJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alamofire+SwiftyJSON.swift"; sourceTree = "<group>"; };
 		16A5395A205F26AB0051CE4F /* SubmissionUpload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionUpload.swift; sourceTree = "<group>"; };
 		16AB45B0205217DC008B6F8C /* UIColor+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
@@ -121,6 +131,49 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1640259D209527BE00784CAA /* Explore */ = {
+			isa = PBXGroup;
+			children = (
+				1670D93A204F698200E223ED /* MainViewController.swift */,
+			);
+			name = Explore;
+			sourceTree = "<group>";
+		};
+		1640259E209527D100784CAA /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				162042E02078C78D00F3BE99 /* FavoritesViewController.swift */,
+			);
+			name = Favorites;
+			sourceTree = "<group>";
+		};
+		1640259F209527E800784CAA /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				1640259920951A3600784CAA /* SettingsViewController.swift */,
+				1670D965204F96E300E223ED /* AddViewController.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		164025A0209527F200784CAA /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				162E8D72207AABE800A7E2D8 /* MapViewController.swift */,
+				16845144205483BB00013A07 /* PhotoViewController.swift */,
+			);
+			name = Shared;
+			sourceTree = "<group>";
+		};
+		164025A12095283000784CAA /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				1640259B209527AC00784CAA /* LoginViewController.swift */,
+				164025A22095298E00784CAA /* RegisterViewController.swift */,
+			);
+			name = Authentication;
+			sourceTree = "<group>";
+		};
 		1670D92C204F698200E223ED = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +229,7 @@
 				166A5A392055D94E00FE5791 /* Base64Utils.swift */,
 				16A53958205F15880051CE4F /* Alamofire+SwiftyJSON.swift */,
 				166674CA207947CE00387EC6 /* UIImage+Additions.swift */,
+				164025A420952A8900784CAA /* UIButton+Additions.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -183,11 +237,11 @@
 		1670D95F204F966900E223ED /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				1670D93A204F698200E223ED /* MainViewController.swift */,
-				1670D965204F96E300E223ED /* AddViewController.swift */,
-				16845144205483BB00013A07 /* PhotoViewController.swift */,
-				162042E02078C78D00F3BE99 /* FavoritesViewController.swift */,
-				162E8D72207AABE800A7E2D8 /* MapViewController.swift */,
+				1640259D209527BE00784CAA /* Explore */,
+				1640259E209527D100784CAA /* Favorites */,
+				1640259F209527E800784CAA /* Settings */,
+				164025A12095283000784CAA /* Authentication */,
+				164025A0209527F200784CAA /* Shared */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -212,6 +266,7 @@
 				1670B1232066F16700F4EBFA /* LoadingSubmissionsView.swift */,
 				16876A53207451FE002A7F5D /* MapCell.swift */,
 				162E8D70207AAAD900A7E2D8 /* MapDot.swift */,
+				16906C8C208A66C70097CBDA /* FavoriteButton.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -288,7 +343,6 @@
 				1670D932204F698200E223ED /* Frameworks */,
 				1670D933204F698200E223ED /* Resources */,
 				320398DDDD7537EEE4249587 /* [CP] Embed Pods Frameworks */,
-				51B3E4853543F009BD4FC151 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -307,8 +361,6 @@
 				1670D945204F698200E223ED /* Sources */,
 				1670D946204F698200E223ED /* Frameworks */,
 				1670D947204F698200E223ED /* Resources */,
-				D108BA9ECAB59B2E4A626FC4 /* [CP] Embed Pods Frameworks */,
-				7A1991839A61E4060E39373F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -443,51 +495,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		51B3E4853543F009BD4FC151 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StreetArt/Pods-StreetArt-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7A1991839A61E4060E39373F /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StreetArtTests/Pods-StreetArtTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D108BA9ECAB59B2E4A626FC4 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StreetArtTests/Pods-StreetArtTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -498,6 +505,7 @@
 				1670D968204F97B900E223ED /* Submission.swift in Sources */,
 				162042E12078C78D00F3BE99 /* FavoritesViewController.swift in Sources */,
 				166A5A382055D49800FE5791 /* DataManager.swift in Sources */,
+				16906C8D208A66C70097CBDA /* FavoriteButton.swift in Sources */,
 				1670D95B204F703A00E223ED /* ContentCell.swift in Sources */,
 				1670D95E204F73CD00E223ED /* ContentUtils.swift in Sources */,
 				168451482054962B00013A07 /* ApiClient.swift in Sources */,
@@ -506,14 +514,18 @@
 				162E8D71207AAAD900A7E2D8 /* MapDot.swift in Sources */,
 				16AB45B52052182E008B6F8C /* FileUtils.swift in Sources */,
 				166A5A342055ACF000FE5791 /* Settings.swift in Sources */,
+				164025A32095298E00784CAA /* RegisterViewController.swift in Sources */,
+				1640259C209527AC00784CAA /* LoginViewController.swift in Sources */,
 				16A53959205F15880051CE4F /* Alamofire+SwiftyJSON.swift in Sources */,
 				1670D93B204F698200E223ED /* MainViewController.swift in Sources */,
 				16AB45B7205218A4008B6F8C /* Color.swift in Sources */,
+				164025A520952A8900784CAA /* UIButton+Additions.swift in Sources */,
 				166A5A362055D12E00FE5791 /* ErrorUtils.swift in Sources */,
 				1670D966204F96E300E223ED /* AddViewController.swift in Sources */,
 				16876A54207451FE002A7F5D /* MapCell.swift in Sources */,
 				1684514A2054967200013A07 /* ApiClient+Router.swift in Sources */,
 				1670B1242066F16700F4EBFA /* LoadingSubmissionsView.swift in Sources */,
+				1640259A20951A3600784CAA /* SettingsViewController.swift in Sources */,
 				16AB45B3205217FA008B6F8C /* Utils.swift in Sources */,
 				166A5A3A2055D94E00FE5791 /* Base64Utils.swift in Sources */,
 				166674CB207947CE00387EC6 /* UIImage+Additions.swift in Sources */,

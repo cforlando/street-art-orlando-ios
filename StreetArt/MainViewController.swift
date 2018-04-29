@@ -31,7 +31,7 @@ class MainViewController: UIViewController {
     init() {
         super.init(nibName: nil, bundle: nil)
         self.title = MAIN_TITLE
-        self.tabBarItem = UITabBarItem(tabBarSystemItem: .recents, tag: 0)
+        self.tabBarItem = UITabBarItem(title: MAIN_TAB, image: #imageLiteral(resourceName: "explore_tab"), tag: 0)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -47,12 +47,6 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
 
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: BACK_TEXT, style: .plain, target: nil, action: nil)
-
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .add,
-            target: self,
-            action: #selector(addAction(_:))
-        )
 
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshAction(_:)), for: .valueChanged)
@@ -115,7 +109,7 @@ extension MainViewController {
 
         isFetching = true
 
-        ApiClient.shared.fetchSubmissions(page: nextPage) { [unowned self] (result) in
+        ApiClient.shared.submissions(page: nextPage) { [unowned self] (result) in
             self.isFetching = false
 
             if let refreshControl = self.collectionView.refreshControl, refreshControl.isRefreshing {
@@ -149,35 +143,6 @@ extension MainViewController {
 // MARK: Selector Methods
 
 extension MainViewController {
-
-    @objc func addAction(_ sender: AnyObject?) {
-        guard isCameraAvailable() || isPhotoLibraryAvailable() else {
-            let alertView = UIAlertController(title: PHOTOS_NOT_SUPPORTED_ALERT, message: nil, preferredStyle: .alert)
-
-            let okAction = UIAlertAction(title: OK_TEXT, style: .cancel, handler: nil)
-            alertView.addAction(okAction)
-
-            self.navigationController?.present(alertView, animated: true, completion: nil)
-            return
-        }
-
-        let controller = AddViewController()
-
-        controller.completionBlock = { [weak self] in
-            guard let _ = self else {
-                return
-            }
-
-           self?.navigationController?.dismiss(animated: true, completion: nil)
-        }
-
-        controller.cancelBlock = { [weak self] in
-            self?.navigationController?.dismiss(animated: true, completion: nil)
-        }
-
-        let navController = UINavigationController(rootViewController: controller)
-        self.navigationController?.present(navController, animated: true, completion: nil)
-    }
 
     @objc func refreshAction(_ refreshControl: UIRefreshControl) {
         nextPage = 1

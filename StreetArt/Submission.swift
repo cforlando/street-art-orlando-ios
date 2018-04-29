@@ -14,13 +14,25 @@ typealias SubmissionArray = [Submission]
 
 struct Submission {
 
+    enum Status: String {
+        case processing = "processing"
+        case pending = "pending"
+        case approved = "approved"
+        case rejected = "rejected"
+    }
+
     var id = 0
+    var status = Status.processing
     var title: String?
     var description: String?
     var artist: String?
 
     var latitude: Double?
     var longitude: Double?
+
+    var locationNote: String?
+
+    var favorite = false
 
     var coordinate: CLLocationCoordinate2D? {
         guard let latitude = self.latitude, let longitude = self.longitude else {
@@ -53,12 +65,17 @@ struct Submission {
         }
 
         self.id = id
+        self.status = Status(rawValue: json["title"].stringValue) ?? Status.processing
         self.title = json["title"].string
         self.description = json["description"].string
         self.artist = json["artist"].string
 
         self.latitude = json["latitude"].double
         self.longitude = json["longitude"].double
+
+        self.locationNote = json["location_note"].string
+
+        self.favorite = json["favorite"].boolValue
 
         self.photoURLString = photoURLString
         self.thumbURLString = thumbURLString

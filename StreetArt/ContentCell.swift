@@ -22,6 +22,8 @@ class ContentCell: UICollectionViewCell {
 
     var overlayView: UIView!
 
+    var submission: Submission?
+
     convenience init() {
         self.init(frame: .zero)
     }
@@ -100,9 +102,13 @@ class ContentCell: UICollectionViewCell {
 
 }
 
+// MARK: - Methods
+
 extension ContentCell {
 
     func set(submission: Submission?) {
+        self.submission = submission
+
         if let url = submission?.thumbURL {
             imageView.af_setImage(withURL: url)
         } else {

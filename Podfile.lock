@@ -1,6 +1,6 @@
 PODS:
   - Alamofire (4.6.0)
-  - AlamofireImage (3.3.0):
+  - AlamofireImage (3.3.1):
     - Alamofire (~> 4.5)
   - PKHUD (5.0.0)
   - SnapKit (4.0.0)
@@ -13,13 +13,21 @@ DEPENDENCIES:
   - SnapKit (~> 4.0.0)
   - SwiftyJSON (~> 4.0.0)
 
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Alamofire
+    - AlamofireImage
+    - PKHUD
+    - SnapKit
+    - SwiftyJSON
+
 SPEC CHECKSUMS:
   Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
-  AlamofireImage: 2e784dc5d00f04903a52c1d169181469c805c3df
+  AlamofireImage: 3b35b586853abaf94ca1250f4e94cff3c21a4c0d
   PKHUD: 3c001512c6e002091184197a8de7a20420786e3b
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
 
 PODFILE CHECKSUM: 70fa6314c8cccf8c57e5d285252389a62098b669
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.0

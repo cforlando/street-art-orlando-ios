@@ -7,14 +7,17 @@
 //
 
 import UIKit
+import PKHUD
 import SnapKit
 import MapKit
 
 class PhotoViewController: UIViewController {
 
-    let CellIdentifier = "Cell"
     let PhotoCellIdentifier = "PhotoCell"
+    let TitleCellIdentifier = "TitleCell"
+    let ArtistCellIdentifier = "ArtistCell"
     let MapCellIdentifier = "MapCell"
+    let NoteCellIdentifier = "NoteCell"
 
     var tableView: UITableView!
     var mapCell: MapCell?
@@ -50,6 +53,14 @@ class PhotoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if ApiClient.shared.isAuthenticated {
+            if submission.favorite {
+                setUnfavoriteButton()
+            } else {
+                setFavoriteButton()
+            }
+        }
+
         if let coordinate = submission.coordinate, let annotation = submission.annotation {
             mapCell = MapCell(reuseIdentifier: nil)
 
@@ -70,8 +81,8 @@ class PhotoViewController: UIViewController {
         updateDataSource()
     }
 
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
     }
 
     override func didReceiveMemoryWarning() {
@@ -97,34 +108,134 @@ extension PhotoViewController {
 
         rows.append(content)
 
-        var photoFooter: String?
-        if let artist = submission.artist {
-            photoFooter = BY_TEXT + " " + artist
-        }
-
-        var photoSection = ContentSection(title: submission.title, rows: rows)
-        photoSection.footer = photoFooter
-
-        sections.append(photoSection)
-
-        if let _ = mapCell {
-            rows = ContentRowArray()
-
-            content = ContentRow(text: PHOTO_ART_LOCATION_TEXT)
-            content.groupIdentifier = CellIdentifier
+        if let title = submission.title {
+            content = ContentRow(text: title)
+            content.groupIdentifier = TitleCellIdentifier
 
             rows.append(content)
+        }
 
+        if let artist = submission.artist {
+            content = ContentRow(text: BY_TEXT + " " + artist)
+            content.groupIdentifier = ArtistCellIdentifier
+
+            rows.append(content)
+        }
+
+        sections.append(ContentSection(title: PHOTO_ART_PHOTO_TEXT, rows: rows))
+
+        rows = ContentRowArray()
+
+        if let _ = mapCell {
             content = ContentRow(object: nil)
             content.groupIdentifier = MapCellIdentifier
             content.height = MapCell.Constants.height
 
             rows.append(content)
-            sections.append(ContentSection(title: nil, rows: rows))
+        }
+
+        if let note = submission.locationNote {
+            content = ContentRow(text: note)
+            content.groupIdentifier = NoteCellIdentifier
+
+            rows.append(content)
+        }
+
+        if !rows.isEmpty {
+            sections.append(ContentSection(title: PHOTO_ART_LOCATION_TEXT, rows: rows))
         }
 
         dataSource = sections
         tableView.reloadData()
+    }
+
+    func setFavoriteButton() {
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: #imageLiteral(resourceName: "heart_icon").tintedImage(color: Color.highlight),
+            style: .plain,
+            target: self,
+            action: #selector(favoriteAction(_:))
+        )
+    }
+
+    func setUnfavoriteButton() {
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: #imageLiteral(resourceName: "heart_selected_icon").tintedImage(color: Color.highlight),
+            style: .plain,
+            target: self,
+            action: #selector(unfavoriteAction(_:))
+        )
+    }
+
+    var noteCell: UITableViewCell {
+        let cell = UITableViewCell(style: .default, reuseIdentifier: NoteCellIdentifier)
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 13.0)
+        cell.textLabel?.numberOfLines = 0
+        cell.textLabel?.textColor = .lightGray
+
+        return cell
+    }
+
+}
+
+// MARK: Selector Methods
+
+extension PhotoViewController {
+
+    @objc func favoriteAction(_ sender: AnyObject?) {
+        HUD.show(.progress, onView: self.view)
+        ApiClient.shared.favorite(submission: submission) { [weak self] (result) in
+            guard let _ = self else {
+                return
+            }
+
+            HUD.hide()
+
+            switch result {
+            case .success:
+                self?.submission.favorite = true
+                self?.setUnfavoriteButton()
+            case .failure:
+                let alertView = UIAlertController(
+                    title: MAIN_FAVORITE_ALERT_TITLE,
+                    message: MAIN_FAVORITE_ALERT_MESSAGE,
+                    preferredStyle: .alert
+                )
+
+                let okAction = UIAlertAction(title: OK_TEXT, style: .cancel, handler: nil)
+                alertView.addAction(okAction)
+
+                self?.navigationController?.present(alertView, animated: true, completion: nil)
+            }
+        }
+    }
+
+    @objc func unfavoriteAction(_ sender: AnyObject) {
+        HUD.show(.progress, onView: self.view)
+        ApiClient.shared.unfavorite(submission: submission) { [weak self] (result) in
+            guard let _ = self else {
+                return
+            }
+
+            HUD.hide()
+
+            switch result {
+            case .success:
+                self?.submission.favorite = false
+                self?.setFavoriteButton()
+            case .failure:
+                let alertView = UIAlertController(
+                    title: MAIN_FAVORITE_ALERT_TITLE,
+                    message: MAIN_UNFAVORITE_ALERT_MESSAGE,
+                    preferredStyle: .alert
+                )
+
+                let okAction = UIAlertAction(title: OK_TEXT, style: .cancel, handler: nil)
+                alertView.addAction(okAction)
+
+                self?.navigationController?.present(alertView, animated: true, completion: nil)
+            }
+        }
     }
 
 }
@@ -145,20 +256,6 @@ extension PhotoViewController: UITableViewDataSource {
         let row = dataSource[indexPath.section].rows[indexPath.row]
         let identifier = row.groupIdentifier ?? String()
 
-        if identifier == CellIdentifier {
-            var cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier)
-            if cell == nil {
-                cell = UITableViewCell(style: .default, reuseIdentifier: CellIdentifier)
-            }
-
-            cell?.textLabel?.text = row.text
-
-            cell?.accessoryType = .none
-            cell?.selectionStyle = .none
-
-            return cell!
-        }
-
         if identifier == PhotoCellIdentifier {
             var cell = tableView.dequeueReusableCell(withIdentifier: PhotoCellIdentifier) as? PhotoCell
             if cell == nil {
@@ -170,8 +267,54 @@ extension PhotoViewController: UITableViewDataSource {
             return cell!
         }
 
+        if identifier == TitleCellIdentifier {
+            var cell = tableView.dequeueReusableCell(withIdentifier: TitleCellIdentifier)
+            if cell == nil {
+                cell = UITableViewCell(style: .default, reuseIdentifier: TitleCellIdentifier)
+                cell?.textLabel?.font = UIFont.systemFont(ofSize: 14.0)
+                cell?.textLabel?.textColor = .darkGray
+            }
+
+            cell?.textLabel?.text = row.text
+
+            cell?.accessoryType = .none
+            cell?.selectionStyle = .none
+
+            return cell!
+        }
+
+        if identifier == ArtistCellIdentifier {
+            var cell = tableView.dequeueReusableCell(withIdentifier: ArtistCellIdentifier)
+            if cell == nil {
+                cell = UITableViewCell(style: .default, reuseIdentifier: ArtistCellIdentifier)
+                cell?.textLabel?.font = UIFont.systemFont(ofSize: 14.0)
+                cell?.textLabel?.textColor = .lightGray
+            }
+
+            cell?.textLabel?.text = row.text
+
+            cell?.accessoryType = .none
+            cell?.selectionStyle = .none
+
+            return cell!
+        }
+
         if identifier == MapCellIdentifier {
             return mapCell!
+        }
+
+        if identifier == NoteCellIdentifier {
+            var cell = tableView.dequeueReusableCell(withIdentifier: NoteCellIdentifier)
+            if cell == nil {
+                cell = noteCell
+            }
+
+            cell?.textLabel?.text = row.text
+
+            cell?.accessoryType = .none
+            cell?.selectionStyle = .none
+
+            return cell!
         }
 
         return UITableViewCell(style: .default, reuseIdentifier: nil)
@@ -196,7 +339,20 @@ extension PhotoViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return dataSource[indexPath.section].rows[indexPath.row].height ?? 44.0
+        let row = dataSource[indexPath.section].rows[indexPath.row]
+        let identifier = row.groupIdentifier ?? String()
+
+        if identifier == NoteCellIdentifier {
+            let cell = noteCell
+            cell.textLabel?.text = row.text
+
+            let contentWidth = tableView.frame.width - (cell.layoutMargins.left + cell.layoutMargins.right)
+            let height = cell.textLabel?.sizeThatFits(CGSize(width: contentWidth, height: 999.0)).height ?? 0.0
+
+            return max(height + 20.0, 44.0)
+        }
+
+        return row.height ?? 44.0
     }
 
 }

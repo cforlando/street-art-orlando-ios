@@ -24,7 +24,7 @@ class ApiClient {
         static let URLString = URLHosts.production  // DO NOT CHANGE EVER!!!
         #else
         // Used for DEBUG BUILDS ONLY
-        static let URLString = URLHosts.production
+        static let URLString = URLHosts.forward
         #endif
     }
 
@@ -75,52 +75,12 @@ class ApiClient {
 
 extension ApiClient {
 
-    var anonymousEmail: String {
-        let identifier = Settings.shared.deviceIdentifier
-        return identifier + "@riveradev.com"
-    }
-
-    var anonymousPassword: String {
-        return Settings.shared.deviceIdentifier
-    }
-
-    func registerAnonymousUser(completionHandler: @escaping ((Result<Bool>) -> Void)) {
-        let route = Router.register
-
-        let parameters: Parameters = [
-            "email": anonymousEmail,
-            "password": anonymousPassword,
-            "anonymous": true
-        ]
-
-        sessionManager.request(route, method: .post, parameters: parameters)
-            .validate()
-            .responseSwiftyJSON { [weak self] (response) in
-                guard let _ = self else {
-                    return
-                }
-
-                switch response.result {
-                case .success(let json):
-                    if let authToken = json["auth_token"].string {
-                        self?.authTokenString = authToken
-                        completionHandler(.success(true))
-                    } else {
-                        let error = NSError.customError(message: "unknown error")
-                        completionHandler(.failure(error))
-                    }
-                case .failure(let error):
-                    completionHandler(.failure(error))
-                }
-        }
-    }
-
-    func authenticateAnonymousUser(completionHandler: @escaping ((Result<Bool>) -> Void)) {
+    func authenticate(username: String, password: String, completionHandler: @escaping ((Result<Bool>) -> Void)) {
         let route = Router.authenticate
 
         let parameters: Parameters = [
-            "email": anonymousEmail,
-            "password": anonymousPassword
+            "email": username,
+            "password": password
         ]
 
         sessionManager.request(route, method: .post, parameters: parameters)
@@ -143,6 +103,10 @@ extension ApiClient {
                     completionHandler(.failure(error))
                 }
         }
+    }
+
+    func logout() {
+        authTokenString = nil
     }
 
 }
@@ -151,9 +115,8 @@ extension ApiClient {
 
 extension ApiClient {
 
-    func uploadSubmission(upload: SubmissionUpload, completionHandler: @escaping ((Result<Bool>) -> Void)) {
+    func upload(submission upload: SubmissionUpload, completionHandler: @escaping ((Result<Bool>) -> Void)) {
         let route = Router.submissions
-
         var parameters = Parameters()
 
         if let imageString = upload.base64ImageString {
@@ -191,9 +154,8 @@ extension ApiClient {
         }
     }
 
-    func fetchSubmissions(page: Int, completionHandler: @escaping ((Result<SubmissionContainer>) -> Void)) {
+    func submissions(page: Int, completionHandler: @escaping ((Result<SubmissionContainer>) -> Void)) {
         let route = Router.submissions
-
         let parameters = [ "page": page ]
 
         sessionManager.request(route, parameters: parameters, headers: additionalHeaders).validate().responseSwiftyJSON { [weak self] (response) in
@@ -203,14 +165,96 @@ extension ApiClient {
 
             switch response.result {
             case .success(let json):
-                dLog("submissions: \(json["meta"])")
-
                 if let container = SubmissionContainer(json: json) {
                     completionHandler(.success(container))
                 } else {
                     let error = NSError.customError(message: "unknown error")
                     completionHandler(.failure(error))
                 }
+            case .failure(let error):
+                completionHandler(.failure(error))
+            }
+        }
+    }
+
+    func mySubmissions(completionHandler: @escaping ((Result<SubmissionArray>) -> Void)) {
+        let route = Router.mySubmissions
+
+        sessionManager.request(route, method: .get, headers: additionalHeaders).validate().responseSwiftyJSON { [weak self] (response) in
+            guard let _ = self else {
+                return
+            }
+
+            switch response.result {
+            case .success(let json):
+                var submissions = SubmissionArray()
+
+                for raw in json.arrayValue {
+                    if let submission = Submission(json: raw) {
+                        submissions.append(submission)
+                    }
+                }
+
+                completionHandler(.success(submissions))
+            case .failure(let error):
+                completionHandler(.failure(error))
+            }
+        }
+    }
+
+    func favorites(completionHandler: @escaping ((Result<SubmissionArray>) -> Void)) {
+        let route = Router.favorites
+
+        sessionManager.request(route, method: .get, headers: additionalHeaders).validate().responseSwiftyJSON { [weak self] (response) in
+            guard let _ = self else {
+                return
+            }
+
+            switch response.result {
+            case .success(let json):
+                var submissions = SubmissionArray()
+
+                for raw in json.arrayValue {
+                    if let submission = Submission(json: raw) {
+                        submissions.append(submission)
+                    }
+                }
+
+                completionHandler(.success(submissions))
+            case .failure(let error):
+                completionHandler(.failure(error))
+            }
+        }
+    }
+
+    func favorite(submission: Submission, completionHandler: @escaping ((Result<Bool>) -> Void)) {
+        let route = Router.favorite(submissionId: submission.id)
+
+        sessionManager.request(route, method: .post, headers: additionalHeaders).validate().responseSwiftyJSON { [weak self] (response) in
+            guard let _ = self else {
+                return
+            }
+
+            switch response.result {
+            case .success:
+                completionHandler(.success(true))
+            case .failure(let error):
+                completionHandler(.failure(error))
+            }
+        }
+    }
+
+    func unfavorite(submission: Submission, completionHandler: @escaping ((Result<Bool>) -> Void)) {
+        let route = Router.unfavorite(submissionId: submission.id)
+
+        sessionManager.request(route, method: .delete, headers: additionalHeaders).validate().responseSwiftyJSON { [weak self] (response) in
+            guard let _ = self else {
+                return
+            }
+
+            switch response.result {
+            case .success:
+                completionHandler(.success(true))
             case .failure(let error):
                 completionHandler(.failure(error))
             }

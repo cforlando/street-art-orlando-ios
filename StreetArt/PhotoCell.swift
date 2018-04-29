@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PhotoCellDelegate {
+protocol PhotoCellDelegate: class {
 
     var enableImageReset: Bool { get }
     func resetImage(photoCell: PhotoCell)
@@ -30,7 +30,7 @@ class PhotoCell: UITableViewCell {
 
     var resetButton: UIButton?
 
-    var delegate: PhotoCellDelegate?
+    weak var delegate: PhotoCellDelegate?
 
     init(placeholder: Placeholder, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
@@ -81,7 +81,7 @@ extension PhotoCell {
             self.selectionStyle = .default
 
             resetButton = UIButton(type: .custom)
-            resetButton?.setBackgroundImage(#imageLiteral(resourceName: "trash_icon").tintedImage(color: Color.highlight.withAlphaComponent(0.7)), for: .normal)
+            resetButton?.setBackgroundImage(#imageLiteral(resourceName: "trash_icon").tintedImage(color: UIColor.red.withAlphaComponent(0.5)), for: .normal)
 
             resetButton?.layer.shadowColor = UIColor.black.cgColor
             resetButton?.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)

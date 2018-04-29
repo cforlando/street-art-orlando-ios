@@ -15,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var mainController: MainViewController?
     var favoritesController: FavoritesViewController?
+    var settingsController: SettingsViewController?
 
     var tabBarController: UITabBarController?
 
@@ -36,11 +37,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         favoritesController = FavoritesViewController()
         let favoritesNavController = UINavigationController(rootViewController: favoritesController!)
 
+        settingsController = SettingsViewController()
+        let settingsNavController = UINavigationController(rootViewController: settingsController!)
+
         tabBarController = UITabBarController()
-        tabBarController?.viewControllers = [ mainNavController, favoritesNavController ]
+        tabBarController?.viewControllers = [ mainNavController, favoritesNavController, settingsNavController ]
 
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
+
+        NotificationCenter.default.addObserver(self, selector: #selector(logoutAction(_:)), name: .userDidLogin, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(logoutAction(_:)), name: .userDidLogout, object: nil)
 
         return true
     }
@@ -61,21 +68,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-
-        if !ApiClient.shared.isAuthenticated {
-            DataManager.shared.authenticateAnonymousUser { [unowned self] (result) in
-                dLog("authentication successful: \(result.isSuccess)")
-                self.mainController?.reloadSubmissions()
-            }
-        } else {
-            self.mainController?.reloadSubmissions()
-        }
+        self.mainController?.reloadSubmissions()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        NotificationCenter.default.removeObserver(self, name: .userDidLogin, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .userDidLogout, object: nil)
     }
 
+}
+
+// MARK: - Observers
+
+extension AppDelegate {
+
+    @objc func loginAction(_ notification: Notification) {
+        mainController?.reloadSubmissions()
+    }
+
+    @objc func logoutAction(_ notification: Notification) {
+        mainController?.reloadSubmissions()
+    }
 
 }
 

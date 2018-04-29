@@ -20,3 +20,8 @@ struct Defaults {
 
     static let maxCharactersInTextView: Int = 200
 }
+
+extension Notification.Name {
+    static let userDidLogin = Notification.Name("cfo_user_did_login")
+    static let userDidLogout = Notification.Name("cfo_user_did_logout")
+}

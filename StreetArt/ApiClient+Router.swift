@@ -15,6 +15,10 @@ extension ApiClient {
         case register
         case authenticate
         case submissions
+        case mySubmissions
+        case favorites
+        case favorite(submissionId: Int)
+        case unfavorite(submissionId: Int)
 
         static var URLString: String {
             let string = Config.URLString
@@ -33,6 +37,14 @@ extension ApiClient {
                 return "authenticate"
             case .submissions:
                 return "submissions"
+            case .mySubmissions:
+                return "submissions/mine"
+            case .favorites:
+                return "submissions/favorites"
+            case .favorite(let submissionId):
+                return "submissions/\(submissionId)/favorite"
+            case .unfavorite(let submissionId):
+                return "submissions/\(submissionId)/unfavorite"
             }
         }
 

@@ -15,18 +15,4 @@ class DataManager {
 
 extension DataManager {
 
-    func authenticateAnonymousUser(completionHandler: @escaping ((Result<Bool>) -> Void)) {
-        if ApiClient.shared.isAuthenticated {
-            completionHandler(.success(true))
-        } else {
-            ApiClient.shared.registerAnonymousUser { [weak self] (result) in
-                guard let _ = self else {
-                    return
-                }
-
-                completionHandler(result)
-            }
-        }
-    }
-
 }

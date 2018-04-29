@@ -14,7 +14,7 @@ import PKHUD
 class AddViewController: UIViewController {
 
     struct Constants {
-        static let notesHeight: CGFloat = 150.0
+        static let notesHeight: CGFloat = 120.0
     }
 
     let TitleCellIdentifier = "TitleCell"
@@ -316,7 +316,7 @@ extension AddViewController {
         upload.locationNote = locationNote
 
         HUD.show(.progress, onView: self.view)
-        ApiClient.shared.uploadSubmission(upload: upload) { [weak self] (result) in
+        ApiClient.shared.upload(submission: upload) { [weak self] (result) in
             HUD.hide()
 
             guard let _ = self else {

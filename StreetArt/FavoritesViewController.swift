@@ -13,7 +13,7 @@ class FavoritesViewController: UIViewController {
     init() {
         super.init(nibName: nil, bundle: nil)
         self.title = FAVORITES_TITLE
-        self.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 2)
+        self.tabBarItem = UITabBarItem(title: FAVORITES_TAB, image: #imageLiteral(resourceName: "favorites_tab"), tag: 1)
     }
 
     required init?(coder aDecoder: NSCoder) {
