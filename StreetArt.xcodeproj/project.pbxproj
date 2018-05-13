@@ -39,6 +39,7 @@
 		1684514A2054967200013A07 /* ApiClient+Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168451492054967200013A07 /* ApiClient+Router.swift */; };
 		16876A54207451FE002A7F5D /* MapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16876A53207451FE002A7F5D /* MapCell.swift */; };
 		16906C8D208A66C70097CBDA /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16906C8C208A66C70097CBDA /* FavoriteButton.swift */; };
+		1691E2AE20A899920084B356 /* SuccessResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1691E2AD20A899920084B356 /* SuccessResponse.swift */; };
 		16A53959205F15880051CE4F /* Alamofire+SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A53958205F15880051CE4F /* Alamofire+SwiftyJSON.swift */; };
 		16A5395B205F26AB0051CE4F /* SubmissionUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A5395A205F26AB0051CE4F /* SubmissionUpload.swift */; };
 		16AB45B1205217DC008B6F8C /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AB45B0205217DC008B6F8C /* UIColor+Additions.swift */; };
@@ -102,6 +103,7 @@
 		168451492054967200013A07 /* ApiClient+Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiClient+Router.swift"; sourceTree = "<group>"; };
 		16876A53207451FE002A7F5D /* MapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCell.swift; sourceTree = "<group>"; };
 		16906C8C208A66C70097CBDA /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
+		1691E2AD20A899920084B356 /* SuccessResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessResponse.swift; sourceTree = "<group>"; };
 		16A53958205F15880051CE4F /* Alamofire+SwiftyJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alamofire+SwiftyJSON.swift"; sourceTree = "<group>"; };
 		16A5395A205F26AB0051CE4F /* SubmissionUpload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionUpload.swift; sourceTree = "<group>"; };
 		16AB45B0205217DC008B6F8C /* UIColor+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
@@ -300,6 +302,7 @@
 			children = (
 				1670D967204F97B900E223ED /* Submission.swift */,
 				16A5395A205F26AB0051CE4F /* SubmissionUpload.swift */,
+				1691E2AD20A899920084B356 /* SuccessResponse.swift */,
 			);
 			name = "Model + Data";
 			sourceTree = "<group>";
@@ -520,6 +523,7 @@
 				162042E12078C78D00F3BE99 /* FavoritesViewController.swift in Sources */,
 				166A5A382055D49800FE5791 /* DataManager.swift in Sources */,
 				16906C8D208A66C70097CBDA /* FavoriteButton.swift in Sources */,
+				1691E2AE20A899920084B356 /* SuccessResponse.swift in Sources */,
 				1670D95B204F703A00E223ED /* ContentCell.swift in Sources */,
 				1670D95E204F73CD00E223ED /* ContentUtils.swift in Sources */,
 				168451482054962B00013A07 /* ApiClient.swift in Sources */,

@@ -12,8 +12,12 @@ import Alamofire
 extension ApiClient {
 
     enum Router: URLConvertible {
-        case register
         case authenticate
+        case register
+        case passwordForgot
+        case passwordValidateToken
+        case passwordReset
+        case passwordUpdate
         case submissions
         case mySubmissions
         case favorites
@@ -31,10 +35,18 @@ extension ApiClient {
 
         var path: String {
             switch self {
-            case .register:
-                return "register"
             case .authenticate:
                 return "authenticate"
+            case .register:
+                return "users/register"
+            case .passwordForgot:
+                return "password/forgot"
+            case .passwordValidateToken:
+                return "password/validate_token"
+            case .passwordReset:
+                return "password/reset"
+            case .passwordUpdate:
+                return "password/update"
             case .submissions:
                 return "submissions"
             case .mySubmissions:

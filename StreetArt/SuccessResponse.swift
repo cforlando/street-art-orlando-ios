@@ -7,3 +7,15 @@
 //
 
 import Foundation
+import SwiftyJSON
+
+struct SuccessResponse {
+    var success = false
+    var message: String?
+
+    init(json: JSON) {
+        success = json["success"].boolValue
+        message = json["message"].string
+    }
+
+}

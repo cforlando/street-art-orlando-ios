@@ -13,6 +13,26 @@ import SwiftyJSON
 
 fileprivate let emptyDataStatusCodes: Set<Int> = [204, 205]
 
+enum ServerError: Error, CustomStringConvertible {
+    case message(String)
+    case system(Error)
+    case generic
+    case unknown
+
+    var description: String {
+        switch self {
+        case .message(let message):
+            return message
+        case .system(let error):
+            return error.localizedDescription
+        case .generic:
+            return "Network Error"
+        case .unknown:
+            return "Unknown Error"
+        }
+    }
+}
+
 extension DataRequest {
 
     static func swiftyJSONResponseSerializer() -> DataResponseSerializer<JSON> {
@@ -27,20 +47,31 @@ extension DataRequest {
             let responseData = result.value ?? Data()
 
             if let error = error, responseData.isEmpty {
-                return .failure(error)
+                return .failure(ServerError.system(error))
             }
 
             do {
                 let object: Any = try JSONSerialization.jsonObject(with: responseData, options: .allowFragments)
                 let json = JSON(object)
 
-                if let error = error {
-                    return .failure(error)
+                if let _ = error {
+                    var errorMessage: String?
+                    if let string = json["error"].string {
+                        errorMessage = string
+                    } else if let array = json["errors"].array {
+                        errorMessage = array.map { $0.stringValue }.joined(separator: "\n")
+                    }
+
+                    if let message = errorMessage {
+                        return .failure(ServerError.message(message))
+                    }
+
+                    return .failure(ServerError.unknown)
                 }
 
                 return .success(json)
             } catch {
-                return .failure(NSError.customError(message: "server error"))
+                return .failure(ServerError.generic)
             }
         }
     }
