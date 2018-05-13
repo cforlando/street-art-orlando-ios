@@ -65,6 +65,10 @@ let SETTINGS_SUBMIT_ART_BUTTON_TEXT = "Submit Art"
 let SETTINGS_MY_SUBMISSIONS_TEXT = "My Submissions"
 let SETTINGS_LOGOUT_BUTTON_TEXT = "Logout"
 
+// MARK: - Submissions
+
+let SUBMISSIONS_TITLE = "My Submissions"
+
 // MARK: - Login
 
 let LOGIN_TITLE = "Login"
@@ -93,6 +97,12 @@ let REMOVE_PHOTO_TEXT = "Remove Photo"
 let USE_CAMERA_TEXT = "Camera"
 let USE_PHOTO_LIBRARY_TEXT = "Photo Library"
 let BY_TEXT = "By"
+let PROCESSING_TEXT = "Processing"
+let PENDING_TEXT = "Pending"
+let APPROVED_TEXT = "Approved"
+let REJECTED_TEXT = "Rejected"
+let NO_TITLE_TEXT = "No Title Provided"
+let NO_ARTIST_TEXT = "No Artist Provided"
 
 let PHOTOS_NOT_SUPPORTED_ALERT = "Photos not supported in this device."
 

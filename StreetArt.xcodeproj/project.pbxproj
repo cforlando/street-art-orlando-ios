@@ -19,6 +19,8 @@
 		166A5A362055D12E00FE5791 /* ErrorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166A5A352055D12E00FE5791 /* ErrorUtils.swift */; };
 		166A5A382055D49800FE5791 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166A5A372055D49800FE5791 /* DataManager.swift */; };
 		166A5A3A2055D94E00FE5791 /* Base64Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166A5A392055D94E00FE5791 /* Base64Utils.swift */; };
+		166CFC2C2097FE2D00BE69C0 /* SubmissionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166CFC2B2097FE2D00BE69C0 /* SubmissionCell.swift */; };
+		166CFC2F209808BB00BE69C0 /* SubmissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166CFC2E209808BB00BE69C0 /* SubmissionsViewController.swift */; };
 		1670B1242066F16700F4EBFA /* LoadingSubmissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1670B1232066F16700F4EBFA /* LoadingSubmissionsView.swift */; };
 		1670D939204F698200E223ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1670D938204F698200E223ED /* AppDelegate.swift */; };
 		1670D93B204F698200E223ED /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1670D93A204F698200E223ED /* MainViewController.swift */; };
@@ -73,6 +75,8 @@
 		166A5A352055D12E00FE5791 /* ErrorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorUtils.swift; sourceTree = "<group>"; };
 		166A5A372055D49800FE5791 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		166A5A392055D94E00FE5791 /* Base64Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Base64Utils.swift; sourceTree = "<group>"; };
+		166CFC2B2097FE2D00BE69C0 /* SubmissionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionCell.swift; sourceTree = "<group>"; };
+		166CFC2E209808BB00BE69C0 /* SubmissionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionsViewController.swift; sourceTree = "<group>"; };
 		1670B1232066F16700F4EBFA /* LoadingSubmissionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingSubmissionsView.swift; sourceTree = "<group>"; };
 		1670D935204F698200E223ED /* StreetArt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StreetArt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1670D938204F698200E223ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -152,6 +156,7 @@
 			children = (
 				1640259920951A3600784CAA /* SettingsViewController.swift */,
 				1670D965204F96E300E223ED /* AddViewController.swift */,
+				166CFC2E209808BB00BE69C0 /* SubmissionsViewController.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -172,6 +177,17 @@
 				164025A22095298E00784CAA /* RegisterViewController.swift */,
 			);
 			name = Authentication;
+			sourceTree = "<group>";
+		};
+		166CFC2D2097FE3300BE69C0 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				1670D95A204F703A00E223ED /* ContentCell.swift */,
+				16E600222050C1160002B4F0 /* PhotoCell.swift */,
+				16876A53207451FE002A7F5D /* MapCell.swift */,
+				166CFC2B2097FE2D00BE69C0 /* SubmissionCell.swift */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 		1670D92C204F698200E223ED = {
@@ -261,10 +277,8 @@
 		1670D962204F968500E223ED /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				1670D95A204F703A00E223ED /* ContentCell.swift */,
-				16E600222050C1160002B4F0 /* PhotoCell.swift */,
+				166CFC2D2097FE3300BE69C0 /* Cells */,
 				1670B1232066F16700F4EBFA /* LoadingSubmissionsView.swift */,
-				16876A53207451FE002A7F5D /* MapCell.swift */,
 				162E8D70207AAAD900A7E2D8 /* MapDot.swift */,
 				16906C8C208A66C70097CBDA /* FavoriteButton.swift */,
 			);
@@ -522,12 +536,14 @@
 				164025A520952A8900784CAA /* UIButton+Additions.swift in Sources */,
 				166A5A362055D12E00FE5791 /* ErrorUtils.swift in Sources */,
 				1670D966204F96E300E223ED /* AddViewController.swift in Sources */,
+				166CFC2F209808BB00BE69C0 /* SubmissionsViewController.swift in Sources */,
 				16876A54207451FE002A7F5D /* MapCell.swift in Sources */,
 				1684514A2054967200013A07 /* ApiClient+Router.swift in Sources */,
 				1670B1242066F16700F4EBFA /* LoadingSubmissionsView.swift in Sources */,
 				1640259A20951A3600784CAA /* SettingsViewController.swift in Sources */,
 				16AB45B3205217FA008B6F8C /* Utils.swift in Sources */,
 				166A5A3A2055D94E00FE5791 /* Base64Utils.swift in Sources */,
+				166CFC2C2097FE2D00BE69C0 /* SubmissionCell.swift in Sources */,
 				166674CB207947CE00387EC6 /* UIImage+Additions.swift in Sources */,
 				1670D959204F6B5B00E223ED /* Strings.swift in Sources */,
 				1670D939204F698200E223ED /* AppDelegate.swift in Sources */,

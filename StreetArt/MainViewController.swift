@@ -18,6 +18,8 @@ class MainViewController: UIViewController {
     let CellIdentifier = "Cell"
     let LoadingIdentifier = "Loading"
 
+    var refreshControl: UIRefreshControl!
+
     var collectionView: UICollectionView!
     var flowLayout: UICollectionViewFlowLayout!
 
@@ -48,7 +50,7 @@ class MainViewController: UIViewController {
 
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: BACK_TEXT, style: .plain, target: nil, action: nil)
 
-        let refreshControl = UIRefreshControl()
+        refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshAction(_:)), for: .valueChanged)
 
         flowLayout = UICollectionViewFlowLayout()
@@ -95,6 +97,7 @@ class MainViewController: UIViewController {
 }
 
 // MARK: -
+// MARK: Methods
 
 extension MainViewController {
 

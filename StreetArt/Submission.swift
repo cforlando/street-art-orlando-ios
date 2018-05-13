@@ -19,6 +19,36 @@ struct Submission {
         case pending = "pending"
         case approved = "approved"
         case rejected = "rejected"
+
+        init(string: String) {
+            self = Status(rawValue: string) ?? .processing
+        }
+
+        var color: UIColor {
+            switch self {
+            case .processing:
+                return UIColor(hexString: "E6C229")
+            case .pending:
+                return UIColor(hexString: "E6C229")
+            case .approved:
+                return UIColor(hexString: "4FC78F")
+            case .rejected:
+                return UIColor(hexString: "D11149")
+            }
+        }
+
+        var labelString: String {
+            switch self {
+            case .processing:
+                return PROCESSING_TEXT
+            case .pending:
+                return PENDING_TEXT
+            case .approved:
+                return APPROVED_TEXT
+            case .rejected:
+                return REJECTED_TEXT
+            }
+        }
     }
 
     var id = 0
@@ -65,7 +95,7 @@ struct Submission {
         }
 
         self.id = id
-        self.status = Status(rawValue: json["title"].stringValue) ?? Status.processing
+        self.status = Status(string: json["status"].stringValue)
         self.title = json["title"].string
         self.description = json["description"].string
         self.artist = json["artist"].string

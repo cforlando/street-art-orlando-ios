@@ -31,7 +31,6 @@ class ContentCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        self.layer.cornerRadius = 3.0
         self.layer.masksToBounds = true
 
         overlayView = UIView()
@@ -106,7 +105,7 @@ class ContentCell: UICollectionViewCell {
 
 extension ContentCell {
 
-    func set(submission: Submission?) {
+    func set(submission: Submission?, isFavorite: Bool = false) {
         self.submission = submission
 
         if let url = submission?.thumbURL {

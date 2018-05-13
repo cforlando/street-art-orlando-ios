@@ -249,6 +249,11 @@ extension SettingsViewController: UITableViewDelegate {
 
             let navController = UINavigationController(rootViewController: controller)
             self.navigationController?.present(navController, animated: true, completion: nil)
+        case MySubmissionsIdentifier:
+            let controller = SubmissionsViewController()
+            controller.hidesBottomBarWhenPushed = true
+
+            self.navigationController?.pushViewController(controller, animated: true)
         case LogoutIdentifier:
             NotificationCenter.default.post(name: .userDidLogout, object: nil)
             ApiClient.shared.logout()
