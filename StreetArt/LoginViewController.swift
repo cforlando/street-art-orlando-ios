@@ -86,6 +86,8 @@ class LoginViewController: UIViewController {
         forgotPasswordButton = UIButton(type: .system)
         forgotPasswordButton.setTitle(LOGIN_FORGOT_PASSWORD_BUTTON_TEXT, for: .normal)
 
+        forgotPasswordButton.addTarget(self, action: #selector(forgotAction(_:)), for: .touchUpInside)
+
         let footerFrame = CGRect(x: 0.0, y: 0.0, width: 0.0, height: 124.0)
         footerView = UIView(frame: footerFrame)
         footerView.backgroundColor = .clear
@@ -116,7 +118,6 @@ class LoginViewController: UIViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
         tableView.tableFooterView = footerView
     }
 
@@ -192,10 +193,12 @@ extension LoginViewController {
                 NotificationCenter.default.post(name: .userDidLogin, object: nil)
                 self?.loginBlock?()
                 self?.navigationController?.dismiss(animated: true, completion: nil)
-            case .failure:
+            case .failure(let error):
+                let message = "\(error)"
+
                 let alertView = UIAlertController(
                     title: LOGIN_ERROR_ALERT_TITLE,
-                    message: LOGIN_ERROR_FAIL_ALERT_MESSAGE,
+                    message: message,
                     preferredStyle: .alert
                 )
 
@@ -213,7 +216,10 @@ extension LoginViewController {
     }
 
     @objc func forgotAction(_ sender: AnyObject?) {
-        
+        let controller = ForgotViewController()
+        let navController = UINavigationController(rootViewController: controller)
+
+        self.navigationController?.present(navController, animated: true, completion: nil)
     }
 
 }

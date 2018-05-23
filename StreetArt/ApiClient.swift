@@ -24,7 +24,7 @@ class ApiClient {
         static let URLString = URLHosts.production  // DO NOT CHANGE EVER!!!
         #else
         // Used for DEBUG BUILDS ONLY
-        static let URLString = URLHosts.forward
+        static let URLString = URLHosts.production
         #endif
     }
 

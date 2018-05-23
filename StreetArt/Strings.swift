@@ -79,6 +79,26 @@ let LOGIN_SUBMIT_BUTTON_TEXT = "Login"
 let LOGIN_REGISTRATION_BUTTON_TEXT = "Register"
 let LOGIN_FORGOT_PASSWORD_BUTTON_TEXT = "Forgot Password?"
 
+// MARK: - Forgot Password
+
+let FORGOT_TITLE = "Forgot Password?"
+let FORGOT_EMAIL_TEXT = "Email"
+let FORGOT_VALIDATE_TEXT = "Security Code"
+let FORGOT_PASSWORD_TEXT = "New Password"
+
+let FORGOT_EMAIL_PLACEHOLDER = "email@example.com"
+let FORGOT_TOKEN_PLACEHOLDER = "XXXXXX"
+let FORGOT_PASSWORD_PLACEHOLDER = "enter password"
+
+// MARK: - Register
+
+let REGISTER_EMAIL_PLACEHOLDER = "Email"
+let REGISTER_EMAIL_CONFIRMATION_PLACEHOLDER = "Email Confirmation"
+let REGISTER_NAME_PLACEHOLDER = "Name (Optional)"
+let REGISTER_PASSWORD_PLACEHOLDER = "Password"
+
+let REGISTER_SUBMIT_BUTTON_TEXT = "Create Account"
+
 // MARK: - Registration
 
 let REGISTER_TITLE = "Register"
@@ -103,6 +123,8 @@ let APPROVED_TEXT = "Approved"
 let REJECTED_TEXT = "Rejected"
 let NO_TITLE_TEXT = "No Title Provided"
 let NO_ARTIST_TEXT = "No Artist Provided"
+let SHOW_PASSWORD_TEXT = "SHOW"
+let RESET_TEXT = "Reset"
 
 let PHOTOS_NOT_SUPPORTED_ALERT = "Photos not supported in this device."
 

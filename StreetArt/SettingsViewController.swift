@@ -208,6 +208,11 @@ extension SettingsViewController: UITableViewDelegate {
             let navController = UINavigationController(rootViewController: controller)
 
             self.navigationController?.present(navController, animated: true, completion: nil)
+        case RegisterIdentifier:
+            let controller = RegisterViewController()
+            let navController = UINavigationController(rootViewController: controller)
+
+            self.navigationController?.present(navController, animated: true, completion: nil)
         case SubmitIdentifier:
             guard ApiClient.shared.isAuthenticated else {
                 let alertView = UIAlertController(

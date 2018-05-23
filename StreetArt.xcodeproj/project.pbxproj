@@ -14,6 +14,7 @@
 		1640259C209527AC00784CAA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1640259B209527AC00784CAA /* LoginViewController.swift */; };
 		164025A32095298E00784CAA /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164025A22095298E00784CAA /* RegisterViewController.swift */; };
 		164025A520952A8900784CAA /* UIButton+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164025A420952A8900784CAA /* UIButton+Additions.swift */; };
+		1661444720AC295D00F4E3A8 /* ForgotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1661444620AC295D00F4E3A8 /* ForgotViewController.swift */; };
 		166674CB207947CE00387EC6 /* UIImage+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166674CA207947CE00387EC6 /* UIImage+Additions.swift */; };
 		166A5A342055ACF000FE5791 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166A5A332055ACF000FE5791 /* Settings.swift */; };
 		166A5A362055D12E00FE5791 /* ErrorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166A5A352055D12E00FE5791 /* ErrorUtils.swift */; };
@@ -71,6 +72,7 @@
 		1640259B209527AC00784CAA /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		164025A22095298E00784CAA /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		164025A420952A8900784CAA /* UIButton+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Additions.swift"; sourceTree = "<group>"; };
+		1661444620AC295D00F4E3A8 /* ForgotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotViewController.swift; sourceTree = "<group>"; };
 		166674CA207947CE00387EC6 /* UIImage+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Additions.swift"; sourceTree = "<group>"; };
 		166A5A332055ACF000FE5791 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		166A5A352055D12E00FE5791 /* ErrorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorUtils.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 			children = (
 				1640259B209527AC00784CAA /* LoginViewController.swift */,
 				164025A22095298E00784CAA /* RegisterViewController.swift */,
+				1661444620AC295D00F4E3A8 /* ForgotViewController.swift */,
 			);
 			name = Authentication;
 			sourceTree = "<group>";
@@ -520,6 +523,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1670D968204F97B900E223ED /* Submission.swift in Sources */,
+				1661444720AC295D00F4E3A8 /* ForgotViewController.swift in Sources */,
 				162042E12078C78D00F3BE99 /* FavoritesViewController.swift in Sources */,
 				166A5A382055D49800FE5791 /* DataManager.swift in Sources */,
 				16906C8D208A66C70097CBDA /* FavoriteButton.swift in Sources */,
