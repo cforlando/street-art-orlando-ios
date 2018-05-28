@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PKHUD
 
 class ForgotViewController: UITableViewController {
 
@@ -15,7 +16,6 @@ class ForgotViewController: UITableViewController {
         case validate = "validate"
         case password = "password"
     }
-
 
     let FieldCellIdentifier = "FieldCell"
 
@@ -32,6 +32,10 @@ class ForgotViewController: UITableViewController {
     var passwordString: String?
 
     var dataSource = ContentSectionArray()
+
+    lazy var emptySet: CharacterSet = {
+        return CharacterSet.whitespacesAndNewlines
+    }()
 
     convenience init() {
         self.init(step: .email)
@@ -177,15 +181,196 @@ extension ForgotViewController {
     }
 
     func submitEmail() {
-        update(step: .validate)
+        let email = (emailField.text ?? String()).trimmingCharacters(in: emptySet).lowercased()
+        if email.isEmpty {
+            self.view.endEditing(true)
+
+            let okAction = UIAlertAction(title: OK_TEXT, style: .cancel, handler: nil)
+            displayAlert(message: FORGOT_EMAIL_REQUIRED, actions: [okAction])
+            return
+        }
+
+        self.view.endEditing(true)
+
+        HUD.show(.progress, onView: self.view)
+
+        ApiClient.shared.passwordForgot(email: email) { [weak self] (result) in
+            guard let _ = self else {
+                return
+            }
+
+            HUD.hide()
+
+            switch result {
+            case .success(let response):
+                var alertMessage: String?
+                var alertAction: UIAlertAction?
+
+                if response.success {
+                    if let message = response.message {
+                        alertMessage = message
+                        alertAction = UIAlertAction(title: OK_TEXT, style: .cancel) { (action) in
+                            self?.emailString = email
+                            self?.update(step: .validate)
+                        }
+                    } else {
+                        // This code should never run but leaving it here for completeness
+                        self?.emailString = email
+                        self?.update(step: .validate)
+                    }
+                } else {
+                    if let message = response.message {
+                        alertMessage = message
+                    } else {
+                        alertMessage = NETWORK_ERROR_TEXT
+                    }
+
+                    alertAction = UIAlertAction(title: OK_TEXT, style: .cancel, handler: nil)
+                }
+
+                if let action = alertAction {
+                    self?.displayAlert(message: alertMessage, actions: [action])
+                }
+            case .failure(let error):
+                let okAction = UIAlertAction(title: OK_TEXT, style: .cancel, handler: nil)
+                self?.displayAlert(message: error.localizedDescription, actions: [okAction])
+            }
+        }
     }
 
     func submitValidate() {
-        update(step: .password)
+        let email = emailString ?? String()
+        if email.isEmpty {
+            self.view.endEditing(true)
+
+            let okAction = UIAlertAction(title: OK_TEXT, style: .cancel) { [unowned self] (action) in
+                self.update(step: .email)
+            }
+
+            displayAlert(message: FORGOT_EMAIL_REQUIRED, actions: [okAction])
+            return
+        }
+
+        let token = (tokenField.text ?? String()).trimmingCharacters(in: emptySet).replacingOccurrences(of: " ", with: "")
+        if token.isEmpty {
+            self.view.endEditing(true)
+
+            let okAction = UIAlertAction(title: OK_TEXT, style: .cancel, handler: nil)
+            displayAlert(message: FORGOT_TOKEN_REQUIRED, actions: [okAction])
+            return
+        }
+
+        self.view.endEditing(true)
+
+        HUD.show(.progress, onView: self.view)
+
+        ApiClient.shared.passwordValidateToken(email: email, token: token) { [weak self] (result) in
+            guard let _ = self else {
+                return
+            }
+
+            HUD.hide()
+
+            switch result {
+            case .success(let response):
+                if response.success {
+                    self?.tokenString = token
+                    self?.update(step: .password)
+                } else {
+                    var alertMessage: String
+
+                    if let message = response.message {
+                        alertMessage = message
+                    } else {
+                        alertMessage = NETWORK_ERROR_TEXT
+                    }
+
+                    let alertAction = UIAlertAction(title: OK_TEXT, style: .cancel, handler: nil)
+                    self?.displayAlert(message: alertMessage, actions: [alertAction])
+                }
+            case .failure(let error):
+                let okAction = UIAlertAction(title: OK_TEXT, style: .cancel, handler: nil)
+                self?.displayAlert(message: error.localizedDescription, actions: [okAction])
+            }
+        }
     }
 
     func submitPassword() {
-        self.navigationController?.dismiss(animated: true, completion: nil)
+        let email = emailString ?? String()
+        if email.isEmpty {
+            self.view.endEditing(true)
+
+            let okAction = UIAlertAction(title: OK_TEXT, style: .cancel) { [unowned self] (action) in
+                self.update(step: .email)
+            }
+
+            displayAlert(message: FORGOT_EMAIL_REQUIRED, actions: [okAction])
+            return
+        }
+
+        let token = tokenString ?? String()
+        if token.isEmpty {
+            self.view.endEditing(true)
+
+            let okAction = UIAlertAction(title: OK_TEXT, style: .cancel) { [unowned self] (action) in
+                self.update(step: .email)
+            }
+
+            displayAlert(message: FORGOT_TOKEN_REQUIRED, actions: [okAction])
+            return
+        }
+
+        let password = (passwordField.text ?? String()).trimmingCharacters(in: emptySet)
+        if password.isEmpty {
+            self.view.endEditing(true)
+
+            let okAction = UIAlertAction(title: OK_TEXT, style: .cancel, handler: nil)
+            displayAlert(message: FORGOT_PASSWORD_REQUIRED, actions: [okAction])
+            return
+        }
+
+        self.view.endEditing(true)
+
+        HUD.show(.progress, onView: self.view)
+
+        ApiClient.shared.passwordReset(email: email, token: token, password: password) { [weak self] (result) in
+            guard let _ = self else {
+                return
+            }
+
+            HUD.hide()
+
+            switch result {
+            case .success(let response):
+                if response.success {
+                    self?.navigationController?.dismiss(animated: true, completion: nil)
+                } else {
+                    var alertMessage: String
+
+                    if let message = response.message {
+                        alertMessage = message
+                    } else {
+                        alertMessage = NETWORK_ERROR_TEXT
+                    }
+
+                    let alertAction = UIAlertAction(title: OK_TEXT, style: .cancel, handler: nil)
+                    self?.displayAlert(message: alertMessage, actions: [alertAction])
+                }
+            case .failure(let error):
+                let okAction = UIAlertAction(title: OK_TEXT, style: .cancel, handler: nil)
+                self?.displayAlert(message: error.localizedDescription, actions: [okAction])
+            }
+        }
+    }
+
+    func displayAlert(message: String?, actions: [UIAlertAction]) {
+        let alertView = UIAlertController(title: FORGOT_ALERT_TITLE, message: message, preferredStyle: .alert)
+
+        for action in actions {
+            alertView.addAction(action)
+        }
+
+        self.navigationController?.present(alertView, animated: true, completion: nil)
     }
 
 }

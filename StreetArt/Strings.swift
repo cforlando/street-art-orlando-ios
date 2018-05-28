@@ -90,6 +90,11 @@ let FORGOT_EMAIL_PLACEHOLDER = "email@example.com"
 let FORGOT_TOKEN_PLACEHOLDER = "XXXXXX"
 let FORGOT_PASSWORD_PLACEHOLDER = "enter password"
 
+let FORGOT_ALERT_TITLE = "Forgot Password?"
+let FORGOT_EMAIL_REQUIRED = "Email required"
+let FORGOT_TOKEN_REQUIRED = "Security code required"
+let FORGOT_PASSWORD_REQUIRED = "Password required"
+
 // MARK: - Register
 
 let REGISTER_EMAIL_PLACEHOLDER = "Email"
@@ -125,6 +130,7 @@ let NO_TITLE_TEXT = "No Title Provided"
 let NO_ARTIST_TEXT = "No Artist Provided"
 let SHOW_PASSWORD_TEXT = "SHOW"
 let RESET_TEXT = "Reset"
+let NETWORK_ERROR_TEXT = "Network Error"
 
 let PHOTOS_NOT_SUPPORTED_ALERT = "Photos not supported in this device."
 
