@@ -19,6 +19,8 @@ class FavoritesViewController: UIViewController {
 
     var refreshControl: UIRefreshControl!
 
+    var errorView: ErrorView?
+
     var collectionView: UICollectionView!
     var flowLayout: UICollectionViewFlowLayout!
 
@@ -79,8 +81,28 @@ class FavoritesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if submissions.isEmpty {
-            reloadFavorites(animated: true)
+        if !ApiClient.shared.isAuthenticated {
+            submissions = SubmissionArray()
+            collectionView.reloadData()
+
+            if let errorView = self.errorView {
+                errorView.removeFromSuperview()
+            }
+
+            errorView = ErrorView(frame: .zero, text: FAVORITES_LOGIN_REQUIRED_MESSAGE)
+            self.view.addSubview(errorView!)
+
+            errorView!.snp.makeConstraints { (make) in
+                make.edges.equalToSuperview()
+            }
+        } else {
+            if let errorView = self.errorView {
+                errorView.removeFromSuperview()
+            }
+
+            if submissions.isEmpty {
+                reloadFavorites(animated: true)
+            }
         }
     }
 

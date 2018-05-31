@@ -14,4 +14,5 @@ struct Color {
     static let text = UIColor.darkText
     static let support = UIColor.lightGray
     static let tableSeparator = UIColor(hexString: "c8c7cc")
+    static let errorBackground = UIColor(hexString: "F7F7F7")
 }

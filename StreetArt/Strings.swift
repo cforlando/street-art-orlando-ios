@@ -52,6 +52,7 @@ let SEARCH_TAB = SEARCH_TITLE
 // MARK: - Favorites
 
 let FAVORITES_TITLE = "Favorites"
+let FAVORITES_LOGIN_REQUIRED_MESSAGE = "Login required to save favorites."
 
 // MARK: - Settings
 

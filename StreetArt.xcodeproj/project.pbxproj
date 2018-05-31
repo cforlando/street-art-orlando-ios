@@ -10,6 +10,7 @@
 		162042E12078C78D00F3BE99 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162042E02078C78D00F3BE99 /* FavoritesViewController.swift */; };
 		162E8D71207AAAD900A7E2D8 /* MapDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162E8D70207AAAD900A7E2D8 /* MapDot.swift */; };
 		162E8D73207AABE800A7E2D8 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162E8D72207AABE800A7E2D8 /* MapViewController.swift */; };
+		16401B7D20BF8B4900606EDD /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16401B7C20BF8B4900606EDD /* ErrorView.swift */; };
 		1640259A20951A3600784CAA /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1640259920951A3600784CAA /* SettingsViewController.swift */; };
 		1640259C209527AC00784CAA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1640259B209527AC00784CAA /* LoginViewController.swift */; };
 		164025A32095298E00784CAA /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164025A22095298E00784CAA /* RegisterViewController.swift */; };
@@ -69,6 +70,7 @@
 		162042E02078C78D00F3BE99 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		162E8D70207AAAD900A7E2D8 /* MapDot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDot.swift; sourceTree = "<group>"; };
 		162E8D72207AABE800A7E2D8 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		16401B7C20BF8B4900606EDD /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		1640259920951A3600784CAA /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		1640259B209527AC00784CAA /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		164025A22095298E00784CAA /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 				1670B1232066F16700F4EBFA /* LoadingSubmissionsView.swift */,
 				162E8D70207AAAD900A7E2D8 /* MapDot.swift */,
 				16906C8C208A66C70097CBDA /* FavoriteButton.swift */,
+				16401B7C20BF8B4900606EDD /* ErrorView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -540,6 +543,7 @@
 				16AB45B52052182E008B6F8C /* FileUtils.swift in Sources */,
 				166A5A342055ACF000FE5791 /* Settings.swift in Sources */,
 				164025A32095298E00784CAA /* RegisterViewController.swift in Sources */,
+				16401B7D20BF8B4900606EDD /* ErrorView.swift in Sources */,
 				1640259C209527AC00784CAA /* LoginViewController.swift in Sources */,
 				16A53959205F15880051CE4F /* Alamofire+SwiftyJSON.swift in Sources */,
 				1670D93B204F698200E223ED /* MainViewController.swift in Sources */,
