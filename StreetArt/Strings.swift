@@ -114,6 +114,11 @@ let REGISTER_PASSWORD_PLACEHOLDER = "Password"
 
 let REGISTER_SUBMIT_BUTTON_TEXT = "Create Account"
 
+let REGISTER_ALERT_TITLE = "Registration"
+let REGISTER_EMAIL_REQUIRED = "Email required"
+let REGISTER_EMAIL_MATCH_ALERT = "Email confirmation doesn't match"
+let REGISTER_PASSWORD_REQUIRED = "Password required"
+
 // MARK: - Registration
 
 let REGISTER_TITLE = "Register"

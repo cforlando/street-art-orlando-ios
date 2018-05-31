@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PKHUD
 
 class RegisterViewController: UIViewController {
 
@@ -26,6 +27,12 @@ class RegisterViewController: UIViewController {
     var registerButton: UIButton!
 
     var footerView: UIView!
+
+    var loginBlock: (() -> Void)?
+
+    lazy var emptySet: CharacterSet = {
+        return CharacterSet.whitespacesAndNewlines
+    }()
 
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -183,6 +190,16 @@ extension RegisterViewController {
         tableView.reloadData()
     }
 
+    func displayAlert(message: String?, actions: [UIAlertAction]) {
+        let alertView = UIAlertController(title: REGISTER_ALERT_TITLE, message: message, preferredStyle: .alert)
+
+        for action in actions {
+            alertView.addAction(action)
+        }
+
+        self.navigationController?.present(alertView, animated: true, completion: nil)
+    }
+
 }
 
 // MARK: Selector Methods
@@ -190,7 +207,70 @@ extension RegisterViewController {
 extension RegisterViewController {
 
     @objc func registerAction(_ sender: AnyObject?) {
+        self.view.endEditing(true)
 
+        var messages = [String]()
+
+        let email = (emailField.text ?? String()).trimmingCharacters(in: emptySet)
+        let emailConfirmation = (emailConfirmationField.text ?? String()).trimmingCharacters(in: emptySet)
+        let name: String = nameField.text ?? String()
+        let password = (passwordField.text ?? String()).trimmingCharacters(in: emptySet)
+
+        if email.isEmpty || emailConfirmation.isEmpty {
+            messages.append(REGISTER_EMAIL_REQUIRED)
+        }
+
+        if email != emailConfirmation {
+            messages.append(REGISTER_EMAIL_MATCH_ALERT)
+        }
+
+        if password.isEmpty {
+            messages.append(REGISTER_PASSWORD_REQUIRED)
+        }
+
+        if !messages.isEmpty {
+            let okAction = UIAlertAction(title: OK_TEXT, style: .cancel, handler: nil)
+            displayAlert(message: messages.joined(separator: "\n"), actions: [okAction])
+            return
+        }
+
+        HUD.show(.progress, onView: self.view)
+
+        ApiClient.shared.register(email: email, password: password, name: name) { [weak self] (result) in
+            guard let _ = self else {
+                return
+            }
+
+            switch result {
+            case .success(let success):
+                guard success.success else {
+                    HUD.hide()
+
+                    let okAction = UIAlertAction(title: OK_TEXT, style: .cancel, handler: nil)
+                    self?.displayAlert(message: NETWORK_ERROR_TEXT, actions: [okAction])
+                    return
+                }
+
+                ApiClient.shared.authenticate(username: email, password: password) { (loginResult) in
+                    HUD.hide()
+
+                    switch loginResult {
+                    case .success:
+                        NotificationCenter.default.post(name: .userDidLogin, object: nil)
+                        self?.loginBlock?()
+                        self?.navigationController?.dismiss(animated: true, completion: nil)
+                    case .failure(let error):
+                        let okAction = UIAlertAction(title: OK_TEXT, style: .cancel, handler: nil)
+                        self?.displayAlert(message: error.localizedDescription, actions: [okAction])
+                    }
+                }
+            case .failure(let error):
+                HUD.hide()
+
+                let okAction = UIAlertAction(title: OK_TEXT, style: .cancel, handler: nil)
+                self?.displayAlert(message: error.localizedDescription, actions: [okAction])
+            }
+        }
     }
 
     @objc func dismissAction(_ sender: AnyObject?) {

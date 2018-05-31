@@ -83,7 +83,7 @@ extension ApiClient {
             "password": password
         ]
 
-        if let name = name {
+        if let name = name, !name.isEmpty {
             parameters["name"] = name
         }
 

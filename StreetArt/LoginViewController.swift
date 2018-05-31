@@ -194,11 +194,9 @@ extension LoginViewController {
                 self?.loginBlock?()
                 self?.navigationController?.dismiss(animated: true, completion: nil)
             case .failure(let error):
-                let message = "\(error)"
-
                 let alertView = UIAlertController(
                     title: LOGIN_ERROR_ALERT_TITLE,
-                    message: message,
+                    message: error.localizedDescription,
                     preferredStyle: .alert
                 )
 
