@@ -18,19 +18,22 @@ class PhotoViewController: UIViewController {
     let ArtistCellIdentifier = "ArtistCell"
     let MapCellIdentifier = "MapCell"
     let NoteCellIdentifier = "NoteCell"
+    let RemoveFavoriteCellIdentifier = "RemoveFavoriteCell"
 
     var tableView: UITableView!
     var mapCell: MapCell?
+    var imageView: UIImageView!
 
     var submission: Submission!
     var dataSource = ContentSectionArray()
 
-    var imageView: UIImageView!
+    var inFavorites = false
 
-    init(submission: Submission) {
+    init(submission: Submission, inFavorites: Bool = false) {
         super.init(nibName: nil, bundle: nil)
         self.title = PHOTO_TITLE
         self.submission = submission
+        self.inFavorites = inFavorites
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -145,11 +148,26 @@ extension PhotoViewController {
             sections.append(ContentSection(title: PHOTO_ART_LOCATION_TEXT, rows: rows))
         }
 
+        if inFavorites {
+            rows = ContentRowArray()
+
+            content = ContentRow(text: REMOVE_FAVORITE_TEXT)
+            content.groupIdentifier = RemoveFavoriteCellIdentifier
+            content.identifier = RemoveFavoriteCellIdentifier
+
+            rows.append(content)
+            sections.append(ContentSection(title: nil, rows: rows))
+        }
+
         dataSource = sections
         tableView.reloadData()
     }
 
     func setFavoriteButton() {
+        guard !inFavorites else {
+            return
+        }
+
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: #imageLiteral(resourceName: "heart_icon").tintedImage(color: Color.highlight),
             style: .plain,
@@ -159,6 +177,10 @@ extension PhotoViewController {
     }
 
     func setUnfavoriteButton() {
+        guard !inFavorites else {
+            return
+        }
+
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: #imageLiteral(resourceName: "heart_selected_icon").tintedImage(color: Color.highlight),
             style: .plain,
@@ -195,6 +217,11 @@ extension PhotoViewController {
             case .success:
                 self?.submission.favorite = true
                 self?.setUnfavoriteButton()
+
+                if let submission = self?.submission {
+                    let userInfo: [AnyHashable: Any] = [ Keys.favorite: submission, Keys.addFavorite: true ]
+                    NotificationCenter.default.post(name: .favoriteUpdated, object: nil, userInfo: userInfo)
+                }
             case .failure:
                 let alertView = UIAlertController(
                     title: MAIN_FAVORITE_ALERT_TITLE,
@@ -210,7 +237,7 @@ extension PhotoViewController {
         }
     }
 
-    @objc func unfavoriteAction(_ sender: AnyObject) {
+    @objc func unfavoriteAction(_ sender: AnyObject?) {
         HUD.show(.progress, onView: self.view)
         ApiClient.shared.unfavorite(submission: submission) { [weak self] (result) in
             guard let _ = self else {
@@ -223,6 +250,15 @@ extension PhotoViewController {
             case .success:
                 self?.submission.favorite = false
                 self?.setFavoriteButton()
+
+                if let submission = self?.submission {
+                    let userInfo: [AnyHashable: Any] = [ Keys.favorite: submission, Keys.removeFavorite: true ]
+                    NotificationCenter.default.post(name: .favoriteUpdated, object: nil, userInfo: userInfo)
+                }
+
+                if let inFavorites = self?.inFavorites, inFavorites {
+                    self?.navigationController?.popViewController(animated: true)
+                }
             case .failure:
                 let alertView = UIAlertController(
                     title: MAIN_FAVORITE_ALERT_TITLE,
@@ -317,6 +353,22 @@ extension PhotoViewController: UITableViewDataSource {
             return cell!
         }
 
+        if identifier == RemoveFavoriteCellIdentifier {
+            var cell = tableView.dequeueReusableCell(withIdentifier: RemoveFavoriteCellIdentifier)
+            if cell == nil {
+                cell = UITableViewCell(style: .default, reuseIdentifier: RemoveFavoriteCellIdentifier)
+                cell?.textLabel?.textColor = .red
+                cell?.textLabel?.textAlignment = .center
+            }
+
+            cell?.textLabel?.text = row.text
+
+            cell?.accessoryType = .none
+            cell?.selectionStyle = .default
+
+            return cell!
+        }
+
         return UITableViewCell(style: .default, reuseIdentifier: nil)
     }
 
@@ -328,6 +380,16 @@ extension PhotoViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+
+        let row = dataSource[indexPath.section].rows[indexPath.row]
+        let identifier = row.identifier ?? String()
+
+        switch identifier {
+        case RemoveFavoriteCellIdentifier:
+            unfavoriteAction(nil)
+        default:
+            break
+        }
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

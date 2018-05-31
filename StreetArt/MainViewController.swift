@@ -72,9 +72,10 @@ class MainViewController: UIViewController {
 
         collectionView.register(ContentCell.self, forCellWithReuseIdentifier: CellIdentifier)
 
-        collectionView.register(LoadingSubmissionsView.self,
-                                forSupplementaryViewOfKind: UICollectionElementKindSectionFooter,
-                                withReuseIdentifier: LoadingIdentifier
+        collectionView.register(
+            LoadingSubmissionsView.self,
+            forSupplementaryViewOfKind: UICollectionElementKindSectionFooter,
+            withReuseIdentifier: LoadingIdentifier
         )
 
         self.view.addSubview(collectionView)
@@ -87,11 +88,21 @@ class MainViewController: UIViewController {
             make.left.equalToSuperview()
             make.right.equalToSuperview()
         }
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(favoriteUpdatedAction(_:)),
+            name: .favoriteUpdated, object: nil
+        )
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .favoriteUpdated, object: nil)
     }
 
 }
@@ -152,6 +163,17 @@ extension MainViewController {
         isLastPage = false
 
         reloadSubmissions(reset: true)
+    }
+
+    @objc func favoriteUpdatedAction(_ notification: Notification) {
+        guard let favorite = notification.userInfo?[Keys.favorite] as? Submission else {
+            return
+        }
+
+        if let index = submissions.index(of: favorite) {
+            submissions[index] = favorite
+            collectionView.reloadData()
+        }
     }
 
 }

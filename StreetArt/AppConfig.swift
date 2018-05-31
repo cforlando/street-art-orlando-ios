@@ -24,4 +24,11 @@ struct Defaults {
 extension Notification.Name {
     static let userDidLogin = Notification.Name("cfo_user_did_login")
     static let userDidLogout = Notification.Name("cfo_user_did_logout")
+    static let favoriteUpdated = Notification.Name("cfo_favorite_updated")
+}
+
+struct Keys {
+    static let favorite = "favorite"
+    static let addFavorite = "add_favorite"
+    static let removeFavorite = "remove_favorite"
 }

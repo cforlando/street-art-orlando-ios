@@ -147,6 +147,7 @@ let NO_ARTIST_TEXT = "No Artist Provided"
 let SHOW_PASSWORD_TEXT = "SHOW"
 let RESET_TEXT = "Reset"
 let NETWORK_ERROR_TEXT = "Network Error"
+let REMOVE_FAVORITE_TEXT = "Remove Favorite"
 
 let PHOTOS_NOT_SUPPORTED_ALERT = "Photos not supported in this device."
 

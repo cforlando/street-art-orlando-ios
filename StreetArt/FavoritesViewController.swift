@@ -76,6 +76,12 @@ class FavoritesViewController: UIViewController {
             make.left.equalToSuperview()
             make.right.equalToSuperview()
         }
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(favoriteUpdatedAction(_:)),
+            name: .favoriteUpdated, object: nil
+        )
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -111,6 +117,10 @@ class FavoritesViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .favoriteUpdated, object: nil)
+    }
+    
 }
 
 // MARK: -
@@ -161,6 +171,27 @@ extension FavoritesViewController {
         reloadFavorites()
     }
 
+    @objc func favoriteUpdatedAction(_ notification: Notification) {
+        guard let favorite = notification.userInfo?[Keys.favorite] as? Submission else {
+            return
+        }
+
+        let addFavorite = (notification.userInfo?[Keys.addFavorite] as? Bool) ?? false
+        let removeFavorite = (notification.userInfo?[Keys.removeFavorite] as? Bool) ?? false
+
+        if addFavorite {
+            submissions.insert(favorite, at: 0)
+            collectionView.reloadData()
+        }
+
+        if removeFavorite {
+            if let index = submissions.index(of: favorite) {
+                submissions.remove(at: index)
+                collectionView.reloadData()
+            }
+        }
+    }
+
 }
 
 // MARK: - Collection View Methods
@@ -194,7 +225,7 @@ extension FavoritesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let submission = submissions[indexPath.row]
 
-        let controller = PhotoViewController(submission: submission)
+        let controller = PhotoViewController(submission: submission, inFavorites: true)
         controller.hidesBottomBarWhenPushed = true
 
         self.navigationController?.pushViewController(controller, animated: true)
