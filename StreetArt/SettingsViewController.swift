@@ -17,6 +17,7 @@ class SettingsViewController: UIViewController {
     let RegisterIdentifier = "register"
     let SubmitIdentifier = "submit"
     let MySubmissionsIdentifier = "my_submissions"
+    let UpdatePasswordIdentifier = "update_password"
     let LogoutIdentifier = "logout"
 
     var tableView: UITableView!
@@ -113,6 +114,15 @@ extension SettingsViewController {
         if ApiClient.shared.isAuthenticated {
             rows = ContentRowArray()
 
+            content = ContentRow(text: SETTINGS_UPDATE_PASSWORD_TEXT)
+            content.groupIdentifier = CellIdentifier
+            content.identifier = UpdatePasswordIdentifier
+
+            rows.append(content)
+            sections.append(ContentSection(title: nil, rows: rows))
+
+            rows = ContentRowArray()
+
             content = ContentRow(text: SETTINGS_LOGOUT_BUTTON_TEXT)
             content.groupIdentifier = ButtonCellIdentifier
             content.identifier = LogoutIdentifier
@@ -123,6 +133,12 @@ extension SettingsViewController {
 
         dataSource = sections
         tableView.reloadData()
+    }
+
+    func logout() {
+        NotificationCenter.default.post(name: .userDidLogout, object: nil)
+        ApiClient.shared.logout()
+        updateDataSource()
     }
 
 }
@@ -259,10 +275,18 @@ extension SettingsViewController: UITableViewDelegate {
             controller.hidesBottomBarWhenPushed = true
 
             self.navigationController?.pushViewController(controller, animated: true)
+        case UpdatePasswordIdentifier:
+            let controller = PasswordViewController()
+            controller.logoutBlock = { [weak self] in
+                self?.logout()
+                self?.navigationController?.popViewController(animated: true)
+            }
+
+            controller.hidesBottomBarWhenPushed = true
+
+            self.navigationController?.pushViewController(controller, animated: true)
         case LogoutIdentifier:
-            NotificationCenter.default.post(name: .userDidLogout, object: nil)
-            ApiClient.shared.logout()
-            updateDataSource()
+            logout()
         default:
             break
         }

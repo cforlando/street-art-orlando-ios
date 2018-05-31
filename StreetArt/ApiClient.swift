@@ -210,7 +210,7 @@ extension ApiClient {
 
         let parameters = [ "password": password ]
 
-        sessionManager.request(route, method: .put, parameters: parameters)
+        sessionManager.request(route, method: .put, parameters: parameters, headers: additionalHeaders)
             .validate()
             .responseSwiftyJSON { [weak self] (response) in
                 guard let _ = self else {

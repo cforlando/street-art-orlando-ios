@@ -40,6 +40,7 @@
 		1684514A2054967200013A07 /* ApiClient+Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168451492054967200013A07 /* ApiClient+Router.swift */; };
 		16876A54207451FE002A7F5D /* MapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16876A53207451FE002A7F5D /* MapCell.swift */; };
 		16906C8D208A66C70097CBDA /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16906C8C208A66C70097CBDA /* FavoriteButton.swift */; };
+		16916B3120BE305A005E2314 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16916B3020BE305A005E2314 /* PasswordViewController.swift */; };
 		1691E2AE20A899920084B356 /* SuccessResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1691E2AD20A899920084B356 /* SuccessResponse.swift */; };
 		16A53959205F15880051CE4F /* Alamofire+SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A53958205F15880051CE4F /* Alamofire+SwiftyJSON.swift */; };
 		16A5395B205F26AB0051CE4F /* SubmissionUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A5395A205F26AB0051CE4F /* SubmissionUpload.swift */; };
@@ -105,6 +106,7 @@
 		168451492054967200013A07 /* ApiClient+Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiClient+Router.swift"; sourceTree = "<group>"; };
 		16876A53207451FE002A7F5D /* MapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCell.swift; sourceTree = "<group>"; };
 		16906C8C208A66C70097CBDA /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
+		16916B3020BE305A005E2314 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		1691E2AD20A899920084B356 /* SuccessResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessResponse.swift; sourceTree = "<group>"; };
 		16A53958205F15880051CE4F /* Alamofire+SwiftyJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alamofire+SwiftyJSON.swift"; sourceTree = "<group>"; };
 		16A5395A205F26AB0051CE4F /* SubmissionUpload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionUpload.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 				1640259920951A3600784CAA /* SettingsViewController.swift */,
 				1670D965204F96E300E223ED /* AddViewController.swift */,
 				166CFC2E209808BB00BE69C0 /* SubmissionsViewController.swift */,
+				16916B3020BE305A005E2314 /* PasswordViewController.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -554,6 +557,7 @@
 				166CFC2C2097FE2D00BE69C0 /* SubmissionCell.swift in Sources */,
 				166674CB207947CE00387EC6 /* UIImage+Additions.swift in Sources */,
 				1670D959204F6B5B00E223ED /* Strings.swift in Sources */,
+				16916B3120BE305A005E2314 /* PasswordViewController.swift in Sources */,
 				1670D939204F698200E223ED /* AppDelegate.swift in Sources */,
 				1684513E2054534900013A07 /* UIImage+Resize.m in Sources */,
 				16E600232050C1160002B4F0 /* PhotoCell.swift in Sources */,

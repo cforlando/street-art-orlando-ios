@@ -78,7 +78,6 @@ class ForgotViewController: UITableViewController {
         emailField.autocapitalizationType = .none
         emailField.autocorrectionType = .no
         emailField.placeholder = FORGOT_EMAIL_PLACEHOLDER
-        emailField.delegate = self
 
         tokenField = UITextField()
         tokenField.contentVerticalAlignment = .center
@@ -87,7 +86,6 @@ class ForgotViewController: UITableViewController {
         tokenField.autocapitalizationType = .words
         tokenField.autocorrectionType = .no
         tokenField.placeholder = FORGOT_TOKEN_PLACEHOLDER
-        tokenField.delegate = self
 
         passwordField = UITextField()
         passwordField.contentVerticalAlignment = .center
@@ -97,7 +95,6 @@ class ForgotViewController: UITableViewController {
         passwordField.autocorrectionType = .no
         passwordField.isSecureTextEntry = true
         passwordField.placeholder = FORGOT_PASSWORD_PLACEHOLDER
-        passwordField.delegate = self
 
         showPasswordButton = UIButton(type: .system)
         showPasswordButton.titleLabel?.font = UIFont.systemFont(ofSize: 11.0)
@@ -453,11 +450,5 @@ extension ForgotViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
-
-}
-
-// MARK: - UITextFieldDelegate Methods
-
-extension ForgotViewController: UITextFieldDelegate {
 
 }

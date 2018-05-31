@@ -60,10 +60,20 @@ let SETTINGS_TITLE = "Settings"
 let SETTINGS_LOGIN_BUTTON_TEXT = "Login"
 let SETTINGS_REGISTRATION_BUTTON_TEXT = "Create Account"
 let SETTINGS_REGISTRATION_FOOTER_TEXT = "You need to create an account to submit Street Art or save Favorites."
+let SETTINGS_UPDATE_PASSWORD_TEXT = "Update Password"
 let SETTINGS_SUBMISSIONS_TITLE_TEXT = "Submissions"
 let SETTINGS_SUBMIT_ART_BUTTON_TEXT = "Submit Art"
 let SETTINGS_MY_SUBMISSIONS_TEXT = "My Submissions"
 let SETTINGS_LOGOUT_BUTTON_TEXT = "Logout"
+
+// MARK: - Update Password
+
+let UPDATE_PASSWORD_TITLE = "Password"
+let UPDATE_PASSWORD_PLACEHOLDER = "New Password"
+
+let UPDATE_PASSWORD_ALERT_TITLE = "Update Password"
+let UPDATE_PASSWORD_REQUIRED_MESSAGE = "New password required."
+let UPDATE_PASSWORD_UPDATED_MESSAGE = "Password updated."
 
 // MARK: - Submissions
 
