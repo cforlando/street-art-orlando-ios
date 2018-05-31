@@ -155,7 +155,7 @@ extension SubmissionsViewController: UITableViewDataSource {
 
             cell?.set(submission: row.object as? Submission)
 
-            cell?.selectionStyle = .default
+            cell?.selectionStyle = .none
 
             return cell!
         }
@@ -171,8 +171,6 @@ extension SubmissionsViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-
-        //let row = dataSource[indexPath.section].rows[indexPath.row]
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
