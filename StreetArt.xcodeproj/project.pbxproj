@@ -50,6 +50,8 @@
 		16AB45B52052182E008B6F8C /* FileUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AB45B42052182E008B6F8C /* FileUtils.swift */; };
 		16AB45B7205218A4008B6F8C /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AB45B6205218A4008B6F8C /* Color.swift */; };
 		16E600232050C1160002B4F0 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E600222050C1160002B4F0 /* PhotoCell.swift */; };
+		16F9573A20C0D74B0058699D /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F9573920C0D74B0058699D /* ImageViewController.swift */; };
+		16F9573C20C0E05B0058699D /* MapUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F9573B20C0E05B0058699D /* MapUpdateViewController.swift */; };
 		30B32BFA6FAAE44BC0EAF5F5 /* Pods_StreetArt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 050566F609F9DD2D0FAC63B9 /* Pods_StreetArt.framework */; };
 		5C2EA84C5084C1FCE43FC498 /* Pods_StreetArtTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F4B962442B730A91040147A /* Pods_StreetArtTests.framework */; };
 /* End PBXBuildFile section */
@@ -117,6 +119,8 @@
 		16AB45B42052182E008B6F8C /* FileUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUtils.swift; sourceTree = "<group>"; };
 		16AB45B6205218A4008B6F8C /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		16E600222050C1160002B4F0 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
+		16F9573920C0D74B0058699D /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
+		16F9573B20C0E05B0058699D /* MapUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapUpdateViewController.swift; sourceTree = "<group>"; };
 		3737C239AB9A92375EA39C29 /* Pods-StreetArt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StreetArt.release.xcconfig"; path = "Pods/Target Support Files/Pods-StreetArt/Pods-StreetArt.release.xcconfig"; sourceTree = "<group>"; };
 		4D47169A6DAE01726A4185BD /* Pods-StreetArtTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StreetArtTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StreetArtTests/Pods-StreetArtTests.release.xcconfig"; sourceTree = "<group>"; };
 		4F4B962442B730A91040147A /* Pods_StreetArtTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StreetArtTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -174,7 +178,9 @@
 			isa = PBXGroup;
 			children = (
 				162E8D72207AABE800A7E2D8 /* MapViewController.swift */,
+				16F9573B20C0E05B0058699D /* MapUpdateViewController.swift */,
 				16845144205483BB00013A07 /* PhotoViewController.swift */,
+				16F9573920C0D74B0058699D /* ImageViewController.swift */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -539,6 +545,7 @@
 				168451482054962B00013A07 /* ApiClient.swift in Sources */,
 				168451412054545400013A07 /* AppConfig.swift in Sources */,
 				16A5395B205F26AB0051CE4F /* SubmissionUpload.swift in Sources */,
+				16F9573A20C0D74B0058699D /* ImageViewController.swift in Sources */,
 				162E8D71207AAAD900A7E2D8 /* MapDot.swift in Sources */,
 				16AB45B52052182E008B6F8C /* FileUtils.swift in Sources */,
 				166A5A342055ACF000FE5791 /* Settings.swift in Sources */,
@@ -563,6 +570,7 @@
 				1670D959204F6B5B00E223ED /* Strings.swift in Sources */,
 				16916B3120BE305A005E2314 /* PasswordViewController.swift in Sources */,
 				1670D939204F698200E223ED /* AppDelegate.swift in Sources */,
+				16F9573C20C0E05B0058699D /* MapUpdateViewController.swift in Sources */,
 				1684513E2054534900013A07 /* UIImage+Resize.m in Sources */,
 				16E600232050C1160002B4F0 /* PhotoCell.swift in Sources */,
 				16AB45B1205217DC008B6F8C /* UIColor+Additions.swift in Sources */,

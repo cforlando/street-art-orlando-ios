@@ -12,18 +12,12 @@ import MapKit
 class MapViewController: UIViewController {
 
     var mapView: MKMapView!
-    var mapDot = MapDot()
-
-    var cancelBlock: (() -> Void)?
-    var saveBlock: ((CLLocationCoordinate2D) -> Void)?
 
     var currentLocation: CLLocation?
 
-    var isDotVisible = false
-
-    init(currentLocation: CLLocation? = nil) {
+    init() {
         super.init(nibName: nil, bundle: nil)
-        self.currentLocation = currentLocation
+        self.title = MAP_TEXT
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -38,20 +32,17 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let _ = cancelBlock {
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(
-                title: CANCEL_TEXT,
-                style: .plain,
-                target: self,
-                action: #selector(dismissAction(_:))
-            )
-        }
-
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
-            title: UPDATE_TEXT,
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
+            title: DONE_TEXT,
             style: .done,
             target: self,
-            action: #selector(saveAction(_:))
+            action: #selector(dismissAction(_:))
+        )
+
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .action,
+            target: self,
+            action: #selector(actionsAction(_:))
         )
 
         mapView = MKMapView()
@@ -69,22 +60,6 @@ class MapViewController: UIViewController {
         }
     }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
-        if let currentLocation = self.currentLocation, !isDotVisible{
-            let origin = mapView.convert(currentLocation.coordinate, toPointTo: self.view)
-            mapDot.center = origin
-            mapView.addSubview(mapDot)
-            
-            isDotVisible = true
-        }
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -97,13 +72,23 @@ class MapViewController: UIViewController {
 
 extension MapViewController {
 
-    @objc func saveAction(_ sender: AnyObject?) {
-        let coordinate = mapView.convert(mapDot.center, toCoordinateFrom: mapView)
-        saveBlock?(coordinate)
+    @objc func dismissAction(_ sender: AnyObject?) {
+        self.navigationController?.dismiss(animated: true, completion: nil)
     }
 
-    @objc func dismissAction(_ sender: AnyObject?) {
-        cancelBlock?()
+    @objc func actionsAction(_ sender: AnyObject?) {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        let directionsAction = UIAlertAction(title: DIRECTIONS_TEXT, style: .default) { (action) in
+
+        }
+
+        actionSheet.addAction(directionsAction)
+
+        let cancelAction = UIAlertAction(title: CANCEL_TEXT, style: .cancel, handler: nil)
+        actionSheet.addAction(cancelAction)
+
+        self.navigationController?.present(actionSheet, animated: true, completion: nil)
     }
 
 }

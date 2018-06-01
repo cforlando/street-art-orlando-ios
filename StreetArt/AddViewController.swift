@@ -505,7 +505,7 @@ extension AddViewController: UITableViewDelegate {
                 longitude: Defaults.mapCoordinate.longitude
             )
 
-            let controller = MapViewController(currentLocation: currentLocation ?? defaultLocation)
+            let controller = MapUpdateViewController(currentLocation: currentLocation ?? defaultLocation)
             controller.title = PHOTO_ART_LOCATION_TEXT
 
             controller.saveBlock = { [weak self] (coordinate) in

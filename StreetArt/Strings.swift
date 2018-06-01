@@ -126,6 +126,7 @@ let REGISTER_TITLE = "Register"
 
 // MARK: - General
 
+let DONE_TEXT = "Done"
 let OK_TEXT = "Ok"
 let SUBMIT_TEXT = "Submit"
 let SAVE_TEXT = "Save"
@@ -148,6 +149,9 @@ let SHOW_PASSWORD_TEXT = "SHOW"
 let RESET_TEXT = "Reset"
 let NETWORK_ERROR_TEXT = "Network Error"
 let REMOVE_FAVORITE_TEXT = "Remove Favorite"
+let DIRECTIONS_TEXT = "Get Directions"
+let PHOTO_TEXT = "Photo"
+let MAP_TEXT = "Map"
 
 let PHOTOS_NOT_SUPPORTED_ALERT = "Photos not supported in this device."
 

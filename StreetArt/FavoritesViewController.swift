@@ -53,7 +53,7 @@ class FavoritesViewController: UIViewController {
         flowLayout.minimumInteritemSpacing = Constants.spacing
 
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        collectionView.backgroundColor = Color.secondary.withAlphaComponent(0.2)
+        collectionView.backgroundColor = Color.background
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.dataSource = self
         collectionView.delegate = self

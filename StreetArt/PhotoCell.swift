@@ -50,6 +50,7 @@ class PhotoCell: UITableViewCell {
         photoImageView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -58,8 +59,16 @@ class PhotoCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
 
-        // Configure the view for the selected state
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+
+        if highlighted {
+            photoImageView.alpha = 0.75
+        } else {
+            photoImageView.alpha = 1.0
+        }
     }
 
 }

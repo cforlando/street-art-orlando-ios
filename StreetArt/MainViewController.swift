@@ -59,7 +59,7 @@ class MainViewController: UIViewController {
         flowLayout.minimumInteritemSpacing = Constants.spacing
 
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        collectionView.backgroundColor = Color.secondary.withAlphaComponent(0.2)
+        collectionView.backgroundColor = Color.background
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -210,7 +210,9 @@ extension MainViewController: UICollectionViewDataSource {
         if isLastPage {
             loadingView.loadingView.stopAnimating()
         } else {
-            loadingView.loadingView.startAnimating()
+            if !submissions.isEmpty {
+                loadingView.loadingView.startAnimating()
+            }
         }
 
         return loadingView

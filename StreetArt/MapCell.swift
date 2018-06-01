@@ -46,4 +46,14 @@ class MapCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+
+        if highlighted {
+            mapView.alpha = 0.75
+        } else {
+            mapView.alpha = 1.0
+        }
+    }
+
 }

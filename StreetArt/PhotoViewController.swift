@@ -106,6 +106,7 @@ extension PhotoViewController {
         var sections = ContentSectionArray()
 
         content = ContentRow(object: submission.photoURL)
+        content.identifier = PhotoCellIdentifier
         content.groupIdentifier = PhotoCellIdentifier
         content.height = PhotoCell.Constants.height
 
@@ -131,6 +132,7 @@ extension PhotoViewController {
 
         if let _ = mapCell {
             content = ContentRow(object: nil)
+            content.identifier = MapCellIdentifier
             content.groupIdentifier = MapCellIdentifier
             content.height = MapCell.Constants.height
 
@@ -385,6 +387,16 @@ extension PhotoViewController: UITableViewDelegate {
         let identifier = row.identifier ?? String()
 
         switch identifier {
+        case PhotoCellIdentifier:
+            let controller = ImageViewController(url: row.object as? URL)
+            let navController = UINavigationController(rootViewController: controller)
+
+            self.navigationController?.present(navController, animated: true, completion: nil)
+        case MapCellIdentifier:
+            let controller = MapViewController()
+            let navController = UINavigationController(rootViewController: controller)
+
+            self.navigationController?.present(navController, animated: true, completion: nil)
         case RemoveFavoriteCellIdentifier:
             unfavoriteAction(nil)
         default:

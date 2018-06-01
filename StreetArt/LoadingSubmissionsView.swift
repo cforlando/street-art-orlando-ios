@@ -21,7 +21,6 @@ class LoadingSubmissionsView: UICollectionReusableView {
 
         loadingView = UIActivityIndicatorView()
         loadingView.activityIndicatorViewStyle = .gray
-        loadingView.startAnimating()
 
         self.addSubview(loadingView)
 
