@@ -33,6 +33,14 @@ enum ServerError: Error, CustomStringConvertible {
     }
 }
 
+extension ServerError: LocalizedError {
+
+    var errorDescription: String? {
+        return description
+    }
+
+}
+
 extension DataRequest {
 
     static func swiftyJSONResponseSerializer() -> DataResponseSerializer<JSON> {
