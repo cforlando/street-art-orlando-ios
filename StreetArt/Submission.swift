@@ -96,14 +96,25 @@ struct Submission {
 
         self.id = id
         self.status = Status(string: json["status"].stringValue)
-        self.title = json["title"].string
-        self.description = json["description"].string
-        self.artist = json["artist"].string
+
+        if let title = json["title"].string, !title.isEmpty {
+            self.title = title
+        }
+
+        if let description = json["description"].string, !description.isEmpty {
+            self.description = description
+        }
+
+        if let artist = json["artist"].string, !artist.isEmpty {
+            self.artist = artist
+        }
 
         self.latitude = json["latitude"].double
         self.longitude = json["longitude"].double
 
-        self.locationNote = json["location_note"].string
+        if let locationNote = json["location_note"].string, !locationNote.isEmpty {
+            self.locationNote = locationNote
+        }
 
         self.favorite = json["favorite"].boolValue
 
