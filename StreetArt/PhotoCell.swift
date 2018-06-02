@@ -30,6 +30,8 @@ class PhotoCell: UITableViewCell {
 
     var resetButton: UIButton?
 
+    var overlayView: UIView!
+
     weak var delegate: PhotoCellDelegate?
 
     init(placeholder: Placeholder, reuseIdentifier: String?) {
@@ -40,12 +42,24 @@ class PhotoCell: UITableViewCell {
 
         self.placeholder = placeholder
 
+        overlayView = UIView()
+        overlayView.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        overlayView.alpha = 0
+
+        self.contentView.addSubview(overlayView)
+
         photoImageView = UIImageView()
         photoImageView.contentMode = .center
         photoImageView.clipsToBounds = true
         photoImageView.image = placeholderImage
 
         self.contentView.addSubview(photoImageView)
+
+        // Auto Layout
+
+        overlayView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
 
         photoImageView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
@@ -65,9 +79,11 @@ class PhotoCell: UITableViewCell {
         super.setHighlighted(highlighted, animated: animated)
 
         if highlighted {
-            photoImageView.alpha = 0.75
+            self.contentView.bringSubview(toFront: overlayView)
+            overlayView.alpha = 1.0
         } else {
-            photoImageView.alpha = 1.0
+            self.contentView.sendSubview(toBack: overlayView)
+            overlayView.alpha = 0.0
         }
     }
 

@@ -16,6 +16,7 @@ class MapCell: UITableViewCell {
         static let height: CGFloat = 200.0
     }
 
+    var overlayView: UIView!
     var mapView: MKMapView!
 
     init(reuseIdentifier: String?) {
@@ -24,12 +25,22 @@ class MapCell: UITableViewCell {
         self.selectionStyle = .none
         self.accessoryType = .none
 
+        overlayView = UIView()
+        overlayView.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        overlayView.alpha = 0
+
+        self.contentView.addSubview(overlayView)
+
         mapView = MKMapView()
         mapView.isUserInteractionEnabled = false
 
         self.contentView.addSubview(mapView)
 
         // Auto Layout
+
+        overlayView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
 
         mapView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
@@ -50,9 +61,11 @@ class MapCell: UITableViewCell {
         super.setHighlighted(highlighted, animated: animated)
 
         if highlighted {
-            mapView.alpha = 0.75
+            self.contentView.bringSubview(toFront: overlayView)
+            overlayView.alpha = 1.0
         } else {
-            mapView.alpha = 1.0
+            self.contentView.sendSubview(toBack: overlayView)
+            overlayView.alpha = 0.0
         }
     }
 
