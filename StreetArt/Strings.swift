@@ -36,6 +36,7 @@ let SELECT_PHOTO_ALERT_TITLE = "Select photo from:"
 
 let PHOTO_TITLE = "Street Art"
 let PHOTO_ART_PHOTO_TEXT = "Photo"
+let PHOTO_ART_DESCRIPTION_TEXT = "Description"
 let PHOTO_ART_LOCATION_TEXT = "Location"
 let PHOTO_TITLE_TEXT = "Title"
 let PHOTO_ARTIST_TEXT = "Artist"

@@ -17,6 +17,7 @@ import MessageUI
 class PhotoViewController: UIViewController {
 
     let PhotoCellIdentifier = "PhotoCell"
+    let DescriptionCellIdentifier = "DescriptionCell"
     let TitleCellIdentifier = "TitleCell"
     let ArtistCellIdentifier = "ArtistCell"
     let MapCellIdentifier = "MapCell"
@@ -151,7 +152,16 @@ extension PhotoViewController {
         let cell = UITableViewCell(style: .default, reuseIdentifier: NoteCellIdentifier)
         cell.textLabel?.font = UIFont.systemFont(ofSize: 13.0)
         cell.textLabel?.numberOfLines = 0
-        cell.textLabel?.textColor = .lightGray
+        cell.textLabel?.textColor = Color.text
+
+        return cell
+    }
+
+    var descriptionCell: UITableViewCell {
+        let cell = UITableViewCell(style: .default, reuseIdentifier: DescriptionCellIdentifier)
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 13.0)
+        cell.textLabel?.numberOfLines = 0
+        cell.textLabel?.textColor = Color.text
 
         return cell
     }
@@ -183,6 +193,17 @@ extension PhotoViewController {
         }
 
         sections.append(ContentSection(title: PHOTO_ART_PHOTO_TEXT, rows: rows))
+
+        if let description = submission.description {
+            rows = ContentRowArray()
+
+            content = ContentRow(text: description)
+            content.groupIdentifier = DescriptionCellIdentifier
+
+            rows.append(content)
+
+            sections.append(ContentSection(title: PHOTO_ART_DESCRIPTION_TEXT, rows: rows))
+        }
 
         rows = ContentRowArray()
 
@@ -527,6 +548,20 @@ extension PhotoViewController: UITableViewDataSource {
             return cell!
         }
 
+        if identifier == DescriptionCellIdentifier {
+            var cell = tableView.dequeueReusableCell(withIdentifier: DescriptionCellIdentifier)
+            if cell == nil {
+                cell = descriptionCell
+            }
+
+            cell?.textLabel?.text = row.text
+
+            cell?.accessoryType = .none
+            cell?.selectionStyle = .none
+
+            return cell!
+        }
+
         if identifier == MapCellIdentifier {
             return mapCell!
         }
@@ -587,6 +622,16 @@ extension PhotoViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let row = dataSource[indexPath.section].rows[indexPath.row]
         let identifier = row.groupIdentifier ?? String()
+
+        if identifier == DescriptionCellIdentifier {
+            let cell = descriptionCell
+            cell.textLabel?.text = row.text
+
+            let contentWidth = tableView.frame.width - (cell.layoutMargins.left + cell.layoutMargins.right)
+            let height = cell.textLabel?.sizeThatFits(CGSize(width: contentWidth, height: 2000.0)).height ?? 0.0
+
+            return max(height + 40.0, 44.0)
+        }
 
         if identifier == NoteCellIdentifier {
             let cell = noteCell
