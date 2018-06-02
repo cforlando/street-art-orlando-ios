@@ -9,6 +9,11 @@
 import UIKit
 import MapKit
 
+struct Emails {
+    static let report = "cforeport@riveradev.com"
+    static let correction = "cfocorrection@riveradev.com"
+}
+
 struct Defaults {
     static let maxImageResizeInPixels: CGFloat = 2048.0
     static let defaultImageHeight: CGFloat = 250.0

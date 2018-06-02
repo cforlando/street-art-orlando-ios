@@ -13,12 +13,12 @@ class ImageViewController: UIViewController {
 
     var imageView: UIImageView!
 
-    var url: URL?
+    var image: UIImage?
 
-    init(url: URL?) {
+    init(image: UIImage?) {
         super.init(nibName: nil, bundle: nil)
         self.title = PHOTO_TEXT
-        self.url = url
+        self.image = image
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -42,13 +42,7 @@ class ImageViewController: UIViewController {
 
         imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-
-        if let url = self.url {
-            HUD.show(.progress, onView: self.view)
-            imageView.af_setImage(withURL: url) { (response) in
-                HUD.hide()
-            }
-        }
+        imageView.image = image
 
         self.view.addSubview(imageView)
 

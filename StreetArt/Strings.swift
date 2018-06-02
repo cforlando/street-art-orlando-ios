@@ -152,6 +152,12 @@ let REMOVE_FAVORITE_TEXT = "Remove Favorite"
 let DIRECTIONS_TEXT = "Get Directions"
 let PHOTO_TEXT = "Photo"
 let MAP_TEXT = "Map"
+let CORRECTION_TEXT = "Submit Correction"
+let REPORT_TEXT = "Report"
+let SHARE_TEXT = "Share Photo"
+let SHARE_IMAGE_NOT_AVAILABLE_TEXT = "Image not available"
+let SHARE_IMAGE_MESSAGE = "Check out this cool photo from the Street Art Orlando App."
+let EMAIL_NOT_CONFIGURED_TEXT = "Email not configured."
 
 let PHOTOS_NOT_SUPPORTED_ALERT = "Photos not supported in this device."
 
@@ -169,3 +175,11 @@ let LOGIN_ERROR_ALERT_TITLE = "Login"
 let LOGIN_ERROR_MISSING_ALERT_MESSAGE = "Enter Username and Pasword"
 let LOGIN_ERROR_FAIL_ALERT_MESSAGE = "Error while trying to login"
 let LOGIN_ERROR_SUBMIT_LOGIN_ALERT_MESSAGE = "You must be logged in submit your Street Art."
+
+// MARK: - Email
+
+let EMAIL_CORRECTION_SUBJECT = "Street Art Orlando Correction"
+let EMAIL_CORRECTION_BODY = "\n\nInclude your notes about what should be corrected above.\n\nDON'T EDIT TEXT BELOW THIS LINE\n----------\n"
+
+let EMAIL_REPORT_SUBJECT = "Street Art Orlando Report"
+let EMAIL_REPORT_BODY = "\n\nInclude your notes about what should be corrected above.\n\nDON'T EDIT TEXT BELOW THIS LINE\n----------\n"

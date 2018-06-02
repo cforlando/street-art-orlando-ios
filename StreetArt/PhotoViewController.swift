@@ -10,6 +10,9 @@ import UIKit
 import PKHUD
 import SnapKit
 import MapKit
+import Alamofire
+import AlamofireImage
+import MessageUI
 
 class PhotoViewController: UIViewController {
 
@@ -18,12 +21,15 @@ class PhotoViewController: UIViewController {
     let ArtistCellIdentifier = "ArtistCell"
     let MapCellIdentifier = "MapCell"
     let NoteCellIdentifier = "NoteCell"
-    let RemoveFavoriteCellIdentifier = "RemoveFavoriteCell"
 
     var tableView: UITableView!
     var mapCell: MapCell?
     var imageView: UIImageView!
 
+    var toolBar: UIToolbar!
+
+    var image: UIImage?
+    var imageDownloader = ImageDownloader()
     var submission: Submission!
     var dataSource = ContentSectionArray()
 
@@ -66,6 +72,11 @@ class PhotoViewController: UIViewController {
             }
         }
 
+        toolBar = UIToolbar(frame: .zero)
+        self.view.addSubview(toolBar)
+
+        updateToolbarItems()
+
         if let coordinate = submission.coordinate, let annotation = submission.annotation {
             mapCell = MapCell(reuseIdentifier: nil)
 
@@ -83,7 +94,30 @@ class PhotoViewController: UIViewController {
             make.right.equalToSuperview()
         }
 
+        toolBar.snp.makeConstraints { (make) in
+            make.height.equalTo(44.0)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottomMargin)
+        }
+
         updateDataSource()
+
+        if let imageURL = submission.photoURL {
+            HUD.show(.progress, onView: self.view)
+            imageDownloader.download(URLRequest(url: imageURL)) { [weak self] (response) in
+                guard let _ = self else {
+                    return
+                }
+
+                HUD.hide()
+
+                if let image = response.result.value {
+                    self?.image = image
+                    self?.updateDataSource()
+                }
+            }
+        }
     }
 
     override func viewDidLayoutSubviews() {
@@ -113,12 +147,21 @@ class PhotoViewController: UIViewController {
 
 extension PhotoViewController {
 
+    var noteCell: UITableViewCell {
+        let cell = UITableViewCell(style: .default, reuseIdentifier: NoteCellIdentifier)
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 13.0)
+        cell.textLabel?.numberOfLines = 0
+        cell.textLabel?.textColor = .lightGray
+
+        return cell
+    }
+
     func updateDataSource() {
         var content: ContentRow!
         var rows = ContentRowArray()
         var sections = ContentSectionArray()
 
-        content = ContentRow(object: submission.photoURL)
+        content = ContentRow(object: image)
         content.identifier = PhotoCellIdentifier
         content.groupIdentifier = PhotoCellIdentifier
         content.height = PhotoCell.Constants.height
@@ -163,17 +206,6 @@ extension PhotoViewController {
             sections.append(ContentSection(title: PHOTO_ART_LOCATION_TEXT, rows: rows))
         }
 
-        if inFavorites {
-            rows = ContentRowArray()
-
-            content = ContentRow(text: REMOVE_FAVORITE_TEXT)
-            content.groupIdentifier = RemoveFavoriteCellIdentifier
-            content.identifier = RemoveFavoriteCellIdentifier
-
-            rows.append(content)
-            sections.append(ContentSection(title: nil, rows: rows))
-        }
-
         dataSource = sections
         tableView.reloadData()
     }
@@ -204,13 +236,115 @@ extension PhotoViewController {
         )
     }
 
-    var noteCell: UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: NoteCellIdentifier)
-        cell.textLabel?.font = UIFont.systemFont(ofSize: 13.0)
-        cell.textLabel?.numberOfLines = 0
-        cell.textLabel?.textColor = .lightGray
+    func updateToolbarItems() {
+        var itemArray = [UIBarButtonItem]()
+        let flexibleItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let actionsItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(actionsAction(_:)))
 
-        return cell
+        if inFavorites {
+            let deleteItem = UIBarButtonItem(
+                barButtonSystemItem: .trash,
+                target: self,
+                action: #selector(unfavoriteConfirmationAction(_:))
+            )
+            itemArray = [ deleteItem, flexibleItem, actionsItem ]
+        } else {
+            itemArray = [ flexibleItem, actionsItem ]
+        }
+
+        toolBar.setItems(itemArray, animated: false)
+    }
+
+    func openDirections() {
+
+    }
+
+    func displaySharingOptions() {
+        guard let image = self.image else {
+            let alertView = UIAlertController(title: SHARE_TEXT, message: SHARE_IMAGE_NOT_AVAILABLE_TEXT, preferredStyle: .alert)
+
+            let okAction = UIAlertAction(title: OK_TEXT, style: .cancel, handler: nil)
+            alertView.addAction(okAction)
+
+            self.navigationController?.present(alertView, animated: true, completion: nil)
+            return
+        }
+
+        let imageData = UIImageJPEGRepresentation(image, 1.0)
+
+        do {
+            let imagePath = path(inTemporaryDirectory: uniqueIdentifier() + ".jpg")
+            let imageURL = URL(fileURLWithPath: imagePath)
+            try imageData?.write(to: imageURL)
+
+            let activityController = UIActivityViewController(activityItems: [SHARE_IMAGE_MESSAGE, imageURL], applicationActivities: nil)
+
+            self.navigationController?.present(activityController, animated: true, completion: nil)
+        } catch {
+
+        }
+    }
+
+    func displayCorrectionEmail() {
+        guard MFMailComposeViewController.canSendMail() else {
+            let alertView = UIAlertController(title: CORRECTION_TEXT, message: EMAIL_NOT_CONFIGURED_TEXT, preferredStyle: .alert)
+
+            let okAction = UIAlertAction(title: OK_TEXT, style: .cancel, handler: nil)
+            alertView.addAction(okAction)
+
+            self.navigationController?.present(alertView, animated: true, completion: nil)
+            return
+        }
+
+        var emailBody = EMAIL_CORRECTION_BODY
+        emailBody += "ID: \(submission.id)"
+
+        if let submissionTitle = submission.title {
+            emailBody += "TITLE: \(submissionTitle)"
+        }
+
+        if let submissionArtist = submission.artist {
+            emailBody += "ARTIST: \(submissionArtist)"
+        }
+
+        let controller = MFMailComposeViewController()
+        controller.mailComposeDelegate = self
+        controller.setToRecipients([Emails.correction])
+        controller.setSubject(EMAIL_CORRECTION_SUBJECT)
+        controller.setMessageBody(emailBody, isHTML: false)
+
+        self.present(controller, animated: true, completion: nil)
+    }
+
+    func displayReportEmail() {
+        guard MFMailComposeViewController.canSendMail() else {
+            let alertView = UIAlertController(title: REPORT_TEXT, message: EMAIL_NOT_CONFIGURED_TEXT, preferredStyle: .alert)
+
+            let okAction = UIAlertAction(title: OK_TEXT, style: .cancel, handler: nil)
+            alertView.addAction(okAction)
+
+            self.navigationController?.present(alertView, animated: true, completion: nil)
+            return
+        }
+
+        var emailBody = EMAIL_REPORT_BODY
+        emailBody += "ID: \(submission.id)"
+
+        if let submissionTitle = submission.title {
+            emailBody += "TITLE: \(submissionTitle)"
+        }
+
+        if let submissionArtist = submission.artist {
+            emailBody += "ARTIST: \(submissionArtist)"
+        }
+
+        let controller = MFMailComposeViewController()
+        controller.mailComposeDelegate = self
+        controller.setToRecipients([Emails.report])
+        controller.setSubject(EMAIL_REPORT_SUBJECT)
+        controller.setMessageBody(emailBody, isHTML: false)
+
+        self.present(controller, animated: true, completion: nil)
     }
 
 }
@@ -289,6 +423,49 @@ extension PhotoViewController {
         }
     }
 
+    @objc func unfavoriteConfirmationAction(_ sender: AnyObject?) {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        let removeAction = UIAlertAction(title: REMOVE_FAVORITE_TEXT, style: .destructive) { [unowned self] (action) in
+            self.unfavoriteAction(nil)
+        }
+        actionSheet.addAction(removeAction)
+
+        let cancelAction = UIAlertAction(title: CANCEL_TEXT, style: .cancel, handler: nil)
+        actionSheet.addAction(cancelAction)
+
+        self.navigationController?.present(actionSheet, animated: true, completion: nil)
+    }
+
+    @objc func actionsAction(_ sender: AnyObject?) {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        let shareAction = UIAlertAction(title: SHARE_TEXT, style: .default) { [unowned self] (action) in
+            self.displaySharingOptions()
+        }
+        actionSheet.addAction(shareAction)
+
+        let directionsAction = UIAlertAction(title: DIRECTIONS_TEXT, style: .default) { [unowned self] (action) in
+            self.openDirections()
+        }
+        actionSheet.addAction(directionsAction)
+
+        let correctionAction = UIAlertAction(title: CORRECTION_TEXT, style: .default) { [unowned self] (action) in
+            self.displayCorrectionEmail()
+        }
+        actionSheet.addAction(correctionAction)
+
+        let reportAction = UIAlertAction(title: REPORT_TEXT, style: .destructive) { [unowned self] (action) in
+            self.displayReportEmail()
+        }
+        actionSheet.addAction(reportAction)
+
+        let cancelAction = UIAlertAction(title: CANCEL_TEXT, style: .cancel, handler: nil)
+        actionSheet.addAction(cancelAction)
+
+        self.navigationController?.present(actionSheet, animated: true, completion: nil)
+    }
+
 }
 
 // MARK: - UITableViewDataSource Methods
@@ -313,7 +490,7 @@ extension PhotoViewController: UITableViewDataSource {
                 cell = PhotoCell(placeholder: .frame, reuseIdentifier: PhotoCellIdentifier)
             }
 
-            cell?.set(url: row.object as? URL)
+            cell?.set(image: row.object as? UIImage)
 
             return cell!
         }
@@ -368,22 +545,6 @@ extension PhotoViewController: UITableViewDataSource {
             return cell!
         }
 
-        if identifier == RemoveFavoriteCellIdentifier {
-            var cell = tableView.dequeueReusableCell(withIdentifier: RemoveFavoriteCellIdentifier)
-            if cell == nil {
-                cell = UITableViewCell(style: .default, reuseIdentifier: RemoveFavoriteCellIdentifier)
-                cell?.textLabel?.textColor = .red
-                cell?.textLabel?.textAlignment = .center
-            }
-
-            cell?.textLabel?.text = row.text
-
-            cell?.accessoryType = .none
-            cell?.selectionStyle = .default
-
-            return cell!
-        }
-
         return UITableViewCell(style: .default, reuseIdentifier: nil)
     }
 
@@ -401,7 +562,7 @@ extension PhotoViewController: UITableViewDelegate {
 
         switch identifier {
         case PhotoCellIdentifier:
-            let controller = ImageViewController(url: row.object as? URL)
+            let controller = ImageViewController(image: row.object as? UIImage)
             let navController = UINavigationController(rootViewController: controller)
 
             self.navigationController?.present(navController, animated: true, completion: nil)
@@ -410,8 +571,6 @@ extension PhotoViewController: UITableViewDelegate {
             let navController = UINavigationController(rootViewController: controller)
 
             self.navigationController?.present(navController, animated: true, completion: nil)
-        case RemoveFavoriteCellIdentifier:
-            unfavoriteAction(nil)
         default:
             break
         }
@@ -443,3 +602,14 @@ extension PhotoViewController: UITableViewDelegate {
     }
 
 }
+
+// MARK: - MFMailComposeViewControllerDelegate Methods
+
+extension PhotoViewController: MFMailComposeViewControllerDelegate {
+
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+
+}
+
