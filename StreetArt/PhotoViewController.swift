@@ -298,7 +298,23 @@ extension PhotoViewController {
             let imageURL = URL(fileURLWithPath: imagePath)
             try imageData?.write(to: imageURL)
 
-            let activityController = UIActivityViewController(activityItems: [SHARE_IMAGE_MESSAGE, imageURL], applicationActivities: nil)
+            var message = SHARE_IMAGE_MESSAGE
+
+            var messageLines = [String]()
+            if let title = submission.title {
+                messageLines.append(PHOTO_TITLE_TEXT + ": " + title)
+            }
+
+            if let artist = submission.artist {
+                messageLines.append(PHOTO_ARTIST_TEXT + ": " + artist)
+            }
+
+            if !messageLines.isEmpty {
+                message += "\n\n"
+                message += messageLines.joined(separator: "\n")
+            }
+
+            let activityController = UIActivityViewController(activityItems: [message, imageURL], applicationActivities: nil)
 
             self.navigationController?.present(activityController, animated: true, completion: nil)
         } catch {
