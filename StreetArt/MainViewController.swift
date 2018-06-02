@@ -30,6 +30,8 @@ class MainViewController: UIViewController {
     var nextPage: Int = 1
     var isLastPage = false
 
+    var shouldSetupLayout = true
+
     init() {
         super.init(nibName: nil, bundle: nil)
         self.title = MAIN_TITLE
@@ -67,6 +69,7 @@ class MainViewController: UIViewController {
         collectionView.showsVerticalScrollIndicator = true
         collectionView.alwaysBounceVertical = true
         collectionView.isPagingEnabled = false
+        collectionView.contentInsetAdjustmentBehavior = .never
 
         collectionView.refreshControl = refreshControl
 
@@ -82,7 +85,7 @@ class MainViewController: UIViewController {
 
         // AutoLayout
 
-        collectionView.snp.remakeConstraints { (make) in
+        collectionView.snp.makeConstraints { (make) in
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.topMargin)
             make.bottom.equalToSuperview()
             make.left.equalToSuperview()
@@ -94,6 +97,21 @@ class MainViewController: UIViewController {
             selector: #selector(favoriteUpdatedAction(_:)),
             name: .favoriteUpdated, object: nil
         )
+    }
+
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        if shouldSetupLayout {
+            var collectionInset = collectionView.contentInset
+            collectionInset.bottom = self.view.safeAreaInsets.bottom
+
+            collectionView.contentInset = collectionInset
+            collectionView.scrollIndicatorInsets = collectionInset
+
+            shouldSetupLayout = false
+        }
     }
 
     override func didReceiveMemoryWarning() {

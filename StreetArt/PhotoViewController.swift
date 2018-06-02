@@ -29,6 +29,8 @@ class PhotoViewController: UIViewController {
 
     var inFavorites = false
 
+    var shouldSetupLayout = true
+
     init(submission: Submission, inFavorites: Bool = false) {
         super.init(nibName: nil, bundle: nil)
         self.title = PHOTO_TITLE
@@ -44,8 +46,6 @@ class PhotoViewController: UIViewController {
         self.view = UIView()
         self.view.backgroundColor = .white
 
-        self.navigationItem.largeTitleDisplayMode = .never
-
         tableView = UITableView(frame: .zero, style: .grouped)
         tableView.dataSource = self
         tableView.delegate = self
@@ -55,6 +55,8 @@ class PhotoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        tableView.contentInsetAdjustmentBehavior = .never
 
         if ApiClient.shared.isAuthenticated {
             if submission.favorite {
@@ -75,7 +77,7 @@ class PhotoViewController: UIViewController {
         // Auto Layout
 
         tableView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+            make.top.equalToSuperview()
             make.bottom.equalToSuperview()
             make.left.equalToSuperview()
             make.right.equalToSuperview()
@@ -86,6 +88,17 @@ class PhotoViewController: UIViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+
+        if shouldSetupLayout {
+            var tableInset = tableView.contentInset
+            tableInset.top = self.view.safeAreaInsets.top
+            tableInset.bottom = 44.0 + self.view.safeAreaInsets.bottom
+
+            self.tableView.contentInset = tableInset
+            self.tableView.scrollIndicatorInsets = tableInset
+
+            shouldSetupLayout = false
+        }
     }
 
     override func didReceiveMemoryWarning() {
