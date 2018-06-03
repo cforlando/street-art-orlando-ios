@@ -130,7 +130,12 @@ class MainViewController: UIViewController {
 
 extension MainViewController {
 
-    func reloadSubmissions(reset: Bool = false) {
+    func reloadSubmissions(reset: Bool = false, showHud: Bool = false) {
+        if reset {
+            nextPage = 1
+            isLastPage = false
+        }
+
         if isLastPage {
             return
         }
@@ -141,11 +146,19 @@ extension MainViewController {
 
         isFetching = true
 
+        if showHud && self.isViewLoaded {
+            HUD.show(.progress, onView: self.view)
+        }
+
         ApiClient.shared.submissions(page: nextPage) { [unowned self] (result) in
             self.isFetching = false
 
             if let refreshControl = self.collectionView.refreshControl, refreshControl.isRefreshing {
                 refreshControl.endRefreshing()
+            }
+
+            if HUD.isVisible {
+                HUD.hide()
             }
 
             switch result {
@@ -177,9 +190,6 @@ extension MainViewController {
 extension MainViewController {
 
     @objc func refreshAction(_ refreshControl: UIRefreshControl) {
-        nextPage = 1
-        isLastPage = false
-
         reloadSubmissions(reset: true)
     }
 
