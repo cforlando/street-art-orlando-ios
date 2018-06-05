@@ -389,15 +389,21 @@ extension PhotoViewController {
         }
 
         var emailBody = EMAIL_CORRECTION_BODY
-        emailBody += "ID: \(submission.id)"
+
+        var bodyLines = [String]()
+
+        bodyLines.append("ID: \(submission.id)")
 
         if let submissionTitle = submission.title {
-            emailBody += "TITLE: \(submissionTitle)"
+            bodyLines.append("TITLE: \(submissionTitle)")
         }
 
         if let submissionArtist = submission.artist {
-            emailBody += "ARTIST: \(submissionArtist)"
+            bodyLines.append("ARTIST: \(submissionArtist)")
         }
+
+        emailBody += "\n"
+        emailBody += bodyLines.joined(separator: "\n")
 
         let controller = MFMailComposeViewController()
         controller.mailComposeDelegate = self
@@ -420,15 +426,21 @@ extension PhotoViewController {
         }
 
         var emailBody = EMAIL_REPORT_BODY
-        emailBody += "ID: \(submission.id)"
+
+        var bodyLines = [String]()
+
+        bodyLines.append("ID: \(submission.id)")
 
         if let submissionTitle = submission.title {
-            emailBody += "TITLE: \(submissionTitle)"
+            bodyLines.append("TITLE: \(submissionTitle)")
         }
 
         if let submissionArtist = submission.artist {
-            emailBody += "ARTIST: \(submissionArtist)"
+            bodyLines.append("ARTIST: \(submissionArtist)")
         }
+
+        emailBody += "\n"
+        emailBody += bodyLines.joined(separator: "\n")
 
         let controller = MFMailComposeViewController()
         controller.mailComposeDelegate = self
@@ -692,7 +704,7 @@ extension PhotoViewController: UITableViewDelegate {
 
             self.navigationController?.present(navController, animated: true, completion: nil)
         case MapCellIdentifier:
-            let controller = MapViewController()
+            let controller = MapViewController(submission: submission)
             let navController = UINavigationController(rootViewController: controller)
 
             self.navigationController?.present(navController, animated: true, completion: nil)
