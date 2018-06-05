@@ -36,6 +36,9 @@ class PhotoViewController: UIViewController {
 
     var inFavorites = false
 
+    var locationManager: CLLocationManager!
+    var currentLocation: CLLocation?
+
     var shouldSetupLayout = true
 
     init(submission: Submission, inFavorites: Bool = false) {
@@ -119,6 +122,8 @@ class PhotoViewController: UIViewController {
                 }
             }
         }
+
+        locationManager = CLLocationManager()
     }
 
     override func viewDidLayoutSubviews() {
@@ -133,6 +138,29 @@ class PhotoViewController: UIViewController {
             self.tableView.scrollIndicatorInsets = tableInset
 
             shouldSetupLayout = false
+        }
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        dLog("view did appear")
+
+        if self.isBeingPresented || self.isMovingToParentViewController {
+            dLog("assign location delegate")
+            locationManager.delegate = self
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        dLog("view will dissapear")
+
+        if self.isBeingDismissed || self.isMovingFromParentViewController {
+            dLog("nil location delegate")
+            locationManager.delegate = nil
+            currentLocation = nil
         }
     }
 
@@ -277,7 +305,34 @@ extension PhotoViewController {
     }
 
     func openDirections() {
+        dLog("location status: \(CLLocationManager.authorizationStatus())")
 
+        if let location = currentLocation {
+            openMaps(from: location.coordinate)
+            return
+        }
+
+        switch CLLocationManager.authorizationStatus() {
+        case .denied, .restricted:
+            let alertView = UIAlertController(
+                title: LOCATION_ERROR_ALERT_TITLE,
+                message: LOCATION_ERROR_ALERT_MESSAGE,
+                preferredStyle: .alert
+            )
+
+            let okAction = UIAlertAction(title: OK_TEXT, style: .cancel, handler: nil)
+            alertView.addAction(okAction)
+
+            self.navigationController?.present(alertView, animated: true, completion: nil)
+        case .authorizedWhenInUse:
+            dLog("start updating location")
+            locationManager.startUpdatingLocation()
+        case .notDetermined:
+            dLog("request when in use authorization")
+            locationManager.requestWhenInUseAuthorization()
+        default:
+            break
+        }
     }
 
     func displaySharingOptions() {
@@ -382,6 +437,25 @@ extension PhotoViewController {
         controller.setMessageBody(emailBody, isHTML: false)
 
         self.present(controller, animated: true, completion: nil)
+    }
+
+    func openMaps(from: CLLocationCoordinate2D) {
+        guard let to = submission.coordinate else {
+            return
+        }
+
+        var launchOptions = [String: Any]()
+        launchOptions[MKLaunchOptionsDirectionsModeKey] = MKLaunchOptionsDirectionsModeDriving
+
+        let fromPlacemark = MKPlacemark(coordinate: from, addressDictionary: nil)
+        let fromLocation = MKMapItem(placemark: fromPlacemark)
+        fromLocation.name = CURRENT_LOCATION_TEXT
+
+        let toPlacemark = MKPlacemark(coordinate: to, addressDictionary: nil)
+        let toLocation = MKMapItem(placemark: toPlacemark)
+        toLocation.name = submission.title ?? STREET_ART_LOCATION_TEXT
+
+        MKMapItem.openMaps(with: [fromLocation, toLocation], launchOptions: launchOptions) 
     }
 
 }
@@ -660,6 +734,41 @@ extension PhotoViewController: UITableViewDelegate {
         }
 
         return row.height ?? 44.0
+    }
+
+}
+
+// MARK: - CLLocationManagerDelegate Methods
+
+extension PhotoViewController: CLLocationManagerDelegate {
+
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        dLog("\(String(status.rawValue))")
+
+        switch status {
+        case .authorizedWhenInUse:
+            dLog("authorized when in use")
+            locationManager.startUpdatingLocation()
+        default:
+            break
+        }
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let _ = currentLocation {
+            return
+        }
+
+        if let location = locations.first {
+            dLog("found location: \(location)")
+            manager.stopUpdatingLocation()
+            currentLocation = location
+            openMaps(from: location.coordinate)
+        }
+    }
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        dLog("location failed: \(error)")
     }
 
 }

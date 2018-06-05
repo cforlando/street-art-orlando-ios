@@ -159,6 +159,8 @@ let SHARE_TEXT = "Share Photo"
 let SHARE_IMAGE_NOT_AVAILABLE_TEXT = "Image not available"
 let SHARE_IMAGE_MESSAGE = "Check out this cool photo from the Street Art Orlando App."
 let EMAIL_NOT_CONFIGURED_TEXT = "Email not configured."
+let CURRENT_LOCATION_TEXT = "Current Location"
+let STREET_ART_LOCATION_TEXT = "Street Art Location"
 
 let PHOTOS_NOT_SUPPORTED_ALERT = "Photos not supported in this device."
 
@@ -184,3 +186,8 @@ let EMAIL_CORRECTION_BODY = "\n\nInclude your notes about what should be correct
 
 let EMAIL_REPORT_SUBJECT = "Street Art Orlando Report"
 let EMAIL_REPORT_BODY = "\n\nInclude your notes about what should be corrected above.\n\nDON'T EDIT TEXT BELOW THIS LINE\n----------\n"
+
+// MARK: - Location
+
+let LOCATION_ERROR_ALERT_TITLE = "Location Disabled"
+let LOCATION_ERROR_ALERT_MESSAGE = "Please go to Settings and enable Location Services in order to get directions."
