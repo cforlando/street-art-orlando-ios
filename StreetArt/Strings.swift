@@ -80,6 +80,7 @@ let UPDATE_PASSWORD_UPDATED_MESSAGE = "Password updated."
 // MARK: - Submissions
 
 let SUBMISSIONS_TITLE = "My Submissions"
+let SUBMISSIONS_EMPTY_TEXT = "No Submissions"
 
 // MARK: - Login
 

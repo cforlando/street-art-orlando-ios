@@ -130,7 +130,10 @@ extension PhotoCell {
         if let image = image {
             resetButton?.alpha = 1.0
             photoImageView.contentMode = .scaleAspectFill
-            photoImageView.image = image
+
+            UIView.animate(withDuration: 0.5) { [unowned self] in
+                self.photoImageView.image = image
+            }
         } else {
             resetButton?.alpha = 0.0
             photoImageView.contentMode = .center

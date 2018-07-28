@@ -12,6 +12,7 @@ import PKHUD
 class SubmissionsViewController: UIViewController {
 
     let CellIdentifier = "Cell"
+    let EmptyCellIdentifier = "Empty"
 
     var tableView: UITableView!
 
@@ -46,6 +47,7 @@ class SubmissionsViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(refreshAction(_:)), for: .valueChanged)
 
         tableView.refreshControl = refreshControl
+        tableView.rowHeight = SubmissionCell.Constants.height
 
         // Auto Layout
 
@@ -76,12 +78,19 @@ extension SubmissionsViewController {
         var rows = ContentRowArray()
         var sections = ContentSectionArray()
 
-        for submission in submissions {
-            content = ContentRow(object: submission)
-            content.groupIdentifier = CellIdentifier
-            content.height = SubmissionCell.Constants.height
+        if submissions.isEmpty {
+            content = ContentRow(text: SUBMISSIONS_EMPTY_TEXT)
+            content.groupIdentifier = EmptyCellIdentifier
 
             rows.append(content)
+        } else {
+            for submission in submissions {
+                content = ContentRow(object: submission)
+                content.groupIdentifier = CellIdentifier
+                content.height = SubmissionCell.Constants.height
+
+                rows.append(content)
+            }
         }
 
         sections.append(ContentSection(title: nil, rows: rows))
@@ -146,6 +155,19 @@ extension SubmissionsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = dataSource[indexPath.section].rows[indexPath.row]
         let identifier = row.groupIdentifier ?? String()
+
+        if identifier == EmptyCellIdentifier {
+            var cell = tableView.dequeueReusableCell(withIdentifier: EmptyCellIdentifier)
+            if cell == nil {
+                cell = UITableViewCell(style: .default, reuseIdentifier: EmptyCellIdentifier)
+                cell?.textLabel?.textAlignment = .center
+            }
+
+            cell?.textLabel?.text = row.text
+
+            return cell!
+        }
+
 
         if identifier == CellIdentifier {
             var cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier) as? SubmissionCell

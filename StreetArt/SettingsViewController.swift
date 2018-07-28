@@ -278,6 +278,20 @@ extension SettingsViewController: UITableViewDelegate {
             let navController = UINavigationController(rootViewController: controller)
             self.navigationController?.present(navController, animated: true, completion: nil)
         case MySubmissionsIdentifier:
+            guard ApiClient.shared.isAuthenticated else {
+                let alertView = UIAlertController(
+                    title: LOGIN_ERROR_ALERT_TITLE,
+                    message: LOGIN_ERROR_SUBMIT_LOGIN_ALERT_MESSAGE,
+                    preferredStyle: .alert
+                )
+
+                let doneAction = UIAlertAction(title: OK_TEXT, style: .cancel, handler: nil)
+                alertView.addAction(doneAction)
+
+                self.navigationController?.present(alertView, animated: true, completion: nil)
+                return
+            }
+
             let controller = SubmissionsViewController()
             controller.hidesBottomBarWhenPushed = true
 
