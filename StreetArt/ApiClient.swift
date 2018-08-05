@@ -15,7 +15,7 @@ class ApiClient {
         static let localhost = "http://localhost:3000/"
 
         // Production constants should never be changed
-        static let production = "https://cfo-street-art.herokuapp.com/api/"
+        static let production = "https://sao-api.herokuapp.com/api/"
     }
 
     struct Config {

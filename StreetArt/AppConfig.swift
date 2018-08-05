@@ -10,8 +10,8 @@ import UIKit
 import MapKit
 
 struct Emails {
-    static let report = "cforeport@riveradev.com"
-    static let correction = "cfocorrection@riveradev.com"
+    static let report = "report@streetartorlando.com"
+    static let correction = "correction@streetartorlando.com"
 }
 
 struct Defaults {
