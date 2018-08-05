@@ -1,0 +1,8 @@
+app_identifier("com.streetartorlando.streetart") # The bundle identifier of your app
+apple_id("axel@axelrivera.me") # Your Apple email address
+
+itc_team_id("472503") # App Store Connect Team ID
+team_id("C2Q5BUZ3MX") # Developer Portal Team ID
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile
