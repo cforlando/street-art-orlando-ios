@@ -1,1 +1,3 @@
 fastlane/report.xml
+*.dSYM.zip
+*.ipa

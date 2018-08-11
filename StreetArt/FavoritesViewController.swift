@@ -102,12 +102,8 @@ class FavoritesViewController: UIViewController {
                 make.edges.equalToSuperview()
             }
         } else {
-            if let errorView = self.errorView {
-                errorView.removeFromSuperview()
-            }
-
             if submissions.isEmpty {
-                reloadFavorites(animated: true)
+                reloadFavorites(animated: false)
             }
         }
     }
@@ -148,9 +144,25 @@ extension FavoritesViewController {
 
             switch result {
             case .success(let submissions):
+                if let errorView = weakSelf.errorView {
+                    errorView.removeFromSuperview()
+                }
+
+                if submissions.isEmpty {
+                    weakSelf.errorView = ErrorView(frame: .zero, text: FAVORITES_EMPTY_MESSAGE)
+                    weakSelf.view.addSubview(weakSelf.errorView!)
+
+                    weakSelf.errorView!.snp.makeConstraints { (make) in
+                        make.edges.equalToSuperview()
+                    }
+                }
+
                 weakSelf.submissions = submissions
                 weakSelf.collectionView.reloadData()
             case .failure:
+                weakSelf.errorView = ErrorView(frame: .zero, text: FAVORITES_EMPTY_MESSAGE)
+                weakSelf.view.addSubview(weakSelf.errorView!)
+
                 let alertController = UIAlertController(title: LOADING_ERROR_TITLE, message: LOADING_ERROR_MESSAGE, preferredStyle: .alert)
 
                 let okAction = UIAlertAction(title: OK_TEXT, style: .cancel, handler: nil)
@@ -188,6 +200,19 @@ extension FavoritesViewController {
             if let index = submissions.index(of: favorite) {
                 submissions.remove(at: index)
                 collectionView.reloadData()
+            }
+        }
+
+        if submissions.isEmpty {
+            errorView = ErrorView(frame: .zero, text: FAVORITES_EMPTY_MESSAGE)
+            self.view.addSubview(errorView!)
+
+            errorView!.snp.makeConstraints { (make) in
+                make.edges.equalToSuperview()
+            }
+        } else {
+            if let errorView = self.errorView {
+                errorView.removeFromSuperview()
             }
         }
     }
