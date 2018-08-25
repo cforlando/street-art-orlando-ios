@@ -11,6 +11,7 @@ target 'StreetArt' do
   pod 'SnapKit', '~> 4.0.0'
   pod 'SwiftyJSON', '~> 4.0.0'
   pod 'PKHUD', '~> 5.0.0'
+  pod 'Firebase/Core'
 
   target 'StreetArtTests' do
     inherit! :search_paths

@@ -49,6 +49,7 @@
 		16AB45B3205217FA008B6F8C /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AB45B2205217FA008B6F8C /* Utils.swift */; };
 		16AB45B52052182E008B6F8C /* FileUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AB45B42052182E008B6F8C /* FileUtils.swift */; };
 		16AB45B7205218A4008B6F8C /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AB45B6205218A4008B6F8C /* Color.swift */; };
+		16C23343211F7A4500F17217 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 16C23342211F7A4500F17217 /* GoogleService-Info.plist */; };
 		16E600232050C1160002B4F0 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E600222050C1160002B4F0 /* PhotoCell.swift */; };
 		16F9573A20C0D74B0058699D /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F9573920C0D74B0058699D /* ImageViewController.swift */; };
 		16F9573C20C0E05B0058699D /* MapUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F9573B20C0E05B0058699D /* MapUpdateViewController.swift */; };
@@ -118,6 +119,7 @@
 		16AB45B2205217FA008B6F8C /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		16AB45B42052182E008B6F8C /* FileUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUtils.swift; sourceTree = "<group>"; };
 		16AB45B6205218A4008B6F8C /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		16C23342211F7A4500F17217 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		16E600222050C1160002B4F0 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		16F9573920C0D74B0058699D /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		16F9573B20C0E05B0058699D /* MapUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapUpdateViewController.swift; sourceTree = "<group>"; };
@@ -334,6 +336,7 @@
 		1684513F2054535C00013A07 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				16C23342211F7A4500F17217 /* GoogleService-Info.plist */,
 				1670D93F204F698200E223ED /* Assets.xcassets */,
 				1684513B2054534900013A07 /* StreetArt-Bridging-Header.h */,
 				1670D944204F698200E223ED /* Info.plist */,
@@ -452,6 +455,7 @@
 			files = (
 				1670D943204F698200E223ED /* LaunchScreen.storyboard in Resources */,
 				1670D940204F698200E223ED /* Assets.xcassets in Resources */,
+				16C23343211F7A4500F17217 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -492,17 +496,21 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-StreetArt/Pods-StreetArt-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
