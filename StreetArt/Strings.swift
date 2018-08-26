@@ -8,6 +8,8 @@
 
 import Foundation
 
+let APP_NAME = "Street Art Orlando"
+
 // MARK: - Tabs
 
 let MAIN_TAB = "Explore"
@@ -87,7 +89,7 @@ let SUBMISSIONS_EMPTY_TEXT = "No Submissions"
 
 let LOGIN_TITLE = "Login"
 
-let LOGIN_USERNAME_PLACEHOLDER = "Username"
+let LOGIN_USERNAME_PLACEHOLDER = "Email"
 let LOGIN_PASSWORD_PLACEHOLDER = "Password"
 let LOGIN_SUBMIT_BUTTON_TEXT = "Login"
 let LOGIN_REGISTRATION_BUTTON_TEXT = "Register"
@@ -177,7 +179,7 @@ let UPLOAD_ERROR_TITLE = "Submission Error"
 let UPLOAD_ERROR_MESSAGE = "Error uploading Street Art"
 
 let LOGIN_ERROR_ALERT_TITLE = "Login"
-let LOGIN_ERROR_MISSING_ALERT_MESSAGE = "Enter Username and Pasword"
+let LOGIN_ERROR_MISSING_ALERT_MESSAGE = "Enter Email and Pasword"
 let LOGIN_ERROR_FAIL_ALERT_MESSAGE = "Error while trying to login"
 let LOGIN_ERROR_SUBMIT_LOGIN_ALERT_MESSAGE = "You must be logged in submit your Street Art."
 
