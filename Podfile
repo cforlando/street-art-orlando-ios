@@ -12,6 +12,7 @@ target 'StreetArt' do
   pod 'SwiftyJSON', '~> 4.0.0'
   pod 'PKHUD', '~> 5.0.0'
   pod 'Firebase/Core'
+  pod 'Firebase/Crash'
 
   target 'StreetArtTests' do
     inherit! :search_paths
