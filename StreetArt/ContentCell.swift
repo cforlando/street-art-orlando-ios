@@ -99,6 +99,13 @@ class ContentCell: UICollectionViewCell {
         }
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        imageView.image = nil
+        textLabel.text = nil
+    }
+
 }
 
 // MARK: - Methods
