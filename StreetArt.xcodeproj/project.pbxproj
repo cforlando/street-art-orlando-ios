@@ -50,6 +50,7 @@
 		16AB45B52052182E008B6F8C /* FileUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AB45B42052182E008B6F8C /* FileUtils.swift */; };
 		16AB45B7205218A4008B6F8C /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AB45B6205218A4008B6F8C /* Color.swift */; };
 		16C23343211F7A4500F17217 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 16C23342211F7A4500F17217 /* GoogleService-Info.plist */; };
+		16C6BB332131CF2600048E81 /* LocalAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C6BB322131CF2600048E81 /* LocalAnalytics.swift */; };
 		16E600232050C1160002B4F0 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E600222050C1160002B4F0 /* PhotoCell.swift */; };
 		16F9573A20C0D74B0058699D /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F9573920C0D74B0058699D /* ImageViewController.swift */; };
 		16F9573C20C0E05B0058699D /* MapUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F9573B20C0E05B0058699D /* MapUpdateViewController.swift */; };
@@ -120,6 +121,7 @@
 		16AB45B42052182E008B6F8C /* FileUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUtils.swift; sourceTree = "<group>"; };
 		16AB45B6205218A4008B6F8C /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		16C23342211F7A4500F17217 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		16C6BB322131CF2600048E81 /* LocalAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAnalytics.swift; sourceTree = "<group>"; };
 		16E600222050C1160002B4F0 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		16F9573920C0D74B0058699D /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		16F9573B20C0E05B0058699D /* MapUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapUpdateViewController.swift; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 				168451492054967200013A07 /* ApiClient+Router.swift */,
 				166A5A332055ACF000FE5791 /* Settings.swift */,
 				166A5A372055D49800FE5791 /* DataManager.swift */,
+				16C6BB322131CF2600048E81 /* LocalAnalytics.swift */,
 			);
 			name = Singletons;
 			sourceTree = "<group>";
@@ -550,6 +553,7 @@
 				1691E2AE20A899920084B356 /* SuccessResponse.swift in Sources */,
 				1670D95B204F703A00E223ED /* ContentCell.swift in Sources */,
 				1670D95E204F73CD00E223ED /* ContentUtils.swift in Sources */,
+				16C6BB332131CF2600048E81 /* LocalAnalytics.swift in Sources */,
 				168451482054962B00013A07 /* ApiClient.swift in Sources */,
 				168451412054545400013A07 /* AppConfig.swift in Sources */,
 				16A5395B205F26AB0051CE4F /* SubmissionUpload.swift in Sources */,

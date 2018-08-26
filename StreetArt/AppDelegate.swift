@@ -71,6 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        LocalAnalytics.shared.appOpen()
         self.mainController?.reloadSubmissions(reset: true, showHud: true)
     }
 
@@ -87,10 +88,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate {
 
     @objc func loginAction(_ notification: Notification) {
+        LocalAnalytics.shared.customEvent(.login)
         mainController?.reloadSubmissions(reset: true, showHud: true)
     }
 
     @objc func logoutAction(_ notification: Notification) {
+        LocalAnalytics.shared.customEvent(.logout)
         mainController?.reloadSubmissions(reset: true, showHud: true)
     }
 

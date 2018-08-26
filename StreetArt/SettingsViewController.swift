@@ -234,6 +234,8 @@ extension SettingsViewController: UITableViewDelegate {
                 self?.updateDataSource()
             }
 
+            LocalAnalytics.shared.customEvent(.registrationStart)
+
             let navController = UINavigationController(rootViewController: controller)
             self.navigationController?.present(navController, animated: true, completion: nil)
         case SubmitIdentifier:
@@ -274,6 +276,8 @@ extension SettingsViewController: UITableViewDelegate {
             controller.cancelBlock = { [weak self] in
                 self?.navigationController?.dismiss(animated: true, completion: nil)
             }
+
+            LocalAnalytics.shared.customEvent(.submissionStart)
 
             let navController = UINavigationController(rootViewController: controller)
             self.navigationController?.present(navController, animated: true, completion: nil)

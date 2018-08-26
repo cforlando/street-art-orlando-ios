@@ -251,6 +251,8 @@ extension RegisterViewController {
                     return
                 }
 
+                LocalAnalytics.shared.customEvent(.registrationSuccess)
+
                 ApiClient.shared.authenticate(username: email, password: password) { (loginResult) in
                     HUD.hide()
 

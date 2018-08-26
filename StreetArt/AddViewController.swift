@@ -333,6 +333,7 @@ extension AddViewController {
                 return
             }
 
+            LocalAnalytics.shared.customEvent(.submissionSuccess)
             self?.completionBlock?()
         }
     }
@@ -532,8 +533,9 @@ extension AddViewController: UITableViewDelegate {
                 self?.navigationController?.dismiss(animated: true, completion: nil)
             }
 
-            let navController = UINavigationController(rootViewController: controller)
+            LocalAnalytics.shared.customEvent(.submissionUpdateLocation)
 
+            let navController = UINavigationController(rootViewController: controller)
             self.navigationController?.present(navController, animated: true, completion: nil)
         default:
             break
@@ -566,6 +568,7 @@ extension AddViewController: PhotoCellDelegate{
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
         let resetAction = UIAlertAction(title: ADD_RESET_PHOTO_TEXT, style: .destructive) { [unowned self] (action) in
+            LocalAnalytics.shared.customEvent(.submissionResetPhoto)
             photoCell.set(image: nil)
             self.image = nil
         }

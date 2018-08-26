@@ -143,6 +143,15 @@ extension ForgotViewController {
 
     func update(step: Step?) {
         if let step = step {
+            switch step {
+            case .validate:
+                LocalAnalytics.shared.forgotPasswordStepSecurityCode()
+            case .password:
+                LocalAnalytics.shared.forgotPasswordStepPasswordUpdate()
+            default:
+                break
+            }
+
             self.step = step
         }
 
@@ -340,6 +349,7 @@ extension ForgotViewController {
             switch result {
             case .success(let response):
                 if response.success {
+                    LocalAnalytics.shared.forgotPasswordSuccess()
                     self?.navigationController?.dismiss(animated: true, completion: nil)
                 } else {
                     var alertMessage: String

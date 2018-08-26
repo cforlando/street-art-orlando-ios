@@ -371,6 +371,7 @@ extension PhotoViewController {
 
             let activityController = UIActivityViewController(activityItems: [message, imageURL], applicationActivities: nil)
 
+            LocalAnalytics.shared.customEvent(.sharePhoto, submission: submission)
             self.navigationController?.present(activityController, animated: true, completion: nil)
         } catch {
 
@@ -411,6 +412,7 @@ extension PhotoViewController {
         controller.setSubject(EMAIL_CORRECTION_SUBJECT)
         controller.setMessageBody(emailBody, isHTML: false)
 
+        LocalAnalytics.shared.customEvent(.submitCorrection, submission: submission)
         self.present(controller, animated: true, completion: nil)
     }
 
@@ -448,6 +450,7 @@ extension PhotoViewController {
         controller.setSubject(EMAIL_REPORT_SUBJECT)
         controller.setMessageBody(emailBody, isHTML: false)
 
+        LocalAnalytics.shared.customEvent(.report, submission: submission)
         self.present(controller, animated: true, completion: nil)
     }
 
@@ -467,6 +470,7 @@ extension PhotoViewController {
         let toLocation = MKMapItem(placemark: toPlacemark)
         toLocation.name = submission.title ?? STREET_ART_LOCATION_TEXT
 
+        LocalAnalytics.shared.customEvent(.getDirections, submission: submission)
         MKMapItem.openMaps(with: [fromLocation, toLocation], launchOptions: launchOptions) 
     }
 
@@ -487,6 +491,8 @@ extension PhotoViewController {
 
             switch result {
             case .success:
+                LocalAnalytics.shared.customEvent(.favorite, submission: self?.submission)
+
                 self?.submission.favorite = true
                 self?.setUnfavoriteButton()
 
@@ -520,6 +526,8 @@ extension PhotoViewController {
 
             switch result {
             case .success:
+                LocalAnalytics.shared.customEvent(.unfavorite, submission: self?.submission)
+                
                 self?.submission.favorite = false
                 self?.setFavoriteButton()
 
@@ -699,11 +707,15 @@ extension PhotoViewController: UITableViewDelegate {
 
         switch identifier {
         case PhotoCellIdentifier:
+            LocalAnalytics.shared.customEvent(.photoDetail, submission: self.submission)
+
             let controller = ImageViewController(image: row.object as? UIImage)
             let navController = UINavigationController(rootViewController: controller)
 
             self.navigationController?.present(navController, animated: true, completion: nil)
         case MapCellIdentifier:
+            LocalAnalytics.shared.customEvent(.mapDetail, submission: self.submission)
+
             let controller = MapViewController(submission: submission)
             let navController = UINavigationController(rootViewController: controller)
 

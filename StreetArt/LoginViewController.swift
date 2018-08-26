@@ -217,6 +217,7 @@ extension LoginViewController {
         let controller = ForgotViewController()
         let navController = UINavigationController(rootViewController: controller)
 
+        LocalAnalytics.shared.forgotPasswordStart()
         self.navigationController?.present(navController, animated: true, completion: nil)
     }
 

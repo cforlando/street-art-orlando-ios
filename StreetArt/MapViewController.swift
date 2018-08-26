@@ -136,6 +136,7 @@ extension MapViewController {
         let toLocation = MKMapItem(placemark: toPlacemark)
         toLocation.name = submission.title ?? STREET_ART_LOCATION_TEXT
 
+        LocalAnalytics.shared.customEvent(.getDirections, submission: submission)
         MKMapItem.openMaps(with: [fromLocation, toLocation], launchOptions: launchOptions)
     }
 
