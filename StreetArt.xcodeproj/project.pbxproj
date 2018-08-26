@@ -381,6 +381,7 @@
 				1670D932204F698200E223ED /* Frameworks */,
 				1670D933204F698200E223ED /* Resources */,
 				320398DDDD7537EEE4249587 /* [CP] Embed Pods Frameworks */,
+				16FF4CDD213340C800CCC276 /* [SAO] Firebase Upload Symbols */,
 			);
 			buildRules = (
 			);
@@ -472,6 +473,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		16FF4CDD213340C800CCC276 /* [SAO] Firebase Upload Symbols */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[SAO] Firebase Upload Symbols";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"${CONFIGURATION}\" = \"Release\" ]; then\n    GOOGLE_APP_ID=\"1:323837972762:ios:3c06b8da404dad0e\"\n    \"${PODS_ROOT}\"/FirebaseCrash/upload-sym \"${PROJECT_DIR}/.crash-secrets\"\nfi";
+		};
 		17CBCFF55AF009A7EA0C0C9F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -741,6 +756,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 102;
 				DEVELOPMENT_TEAM = C2Q5BUZ3MX;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = StreetArt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -767,6 +783,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 102;
 				DEVELOPMENT_TEAM = C2Q5BUZ3MX;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = StreetArt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
