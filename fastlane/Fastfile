@@ -30,4 +30,12 @@ platform :ios do
   lane :update_build_number do
     increment_build_number
   end
+
+  after_all do |lane|
+    # This block is called, only if the executed lane was successful
+
+    clean_build_artifacts(
+      exclude_pattern: ".*\.mobileprovision"
+    )
+  end
 end
