@@ -23,3 +23,11 @@ func isCameraAvailable() -> Bool {
 func isPhotoLibraryAvailable() -> Bool {
     return UIImagePickerController.isSourceTypeAvailable(.photoLibrary)
 }
+
+func systemVersionAndBuild() -> (String, String) {
+    let dictionary = Bundle.main.infoDictionary!
+    let version = dictionary["CFBundleShortVersionString"] as! String
+    let build = dictionary["CFBundleVersion"] as! String
+    return (version, build)
+}
+

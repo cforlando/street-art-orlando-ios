@@ -109,9 +109,12 @@ extension SettingsViewController {
         content.identifier = MySubmissionsIdentifier
 
         rows.append(content)
-        sections.append(ContentSection(title: SETTINGS_SUBMISSIONS_TITLE_TEXT, rows: rows))
+
+        var lastSection = ContentSection(title: SETTINGS_SUBMISSIONS_TITLE_TEXT, rows: rows)
 
         if ApiClient.shared.isAuthenticated {
+            sections.append(lastSection)
+
             rows = ContentRowArray()
 
             content = ContentRow(text: SETTINGS_UPDATE_PASSWORD_TEXT)
@@ -128,8 +131,15 @@ extension SettingsViewController {
             content.identifier = LogoutIdentifier
 
             rows.append(content)
-            sections.append(ContentSection(title: nil, rows: rows))
+
+            lastSection = ContentSection(title: nil, rows: rows)
         }
+
+        let (version, build) = systemVersionAndBuild()
+        let footerStr = "\(APP_NAME) \(version) (\(build))"
+        lastSection.footer = footerStr
+
+        sections.append(lastSection)
 
         dataSource = sections
         tableView.reloadData()
@@ -324,6 +334,12 @@ extension SettingsViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return dataSource[section].title
+    }
+
+    func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+        if let _ = dataSource[section].footer, let footerView = view as? UITableViewHeaderFooterView {
+            footerView.textLabel?.textAlignment = .center
+        }
     }
 
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
