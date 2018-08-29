@@ -52,7 +52,11 @@ class SubmissionsViewController: UIViewController {
         // Auto Layout
 
         tableView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.topMargin)
+            if #available(iOS 11.0, *) {
+                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.topMargin)
+            } else {
+                make.top.equalTo(self.topLayoutGuide.snp.top)
+            }
             make.bottom.equalToSuperview()
             make.left.equalToSuperview()
             make.right.equalToSuperview()

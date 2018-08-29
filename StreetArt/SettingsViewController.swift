@@ -51,8 +51,14 @@ class SettingsViewController: UIViewController {
         // Auto Layout
 
         tableView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.topMargin)
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottomMargin)
+            if #available(iOS 11.0, *) {
+                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.topMargin)
+                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottomMargin)
+            } else {
+                make.top.equalTo(self.topLayoutGuide.snp.top)
+                make.bottom.equalTo(self.bottomLayoutGuide.snp.bottom)
+            }
+
             make.left.equalToSuperview()
             make.right.equalToSuperview()
         }

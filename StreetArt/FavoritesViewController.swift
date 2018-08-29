@@ -71,7 +71,11 @@ class FavoritesViewController: UIViewController {
         // AutoLayout
 
         collectionView.snp.remakeConstraints { (make) in
-            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.topMargin)
+            if #available(iOS 11.0, *) {
+                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.topMargin)
+            } else {
+                make.top.equalTo(self.topLayoutGuide.snp.top)
+            }
             make.bottom.equalToSuperview()
             make.left.equalToSuperview()
             make.right.equalToSuperview()
@@ -204,6 +208,10 @@ extension FavoritesViewController {
         }
 
         if submissions.isEmpty {
+            if let errorView = self.errorView {
+                errorView.removeFromSuperview()
+            }
+
             errorView = ErrorView(frame: .zero, text: FAVORITES_EMPTY_MESSAGE)
             self.view.addSubview(errorView!)
 
