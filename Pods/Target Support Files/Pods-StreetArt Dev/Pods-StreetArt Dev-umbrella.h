@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_StreetArtTestsVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_StreetArtTestsVersionString[];
+FOUNDATION_EXPORT double Pods_StreetArt_DevVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_StreetArt_DevVersionString[];
 

@@ -13,8 +13,12 @@ class LocalAnalytics {
     static let shared = LocalAnalytics()
 
     var isProduction: Bool {
-#if OSA_PRODUCTION
+#if PRODUCTION_BUILD
+    #if SAO_PRODUCTION
         return true
+    #else
+        return false
+    #endif
 #else
         return false
 #endif

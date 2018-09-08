@@ -40,6 +40,53 @@
 		168451482054962B00013A07 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168451472054962B00013A07 /* ApiClient.swift */; };
 		1684514A2054967200013A07 /* ApiClient+Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168451492054967200013A07 /* ApiClient+Router.swift */; };
 		16876A54207451FE002A7F5D /* MapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16876A53207451FE002A7F5D /* MapCell.swift */; };
+		168C0A8B2143555100FFD7C0 /* Submission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1670D967204F97B900E223ED /* Submission.swift */; };
+		168C0A8C2143555100FFD7C0 /* ForgotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1661444620AC295D00F4E3A8 /* ForgotViewController.swift */; };
+		168C0A8D2143555100FFD7C0 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162042E02078C78D00F3BE99 /* FavoritesViewController.swift */; };
+		168C0A8E2143555100FFD7C0 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166A5A372055D49800FE5791 /* DataManager.swift */; };
+		168C0A8F2143555100FFD7C0 /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16906C8C208A66C70097CBDA /* FavoriteButton.swift */; };
+		168C0A902143555100FFD7C0 /* SuccessResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1691E2AD20A899920084B356 /* SuccessResponse.swift */; };
+		168C0A912143555100FFD7C0 /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1670D95A204F703A00E223ED /* ContentCell.swift */; };
+		168C0A922143555100FFD7C0 /* ContentUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1670D95D204F73CD00E223ED /* ContentUtils.swift */; };
+		168C0A932143555100FFD7C0 /* LocalAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C6BB322131CF2600048E81 /* LocalAnalytics.swift */; };
+		168C0A942143555100FFD7C0 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168451472054962B00013A07 /* ApiClient.swift */; };
+		168C0A952143555100FFD7C0 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168451402054545400013A07 /* AppConfig.swift */; };
+		168C0A962143555100FFD7C0 /* SubmissionUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A5395A205F26AB0051CE4F /* SubmissionUpload.swift */; };
+		168C0A972143555100FFD7C0 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F9573920C0D74B0058699D /* ImageViewController.swift */; };
+		168C0A982143555100FFD7C0 /* MapDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162E8D70207AAAD900A7E2D8 /* MapDot.swift */; };
+		168C0A992143555100FFD7C0 /* FileUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AB45B42052182E008B6F8C /* FileUtils.swift */; };
+		168C0A9A2143555100FFD7C0 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166A5A332055ACF000FE5791 /* Settings.swift */; };
+		168C0A9B2143555100FFD7C0 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164025A22095298E00784CAA /* RegisterViewController.swift */; };
+		168C0A9C2143555100FFD7C0 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16401B7C20BF8B4900606EDD /* ErrorView.swift */; };
+		168C0A9D2143555100FFD7C0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1640259B209527AC00784CAA /* LoginViewController.swift */; };
+		168C0A9E2143555100FFD7C0 /* Alamofire+SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A53958205F15880051CE4F /* Alamofire+SwiftyJSON.swift */; };
+		168C0A9F2143555100FFD7C0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1670D93A204F698200E223ED /* MainViewController.swift */; };
+		168C0AA02143555100FFD7C0 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AB45B6205218A4008B6F8C /* Color.swift */; };
+		168C0AA12143555100FFD7C0 /* UIButton+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164025A420952A8900784CAA /* UIButton+Additions.swift */; };
+		168C0AA22143555100FFD7C0 /* ErrorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166A5A352055D12E00FE5791 /* ErrorUtils.swift */; };
+		168C0AA32143555100FFD7C0 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1670D965204F96E300E223ED /* AddViewController.swift */; };
+		168C0AA42143555100FFD7C0 /* SubmissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166CFC2E209808BB00BE69C0 /* SubmissionsViewController.swift */; };
+		168C0AA52143555100FFD7C0 /* MapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16876A53207451FE002A7F5D /* MapCell.swift */; };
+		168C0AA62143555100FFD7C0 /* ApiClient+Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168451492054967200013A07 /* ApiClient+Router.swift */; };
+		168C0AA72143555100FFD7C0 /* LoadingSubmissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1670B1232066F16700F4EBFA /* LoadingSubmissionsView.swift */; };
+		168C0AA82143555100FFD7C0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1640259920951A3600784CAA /* SettingsViewController.swift */; };
+		168C0AA92143555100FFD7C0 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AB45B2205217FA008B6F8C /* Utils.swift */; };
+		168C0AAA2143555100FFD7C0 /* Base64Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166A5A392055D94E00FE5791 /* Base64Utils.swift */; };
+		168C0AAB2143555100FFD7C0 /* SubmissionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166CFC2B2097FE2D00BE69C0 /* SubmissionCell.swift */; };
+		168C0AAC2143555100FFD7C0 /* UIImage+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166674CA207947CE00387EC6 /* UIImage+Additions.swift */; };
+		168C0AAD2143555100FFD7C0 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1670D958204F6B5B00E223ED /* Strings.swift */; };
+		168C0AAE2143555100FFD7C0 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16916B3020BE305A005E2314 /* PasswordViewController.swift */; };
+		168C0AAF2143555100FFD7C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1670D938204F698200E223ED /* AppDelegate.swift */; };
+		168C0AB02143555100FFD7C0 /* MapUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F9573B20C0E05B0058699D /* MapUpdateViewController.swift */; };
+		168C0AB12143555100FFD7C0 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 1684513D2054534900013A07 /* UIImage+Resize.m */; };
+		168C0AB22143555100FFD7C0 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E600222050C1160002B4F0 /* PhotoCell.swift */; };
+		168C0AB32143555100FFD7C0 /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AB45B0205217DC008B6F8C /* UIColor+Additions.swift */; };
+		168C0AB42143555100FFD7C0 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162E8D72207AABE800A7E2D8 /* MapViewController.swift */; };
+		168C0AB52143555100FFD7C0 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16845144205483BB00013A07 /* PhotoViewController.swift */; };
+		168C0AB72143555100FFD7C0 /* Pods_StreetArt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 050566F609F9DD2D0FAC63B9 /* Pods_StreetArt.framework */; };
+		168C0AB92143555100FFD7C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1670D941204F698200E223ED /* LaunchScreen.storyboard */; };
+		168C0ABA2143555100FFD7C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1670D93F204F698200E223ED /* Assets.xcassets */; };
+		168C0ABB2143555100FFD7C0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 16C23342211F7A4500F17217 /* GoogleService-Info.plist */; };
 		16906C8D208A66C70097CBDA /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16906C8C208A66C70097CBDA /* FavoriteButton.swift */; };
 		16916B3120BE305A005E2314 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16916B3020BE305A005E2314 /* PasswordViewController.swift */; };
 		1691E2AE20A899920084B356 /* SuccessResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1691E2AD20A899920084B356 /* SuccessResponse.swift */; };
@@ -55,7 +102,7 @@
 		16F9573A20C0D74B0058699D /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F9573920C0D74B0058699D /* ImageViewController.swift */; };
 		16F9573C20C0E05B0058699D /* MapUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F9573B20C0E05B0058699D /* MapUpdateViewController.swift */; };
 		30B32BFA6FAAE44BC0EAF5F5 /* Pods_StreetArt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 050566F609F9DD2D0FAC63B9 /* Pods_StreetArt.framework */; };
-		5C2EA84C5084C1FCE43FC498 /* Pods_StreetArtTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F4B962442B730A91040147A /* Pods_StreetArtTests.framework */; };
+		83C8495C59F61A8D39256884 /* Pods_StreetArt_Dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AFF359053C63229359EA061 /* Pods_StreetArt_Dev.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,7 +117,6 @@
 
 /* Begin PBXFileReference section */
 		050566F609F9DD2D0FAC63B9 /* Pods_StreetArt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StreetArt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		0A15AF122F724A134B86B7D8 /* Pods-StreetArtTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StreetArtTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StreetArtTests/Pods-StreetArtTests.debug.xcconfig"; sourceTree = "<group>"; };
 		162042E02078C78D00F3BE99 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		162E8D70207AAAD900A7E2D8 /* MapDot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDot.swift; sourceTree = "<group>"; };
 		162E8D72207AABE800A7E2D8 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -111,6 +157,8 @@
 		168451472054962B00013A07 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		168451492054967200013A07 /* ApiClient+Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiClient+Router.swift"; sourceTree = "<group>"; };
 		16876A53207451FE002A7F5D /* MapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCell.swift; sourceTree = "<group>"; };
+		168C0AC12143555100FFD7C0 /* StreetArt Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "StreetArt Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		168C0AC22143555100FFD7C0 /* Info-Dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Dev.plist"; path = "/Users/arn/Dropbox/Projects/Code-for-Orlando/sao-ios/StreetArt/Info-Dev.plist"; sourceTree = "<absolute>"; };
 		16906C8C208A66C70097CBDA /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
 		16916B3020BE305A005E2314 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		1691E2AD20A899920084B356 /* SuccessResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessResponse.swift; sourceTree = "<group>"; };
@@ -126,9 +174,11 @@
 		16F9573920C0D74B0058699D /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		16F9573B20C0E05B0058699D /* MapUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapUpdateViewController.swift; sourceTree = "<group>"; };
 		3737C239AB9A92375EA39C29 /* Pods-StreetArt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StreetArt.release.xcconfig"; path = "Pods/Target Support Files/Pods-StreetArt/Pods-StreetArt.release.xcconfig"; sourceTree = "<group>"; };
-		4D47169A6DAE01726A4185BD /* Pods-StreetArtTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StreetArtTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StreetArtTests/Pods-StreetArtTests.release.xcconfig"; sourceTree = "<group>"; };
+		3AFF359053C63229359EA061 /* Pods_StreetArt_Dev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StreetArt_Dev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F4B962442B730A91040147A /* Pods_StreetArtTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StreetArtTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E27B7035A55D824E0649429 /* Pods-StreetArt Dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StreetArt Dev.release.xcconfig"; path = "Pods/Target Support Files/Pods-StreetArt Dev/Pods-StreetArt Dev.release.xcconfig"; sourceTree = "<group>"; };
 		8BBDFE5684531E3DCB4D4BC4 /* Pods-StreetArt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StreetArt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StreetArt/Pods-StreetArt.debug.xcconfig"; sourceTree = "<group>"; };
+		FDD9104F581DA97564A1BE39 /* Pods-StreetArt Dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StreetArt Dev.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StreetArt Dev/Pods-StreetArt Dev.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,7 +194,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C2EA84C5084C1FCE43FC498 /* Pods_StreetArtTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		168C0AB62143555100FFD7C0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				168C0AB72143555100FFD7C0 /* Pods_StreetArt.framework in Frameworks */,
+				83C8495C59F61A8D39256884 /* Pods_StreetArt_Dev.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,6 +284,7 @@
 			children = (
 				1670D935204F698200E223ED /* StreetArt.app */,
 				1670D949204F698200E223ED /* StreetArtTests.xctest */,
+				168C0AC12143555100FFD7C0 /* StreetArt Dev.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -343,6 +402,7 @@
 				1670D93F204F698200E223ED /* Assets.xcassets */,
 				1684513B2054534900013A07 /* StreetArt-Bridging-Header.h */,
 				1670D944204F698200E223ED /* Info.plist */,
+				168C0AC22143555100FFD7C0 /* Info-Dev.plist */,
 				1670D941204F698200E223ED /* LaunchScreen.storyboard */,
 			);
 			name = "Supporting Files";
@@ -354,6 +414,7 @@
 				168451422054574B00013A07 /* MobileCoreServices.framework */,
 				050566F609F9DD2D0FAC63B9 /* Pods_StreetArt.framework */,
 				4F4B962442B730A91040147A /* Pods_StreetArtTests.framework */,
+				3AFF359053C63229359EA061 /* Pods_StreetArt_Dev.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -363,8 +424,8 @@
 			children = (
 				8BBDFE5684531E3DCB4D4BC4 /* Pods-StreetArt.debug.xcconfig */,
 				3737C239AB9A92375EA39C29 /* Pods-StreetArt.release.xcconfig */,
-				0A15AF122F724A134B86B7D8 /* Pods-StreetArtTests.debug.xcconfig */,
-				4D47169A6DAE01726A4185BD /* Pods-StreetArtTests.release.xcconfig */,
+				FDD9104F581DA97564A1BE39 /* Pods-StreetArt Dev.debug.xcconfig */,
+				7E27B7035A55D824E0649429 /* Pods-StreetArt Dev.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -396,7 +457,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1670D955204F698200E223ED /* Build configuration list for PBXNativeTarget "StreetArtTests" */;
 			buildPhases = (
-				17CBCFF55AF009A7EA0C0C9F /* [CP] Check Pods Manifest.lock */,
 				1670D945204F698200E223ED /* Sources */,
 				1670D946204F698200E223ED /* Frameworks */,
 				1670D947204F698200E223ED /* Resources */,
@@ -410,6 +470,25 @@
 			productName = StreetArtTests;
 			productReference = 1670D949204F698200E223ED /* StreetArtTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		168C0A882143555100FFD7C0 /* StreetArt Dev */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 168C0ABE2143555100FFD7C0 /* Build configuration list for PBXNativeTarget "StreetArt Dev" */;
+			buildPhases = (
+				168C0A892143555100FFD7C0 /* [CP] Check Pods Manifest.lock */,
+				168C0A8A2143555100FFD7C0 /* Sources */,
+				168C0AB62143555100FFD7C0 /* Frameworks */,
+				168C0AB82143555100FFD7C0 /* Resources */,
+				168C0ABC2143555100FFD7C0 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "StreetArt Dev";
+			productName = StreetArt;
+			productReference = 168C0AC12143555100FFD7C0 /* StreetArt Dev.app */;
+			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
@@ -431,6 +510,9 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = 1670D934204F698200E223ED;
 					};
+					168C0A882143555100FFD7C0 = {
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 1670D930204F698200E223ED /* Build configuration list for PBXProject "StreetArt" */;
@@ -447,6 +529,7 @@
 			projectRoot = "";
 			targets = (
 				1670D934204F698200E223ED /* StreetArt */,
+				168C0A882143555100FFD7C0 /* StreetArt Dev */,
 				1670D948204F698200E223ED /* StreetArtTests */,
 			);
 		};
@@ -470,9 +553,71 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		168C0AB82143555100FFD7C0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				168C0AB92143555100FFD7C0 /* LaunchScreen.storyboard in Resources */,
+				168C0ABA2143555100FFD7C0 /* Assets.xcassets in Resources */,
+				168C0ABB2143555100FFD7C0 /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		168C0A892143555100FFD7C0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-StreetArt Dev-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		168C0ABC2143555100FFD7C0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-StreetArt Dev/Pods-StreetArt Dev-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StreetArt Dev/Pods-StreetArt Dev-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		16FF4CDD213340C800CCC276 /* [SAO] Firebase Upload Symbols */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -486,24 +631,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if [ \"${CONFIGURATION}\" = \"Release\" ]; then\n    GOOGLE_APP_ID=\"1:323837972762:ios:3c06b8da404dad0e\"\n    \"${PODS_ROOT}\"/FirebaseCrash/upload-sym \"${PROJECT_DIR}/.crash-secrets\"\nfi";
-		};
-		17CBCFF55AF009A7EA0C0C9F /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-StreetArtTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
 		};
 		320398DDDD7537EEE4249587 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -615,6 +742,56 @@
 			buildActionMask = 2147483647;
 			files = (
 				1670D94E204F698200E223ED /* StreetArtTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		168C0A8A2143555100FFD7C0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				168C0A8B2143555100FFD7C0 /* Submission.swift in Sources */,
+				168C0A8C2143555100FFD7C0 /* ForgotViewController.swift in Sources */,
+				168C0A8D2143555100FFD7C0 /* FavoritesViewController.swift in Sources */,
+				168C0A8E2143555100FFD7C0 /* DataManager.swift in Sources */,
+				168C0A8F2143555100FFD7C0 /* FavoriteButton.swift in Sources */,
+				168C0A902143555100FFD7C0 /* SuccessResponse.swift in Sources */,
+				168C0A912143555100FFD7C0 /* ContentCell.swift in Sources */,
+				168C0A922143555100FFD7C0 /* ContentUtils.swift in Sources */,
+				168C0A932143555100FFD7C0 /* LocalAnalytics.swift in Sources */,
+				168C0A942143555100FFD7C0 /* ApiClient.swift in Sources */,
+				168C0A952143555100FFD7C0 /* AppConfig.swift in Sources */,
+				168C0A962143555100FFD7C0 /* SubmissionUpload.swift in Sources */,
+				168C0A972143555100FFD7C0 /* ImageViewController.swift in Sources */,
+				168C0A982143555100FFD7C0 /* MapDot.swift in Sources */,
+				168C0A992143555100FFD7C0 /* FileUtils.swift in Sources */,
+				168C0A9A2143555100FFD7C0 /* Settings.swift in Sources */,
+				168C0A9B2143555100FFD7C0 /* RegisterViewController.swift in Sources */,
+				168C0A9C2143555100FFD7C0 /* ErrorView.swift in Sources */,
+				168C0A9D2143555100FFD7C0 /* LoginViewController.swift in Sources */,
+				168C0A9E2143555100FFD7C0 /* Alamofire+SwiftyJSON.swift in Sources */,
+				168C0A9F2143555100FFD7C0 /* MainViewController.swift in Sources */,
+				168C0AA02143555100FFD7C0 /* Color.swift in Sources */,
+				168C0AA12143555100FFD7C0 /* UIButton+Additions.swift in Sources */,
+				168C0AA22143555100FFD7C0 /* ErrorUtils.swift in Sources */,
+				168C0AA32143555100FFD7C0 /* AddViewController.swift in Sources */,
+				168C0AA42143555100FFD7C0 /* SubmissionsViewController.swift in Sources */,
+				168C0AA52143555100FFD7C0 /* MapCell.swift in Sources */,
+				168C0AA62143555100FFD7C0 /* ApiClient+Router.swift in Sources */,
+				168C0AA72143555100FFD7C0 /* LoadingSubmissionsView.swift in Sources */,
+				168C0AA82143555100FFD7C0 /* SettingsViewController.swift in Sources */,
+				168C0AA92143555100FFD7C0 /* Utils.swift in Sources */,
+				168C0AAA2143555100FFD7C0 /* Base64Utils.swift in Sources */,
+				168C0AAB2143555100FFD7C0 /* SubmissionCell.swift in Sources */,
+				168C0AAC2143555100FFD7C0 /* UIImage+Additions.swift in Sources */,
+				168C0AAD2143555100FFD7C0 /* Strings.swift in Sources */,
+				168C0AAE2143555100FFD7C0 /* PasswordViewController.swift in Sources */,
+				168C0AAF2143555100FFD7C0 /* AppDelegate.swift in Sources */,
+				168C0AB02143555100FFD7C0 /* MapUpdateViewController.swift in Sources */,
+				168C0AB12143555100FFD7C0 /* UIImage+Resize.m in Sources */,
+				168C0AB22143555100FFD7C0 /* PhotoCell.swift in Sources */,
+				168C0AB32143555100FFD7C0 /* UIColor+Additions.swift in Sources */,
+				168C0AB42143555100FFD7C0 /* MapViewController.swift in Sources */,
+				168C0AB52143555100FFD7C0 /* PhotoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -766,7 +943,7 @@
 				INFOPLIST_FILE = StreetArt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG -D PRODUCTION_BUILD";
 				PRODUCT_BUNDLE_IDENTIFIER = com.streetartorlando.streetart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cce74698-1d9d-4b2d-81df-3b424b7272b4";
@@ -793,7 +970,7 @@
 				INFOPLIST_FILE = StreetArt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D OSA_PRODUCTION";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D SAO_PRODUCTION -D PRODUCTION_BUILD";
 				PRODUCT_BUNDLE_IDENTIFIER = com.streetartorlando.streetart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "356b28db-a997-42fc-8d6c-959b8172354d";
@@ -807,7 +984,6 @@
 		};
 		1670D956204F698200E223ED /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0A15AF122F724A134B86B7D8 /* Pods-StreetArtTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -825,7 +1001,6 @@
 		};
 		1670D957204F698200E223ED /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4D47169A6DAE01726A4185BD /* Pods-StreetArtTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -838,6 +1013,59 @@
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StreetArt.app/StreetArt";
+			};
+			name = Release;
+		};
+		168C0ABF2143555100FFD7C0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FDD9104F581DA97564A1BE39 /* Pods-StreetArt Dev.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Dev";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 104;
+				DEVELOPMENT_TEAM = C2Q5BUZ3MX;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = "StreetArt/Info-Dev.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG -D DEVELOPMENT_BUILD";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.streetartorlando.streetart-dev";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "StreetArt/StreetArt-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Debug;
+		};
+		168C0AC02143555100FFD7C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7E27B7035A55D824E0649429 /* Pods-StreetArt Dev.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Dev";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 104;
+				DEVELOPMENT_TEAM = C2Q5BUZ3MX;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = "StreetArt/Info-Dev.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D SAO_PRODUCTION -D DEVELOPMENT_BUILD";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.streetartorlando.streetart-dev";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "StreetArt/StreetArt-Bridging-Header.h";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
@@ -867,6 +1095,15 @@
 			buildConfigurations = (
 				1670D956204F698200E223ED /* Debug */,
 				1670D957204F698200E223ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		168C0ABE2143555100FFD7C0 /* Build configuration list for PBXNativeTarget "StreetArt Dev" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				168C0ABF2143555100FFD7C0 /* Debug */,
+				168C0AC02143555100FFD7C0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

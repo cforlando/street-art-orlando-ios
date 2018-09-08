@@ -21,7 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var tabBarController: UITabBarController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+
+#if PRODUCTION_BUILD
         FirebaseApp.configure()
+#endif
 
         let titleAttributes: [NSAttributedStringKey: Any] = [
             NSAttributedStringKey.foregroundColor: Color.text

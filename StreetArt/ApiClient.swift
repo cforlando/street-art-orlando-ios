@@ -14,12 +14,15 @@ class ApiClient {
         static let forward = "https://sao-sharingan.fwd.wf/api/"
         static let localhost = "http://localhost:3000/"
 
+        // Staging Environment
+        static let staging = "https://sao-api-staging.herokuapp.com/api/"
+
         // Production constants should never be changed
         static let production = "https://sao-api.herokuapp.com/api/"
     }
 
     struct Config {
-        #if OSA_PRODUCTION
+        #if SAO_PRODUCTION
         // Used for App Store Builds. DO NOT CHANGE!!
         static let URLString = URLHosts.production  // DO NOT CHANGE EVER!!!
         #else
