@@ -12,7 +12,7 @@ import Alamofire
 class ApiClient {
     struct URLHosts {
         static let forward = "https://sao-sharingan.fwd.wf/api/"
-        static let localhost = "http://localhost:3000/"
+        static let localhost = "http://localhost:5000/"
 
         // Staging Environment
         static let staging = "https://sao-api-staging.herokuapp.com/api/"
@@ -27,7 +27,7 @@ class ApiClient {
         static let URLString = URLHosts.production  // DO NOT CHANGE EVER!!!
         #else
         // Used for DEBUG BUILDS ONLY
-        static let URLString = URLHosts.production
+        static let URLString = URLHosts.localhost
         #endif
     }
 
