@@ -89,6 +89,8 @@
 		16906C8D208A66C70097CBDA /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16906C8C208A66C70097CBDA /* FavoriteButton.swift */; };
 		16916B3120BE305A005E2314 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16916B3020BE305A005E2314 /* PasswordViewController.swift */; };
 		1691E2AE20A899920084B356 /* SuccessResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1691E2AD20A899920084B356 /* SuccessResponse.swift */; };
+		169D3E88215B10AC00A4F1A3 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169D3E87215B10AC00A4F1A3 /* WebViewController.swift */; };
+		169D3E89215B10AC00A4F1A3 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169D3E87215B10AC00A4F1A3 /* WebViewController.swift */; };
 		16A53959205F15880051CE4F /* Alamofire+SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A53958205F15880051CE4F /* Alamofire+SwiftyJSON.swift */; };
 		16A5395B205F26AB0051CE4F /* SubmissionUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A5395A205F26AB0051CE4F /* SubmissionUpload.swift */; };
 		16AB45B1205217DC008B6F8C /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AB45B0205217DC008B6F8C /* UIColor+Additions.swift */; };
@@ -150,6 +152,7 @@
 		16906C8C208A66C70097CBDA /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
 		16916B3020BE305A005E2314 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		1691E2AD20A899920084B356 /* SuccessResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessResponse.swift; sourceTree = "<group>"; };
+		169D3E87215B10AC00A4F1A3 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		16A53958205F15880051CE4F /* Alamofire+SwiftyJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alamofire+SwiftyJSON.swift"; sourceTree = "<group>"; };
 		16A5395A205F26AB0051CE4F /* SubmissionUpload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionUpload.swift; sourceTree = "<group>"; };
 		16AB45B0205217DC008B6F8C /* UIColor+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
@@ -224,6 +227,7 @@
 				16F9573B20C0E05B0058699D /* MapUpdateViewController.swift */,
 				16845144205483BB00013A07 /* PhotoViewController.swift */,
 				16F9573920C0D74B0058699D /* ImageViewController.swift */,
+				169D3E87215B10AC00A4F1A3 /* WebViewController.swift */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -664,6 +668,7 @@
 				1670D93B204F698200E223ED /* MainViewController.swift in Sources */,
 				16AB45B7205218A4008B6F8C /* Color.swift in Sources */,
 				164025A520952A8900784CAA /* UIButton+Additions.swift in Sources */,
+				169D3E88215B10AC00A4F1A3 /* WebViewController.swift in Sources */,
 				166A5A362055D12E00FE5791 /* ErrorUtils.swift in Sources */,
 				1670D966204F96E300E223ED /* AddViewController.swift in Sources */,
 				166CFC2F209808BB00BE69C0 /* SubmissionsViewController.swift in Sources */,
@@ -714,6 +719,7 @@
 				168C0A9F2143555100FFD7C0 /* MainViewController.swift in Sources */,
 				168C0AA02143555100FFD7C0 /* Color.swift in Sources */,
 				168C0AA12143555100FFD7C0 /* UIButton+Additions.swift in Sources */,
+				169D3E89215B10AC00A4F1A3 /* WebViewController.swift in Sources */,
 				168C0AA22143555100FFD7C0 /* ErrorUtils.swift in Sources */,
 				168C0AA32143555100FFD7C0 /* AddViewController.swift in Sources */,
 				168C0AA42143555100FFD7C0 /* SubmissionsViewController.swift in Sources */,

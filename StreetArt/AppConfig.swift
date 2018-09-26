@@ -14,6 +14,12 @@ struct Emails {
     static let correction = "correction@streetartorlando.com"
 }
 
+struct WebsiteURL {
+    static let terms = "http://streetartorlando.com/terms"
+    static let privacy = "http://streetartorlando.com/privacy"
+    static let community = "http://streetartorlando.com/community-guidelines"
+}
+
 struct Defaults {
     static let maxImageResizeInPixels: CGFloat = 2048.0
     static let defaultImageHeight: CGFloat = 250.0

@@ -10,15 +10,23 @@ import UIKit
 
 class SettingsViewController: UIViewController {
 
-    let CellIdentifier = "Cell"
-    let ButtonCellIdentifier = "ButtonCell"
+    struct GroupIdentifier {
+        static let cell = "Cell"
+        static let button = "ButtonCell"
+        static let web = "WebCell"
+    }
 
-    let LoginIdentifier = "login"
-    let RegisterIdentifier = "register"
-    let SubmitIdentifier = "submit"
-    let MySubmissionsIdentifier = "my_submissions"
-    let UpdatePasswordIdentifier = "update_password"
-    let LogoutIdentifier = "logout"
+    struct Identifier {
+        static let login = "login"
+        static let register = "register"
+        static let submit = "submit"
+        static let mySubmissions = "my_submissions"
+        static let updatePassword = "update_password"
+        static let terms = "terms"
+        static let privacy = "privacy"
+        static let community = "community"
+        static let logout = "logout"
+    }
 
     var tableView: UITableView!
 
@@ -77,16 +85,30 @@ extension SettingsViewController {
         var rows = ContentRowArray()
         var sections = ContentSectionArray()
 
-        if !ApiClient.shared.isAuthenticated {
+        if ApiClient.shared.isAuthenticated {
+            content = ContentRow(text: SETTINGS_LOGOUT_BUTTON_TEXT)
+            content.groupIdentifier = GroupIdentifier.button
+            content.identifier = Identifier.logout
+
+            rows.append(content)
+
+            content = ContentRow(text: SETTINGS_UPDATE_PASSWORD_TEXT)
+            content.groupIdentifier = GroupIdentifier.cell
+            content.identifier = Identifier.updatePassword
+
+            rows.append(content)
+
+            sections.append(ContentSection(title: nil, rows: rows))
+        } else {
             content = ContentRow(text: SETTINGS_LOGIN_BUTTON_TEXT)
-            content.groupIdentifier = ButtonCellIdentifier
-            content.identifier = LoginIdentifier
+            content.groupIdentifier = GroupIdentifier.button
+            content.identifier = Identifier.login
 
             rows.append(content)
 
             content = ContentRow(text: SETTINGS_REGISTRATION_BUTTON_TEXT)
-            content.groupIdentifier = ButtonCellIdentifier
-            content.identifier = RegisterIdentifier
+            content.groupIdentifier = GroupIdentifier.button
+            content.identifier = Identifier.register
 
             rows.append(content)
 
@@ -99,56 +121,68 @@ extension SettingsViewController {
         rows = ContentRowArray()
 
         content = ContentRow(text: SETTINGS_SUBMIT_ART_BUTTON_TEXT)
-        content.groupIdentifier = ButtonCellIdentifier
-        content.identifier = SubmitIdentifier
+        content.groupIdentifier = GroupIdentifier.button
+        content.identifier = Identifier.submit
 
         rows.append(content)
 
         content = ContentRow(text: SETTINGS_MY_SUBMISSIONS_TEXT)
-        content.groupIdentifier = CellIdentifier
-        content.identifier = MySubmissionsIdentifier
+        content.groupIdentifier = GroupIdentifier.cell
+        content.identifier = Identifier.mySubmissions
+
+        rows.append(content)
+        sections.append(ContentSection(title: SETTINGS_SUBMISSIONS_TITLE_TEXT, rows: rows))
+
+        // Information
+
+        rows = ContentRowArray()
+
+        content = ContentRow(text: SETTINGS_TERMS_TEXT)
+        content.groupIdentifier = GroupIdentifier.web
+        content.identifier = Identifier.terms
 
         rows.append(content)
 
-        var lastSection = ContentSection(title: SETTINGS_SUBMISSIONS_TITLE_TEXT, rows: rows)
+        content = ContentRow(text: SETTINGS_PRIVACY_TEXT)
+        content.groupIdentifier = GroupIdentifier.web
+        content.identifier = Identifier.privacy
 
-        if ApiClient.shared.isAuthenticated {
-            sections.append(lastSection)
+        rows.append(content)
 
-            rows = ContentRowArray()
+        content = ContentRow(text: SETTINGS_COMMUNITY_TEXT)
+        content.groupIdentifier = GroupIdentifier.web
+        content.identifier = Identifier.community
 
-            content = ContentRow(text: SETTINGS_UPDATE_PASSWORD_TEXT)
-            content.groupIdentifier = CellIdentifier
-            content.identifier = UpdatePasswordIdentifier
-
-            rows.append(content)
-            sections.append(ContentSection(title: nil, rows: rows))
-
-            rows = ContentRowArray()
-
-            content = ContentRow(text: SETTINGS_LOGOUT_BUTTON_TEXT)
-            content.groupIdentifier = ButtonCellIdentifier
-            content.identifier = LogoutIdentifier
-
-            rows.append(content)
-
-            lastSection = ContentSection(title: nil, rows: rows)
-        }
+        rows.append(content)
 
         let (version, build) = systemVersionAndBuild()
         let footerStr = "\(APP_NAME) \(version) (\(build))"
-        lastSection.footer = footerStr
 
-        sections.append(lastSection)
+        var infoSection = ContentSection(title: nil, rows: rows)
+        infoSection.footer = footerStr
+
+        sections.append(infoSection)
+
 
         dataSource = sections
         tableView.reloadData()
     }
 
     func logout() {
-        NotificationCenter.default.post(name: .userDidLogout, object: nil)
-        ApiClient.shared.logout()
-        updateDataSource()
+        let actionSheet = UIAlertController(title: SETTINGS_LOGOUT_CONFIRMATION_TEXT, message: nil, preferredStyle: .actionSheet)
+
+        let logoutAction = UIAlertAction(title: SETTINGS_LOGOUT_BUTTON_TEXT, style: .destructive) { [unowned self] (action) in
+            NotificationCenter.default.post(name: .userDidLogout, object: nil)
+            ApiClient.shared.logout()
+            self.updateDataSource()
+        }
+
+        actionSheet.addAction(logoutAction)
+
+        let cancelAction = UIAlertAction(title: CANCEL_TEXT, style: .cancel, handler: nil)
+        actionSheet.addAction(cancelAction)
+
+        self.navigationController?.present(actionSheet, animated: true, completion: nil)
     }
 
 }
@@ -169,10 +203,29 @@ extension SettingsViewController: UITableViewDataSource {
         let row = dataSource[indexPath.section].rows[indexPath.row]
         let identifier = row.groupIdentifier ?? String()
 
-        if identifier == ButtonCellIdentifier {
-            var cell = tableView.dequeueReusableCell(withIdentifier: ButtonCellIdentifier)
+        if identifier == GroupIdentifier.cell {
+            var cell = tableView.dequeueReusableCell(withIdentifier: GroupIdentifier.cell)
             if cell == nil {
-                cell = UITableViewCell(style: .default, reuseIdentifier: ButtonCellIdentifier)
+                cell = UITableViewCell(style: .default, reuseIdentifier: GroupIdentifier.cell)
+            }
+
+            cell?.textLabel?.text = row.text
+
+            if let _ = row.identifier {
+                cell?.selectionStyle = .default
+                cell?.accessoryType = .disclosureIndicator
+            } else {
+                cell?.selectionStyle = .none
+                cell?.accessoryType = .none
+            }
+
+            return cell!
+        }
+
+        if identifier == GroupIdentifier.button {
+            var cell = tableView.dequeueReusableCell(withIdentifier: GroupIdentifier.button)
+            if cell == nil {
+                cell = UITableViewCell(style: .default, reuseIdentifier: GroupIdentifier.button)
                 cell?.textLabel?.textColor = Color.highlight
                 cell?.textLabel?.textAlignment = .center
             }
@@ -185,21 +238,16 @@ extension SettingsViewController: UITableViewDataSource {
             return cell!
         }
 
-        if identifier == CellIdentifier {
-            var cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier)
+        if identifier == GroupIdentifier.web {
+            var cell = tableView.dequeueReusableCell(withIdentifier: GroupIdentifier.web)
             if cell == nil {
-                cell = UITableViewCell(style: .default, reuseIdentifier: CellIdentifier)
+                cell = UITableViewCell(style: .default, reuseIdentifier: GroupIdentifier.web)
             }
 
             cell?.textLabel?.text = row.text
 
-            if let _ = row.identifier {
-                cell?.selectionStyle = .default
-                cell?.accessoryType = .disclosureIndicator
-            } else {
-                cell?.selectionStyle = .none
-                cell?.accessoryType = .none
-            }
+            cell?.selectionStyle = .default
+            cell?.accessoryType = .disclosureIndicator
 
             return cell!
         }
@@ -220,7 +268,7 @@ extension SettingsViewController: UITableViewDelegate {
         let identifier = row.identifier ?? String()
 
         switch identifier {
-        case LoginIdentifier:
+        case Identifier.login:
             let controller = LoginViewController()
 
             controller.loginBlock = { [weak self] in
@@ -233,7 +281,7 @@ extension SettingsViewController: UITableViewDelegate {
 
             let navController = UINavigationController(rootViewController: controller)
             self.navigationController?.present(navController, animated: true, completion: nil)
-        case RegisterIdentifier:
+        case Identifier.register:
             let controller = RegisterViewController()
 
             controller.loginBlock = { [weak self] in
@@ -248,7 +296,7 @@ extension SettingsViewController: UITableViewDelegate {
 
             let navController = UINavigationController(rootViewController: controller)
             self.navigationController?.present(navController, animated: true, completion: nil)
-        case SubmitIdentifier:
+        case Identifier.submit:
             guard ApiClient.shared.isAuthenticated else {
                 let alertView = UIAlertController(
                     title: LOGIN_ERROR_ALERT_TITLE,
@@ -291,7 +339,7 @@ extension SettingsViewController: UITableViewDelegate {
 
             let navController = UINavigationController(rootViewController: controller)
             self.navigationController?.present(navController, animated: true, completion: nil)
-        case MySubmissionsIdentifier:
+        case Identifier.mySubmissions:
             guard ApiClient.shared.isAuthenticated else {
                 let alertView = UIAlertController(
                     title: LOGIN_ERROR_ALERT_TITLE,
@@ -310,7 +358,7 @@ extension SettingsViewController: UITableViewDelegate {
             controller.hidesBottomBarWhenPushed = true
 
             self.navigationController?.pushViewController(controller, animated: true)
-        case UpdatePasswordIdentifier:
+        case Identifier.updatePassword:
             let controller = PasswordViewController()
             controller.logoutBlock = { [weak self] in
                 self?.logout()
@@ -320,7 +368,19 @@ extension SettingsViewController: UITableViewDelegate {
             controller.hidesBottomBarWhenPushed = true
 
             self.navigationController?.pushViewController(controller, animated: true)
-        case LogoutIdentifier:
+        case Identifier.terms:
+            let controller = WebViewController(url: URL(string: WebsiteURL.terms)!)
+            controller.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(controller, animated: true)
+        case Identifier.privacy:
+            let controller = WebViewController(url: URL(string: WebsiteURL.privacy)!)
+            controller.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(controller, animated: true)
+        case Identifier.community:
+            let controller = WebViewController(url: URL(string: WebsiteURL.community)!)
+            controller.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(controller, animated: true)
+        case Identifier.logout:
             logout()
         default:
             break

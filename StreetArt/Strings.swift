@@ -70,6 +70,11 @@ let SETTINGS_SUBMISSIONS_TITLE_TEXT = "Submissions"
 let SETTINGS_SUBMIT_ART_BUTTON_TEXT = "Submit Art"
 let SETTINGS_MY_SUBMISSIONS_TEXT = "My Submissions"
 let SETTINGS_LOGOUT_BUTTON_TEXT = "Logout"
+let SETTINGS_LOGOUT_CONFIRMATION_TEXT = "Are you sure?"
+
+let SETTINGS_TERMS_TEXT = "Terms & Conditions"
+let SETTINGS_PRIVACY_TEXT = "Privacy"
+let SETTINGS_COMMUNITY_TEXT = "Community Guidelines"
 
 // MARK: - Update Password
 

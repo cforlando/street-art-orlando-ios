@@ -36,6 +36,11 @@
 				<key>NSAllowsArbitraryLoads</key>
 				<true/>
 			</dict>
+            <key>streetartorlando.com</key>
+            <dict>
+                <key>NSThirdPartyExceptionAllowsInsecureHTTPLoads</key>
+                <true/>
+            </dict>
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
