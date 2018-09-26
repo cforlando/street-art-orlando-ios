@@ -16,12 +16,14 @@ import MessageUI
 
 class PhotoViewController: UIViewController {
 
-    let PhotoCellIdentifier = "PhotoCell"
-    let DescriptionCellIdentifier = "DescriptionCell"
-    let TitleCellIdentifier = "TitleCell"
-    let ArtistCellIdentifier = "ArtistCell"
-    let MapCellIdentifier = "MapCell"
-    let NoteCellIdentifier = "NoteCell"
+    struct GroupIdentifier {
+        static let photo = "PhotoCell"
+        static let description = "DescriptionCell"
+        static let title = "TitleCell"
+        static let artist = "ArtistCell"
+        static let map = "MapCell"
+        static let note = "NoteCell"
+    }
 
     var tableView: UITableView!
     var mapCell: MapCell?
@@ -178,7 +180,7 @@ class PhotoViewController: UIViewController {
 extension PhotoViewController {
 
     var noteCell: UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: NoteCellIdentifier)
+        let cell = UITableViewCell(style: .default, reuseIdentifier: GroupIdentifier.note)
         cell.textLabel?.font = UIFont.systemFont(ofSize: 13.0)
         cell.textLabel?.numberOfLines = 0
         cell.textLabel?.textColor = Color.text
@@ -187,7 +189,7 @@ extension PhotoViewController {
     }
 
     var descriptionCell: UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: DescriptionCellIdentifier)
+        let cell = UITableViewCell(style: .default, reuseIdentifier: GroupIdentifier.description)
         cell.textLabel?.font = UIFont.systemFont(ofSize: 13.0)
         cell.textLabel?.numberOfLines = 0
         cell.textLabel?.textColor = Color.text
@@ -201,22 +203,22 @@ extension PhotoViewController {
         var sections = ContentSectionArray()
 
         content = ContentRow(object: image)
-        content.identifier = PhotoCellIdentifier
-        content.groupIdentifier = PhotoCellIdentifier
+        content.identifier = GroupIdentifier.photo
+        content.groupIdentifier = GroupIdentifier.photo
         content.height = PhotoCell.Constants.height
 
         rows.append(content)
 
         if let title = submission.title {
             content = ContentRow(text: title)
-            content.groupIdentifier = TitleCellIdentifier
+            content.groupIdentifier = GroupIdentifier.title
 
             rows.append(content)
         }
 
         if let artist = submission.artist {
             content = ContentRow(text: BY_TEXT + " " + artist)
-            content.groupIdentifier = ArtistCellIdentifier
+            content.groupIdentifier = GroupIdentifier.artist
 
             rows.append(content)
         }
@@ -227,7 +229,7 @@ extension PhotoViewController {
             rows = ContentRowArray()
 
             content = ContentRow(text: description)
-            content.groupIdentifier = DescriptionCellIdentifier
+            content.groupIdentifier = GroupIdentifier.description
 
             rows.append(content)
 
@@ -238,8 +240,8 @@ extension PhotoViewController {
 
         if let _ = mapCell {
             content = ContentRow(object: nil)
-            content.identifier = MapCellIdentifier
-            content.groupIdentifier = MapCellIdentifier
+            content.identifier = GroupIdentifier.map
+            content.groupIdentifier = GroupIdentifier.map
             content.height = MapCell.Constants.height
 
             rows.append(content)
@@ -247,7 +249,7 @@ extension PhotoViewController {
 
         if let note = submission.locationNote {
             content = ContentRow(text: note)
-            content.groupIdentifier = NoteCellIdentifier
+            content.groupIdentifier = GroupIdentifier.note
 
             rows.append(content)
         }
@@ -616,10 +618,10 @@ extension PhotoViewController: UITableViewDataSource {
         let row = dataSource[indexPath.section].rows[indexPath.row]
         let identifier = row.groupIdentifier ?? String()
 
-        if identifier == PhotoCellIdentifier {
-            var cell = tableView.dequeueReusableCell(withIdentifier: PhotoCellIdentifier) as? PhotoCell
+        if identifier == GroupIdentifier.photo {
+            var cell = tableView.dequeueReusableCell(withIdentifier: GroupIdentifier.photo) as? PhotoCell
             if cell == nil {
-                cell = PhotoCell(placeholder: .frame, reuseIdentifier: PhotoCellIdentifier)
+                cell = PhotoCell(placeholder: .frame, reuseIdentifier: GroupIdentifier.photo)
             }
 
             cell?.set(image: row.object as? UIImage)
@@ -627,10 +629,10 @@ extension PhotoViewController: UITableViewDataSource {
             return cell!
         }
 
-        if identifier == TitleCellIdentifier {
-            var cell = tableView.dequeueReusableCell(withIdentifier: TitleCellIdentifier)
+        if identifier == GroupIdentifier.title {
+            var cell = tableView.dequeueReusableCell(withIdentifier: GroupIdentifier.title)
             if cell == nil {
-                cell = UITableViewCell(style: .default, reuseIdentifier: TitleCellIdentifier)
+                cell = UITableViewCell(style: .default, reuseIdentifier: GroupIdentifier.title)
                 cell?.textLabel?.font = UIFont.systemFont(ofSize: 14.0)
                 cell?.textLabel?.textColor = .darkGray
             }
@@ -643,10 +645,10 @@ extension PhotoViewController: UITableViewDataSource {
             return cell!
         }
 
-        if identifier == ArtistCellIdentifier {
-            var cell = tableView.dequeueReusableCell(withIdentifier: ArtistCellIdentifier)
+        if identifier == GroupIdentifier.artist {
+            var cell = tableView.dequeueReusableCell(withIdentifier: GroupIdentifier.artist)
             if cell == nil {
-                cell = UITableViewCell(style: .default, reuseIdentifier: ArtistCellIdentifier)
+                cell = UITableViewCell(style: .default, reuseIdentifier: GroupIdentifier.artist)
                 cell?.textLabel?.font = UIFont.systemFont(ofSize: 14.0)
                 cell?.textLabel?.textColor = .lightGray
             }
@@ -659,8 +661,8 @@ extension PhotoViewController: UITableViewDataSource {
             return cell!
         }
 
-        if identifier == DescriptionCellIdentifier {
-            var cell = tableView.dequeueReusableCell(withIdentifier: DescriptionCellIdentifier)
+        if identifier == GroupIdentifier.description {
+            var cell = tableView.dequeueReusableCell(withIdentifier: GroupIdentifier.description)
             if cell == nil {
                 cell = descriptionCell
             }
@@ -673,12 +675,12 @@ extension PhotoViewController: UITableViewDataSource {
             return cell!
         }
 
-        if identifier == MapCellIdentifier {
+        if identifier == GroupIdentifier.map {
             return mapCell!
         }
 
-        if identifier == NoteCellIdentifier {
-            var cell = tableView.dequeueReusableCell(withIdentifier: NoteCellIdentifier)
+        if identifier == GroupIdentifier.note {
+            var cell = tableView.dequeueReusableCell(withIdentifier: GroupIdentifier.note)
             if cell == nil {
                 cell = noteCell
             }
@@ -707,14 +709,14 @@ extension PhotoViewController: UITableViewDelegate {
         let identifier = row.identifier ?? String()
 
         switch identifier {
-        case PhotoCellIdentifier:
+        case GroupIdentifier.photo:
             LocalAnalytics.shared.customEvent(.photoDetail, submission: self.submission)
 
             let controller = ImageViewController(image: row.object as? UIImage)
             let navController = UINavigationController(rootViewController: controller)
 
             self.navigationController?.present(navController, animated: true, completion: nil)
-        case MapCellIdentifier:
+        case GroupIdentifier.map:
             LocalAnalytics.shared.customEvent(.mapDetail, submission: self.submission)
 
             let controller = MapViewController(submission: submission)
