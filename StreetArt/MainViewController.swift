@@ -69,12 +69,7 @@ class MainViewController: UIViewController {
         collectionView.showsVerticalScrollIndicator = true
         collectionView.alwaysBounceVertical = true
         collectionView.isPagingEnabled = false
-
-        if #available(iOS 11.0, *) {
-            collectionView.contentInsetAdjustmentBehavior = .never
-        } else {
-            //self.automaticallyAdjustsScrollViewInsets = false
-        }
+        collectionView.contentInsetAdjustmentBehavior = .never
 
         collectionView.refreshControl = refreshControl
 
@@ -91,12 +86,7 @@ class MainViewController: UIViewController {
         // AutoLayout
 
         collectionView.snp.makeConstraints { (make) in
-            if #available(iOS 11.0, *) {
-                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.topMargin)
-            } else {
-                make.top.equalTo(self.topLayoutGuide.snp.top)
-            }
-            
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.topMargin)
             make.bottom.equalToSuperview()
             make.left.equalToSuperview()
             make.right.equalToSuperview()
@@ -115,10 +105,7 @@ class MainViewController: UIViewController {
 
         if shouldSetupLayout {
             var collectionInset = collectionView.contentInset
-
-            if #available(iOS 11.0, *) {
-                collectionInset.bottom = self.view.safeAreaInsets.bottom
-            }
+            collectionInset.bottom = self.view.safeAreaInsets.bottom
 
             collectionView.contentInset = collectionInset
             collectionView.scrollIndicatorInsets = collectionInset

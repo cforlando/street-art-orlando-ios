@@ -111,11 +111,7 @@ class AddViewController: UIViewController {
         // AutoLayout
 
         tableView.snp.makeConstraints { (make) in
-            if #available(iOS 11.0, *) {
-                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.topMargin)
-            } else {
-                make.top.equalTo(self.topLayoutGuide.snp.top)
-            }
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.topMargin)
             make.bottom.equalToSuperview()
             make.left.equalToSuperview()
             make.right.equalToSuperview()

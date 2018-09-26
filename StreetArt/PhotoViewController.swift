@@ -66,11 +66,7 @@ class PhotoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if #available(iOS 11.0, *) {
-            tableView.contentInsetAdjustmentBehavior = .never
-        } else {
-            //self.automaticallyAdjustsScrollViewInsets = false
-        }
+        tableView.contentInsetAdjustmentBehavior = .never
 
         if ApiClient.shared.isAuthenticated {
             if submission.favorite {
@@ -96,14 +92,8 @@ class PhotoViewController: UIViewController {
         // Auto Layout
 
         tableView.snp.makeConstraints { (make) in
-            if #available(iOS 11.0, *) {
-                make.top.equalToSuperview()
-                make.bottom.equalToSuperview()
-            } else {
-                make.top.equalTo(self.topLayoutGuide.snp.top)
-                make.bottom.equalTo(self.bottomLayoutGuide.snp.bottom).offset(-44.0)
-            }
-
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
             make.left.equalToSuperview()
             make.right.equalToSuperview()
         }
@@ -112,12 +102,7 @@ class PhotoViewController: UIViewController {
             make.height.equalTo(44.0)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
-
-            if #available(iOS 11.0, *) {
-                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottomMargin)
-            } else {
-                make.bottom.equalTo(self.bottomLayoutGuide.snp.bottom)
-            }
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottomMargin)
         }
 
         updateDataSource()
@@ -147,10 +132,8 @@ class PhotoViewController: UIViewController {
         if shouldSetupLayout {
             var tableInset = tableView.contentInset
 
-            if #available(iOS 11.0, *) {
-                tableInset.top = self.view.safeAreaInsets.top
-                tableInset.bottom = 44.0 + self.view.safeAreaInsets.bottom
-            }
+            tableInset.top = self.view.safeAreaInsets.top
+            tableInset.bottom = 44.0 + self.view.safeAreaInsets.bottom
 
             self.tableView.contentInset = tableInset
             self.tableView.scrollIndicatorInsets = tableInset
