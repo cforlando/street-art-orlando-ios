@@ -20,7 +20,7 @@ class LoadingSubmissionsView: UICollectionReusableView {
         super.init(frame: frame)
 
         loadingView = UIActivityIndicatorView()
-        loadingView.activityIndicatorViewStyle = .gray
+        loadingView.style = .gray
 
         self.addSubview(loadingView)
 

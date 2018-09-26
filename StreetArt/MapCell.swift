@@ -61,10 +61,10 @@ class MapCell: UITableViewCell {
         super.setHighlighted(highlighted, animated: animated)
 
         if highlighted {
-            self.contentView.bringSubview(toFront: overlayView)
+            self.contentView.bringSubviewToFront(overlayView)
             overlayView.alpha = 1.0
         } else {
-            self.contentView.sendSubview(toBack: overlayView)
+            self.contentView.sendSubviewToBack(overlayView)
             overlayView.alpha = 0.0
         }
     }

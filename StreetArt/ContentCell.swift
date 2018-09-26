@@ -90,10 +90,10 @@ class ContentCell: UICollectionViewCell {
     override var isHighlighted: Bool {
         willSet(newValue) {
             if newValue {
-                self.contentView.bringSubview(toFront: overlayView)
+                self.contentView.bringSubviewToFront(overlayView)
                 overlayView.alpha = 1.0
             } else {
-                self.contentView.sendSubview(toBack: overlayView)
+                self.contentView.sendSubviewToBack(overlayView)
                 overlayView.alpha = 0.0
             }
         }

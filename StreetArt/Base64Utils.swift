@@ -12,7 +12,7 @@ extension UIImage {
 
     func toBase64String() -> String? {
         var string: String?
-        if let data = UIImageJPEGRepresentation(self, 1.0) {
+        if let data = self.jpegData(compressionQuality: 1.0) {
             string = data.base64EncodedString(options: [])
         }
 

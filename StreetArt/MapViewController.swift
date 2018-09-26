@@ -96,7 +96,7 @@ class MapViewController: UIViewController {
 extension MapViewController {
 
     func updateAnnotations(animated: Bool = false) {
-        var zoomRect = MKMapRectNull
+        var zoomRect = MKMapRect.null
 
         for annotation in mapView.annotations {
             if annotation is SubmissionAnnotation {
@@ -111,13 +111,13 @@ extension MapViewController {
         for annotation in mapView.annotations {
             dLog("processing annotation: \(annotation)")
 
-            let point = MKMapPointForCoordinate(annotation.coordinate)
-            let rect = MKMapRectMake(point.x, point.y, 0.1, 0.1)
-            zoomRect = MKMapRectUnion(zoomRect, rect)
+            let point = MKMapPoint.init(annotation.coordinate)
+            let rect = MKMapRect.init(x: point.x, y: point.y, width: 0.1, height: 0.1)
+            zoomRect = zoomRect.union(rect)
         }
 
         let inset = -zoomRect.size.width * 0.1
-        mapView.setVisibleMapRect(MKMapRectInset(zoomRect, inset, inset), animated: animated)
+        mapView.setVisibleMapRect(zoomRect.insetBy(dx: inset, dy: inset), animated: animated)
     }
 
     func openMaps() {

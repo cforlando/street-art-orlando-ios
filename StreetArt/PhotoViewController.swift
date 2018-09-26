@@ -164,7 +164,7 @@ class PhotoViewController: UIViewController {
 
         dLog("view did appear")
 
-        if self.isBeingPresented || self.isMovingToParentViewController {
+        if self.isBeingPresented || self.isMovingToParent {
             dLog("assign location delegate")
             locationManager.delegate = self
         }
@@ -175,7 +175,7 @@ class PhotoViewController: UIViewController {
 
         dLog("view will dissapear")
 
-        if self.isBeingDismissed || self.isMovingFromParentViewController {
+        if self.isBeingDismissed || self.isMovingFromParent {
             dLog("nil location delegate")
             locationManager.delegate = nil
             currentLocation = nil
@@ -364,7 +364,7 @@ extension PhotoViewController {
             return
         }
 
-        let imageData = UIImageJPEGRepresentation(image, 1.0)
+        let imageData = image.jpegData(compressionQuality: 1.0)
 
         do {
             let imagePath = path(inTemporaryDirectory: uniqueIdentifier() + ".jpg")

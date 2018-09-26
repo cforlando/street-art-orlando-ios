@@ -28,7 +28,6 @@
 		1670D93B204F698200E223ED /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1670D93A204F698200E223ED /* MainViewController.swift */; };
 		1670D940204F698200E223ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1670D93F204F698200E223ED /* Assets.xcassets */; };
 		1670D943204F698200E223ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1670D941204F698200E223ED /* LaunchScreen.storyboard */; };
-		1670D94E204F698200E223ED /* StreetArtTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1670D94D204F698200E223ED /* StreetArtTests.swift */; };
 		1670D959204F6B5B00E223ED /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1670D958204F6B5B00E223ED /* Strings.swift */; };
 		1670D95B204F703A00E223ED /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1670D95A204F703A00E223ED /* ContentCell.swift */; };
 		1670D95E204F73CD00E223ED /* ContentUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1670D95D204F73CD00E223ED /* ContentUtils.swift */; };
@@ -105,16 +104,6 @@
 		83C8495C59F61A8D39256884 /* Pods_StreetArt_Dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AFF359053C63229359EA061 /* Pods_StreetArt_Dev.framework */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		1670D94A204F698200E223ED /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1670D92D204F698200E223ED /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1670D934204F698200E223ED;
-			remoteInfo = StreetArt;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		050566F609F9DD2D0FAC63B9 /* Pods_StreetArt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StreetArt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		162042E02078C78D00F3BE99 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
@@ -140,7 +129,6 @@
 		1670D93F204F698200E223ED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1670D942204F698200E223ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1670D944204F698200E223ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1670D949204F698200E223ED /* StreetArtTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StreetArtTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1670D94D204F698200E223ED /* StreetArtTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreetArtTests.swift; sourceTree = "<group>"; };
 		1670D94F204F698200E223ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1670D958204F6B5B00E223ED /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
@@ -187,13 +175,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				30B32BFA6FAAE44BC0EAF5F5 /* Pods_StreetArt.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1670D946204F698200E223ED /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,7 +264,6 @@
 			isa = PBXGroup;
 			children = (
 				1670D935204F698200E223ED /* StreetArt.app */,
-				1670D949204F698200E223ED /* StreetArtTests.xctest */,
 				168C0AC12143555100FFD7C0 /* StreetArt Dev.app */,
 			);
 			name = Products;
@@ -453,24 +433,6 @@
 			productReference = 1670D935204F698200E223ED /* StreetArt.app */;
 			productType = "com.apple.product-type.application";
 		};
-		1670D948204F698200E223ED /* StreetArtTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1670D955204F698200E223ED /* Build configuration list for PBXNativeTarget "StreetArtTests" */;
-			buildPhases = (
-				1670D945204F698200E223ED /* Sources */,
-				1670D946204F698200E223ED /* Frameworks */,
-				1670D947204F698200E223ED /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				1670D94B204F698200E223ED /* PBXTargetDependency */,
-			);
-			name = StreetArtTests;
-			productName = StreetArtTests;
-			productReference = 1670D949204F698200E223ED /* StreetArtTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		168C0A882143555100FFD7C0 /* StreetArt Dev */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 168C0ABE2143555100FFD7C0 /* Build configuration list for PBXNativeTarget "StreetArt Dev" */;
@@ -505,12 +467,8 @@
 						LastSwiftMigration = 0920;
 						ProvisioningStyle = Manual;
 					};
-					1670D948204F698200E223ED = {
-						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 1670D934204F698200E223ED;
-					};
 					168C0A882143555100FFD7C0 = {
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -530,7 +488,6 @@
 			targets = (
 				1670D934204F698200E223ED /* StreetArt */,
 				168C0A882143555100FFD7C0 /* StreetArt Dev */,
-				1670D948204F698200E223ED /* StreetArtTests */,
 			);
 		};
 /* End PBXProject section */
@@ -543,13 +500,6 @@
 				1670D943204F698200E223ED /* LaunchScreen.storyboard in Resources */,
 				1670D940204F698200E223ED /* Assets.xcassets in Resources */,
 				16C23343211F7A4500F17217 /* GoogleService-Info.plist in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1670D947204F698200E223ED /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -737,14 +687,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1670D945204F698200E223ED /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1670D94E204F698200E223ED /* StreetArtTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		168C0A8A2143555100FFD7C0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -796,14 +738,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		1670D94B204F698200E223ED /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1670D934204F698200E223ED /* StreetArt */;
-			targetProxy = 1670D94A204F698200E223ED /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		1670D941204F698200E223ED /* LaunchScreen.storyboard */ = {
@@ -950,7 +884,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "Street Art Orlando Development";
 				SWIFT_OBJC_BRIDGING_HEADER = "StreetArt/StreetArt-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -976,43 +910,9 @@
 				PROVISIONING_PROFILE = "356b28db-a997-42fc-8d6c-959b8172354d";
 				PROVISIONING_PROFILE_SPECIFIER = "Street Art Orlando Distribution";
 				SWIFT_OBJC_BRIDGING_HEADER = "StreetArt/StreetArt-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
-			};
-			name = Release;
-		};
-		1670D956204F698200E223ED /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = C2Q5BUZ3MX;
-				INFOPLIST_FILE = StreetArtTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = me.axelrivera.StreetArtTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StreetArt.app/StreetArt";
-			};
-			name = Debug;
-		};
-		1670D957204F698200E223ED /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = C2Q5BUZ3MX;
-				INFOPLIST_FILE = StreetArtTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = me.axelrivera.StreetArtTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StreetArt.app/StreetArt";
 			};
 			name = Release;
 		};
@@ -1037,7 +937,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "StreetArt/StreetArt-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1063,7 +963,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "StreetArt/StreetArt-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1086,15 +986,6 @@
 			buildConfigurations = (
 				1670D953204F698200E223ED /* Debug */,
 				1670D954204F698200E223ED /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1670D955204F698200E223ED /* Build configuration list for PBXNativeTarget "StreetArtTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1670D956204F698200E223ED /* Debug */,
-				1670D957204F698200E223ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

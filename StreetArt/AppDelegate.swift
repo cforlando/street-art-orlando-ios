@@ -20,14 +20,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var tabBarController: UITabBarController?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
 #if PRODUCTION_BUILD
         FirebaseApp.configure()
 #endif
 
-        let titleAttributes: [NSAttributedStringKey: Any] = [
-            NSAttributedStringKey.foregroundColor: Color.text
+        let titleAttributes: [NSAttributedString.Key: Any] = [
+            NSAttributedString.Key.foregroundColor: Color.text
         ]
 
         UINavigationBar.appearance().tintColor = Color.highlight

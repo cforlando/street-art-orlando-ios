@@ -82,7 +82,7 @@ class MainViewController: UIViewController {
 
         collectionView.register(
             LoadingSubmissionsView.self,
-            forSupplementaryViewOfKind: UICollectionElementKindSectionFooter,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
             withReuseIdentifier: LoadingIdentifier
         )
 
@@ -243,7 +243,7 @@ extension MainViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let loadingView = collectionView.dequeueReusableSupplementaryView(
-            ofKind: UICollectionElementKindSectionFooter,
+            ofKind: UICollectionView.elementKindSectionFooter,
             withReuseIdentifier: LoadingIdentifier,
             for: indexPath
         ) as! LoadingSubmissionsView

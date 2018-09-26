@@ -10,7 +10,7 @@ def shared_pods
   pod 'AlamofireImage', '~> 3.3.0', inhibit_warnings: true
   pod 'SnapKit', '~> 4.0.0'
   pod 'SwiftyJSON', '~> 4.0.0'
-  pod 'PKHUD', '~> 5.0.0'
+  pod 'PKHUD', '~> 5.0.0', inhibit_warnings: true
   pod 'Firebase/Core'
   pod 'Firebase/Crash'
 end
