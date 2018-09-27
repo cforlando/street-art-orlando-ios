@@ -15,7 +15,9 @@ class FavoritesViewController: UIViewController {
         static let spacing: CGFloat = 5.0
     }
 
-    let CellIdentifier = "Cell"
+    struct GroupIdentifier {
+        static let cell = "CellIdentifier"
+    }
 
     var refreshControl: UIRefreshControl!
 
@@ -64,7 +66,7 @@ class FavoritesViewController: UIViewController {
 
         collectionView.refreshControl = refreshControl
 
-        collectionView.register(ContentCell.self, forCellWithReuseIdentifier: CellIdentifier)
+        collectionView.register(ContentCell.self, forCellWithReuseIdentifier: GroupIdentifier.cell)
 
         self.view.addSubview(collectionView)
 
@@ -237,7 +239,7 @@ extension FavoritesViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier, for: indexPath) as! ContentCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GroupIdentifier.cell, for: indexPath) as! ContentCell
 
         let submission = submissions[indexPath.row]
         cell.set(submission: submission)

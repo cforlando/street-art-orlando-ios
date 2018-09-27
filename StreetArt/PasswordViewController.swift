@@ -11,7 +11,9 @@ import PKHUD
 
 class PasswordViewController: UITableViewController {
 
-    let FieldCellIdentifier = "FieldCell"
+    struct GroupIdentifier {
+        static let field = "FieldCell"
+    }
 
     var passwordField: UITextField!
     var showPasswordButton: UIButton!
@@ -91,7 +93,7 @@ extension PasswordViewController {
         var sections = ContentSectionArray()
 
         content = ContentRow(object: passwordField)
-        content.groupIdentifier = FieldCellIdentifier
+        content.groupIdentifier = GroupIdentifier.field
 
         rows.append(content)
         sections.append(ContentSection(title: nil, rows: rows))
@@ -190,10 +192,10 @@ extension PasswordViewController {
         let row = dataSource[indexPath.section].rows[indexPath.row]
         let identifier = row.groupIdentifier ?? String()
 
-        if identifier == FieldCellIdentifier {
-            var cell = tableView.dequeueReusableCell(withIdentifier: FieldCellIdentifier)
+        if identifier == GroupIdentifier.field {
+            var cell = tableView.dequeueReusableCell(withIdentifier: GroupIdentifier.field)
             if cell == nil {
-                cell = UITableViewCell(style: .default, reuseIdentifier: FieldCellIdentifier)
+                cell = UITableViewCell(style: .default, reuseIdentifier: GroupIdentifier.field)
             }
 
             if let field = row.object as? UITextField {

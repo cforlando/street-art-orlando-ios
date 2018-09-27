@@ -15,8 +15,10 @@ class MainViewController: UIViewController {
         static let spacing: CGFloat = 4.0
     }
 
-    let CellIdentifier = "Cell"
-    let LoadingIdentifier = "Loading"
+    struct GroupIdentifier {
+        static let cell = "CellIdentifier"
+        static let loading = "LoadingCell"
+    }
 
     var refreshControl: UIRefreshControl!
 
@@ -73,12 +75,12 @@ class MainViewController: UIViewController {
 
         collectionView.refreshControl = refreshControl
 
-        collectionView.register(ContentCell.self, forCellWithReuseIdentifier: CellIdentifier)
+        collectionView.register(ContentCell.self, forCellWithReuseIdentifier: GroupIdentifier.cell)
 
         collectionView.register(
             LoadingSubmissionsView.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
-            withReuseIdentifier: LoadingIdentifier
+            withReuseIdentifier: GroupIdentifier.loading
         )
 
         self.view.addSubview(collectionView)
@@ -220,7 +222,7 @@ extension MainViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier, for: indexPath) as! ContentCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GroupIdentifier.cell, for: indexPath) as! ContentCell
 
         let submission = submissions[indexPath.row]
         cell.set(submission: submission)
@@ -231,7 +233,7 @@ extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let loadingView = collectionView.dequeueReusableSupplementaryView(
             ofKind: UICollectionView.elementKindSectionFooter,
-            withReuseIdentifier: LoadingIdentifier,
+            withReuseIdentifier: GroupIdentifier.loading,
             for: indexPath
         ) as! LoadingSubmissionsView
 

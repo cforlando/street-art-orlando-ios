@@ -11,8 +11,10 @@ import PKHUD
 
 class SubmissionsViewController: UIViewController {
 
-    let CellIdentifier = "Cell"
-    let EmptyCellIdentifier = "Empty"
+    struct GroupIdentifier {
+        static let cell = "CellIdentifier"
+        static let empty = "EmptyCell"
+    }
 
     var tableView: UITableView!
 
@@ -80,13 +82,13 @@ extension SubmissionsViewController {
 
         if submissions.isEmpty {
             content = ContentRow(text: SUBMISSIONS_EMPTY_TEXT)
-            content.groupIdentifier = EmptyCellIdentifier
+            content.groupIdentifier = GroupIdentifier.empty
 
             rows.append(content)
         } else {
             for submission in submissions {
                 content = ContentRow(object: submission)
-                content.groupIdentifier = CellIdentifier
+                content.groupIdentifier = GroupIdentifier.cell
                 content.height = SubmissionCell.Constants.height
 
                 rows.append(content)
@@ -156,10 +158,10 @@ extension SubmissionsViewController: UITableViewDataSource {
         let row = dataSource[indexPath.section].rows[indexPath.row]
         let identifier = row.groupIdentifier ?? String()
 
-        if identifier == EmptyCellIdentifier {
-            var cell = tableView.dequeueReusableCell(withIdentifier: EmptyCellIdentifier)
+        if identifier == GroupIdentifier.empty {
+            var cell = tableView.dequeueReusableCell(withIdentifier: GroupIdentifier.empty)
             if cell == nil {
-                cell = UITableViewCell(style: .default, reuseIdentifier: EmptyCellIdentifier)
+                cell = UITableViewCell(style: .default, reuseIdentifier: GroupIdentifier.empty)
                 cell?.textLabel?.textAlignment = .center
             }
 
@@ -169,10 +171,10 @@ extension SubmissionsViewController: UITableViewDataSource {
         }
 
 
-        if identifier == CellIdentifier {
-            var cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier) as? SubmissionCell
+        if identifier == GroupIdentifier.cell {
+            var cell = tableView.dequeueReusableCell(withIdentifier: GroupIdentifier.cell) as? SubmissionCell
             if cell == nil {
-                cell = SubmissionCell(reuseIdentifier: CellIdentifier)
+                cell = SubmissionCell(reuseIdentifier: GroupIdentifier.cell)
             }
 
             cell?.set(submission: row.object as? Submission)

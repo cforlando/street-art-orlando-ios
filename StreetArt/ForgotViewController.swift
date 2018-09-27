@@ -17,7 +17,9 @@ class ForgotViewController: UITableViewController {
         case password = "password"
     }
 
-    let FieldCellIdentifier = "FieldCell"
+    struct GroupIdentifier {
+        static let field = "FieldCell"
+    }
 
     var emailField: UITextField!
     var tokenField: UITextField!
@@ -176,7 +178,7 @@ extension ForgotViewController {
             content.object = passwordField
         }
 
-        content.groupIdentifier = FieldCellIdentifier
+        content.groupIdentifier = GroupIdentifier.field
 
         rows.append(content)
 
@@ -427,10 +429,10 @@ extension ForgotViewController {
         let row = dataSource[indexPath.section].rows[indexPath.row]
         let identifier = row.groupIdentifier ?? String()
 
-        if identifier == FieldCellIdentifier {
-            var cell = tableView.dequeueReusableCell(withIdentifier: FieldCellIdentifier)
+        if identifier == GroupIdentifier.field {
+            var cell = tableView.dequeueReusableCell(withIdentifier: GroupIdentifier.field)
             if cell == nil {
-                cell = UITableViewCell(style: .default, reuseIdentifier: FieldCellIdentifier)
+                cell = UITableViewCell(style: .default, reuseIdentifier: GroupIdentifier.field)
                 cell?.textLabel?.font = UIFont.systemFont(ofSize: 16.0)
             }
 

@@ -740,7 +740,7 @@ extension PhotoViewController: UITableViewDelegate {
         let row = dataSource[indexPath.section].rows[indexPath.row]
         let identifier = row.groupIdentifier ?? String()
 
-        if identifier == DescriptionCellIdentifier {
+        if identifier == GroupIdentifier.description {
             let cell = descriptionCell
             cell.textLabel?.text = row.text
 
@@ -750,7 +750,7 @@ extension PhotoViewController: UITableViewDelegate {
             return max(height + 40.0, 44.0)
         }
 
-        if identifier == NoteCellIdentifier {
+        if identifier == GroupIdentifier.note {
             let cell = noteCell
             cell.textLabel?.text = row.text
 

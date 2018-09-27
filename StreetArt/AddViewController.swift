@@ -17,12 +17,14 @@ class AddViewController: UIViewController {
         static let notesHeight: CGFloat = 120.0
     }
 
-    let TitleCellIdentifier = "TitleCell"
-    let ArtistCellIdentifier = "ArtistCell"
-    let PhotoCellIdentifier = "PhotoCell"
-    let MapCellIdentifier = "MapCell"
-    let UpdateLocationCellIdentifier = "UpdateLocationCell"
-    let NotesCellIdentifier = "NotesCell"
+    struct GroupIdentifier {
+        static let title = "TitleCell"
+        static let artist = "ArtistCell"
+        static let photo = "PhotoCell"
+        static let map = "MapCell"
+        static let updateLocation = "UpdateLocationCell"
+        static let notes = "NotesCell"
+    }
 
     var tableView: UITableView!
 
@@ -177,7 +179,7 @@ extension AddViewController {
         // Photo Section
 
         content = ContentRow()
-        content.identifier = PhotoCellIdentifier
+        content.identifier = GroupIdentifier.photo
         content.object = image
         content.height = PhotoCell.Constants.height
 
@@ -189,13 +191,13 @@ extension AddViewController {
         rows = ContentRowArray()
 
         content = ContentRow(object: nil)
-        content.identifier = MapCellIdentifier
+        content.identifier = GroupIdentifier.map
         content.height = MapCell.Constants.height
 
         rows.append(content)
 
         content = ContentRow(text: PHOTO_UPDATE_LOCATION_TEXT)
-        content.identifier = UpdateLocationCellIdentifier
+        content.identifier = GroupIdentifier.updateLocation
 
         rows.append(content)
 
@@ -206,12 +208,12 @@ extension AddViewController {
         rows = ContentRowArray()
 
         content = ContentRow()
-        content.identifier = TitleCellIdentifier
+        content.identifier = GroupIdentifier.title
 
         rows.append(content)
 
         content = ContentRow()
-        content.identifier = ArtistCellIdentifier
+        content.identifier = GroupIdentifier.artist
 
         rows.append(content)
 
@@ -222,7 +224,7 @@ extension AddViewController {
         rows = ContentRowArray()
 
         content = ContentRow()
-        content.identifier = NotesCellIdentifier
+        content.identifier = GroupIdentifier.notes
         content.height = Constants.notesHeight
 
         rows.append(content)
@@ -385,10 +387,10 @@ extension AddViewController: UITableViewDataSource {
         let row = dataSource[indexPath.section].rows[indexPath.row]
         let identifier = row.identifier ?? String()
 
-        if identifier == PhotoCellIdentifier {
-            var cell = tableView.dequeueReusableCell(withIdentifier: PhotoCellIdentifier) as? PhotoCell
+        if identifier == GroupIdentifier.photo {
+            var cell = tableView.dequeueReusableCell(withIdentifier: GroupIdentifier.photo) as? PhotoCell
             if cell == nil {
-                cell = PhotoCell(placeholder: .camera, reuseIdentifier: PhotoCellIdentifier)
+                cell = PhotoCell(placeholder: .camera, reuseIdentifier: GroupIdentifier.photo)
                 cell?.delegate = self
                 cell?.enableResetIfNeeded()
             }
@@ -398,14 +400,14 @@ extension AddViewController: UITableViewDataSource {
             return cell!
         }
 
-        if identifier == MapCellIdentifier {
+        if identifier == GroupIdentifier.map {
             return mapCell
         }
 
-        if identifier == UpdateLocationCellIdentifier {
-            var cell = tableView.dequeueReusableCell(withIdentifier: UpdateLocationCellIdentifier)
+        if identifier == GroupIdentifier.updateLocation {
+            var cell = tableView.dequeueReusableCell(withIdentifier: GroupIdentifier.updateLocation)
             if cell == nil {
-                cell = UITableViewCell(style: .default, reuseIdentifier: UpdateLocationCellIdentifier)
+                cell = UITableViewCell(style: .default, reuseIdentifier: GroupIdentifier.updateLocation)
                 cell?.textLabel?.textColor = Color.highlight
                 cell?.textLabel?.textAlignment = .center
             }
@@ -418,10 +420,10 @@ extension AddViewController: UITableViewDataSource {
             return cell!
         }
 
-        if identifier == TitleCellIdentifier {
-            var cell = tableView.dequeueReusableCell(withIdentifier: TitleCellIdentifier)
+        if identifier == GroupIdentifier.title {
+            var cell = tableView.dequeueReusableCell(withIdentifier: GroupIdentifier.title)
             if cell == nil {
-                cell = UITableViewCell(style: .default, reuseIdentifier: TitleCellIdentifier)
+                cell = UITableViewCell(style: .default, reuseIdentifier: GroupIdentifier.title)
             }
 
             let contentWidth = tableView.frame.size.width - (tableView.layoutMargins.right * 2.0)
@@ -433,10 +435,10 @@ extension AddViewController: UITableViewDataSource {
             return cell!
         }
 
-        if identifier == ArtistCellIdentifier {
-            var cell = tableView.dequeueReusableCell(withIdentifier: ArtistCellIdentifier)
+        if identifier == GroupIdentifier.artist {
+            var cell = tableView.dequeueReusableCell(withIdentifier: GroupIdentifier.artist)
             if cell == nil {
-                cell = UITableViewCell(style: .default, reuseIdentifier: ArtistCellIdentifier)
+                cell = UITableViewCell(style: .default, reuseIdentifier: GroupIdentifier.artist)
             }
 
             let contentWidth = tableView.frame.size.width - (tableView.layoutMargins.right * 2.0)
@@ -448,10 +450,10 @@ extension AddViewController: UITableViewDataSource {
             return cell!
         }
 
-        if identifier == NotesCellIdentifier {
-            var cell = tableView.dequeueReusableCell(withIdentifier: NotesCellIdentifier)
+        if identifier == GroupIdentifier.notes {
+            var cell = tableView.dequeueReusableCell(withIdentifier: GroupIdentifier.notes)
             if cell == nil {
-                cell = UITableViewCell(style: .default, reuseIdentifier: NotesCellIdentifier)
+                cell = UITableViewCell(style: .default, reuseIdentifier: GroupIdentifier.notes)
             }
 
             let contentWidth = tableView.frame.size.width - (tableView.layoutMargins.right * 2.0)
@@ -479,7 +481,7 @@ extension AddViewController: UITableViewDelegate {
         let identifier = row.identifier ?? String()
 
         switch identifier {
-        case PhotoCellIdentifier:
+        case GroupIdentifier.photo:
             let actionSheet = UIAlertController(title: SELECT_PHOTO_ALERT_TITLE, message: nil, preferredStyle: .actionSheet)
 
             if isCameraAvailable() {
@@ -500,7 +502,7 @@ extension AddViewController: UITableViewDelegate {
             actionSheet.addAction(cancelAction)
 
             self.navigationController?.present(actionSheet, animated: true, completion: nil)
-        case UpdateLocationCellIdentifier:
+        case GroupIdentifier.updateLocation:
             let defaultLocation = CLLocation(
                 latitude: Defaults.mapCoordinate.latitude,
                 longitude: Defaults.mapCoordinate.longitude

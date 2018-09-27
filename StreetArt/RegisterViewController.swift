@@ -11,7 +11,9 @@ import PKHUD
 
 class RegisterViewController: UIViewController {
 
-    let FieldCellIdentifier = "FieldCell"
+    struct GroupIdentifier {
+        static let field = "FieldCell"
+    }
 
     var tableView: UITableView!
 
@@ -165,22 +167,22 @@ extension RegisterViewController {
         var sections = ContentSectionArray()
 
         content = ContentRow(object: emailField)
-        content.groupIdentifier = FieldCellIdentifier
+        content.groupIdentifier = GroupIdentifier.field
 
         rows.append(content)
 
         content = ContentRow(object: emailConfirmationField)
-        content.groupIdentifier = FieldCellIdentifier
+        content.groupIdentifier = GroupIdentifier.field
 
         rows.append(content)
 
         content = ContentRow(object: nameField)
-        content.groupIdentifier = FieldCellIdentifier
+        content.groupIdentifier = GroupIdentifier.field
 
         rows.append(content)
 
         content = ContentRow(object: passwordField)
-        content.groupIdentifier = FieldCellIdentifier
+        content.groupIdentifier = GroupIdentifier.field
 
         rows.append(content)
 
@@ -306,10 +308,10 @@ extension RegisterViewController: UITableViewDataSource {
         let row = dataSource[indexPath.section].rows[indexPath.row]
         let identifier = row.groupIdentifier ?? String()
 
-        if identifier == FieldCellIdentifier {
-            var cell = tableView.dequeueReusableCell(withIdentifier: FieldCellIdentifier)
+        if identifier == GroupIdentifier.field {
+            var cell = tableView.dequeueReusableCell(withIdentifier: GroupIdentifier.field)
             if cell == nil {
-                cell = UITableViewCell(style: .default, reuseIdentifier: FieldCellIdentifier)
+                cell = UITableViewCell(style: .default, reuseIdentifier: GroupIdentifier.field)
             }
 
             if let field = row.object as? UITextField {
