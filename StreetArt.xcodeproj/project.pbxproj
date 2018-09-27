@@ -19,7 +19,6 @@
 		166674CB207947CE00387EC6 /* UIImage+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166674CA207947CE00387EC6 /* UIImage+Additions.swift */; };
 		166A5A342055ACF000FE5791 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166A5A332055ACF000FE5791 /* Settings.swift */; };
 		166A5A362055D12E00FE5791 /* ErrorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166A5A352055D12E00FE5791 /* ErrorUtils.swift */; };
-		166A5A382055D49800FE5791 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166A5A372055D49800FE5791 /* DataManager.swift */; };
 		166A5A3A2055D94E00FE5791 /* Base64Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166A5A392055D94E00FE5791 /* Base64Utils.swift */; };
 		166CFC2C2097FE2D00BE69C0 /* SubmissionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166CFC2B2097FE2D00BE69C0 /* SubmissionCell.swift */; };
 		166CFC2F209808BB00BE69C0 /* SubmissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166CFC2E209808BB00BE69C0 /* SubmissionsViewController.swift */; };
@@ -42,7 +41,6 @@
 		168C0A8B2143555100FFD7C0 /* Submission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1670D967204F97B900E223ED /* Submission.swift */; };
 		168C0A8C2143555100FFD7C0 /* ForgotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1661444620AC295D00F4E3A8 /* ForgotViewController.swift */; };
 		168C0A8D2143555100FFD7C0 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162042E02078C78D00F3BE99 /* FavoritesViewController.swift */; };
-		168C0A8E2143555100FFD7C0 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166A5A372055D49800FE5791 /* DataManager.swift */; };
 		168C0A8F2143555100FFD7C0 /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16906C8C208A66C70097CBDA /* FavoriteButton.swift */; };
 		168C0A902143555100FFD7C0 /* SuccessResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1691E2AD20A899920084B356 /* SuccessResponse.swift */; };
 		168C0A912143555100FFD7C0 /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1670D95A204F703A00E223ED /* ContentCell.swift */; };
@@ -120,7 +118,6 @@
 		166674CA207947CE00387EC6 /* UIImage+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Additions.swift"; sourceTree = "<group>"; };
 		166A5A332055ACF000FE5791 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		166A5A352055D12E00FE5791 /* ErrorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorUtils.swift; sourceTree = "<group>"; };
-		166A5A372055D49800FE5791 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		166A5A392055D94E00FE5791 /* Base64Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Base64Utils.swift; sourceTree = "<group>"; };
 		166CFC2B2097FE2D00BE69C0 /* SubmissionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionCell.swift; sourceTree = "<group>"; };
 		166CFC2E209808BB00BE69C0 /* SubmissionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionsViewController.swift; sourceTree = "<group>"; };
@@ -332,7 +329,6 @@
 				168451472054962B00013A07 /* ApiClient.swift */,
 				168451492054967200013A07 /* ApiClient+Router.swift */,
 				166A5A332055ACF000FE5791 /* Settings.swift */,
-				166A5A372055D49800FE5791 /* DataManager.swift */,
 				16C6BB322131CF2600048E81 /* LocalAnalytics.swift */,
 			);
 			name = Singletons;
@@ -648,7 +644,6 @@
 				1670D968204F97B900E223ED /* Submission.swift in Sources */,
 				1661444720AC295D00F4E3A8 /* ForgotViewController.swift in Sources */,
 				162042E12078C78D00F3BE99 /* FavoritesViewController.swift in Sources */,
-				166A5A382055D49800FE5791 /* DataManager.swift in Sources */,
 				16906C8D208A66C70097CBDA /* FavoriteButton.swift in Sources */,
 				1691E2AE20A899920084B356 /* SuccessResponse.swift in Sources */,
 				1670D95B204F703A00E223ED /* ContentCell.swift in Sources */,
@@ -699,7 +694,6 @@
 				168C0A8B2143555100FFD7C0 /* Submission.swift in Sources */,
 				168C0A8C2143555100FFD7C0 /* ForgotViewController.swift in Sources */,
 				168C0A8D2143555100FFD7C0 /* FavoritesViewController.swift in Sources */,
-				168C0A8E2143555100FFD7C0 /* DataManager.swift in Sources */,
 				168C0A8F2143555100FFD7C0 /* FavoriteButton.swift in Sources */,
 				168C0A902143555100FFD7C0 /* SuccessResponse.swift in Sources */,
 				168C0A912143555100FFD7C0 /* ContentCell.swift in Sources */,
