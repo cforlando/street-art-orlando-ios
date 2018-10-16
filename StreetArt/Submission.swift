@@ -63,6 +63,7 @@ struct Submission {
     var locationNote: String?
 
     var favorite = false
+    var nickname: String?
 
     var coordinate: CLLocationCoordinate2D? {
         guard let latitude = self.latitude, let longitude = self.longitude else {
@@ -117,6 +118,7 @@ struct Submission {
         }
 
         self.favorite = json["favorite"].boolValue
+        self.nickname = json["nickname"].string
 
         self.photoURLString = photoURLString
         self.thumbURLString = thumbURLString

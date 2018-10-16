@@ -52,8 +52,26 @@ class SubmissionCell: UITableViewCell {
 
         self.contentView.addSubview(statusLabel)
 
-        // Auto Layout
+        setupCosntraints()
+    }
 
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
+
+}
+
+// MARK: - Methods
+
+extension SubmissionCell {
+
+    func setupCosntraints() {
         photoView.snp.makeConstraints { (make) in
             make.size.equalTo(Constants.photoSize)
             make.leftMargin.equalToSuperview()
@@ -78,22 +96,6 @@ class SubmissionCell: UITableViewCell {
             make.rightMargin.equalToSuperview()
         }
     }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
-}
-
-// MARK: - Methods
-
-extension SubmissionCell {
 
     func set(submission: Submission?) {
         if let url = submission?.tinyURL {

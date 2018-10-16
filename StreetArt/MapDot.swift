@@ -37,14 +37,24 @@ class MapDot: UIView {
 
         self.addSubview(innerDot)
 
-        innerDot.snp.makeConstraints { (make) in
-            make.center.equalToSuperview()
-            make.size.equalTo(CGSize(width: Constants.innerHeight, height: Constants.innerHeight))
-        }
+        setupConstraints()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+
+}
+
+// MARK: - Methods
+
+extension MapDot {
+
+    func setupConstraints() {
+        innerDot.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+            make.size.equalTo(CGSize(width: Constants.innerHeight, height: Constants.innerHeight))
+        }
     }
 
 }

@@ -42,6 +42,7 @@ let PHOTO_ART_DESCRIPTION_TEXT = "Description"
 let PHOTO_ART_LOCATION_TEXT = "Location"
 let PHOTO_TITLE_TEXT = "Title"
 let PHOTO_ARTIST_TEXT = "Artist"
+let PHOTO_SUBMITTED_BY_TEXT = "Submitted by"
 let PHOTO_ADDITIONAL_INFORMATION_TEXT = "Additional Information"
 let PHOTO_UPDATE_LOCATION_TEXT = "Update Location"
 let PHOTO_LOCATION_NOTES_TEXT = "Location Notes"
@@ -120,7 +121,8 @@ let FORGOT_PASSWORD_REQUIRED = "Password required"
 
 let REGISTER_EMAIL_PLACEHOLDER = "Email"
 let REGISTER_EMAIL_CONFIRMATION_PLACEHOLDER = "Email Confirmation"
-let REGISTER_NAME_PLACEHOLDER = "Name (Optional)"
+let REGISTER_NICKNAME_PLACEHOLDER = "Nickname"
+let REGISTER_NAME_PLACEHOLDER = "Full Name (Optional)"
 let REGISTER_PASSWORD_PLACEHOLDER = "Password"
 
 let REGISTER_SUBMIT_BUTTON_TEXT = "Create Account"
@@ -128,7 +130,12 @@ let REGISTER_SUBMIT_BUTTON_TEXT = "Create Account"
 let REGISTER_ALERT_TITLE = "Registration"
 let REGISTER_EMAIL_REQUIRED = "Email required"
 let REGISTER_EMAIL_MATCH_ALERT = "Email confirmation doesn't match"
+let REGISTER_NICKNAME_REQUIRED = "Nickname required"
 let REGISTER_PASSWORD_REQUIRED = "Password required"
+
+let REGISTER_TERM_AGREE_TITLE = "Agree with Terms & Conditions"
+let REGISTER_TERM_AGREE_BUTTON_TEXT = "View Terms & Conditions"
+let REGISTER_TERM_AGREE_ACCEPT_MESSAGE = "You must accept the terms and conditions before registering."
 
 // MARK: - Registration
 
@@ -163,7 +170,8 @@ let DIRECTIONS_TEXT = "Get Directions"
 let PHOTO_TEXT = "Photo"
 let MAP_TEXT = "Map"
 let CORRECTION_TEXT = "Submit Correction"
-let REPORT_TEXT = "Report"
+let REPORT_TEXT = "Report Photo"
+let REPORT_USER_TEXT = "Report User"
 let SHARE_TEXT = "Share Photo"
 let SHARE_IMAGE_NOT_AVAILABLE_TEXT = "Image not available"
 let SHARE_IMAGE_MESSAGE = "Check out this cool photo from the Street Art Orlando App."
@@ -194,7 +202,10 @@ let EMAIL_CORRECTION_SUBJECT = "Street Art Orlando Correction"
 let EMAIL_CORRECTION_BODY = "\n\nInclude your notes about what should be corrected above.\n\nDON'T EDIT TEXT BELOW THIS LINE\n----------\n"
 
 let EMAIL_REPORT_SUBJECT = "Street Art Orlando Report"
-let EMAIL_REPORT_BODY = "\n\nInclude your notes about what should be corrected above.\n\nDON'T EDIT TEXT BELOW THIS LINE\n----------\n"
+let EMAIL_REPORT_BODY = "\n\nInclude the reasons why you believe this photo violates our Terms & Conditions above. One of our moderators will respond to your request within the next 24 hours.\n\nDON'T EDIT TEXT BELOW THIS LINE\n----------\n"
+
+let EMAIL_REPORT_USER_SUBJECT = "Street Art Orlando Report User"
+let EMAIL_REPORT_USER_BODY = "\n\nInclude the reasons why you believe this user is violating our Terms & Conditions above. One of our moderators will respond to your request within the next 24 hours.\n\nDON'T EDIT TEXT BELOW THIS LINE\n----------\n"
 
 // MARK: - Location
 

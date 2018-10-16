@@ -38,6 +38,7 @@ class LocalAnalytics {
         case getDirections = "get_directions"
         case submitCorrection = "submit_correction"
         case report = "report"
+        case reportUser = "report_user"
         case forgotPassword = "forgot_password"
         case forgotPasswordProgress = "forgot_password_progress"
         case forgotPasswordSuccess = "forgot_password_success"

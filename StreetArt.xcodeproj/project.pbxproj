@@ -98,6 +98,8 @@
 		16C23343211F7A4500F17217 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 16C23342211F7A4500F17217 /* GoogleService-Info.plist */; };
 		16C6BB332131CF2600048E81 /* LocalAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C6BB322131CF2600048E81 /* LocalAnalytics.swift */; };
 		16E600232050C1160002B4F0 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E600222050C1160002B4F0 /* PhotoCell.swift */; };
+		16EA2960216A9A9B00877226 /* AgreementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EA295F216A9A9B00877226 /* AgreementCell.swift */; };
+		16EA2961216A9A9B00877226 /* AgreementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EA295F216A9A9B00877226 /* AgreementCell.swift */; };
 		16F9573A20C0D74B0058699D /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F9573920C0D74B0058699D /* ImageViewController.swift */; };
 		16F9573C20C0E05B0058699D /* MapUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F9573B20C0E05B0058699D /* MapUpdateViewController.swift */; };
 		30B32BFA6FAAE44BC0EAF5F5 /* Pods_StreetArt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 050566F609F9DD2D0FAC63B9 /* Pods_StreetArt.framework */; };
@@ -159,6 +161,7 @@
 		16C23342211F7A4500F17217 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		16C6BB322131CF2600048E81 /* LocalAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAnalytics.swift; sourceTree = "<group>"; };
 		16E600222050C1160002B4F0 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
+		16EA295F216A9A9B00877226 /* AgreementCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementCell.swift; sourceTree = "<group>"; };
 		16F9573920C0D74B0058699D /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		16F9573B20C0E05B0058699D /* MapUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapUpdateViewController.swift; sourceTree = "<group>"; };
 		3737C239AB9A92375EA39C29 /* Pods-StreetArt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StreetArt.release.xcconfig"; path = "Pods/Target Support Files/Pods-StreetArt/Pods-StreetArt.release.xcconfig"; sourceTree = "<group>"; };
@@ -246,6 +249,7 @@
 				16E600222050C1160002B4F0 /* PhotoCell.swift */,
 				16876A53207451FE002A7F5D /* MapCell.swift */,
 				166CFC2B2097FE2D00BE69C0 /* SubmissionCell.swift */,
+				16EA295F216A9A9B00877226 /* AgreementCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -671,6 +675,7 @@
 				1684514A2054967200013A07 /* ApiClient+Router.swift in Sources */,
 				1670B1242066F16700F4EBFA /* LoadingSubmissionsView.swift in Sources */,
 				1640259A20951A3600784CAA /* SettingsViewController.swift in Sources */,
+				16EA2960216A9A9B00877226 /* AgreementCell.swift in Sources */,
 				16AB45B3205217FA008B6F8C /* Utils.swift in Sources */,
 				166A5A3A2055D94E00FE5791 /* Base64Utils.swift in Sources */,
 				166CFC2C2097FE2D00BE69C0 /* SubmissionCell.swift in Sources */,
@@ -721,6 +726,7 @@
 				168C0AA62143555100FFD7C0 /* ApiClient+Router.swift in Sources */,
 				168C0AA72143555100FFD7C0 /* LoadingSubmissionsView.swift in Sources */,
 				168C0AA82143555100FFD7C0 /* SettingsViewController.swift in Sources */,
+				16EA2961216A9A9B00877226 /* AgreementCell.swift in Sources */,
 				168C0AA92143555100FFD7C0 /* Utils.swift in Sources */,
 				168C0AAA2143555100FFD7C0 /* Base64Utils.swift in Sources */,
 				168C0AAB2143555100FFD7C0 /* SubmissionCell.swift in Sources */,

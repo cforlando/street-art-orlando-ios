@@ -29,12 +29,7 @@ class FavoriteButton: UIControl {
 
         self.addSubview(imageView)
 
-        // Auto Layout
-
-        imageView.snp.makeConstraints { (make) in
-            make.size.equalTo(CGSize(width: Constants.width, height: Constants.height))
-            make.center.equalToSuperview()
-        }
+        setupConstraints()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -55,7 +50,7 @@ class FavoriteButton: UIControl {
 
 }
 
-// MARK: - Class Methods
+// MARK: - Methods
 
 extension FavoriteButton {
 
@@ -65,6 +60,13 @@ extension FavoriteButton {
 
     class var defaultImage: UIImage {
         return #imageLiteral(resourceName: "heart_icon").tintedImage(color: .white)!
+    }
+
+    func setupConstraints() {
+        imageView.snp.makeConstraints { (make) in
+            make.size.equalTo(CGSize(width: Constants.width, height: Constants.height))
+            make.center.equalToSuperview()
+        }
     }
 
 }

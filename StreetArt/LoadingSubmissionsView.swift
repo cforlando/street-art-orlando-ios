@@ -24,15 +24,23 @@ class LoadingSubmissionsView: UICollectionReusableView {
 
         self.addSubview(loadingView)
 
-        // AutoLayout
-
-        loadingView.snp.makeConstraints { (make) in
-            make.center.equalToSuperview()
-        }
+        setupConstraints()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+
+}
+
+// MARK: - Methods
+
+extension LoadingSubmissionsView {
+
+    func setupConstraints() {
+        loadingView.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+        }
     }
 
 }

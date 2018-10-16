@@ -36,15 +36,7 @@ class MapCell: UITableViewCell {
 
         self.contentView.addSubview(mapView)
 
-        // Auto Layout
-
-        overlayView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
-
-        mapView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
+        setupConstraints()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -66,6 +58,22 @@ class MapCell: UITableViewCell {
         } else {
             self.contentView.sendSubviewToBack(overlayView)
             overlayView.alpha = 0.0
+        }
+    }
+
+}
+
+// MARK: - Methods
+
+extension MapCell {
+
+    func setupConstraints() {
+        overlayView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+
+        mapView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
         }
     }
 

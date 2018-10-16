@@ -59,28 +59,7 @@ class ContentCell: UICollectionViewCell {
 
         textView.addSubview(textLabel)
 
-        // AutoLayout
-
-        overlayView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
-
-        imageView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
-
-        textView.snp.makeConstraints { (make) in
-            make.height.equalTo(44.0)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
-            make.bottom.equalToSuperview()
-        }
-
-        textLabel.snp.makeConstraints { (make) in
-            make.left.equalToSuperview().offset(5.0)
-            make.right.equalToSuperview().offset(-5.0)
-            make.centerY.equalToSuperview()
-        }
+        setupConstraints()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -111,6 +90,29 @@ class ContentCell: UICollectionViewCell {
 // MARK: - Methods
 
 extension ContentCell {
+
+    func setupConstraints() {
+        overlayView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+
+        imageView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+
+        textView.snp.makeConstraints { (make) in
+            make.height.equalTo(44.0)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+
+        textLabel.snp.makeConstraints { (make) in
+            make.left.equalToSuperview().offset(5.0)
+            make.right.equalToSuperview().offset(-5.0)
+            make.centerY.equalToSuperview()
+        }
+    }
 
     func set(submission: Submission?, isFavorite: Bool = false) {
         self.submission = submission

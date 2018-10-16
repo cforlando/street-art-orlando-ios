@@ -21,6 +21,7 @@ class PhotoViewController: UIViewController {
         static let description = "DescriptionCell"
         static let title = "TitleCell"
         static let artist = "ArtistCell"
+        static let nickname = "NicknameCell"
         static let map = "MapCell"
         static let note = "NoteCell"
     }
@@ -219,6 +220,13 @@ extension PhotoViewController {
         if let artist = submission.artist {
             content = ContentRow(text: BY_TEXT + " " + artist)
             content.groupIdentifier = GroupIdentifier.artist
+
+            rows.append(content)
+        }
+
+        if let nickname = submission.nickname {
+            content = ContentRow(text: PHOTO_SUBMITTED_BY_TEXT + " " + nickname)
+            content.groupIdentifier = GroupIdentifier.nickname
 
             rows.append(content)
         }
@@ -444,6 +452,10 @@ extension PhotoViewController {
             bodyLines.append("ARTIST: \(submissionArtist)")
         }
 
+        if let submissionNickname = submission.nickname {
+            bodyLines.append("USER: \(submissionNickname)")
+        }
+
         emailBody += "\n"
         emailBody += bodyLines.joined(separator: "\n")
 
@@ -454,6 +466,48 @@ extension PhotoViewController {
         controller.setMessageBody(emailBody, isHTML: false)
 
         LocalAnalytics.shared.customEvent(.report, submission: submission)
+        self.present(controller, animated: true, completion: nil)
+    }
+
+    func displayReportUserEmail() {
+        guard MFMailComposeViewController.canSendMail() else {
+            let alertView = UIAlertController(title: REPORT_USER_TEXT, message: EMAIL_NOT_CONFIGURED_TEXT, preferredStyle: .alert)
+
+            let okAction = UIAlertAction(title: OK_TEXT, style: .cancel, handler: nil)
+            alertView.addAction(okAction)
+
+            self.navigationController?.present(alertView, animated: true, completion: nil)
+            return
+        }
+
+        var emailBody = EMAIL_REPORT_USER_BODY
+
+        var bodyLines = [String]()
+
+        bodyLines.append("ID: \(submission.id)")
+
+        if let submissionTitle = submission.title {
+            bodyLines.append("TITLE: \(submissionTitle)")
+        }
+
+        if let submissionArtist = submission.artist {
+            bodyLines.append("ARTIST: \(submissionArtist)")
+        }
+
+        if let submissionNickname = submission.nickname {
+            bodyLines.append("USER: \(submissionNickname)")
+        }
+
+        emailBody += "\n"
+        emailBody += bodyLines.joined(separator: "\n")
+
+        let controller = MFMailComposeViewController()
+        controller.mailComposeDelegate = self
+        controller.setToRecipients([Emails.report])
+        controller.setSubject(EMAIL_REPORT_USER_SUBJECT)
+        controller.setMessageBody(emailBody, isHTML: false)
+
+        LocalAnalytics.shared.customEvent(.reportUser, submission: submission)
         self.present(controller, animated: true, completion: nil)
     }
 
@@ -589,10 +643,15 @@ extension PhotoViewController {
         }
         actionSheet.addAction(correctionAction)
 
-        let reportAction = UIAlertAction(title: REPORT_TEXT, style: .destructive) { [unowned self] (action) in
+        let reportAction = UIAlertAction(title: REPORT_TEXT, style: .default) { [unowned self] (action) in
             self.displayReportEmail()
         }
         actionSheet.addAction(reportAction)
+
+        let reportUserAction = UIAlertAction(title: REPORT_USER_TEXT, style: .default) { [unowned self] (action) in
+            self.displayReportUserEmail()
+        }
+        actionSheet.addAction(reportUserAction)
 
         let cancelAction = UIAlertAction(title: CANCEL_TEXT, style: .cancel, handler: nil)
         actionSheet.addAction(cancelAction)
@@ -651,6 +710,22 @@ extension PhotoViewController: UITableViewDataSource {
                 cell = UITableViewCell(style: .default, reuseIdentifier: GroupIdentifier.artist)
                 cell?.textLabel?.font = UIFont.systemFont(ofSize: 14.0)
                 cell?.textLabel?.textColor = .lightGray
+            }
+
+            cell?.textLabel?.text = row.text
+
+            cell?.accessoryType = .none
+            cell?.selectionStyle = .none
+
+            return cell!
+        }
+
+        if identifier == GroupIdentifier.nickname {
+            var cell = tableView.dequeueReusableCell(withIdentifier: GroupIdentifier.nickname)
+            if cell == nil {
+                cell = UITableViewCell(style: .default, reuseIdentifier: GroupIdentifier.nickname)
+                cell?.textLabel?.font = UIFont.systemFont(ofSize: 14.0)
+                cell?.textLabel?.textColor = .darkGray
             }
 
             cell?.textLabel?.text = row.text

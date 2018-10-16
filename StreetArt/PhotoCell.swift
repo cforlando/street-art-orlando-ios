@@ -55,16 +55,7 @@ class PhotoCell: UITableViewCell {
 
         self.contentView.addSubview(photoImageView)
 
-        // Auto Layout
-
-        overlayView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
-
-        photoImageView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
-
+        setupConstraints()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -92,6 +83,16 @@ class PhotoCell: UITableViewCell {
 // MARK: - Methods
 
 extension PhotoCell {
+
+    func setupConstraints() {
+        overlayView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+
+        photoImageView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+    }
 
     func enableResetIfNeeded() {
         if let _ = resetButton {

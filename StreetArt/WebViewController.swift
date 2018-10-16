@@ -15,6 +15,8 @@ class WebViewController: UIViewController {
 
     var url: URL?
 
+    var dismissBlock: (() -> Void)?
+
     init(url: URL?) {
         super.init(nibName: nil, bundle: nil)
         self.url = url
@@ -39,6 +41,17 @@ class WebViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if let _ = self.dismissBlock {
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+                title: DONE_TEXT,
+                style: .done,
+                target: self,
+                action: #selector(dismissAction(_:))
+            )
+        }
+
+        // AutoLayout
+
         webView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
@@ -49,6 +62,16 @@ class WebViewController: UIViewController {
         } else {
             dLog("url is null")
         }
+    }
+
+}
+
+// MARK: - Selector Methods
+
+extension WebViewController {
+
+    @objc func dismissAction(_ sender: AnyObject?) {
+        dismissBlock?()
     }
 
 }

@@ -29,17 +29,25 @@ class ErrorView: UIView {
 
         self.addSubview(titleLabel)
 
-        // Auto Layout
+        setupConstraints()
+    }
 
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+
+}
+
+// MARK: - Methods
+
+extension ErrorView {
+
+    func setupConstraints() {
         titleLabel.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
             make.left.equalToSuperview().offset(15.0)
             make.right.equalToSuperview().offset(-15.0)
         }
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
     }
 
 }

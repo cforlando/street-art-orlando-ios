@@ -13,6 +13,7 @@ class RegisterViewController: UIViewController {
 
     struct GroupIdentifier {
         static let field = "FieldCell"
+        static let agreement = "AgreementCell"
     }
 
     var tableView: UITableView!
@@ -21,7 +22,7 @@ class RegisterViewController: UIViewController {
 
     var emailField: UITextField!
     var emailConfirmationField: UITextField!
-    var nameField: UITextField!
+    var nicknameField: UITextField!
     var passwordField: UITextField!
 
     var showPasswordButton: UIButton!
@@ -31,6 +32,8 @@ class RegisterViewController: UIViewController {
     var footerView: UIView!
 
     var loginBlock: (() -> Void)?
+
+    var acceptedTerms = false
 
     lazy var emptySet: CharacterSet = {
         return CharacterSet.whitespacesAndNewlines
@@ -85,14 +88,14 @@ class RegisterViewController: UIViewController {
         emailConfirmationField.placeholder = REGISTER_EMAIL_CONFIRMATION_PLACEHOLDER
         emailConfirmationField.delegate = self
 
-        nameField = UITextField()
-        nameField.contentVerticalAlignment = .center
-        nameField.keyboardType = .default
-        nameField.returnKeyType = .done
-        nameField.autocapitalizationType = .words
-        nameField.autocorrectionType = .no
-        nameField.placeholder = REGISTER_NAME_PLACEHOLDER
-        nameField.delegate = self
+        nicknameField = UITextField()
+        nicknameField.contentVerticalAlignment = .center
+        nicknameField.keyboardType = .default
+        nicknameField.returnKeyType = .done
+        nicknameField.autocapitalizationType = .words
+        nicknameField.autocorrectionType = .no
+        nicknameField.placeholder = REGISTER_NICKNAME_PLACEHOLDER
+        nicknameField.delegate = self
 
         passwordField = UITextField()
         passwordField.contentVerticalAlignment = .center
@@ -154,6 +157,11 @@ class RegisterViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardDidShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardDidHideNotification, object: nil)
+    }
+
 }
 
 // MARK: -
@@ -176,7 +184,7 @@ extension RegisterViewController {
 
         rows.append(content)
 
-        content = ContentRow(object: nameField)
+        content = ContentRow(object: nicknameField)
         content.groupIdentifier = GroupIdentifier.field
 
         rows.append(content)
@@ -186,10 +194,30 @@ extension RegisterViewController {
 
         rows.append(content)
 
+        content = ContentRow(text: nil)
+        content.groupIdentifier = GroupIdentifier.agreement
+        content.height = AgreementCell.defaultHeight
+
+        rows.append(content)
+
         sections.append(ContentSection(title: nil, rows: rows))
 
         dataSource = sections
         tableView.reloadData()
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardShown(_:)),
+            name: UIResponder.keyboardDidShowNotification,
+            object: nil
+        )
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardHidden(_:)),
+            name: UIResponder.keyboardDidHideNotification,
+            object: nil
+        )
     }
 
     func displayAlert(message: String?, actions: [UIAlertAction]) {
@@ -215,7 +243,7 @@ extension RegisterViewController {
 
         let email = (emailField.text ?? String()).trimmingCharacters(in: emptySet)
         let emailConfirmation = (emailConfirmationField.text ?? String()).trimmingCharacters(in: emptySet)
-        let name: String = nameField.text ?? String()
+        let nickname = (nicknameField.text ?? String()).trimmingCharacters(in: emptySet)
         let password = (passwordField.text ?? String()).trimmingCharacters(in: emptySet)
 
         if email.isEmpty || emailConfirmation.isEmpty {
@@ -224,6 +252,10 @@ extension RegisterViewController {
 
         if email != emailConfirmation {
             messages.append(REGISTER_EMAIL_MATCH_ALERT)
+        }
+
+        if nickname.isEmpty {
+            messages.append(REGISTER_NICKNAME_REQUIRED)
         }
 
         if password.isEmpty {
@@ -236,9 +268,15 @@ extension RegisterViewController {
             return
         }
 
+        if !acceptedTerms {
+            let okAction = UIAlertAction(title: OK_TEXT, style: .cancel, handler: nil)
+            displayAlert(message: REGISTER_TERM_AGREE_ACCEPT_MESSAGE, actions: [okAction])
+            return
+        }
+
         HUD.show(.progress, onView: self.view)
 
-        ApiClient.shared.register(email: email, password: password, name: name) { [weak self] (result) in
+        ApiClient.shared.register(email: email, password: password, nickname: nickname, name: nil) { [weak self] (result) in
             guard let _ = self else {
                 return
             }
@@ -290,6 +328,26 @@ extension RegisterViewController {
         passwordField.text = text
     }
 
+    @objc func keyboardShown(_ notification: NSNotification) {
+        if let kbFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            var contentInset = tableView.contentInset
+            contentInset.bottom = kbFrame.size.height
+
+            UIView.animate(withDuration: 0.2, animations: {
+                self.tableView.contentInset = contentInset
+            })
+        }
+    }
+
+    @objc func keyboardHidden(_ notification: NSNotification) {
+        var contentInset = tableView.contentInset
+        contentInset.bottom = 0.0
+
+        UIView.animate(withDuration: 0.2, animations: {
+            self.tableView.contentInset = contentInset
+        })
+    }
+
 }
 
 // MARK: - UITableViewDataSource Methods
@@ -326,6 +384,17 @@ extension RegisterViewController: UITableViewDataSource {
             return cell!
         }
 
+        if identifier == GroupIdentifier.agreement {
+            var cell = tableView.dequeueReusableCell(withIdentifier: GroupIdentifier.agreement) as? AgreementCell
+            if cell == nil {
+                cell = AgreementCell(reuseIdentifier: GroupIdentifier.agreement)
+                cell?.agreementSwitch.isOn = acceptedTerms
+                cell?.agreementDelegate = self
+            }
+
+            return cell!
+        }
+
         return UITableViewCell(style: .default, reuseIdentifier: nil)
     }
 
@@ -345,9 +414,35 @@ extension RegisterViewController: UITableViewDelegate {
 
 }
 
+// MARK: - AgreementCellDelegate
+
+extension RegisterViewController: AgreementCellDelegate {
+
+    func didChangeAgreement(cell: UITableViewCell, value: Bool) {
+        dLog("dis change agreement")
+        acceptedTerms = value
+    }
+
+    func didPressAgreementButton(cell: UITableViewCell) {
+        let controller = WebViewController(url: URL(string: WebsiteURL.terms)!)
+
+        controller.dismissBlock = { [weak self] in
+            self?.navigationController?.dismiss(animated: true, completion: nil)
+        }
+
+        let navController = UINavigationController(rootViewController: controller)
+        self.navigationController?.present(navController, animated: true, completion: nil)
+    }
+
+}
+
 // MARK: UITextFieldDelegate Methods
 
 extension RegisterViewController: UITextFieldDelegate {
 
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return false
+    }
 
 }

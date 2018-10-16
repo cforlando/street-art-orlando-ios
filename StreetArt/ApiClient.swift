@@ -27,7 +27,7 @@ class ApiClient {
         static let URLString = URLHosts.production  // DO NOT CHANGE EVER!!!
         #else
         // Used for DEBUG BUILDS ONLY
-        static let URLString = URLHosts.localhost
+        static let URLString = URLHosts.production
         #endif
     }
 
@@ -78,12 +78,13 @@ class ApiClient {
 
 extension ApiClient {
 
-    func register(email: String, password: String, name: String?, completionHandler: @escaping ((Result<SuccessResponse>) -> Void)) {
+    func register(email: String, password: String, nickname: String, name: String?, completionHandler: @escaping ((Result<SuccessResponse>) -> Void)) {
         let route = Router.register
 
         var parameters = [
             "email": email,
-            "password": password
+            "password": password,
+            "nickname": nickname
         ]
 
         if let name = name, !name.isEmpty {
