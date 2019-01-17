@@ -66,7 +66,7 @@ class ApiClient {
         var headers = SessionManager.defaultHTTPHeaders
         headers[Headers.accept] = "application/json"
         headers[Headers.contentType] = "application/json"
-        headers[Headers.deviceIdentifier] = uniqueIdentifier()
+        headers[Headers.deviceIdentifier] = Settings.shared.deviceIdentifier
         configuration.httpAdditionalHeaders = headers
 
         return Alamofire.SessionManager(configuration: configuration)
