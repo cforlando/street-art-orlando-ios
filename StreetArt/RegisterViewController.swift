@@ -33,7 +33,7 @@ class RegisterViewController: UIViewController {
 
     var loginBlock: (() -> Void)?
 
-    var acceptedTerms = false
+    var acceptedTerms = true
 
     lazy var emptySet: CharacterSet = {
         return CharacterSet.whitespacesAndNewlines
@@ -406,6 +406,23 @@ extension RegisterViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+
+        let row = dataSource[indexPath.section].rows[indexPath.row]
+        let identifier = row.groupIdentifier ?? String()
+
+        switch identifier {
+        case GroupIdentifier.agreement:
+            let controller = WebViewController(url: URL(string: WebsiteURL.terms)!)
+
+            controller.dismissBlock = { [weak self] in
+                self?.navigationController?.dismiss(animated: true, completion: nil)
+            }
+
+            let navController = UINavigationController(rootViewController: controller)
+            self.navigationController?.present(navController, animated: true, completion: nil)
+        default:
+            break
+        }
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -421,17 +438,6 @@ extension RegisterViewController: AgreementCellDelegate {
     func didChangeAgreement(cell: UITableViewCell, value: Bool) {
         dLog("dis change agreement")
         acceptedTerms = value
-    }
-
-    func didPressAgreementButton(cell: UITableViewCell) {
-        let controller = WebViewController(url: URL(string: WebsiteURL.terms)!)
-
-        controller.dismissBlock = { [weak self] in
-            self?.navigationController?.dismiss(animated: true, completion: nil)
-        }
-
-        let navController = UINavigationController(rootViewController: controller)
-        self.navigationController?.present(navController, animated: true, completion: nil)
     }
 
 }

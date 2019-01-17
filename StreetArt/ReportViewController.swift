@@ -174,7 +174,7 @@ extension ReportViewController {
             cell?.accessoryType = .none
         }
 
-        cell?.selectionStyle = .default
+        cell?.selectionStyle = .none
 
         return cell!
     }

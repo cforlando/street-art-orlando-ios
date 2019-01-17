@@ -11,20 +11,19 @@ import UIKit
 protocol AgreementCellDelegate: AnyObject {
 
     func didChangeAgreement(cell: UITableViewCell, value: Bool)
-    func didPressAgreementButton(cell: UITableViewCell)
+
 }
 
 class AgreementCell: UITableViewCell {
 
     struct Constants {
-        static let height: CGFloat = 68.0
+        static let height: CGFloat = 44.0
     }
 
     static var defaultHeight = Constants.height
 
     var titleLabel: UILabel!
     var agreementSwitch: UISwitch!
-    var agreementButton: UIButton!
 
     weak var agreementDelegate: AgreementCellDelegate?
 
@@ -35,7 +34,7 @@ class AgreementCell: UITableViewCell {
         titleLabel.font = UIFont.systemFont(ofSize: 16.0)
         titleLabel.minimumScaleFactor = 12.0 / 16.0
         titleLabel.adjustsFontSizeToFitWidth = true
-        titleLabel.textColor = Color.text
+        titleLabel.textColor = Color.highlight
         titleLabel.textAlignment = .left
         titleLabel.text = REGISTER_TERM_AGREE_TITLE
 
@@ -46,12 +45,6 @@ class AgreementCell: UITableViewCell {
         agreementSwitch.addTarget(self, action: #selector(agreementSwitchAction(_:)), for: .valueChanged)
 
         self.contentView.addSubview(agreementSwitch)
-
-        agreementButton = UIButton(type: .system)
-        agreementButton.setTitle(REGISTER_TERM_AGREE_BUTTON_TEXT, for: .normal)
-        agreementButton.addTarget(self, action: #selector(agreementButtonAction(_:)), for: .touchUpInside)
-
-        self.contentView.addSubview(agreementButton)
 
         setupConstraints()
     }
@@ -74,7 +67,7 @@ extension AgreementCell {
 
     func setupConstraints() {
         titleLabel.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().offset(10.0)
+            make.centerY.equalToSuperview()
             make.left.equalToSuperview().offset(15.0)
             make.right.equalTo(agreementSwitch.snp.left).offset(-15.0)
         }
@@ -82,11 +75,6 @@ extension AgreementCell {
         agreementSwitch.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
             make.right.equalTo(self.contentView.snp.rightMargin)
-        }
-
-        agreementButton.snp.makeConstraints { (make) in
-            make.bottom.equalToSuperview().offset(-5.0)
-            make.left.equalTo(titleLabel.snp.left)
         }
     }
 
@@ -99,12 +87,6 @@ extension AgreementCell {
     @objc func agreementSwitchAction(_ agreementSwitch: UISwitch) {
         if let delegate = self.agreementDelegate {
             delegate.didChangeAgreement(cell: self, value: agreementSwitch.isOn)
-        }
-    }
-
-    @objc func agreementButtonAction(_ sender: AnyObject?) {
-        if let delegate = self.agreementDelegate {
-            delegate.didPressAgreementButton(cell: self)
         }
     }
 

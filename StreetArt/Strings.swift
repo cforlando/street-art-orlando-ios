@@ -65,11 +65,11 @@ let SETTINGS_TITLE = "Settings"
 
 let SETTINGS_LOGIN_BUTTON_TEXT = "Login"
 let SETTINGS_REGISTRATION_BUTTON_TEXT = "Create Account"
-let SETTINGS_REGISTRATION_FOOTER_TEXT = "You need to create an account to submit Street Art or save Favorites."
+let SETTINGS_REGISTRATION_FOOTER_TEXT = "Create an account to submit photos or save favorites."
 let SETTINGS_UPDATE_PASSWORD_TEXT = "Update Password"
-let SETTINGS_SUBMISSIONS_TITLE_TEXT = "Submissions"
-let SETTINGS_SUBMIT_ART_BUTTON_TEXT = "Submit Art"
-let SETTINGS_MY_SUBMISSIONS_TEXT = "My Submissions"
+let SETTINGS_SUBMISSIONS_TITLE_TEXT = "Photos"
+let SETTINGS_SUBMIT_ART_BUTTON_TEXT = "Submit Photo"
+let SETTINGS_MY_SUBMISSIONS_TEXT = "My Photos"
 let SETTINGS_LOGOUT_BUTTON_TEXT = "Logout"
 let SETTINGS_LOGOUT_CONFIRMATION_TEXT = "Are you sure?"
 
@@ -88,8 +88,8 @@ let UPDATE_PASSWORD_UPDATED_MESSAGE = "Password updated."
 
 // MARK: - Submissions
 
-let SUBMISSIONS_TITLE = "My Submissions"
-let SUBMISSIONS_EMPTY_TEXT = "No Submissions"
+let SUBMISSIONS_TITLE = "My Photos"
+let SUBMISSIONS_EMPTY_TEXT = "No Photos"
 
 // MARK: - Login
 
@@ -134,7 +134,6 @@ let REGISTER_NICKNAME_REQUIRED = "Nickname required"
 let REGISTER_PASSWORD_REQUIRED = "Password required"
 
 let REGISTER_TERM_AGREE_TITLE = "Agree with Terms & Conditions"
-let REGISTER_TERM_AGREE_BUTTON_TEXT = "View Terms & Conditions"
 let REGISTER_TERM_AGREE_ACCEPT_MESSAGE = "You must accept the terms and conditions before registering."
 
 // MARK: - Registration
@@ -188,15 +187,15 @@ let UPLOAD_REQUIRED_NAME = "Name Required"
 let UPLOAD_REQUIRED_IMAGE = "Image Required"
 
 let LOADING_ERROR_TITLE = "Loading Error"
-let LOADING_ERROR_MESSAGE = "Error loading Street Art"
+let LOADING_ERROR_MESSAGE = "Error loading photo"
 
-let UPLOAD_ERROR_TITLE = "Submission Error"
-let UPLOAD_ERROR_MESSAGE = "Error uploading Street Art"
+let UPLOAD_ERROR_TITLE = "Photo Error"
+let UPLOAD_ERROR_MESSAGE = "Error uploading photo"
 
 let LOGIN_ERROR_ALERT_TITLE = "Login"
 let LOGIN_ERROR_MISSING_ALERT_MESSAGE = "Enter Email and Pasword"
 let LOGIN_ERROR_FAIL_ALERT_MESSAGE = "Error while trying to login"
-let LOGIN_ERROR_SUBMIT_LOGIN_ALERT_MESSAGE = "You must be logged in submit your Street Art."
+let LOGIN_ERROR_SUBMIT_LOGIN_ALERT_MESSAGE = "You must be logged in submit photos."
 
 // MARK: - Email
 
