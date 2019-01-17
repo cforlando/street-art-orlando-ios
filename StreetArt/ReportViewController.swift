@@ -55,6 +55,8 @@ class ReportViewController: UITableViewController {
 
         self.navigationItem.rightBarButtonItem?.isEnabled = false
 
+        DataManager.shared.fetchUser(completionHandler: nil)
+
         DataManager.shared.fetchReportCodes(force: false) { [weak self] (reportCodes) in
             guard let _ = self else {
                 return
