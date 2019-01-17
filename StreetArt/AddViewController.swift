@@ -93,6 +93,7 @@ class AddViewController: UIViewController {
         titleField.returnKeyType = .done
         titleField.autocapitalizationType = .words
         titleField.placeholder = ADD_NAME_PLACEHOLDER
+        titleField.delegate = self
 
         artistField = UITextField()
         artistField.contentVerticalAlignment = .center
@@ -100,6 +101,7 @@ class AddViewController: UIViewController {
         artistField.returnKeyType = .done
         artistField.autocapitalizationType = .words
         artistField.placeholder = ADD_ARTIST_PLACEHOLDER
+        artistField.delegate = self
 
         notesTextView = UITextView()
         notesTextView.font = UIFont.systemFont(ofSize: 14.0)
@@ -628,6 +630,17 @@ extension AddViewController: CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         dLog("location failed: \(error)")
+    }
+
+}
+
+// MARK: - UITextFieldDelegate Methods
+
+extension AddViewController: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return false
     }
 
 }
