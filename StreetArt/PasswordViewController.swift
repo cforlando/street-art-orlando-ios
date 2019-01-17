@@ -114,6 +114,12 @@ extension PasswordViewController {
 
         passwordField.isSecureTextEntry = !passwordField.isSecureTextEntry
         passwordField.text = text
+
+        if passwordField.isSecureTextEntry {
+            showPasswordButton.setTitle(SHOW_PASSWORD_TEXT, for: .normal)
+        } else {
+            showPasswordButton.setTitle(HIDE_PASSWORD_TEXT, for: .normal)
+        }
     }
 
     @objc func updateAction(_ sender: AnyObject?) {
