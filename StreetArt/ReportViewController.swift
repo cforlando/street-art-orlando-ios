@@ -113,6 +113,8 @@ extension ReportViewController {
 
             switch result {
             case .success:
+                LocalAnalytics.shared.customEvent(.reportPhoto, submission: self?.submission)
+
                 let alertView = UIAlertController(
                     title: REPORT_TEXT,
                     message: REPORT_SUCCESS_TEXT,

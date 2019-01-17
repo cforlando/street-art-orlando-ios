@@ -431,6 +431,7 @@ extension PhotoViewController {
         let controller = ReportViewController(submission: submission)
         let navController = UINavigationController(rootViewController: controller)
 
+        LocalAnalytics.shared.customEvent(.reportPhotoIntent, submission: submission)
         self.navigationController?.present(navController, animated: true, completion: nil)
     }
 
