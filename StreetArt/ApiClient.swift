@@ -12,7 +12,7 @@ import Alamofire
 class ApiClient {
     struct URLHosts {
         static let forward = "https://sao-sharingan.fwd.wf/api/"
-        static let localhost = "http://localhost:5000/"
+        static let localhost = "http://localhost:5000/api/"
 
         // Staging Environment
         static let staging = "https://sao-api-staging.herokuapp.com/api/"
@@ -27,8 +27,15 @@ class ApiClient {
         static let URLString = URLHosts.production  // DO NOT CHANGE EVER!!!
         #else
         // Used for DEBUG BUILDS ONLY
-        static let URLString = URLHosts.production
+        static let URLString = URLHosts.localhost
         #endif
+    }
+
+    struct Headers {
+        static let accept = "Accept"
+        static let contentType = "Content-Type"
+        static let authorization = "Authorization"
+        static let deviceIdentifier = "Device-Identifier"
     }
 
     static let shared = ApiClient()
@@ -57,16 +64,17 @@ class ApiClient {
         let configuration = URLSessionConfiguration.default
 
         var headers = SessionManager.defaultHTTPHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        headers[Headers.accept] = "application/json"
+        headers[Headers.contentType] = "application/json"
+        headers[Headers.deviceIdentifier] = uniqueIdentifier()
         configuration.httpAdditionalHeaders = headers
 
         return Alamofire.SessionManager(configuration: configuration)
     }()
 
-    var additionalHeaders: HTTPHeaders {
+    var authenticatedHeaders: HTTPHeaders {
         let headers = [
-            "Authorization": authToken ?? String()
+            Headers.authorization: authToken ?? String(),
         ]
 
         return headers
@@ -129,6 +137,30 @@ extension ApiClient {
                         completionHandler(.success(SuccessResponse(json: json)))
                     } else {
                         completionHandler(.failure(ServerError.unknown))
+                    }
+                case .failure(let error):
+                    completionHandler(.failure(error))
+                }
+        }
+    }
+
+    func user(completionHandler: @escaping ((Result<User>) -> Void)) {
+        let route = Router.me
+
+        sessionManager.request(route, method: .get, headers: authenticatedHeaders)
+            .validate()
+            .responseSwiftyJSON { [weak self] (response) in
+                guard let _ = self else {
+                    return
+                }
+
+                switch response.result {
+                case .success(let json):
+                    if let user = User(json: json["user"]) {
+                        completionHandler(.success(user))
+                    } else {
+                        let error = NSError.customError(message: "unknown error")
+                        completionHandler(.failure(error))
                     }
                 case .failure(let error):
                     completionHandler(.failure(error))
@@ -214,7 +246,7 @@ extension ApiClient {
 
         let parameters = [ "password": password ]
 
-        sessionManager.request(route, method: .put, parameters: parameters, headers: additionalHeaders)
+        sessionManager.request(route, method: .put, parameters: parameters, headers: authenticatedHeaders)
             .validate()
             .responseSwiftyJSON { [weak self] (response) in
                 guard let _ = self else {
@@ -259,7 +291,7 @@ extension ApiClient {
         parameters["latitude"] = upload.coordinate.latitude
         parameters["longitude"] = upload.coordinate.longitude
 
-        sessionManager.request(route, method: .post, parameters: parameters, headers: additionalHeaders)
+        sessionManager.request(route, method: .post, parameters: parameters, headers: authenticatedHeaders)
             .validate()
             .responseSwiftyJSON { [weak self] (response) in
                 guard let _ = self else {
@@ -279,7 +311,7 @@ extension ApiClient {
         let route = Router.submissions
         let parameters = [ "page": page ]
 
-        sessionManager.request(route, parameters: parameters, headers: additionalHeaders)
+        sessionManager.request(route, parameters: parameters, headers: authenticatedHeaders)
             .validate()
             .responseSwiftyJSON { [weak self] (response) in
                 guard let _ = self else {
@@ -303,7 +335,7 @@ extension ApiClient {
     func mySubmissions(completionHandler: @escaping ((Result<SubmissionArray>) -> Void)) {
         let route = Router.mySubmissions
 
-        sessionManager.request(route, method: .get, headers: additionalHeaders).validate().responseSwiftyJSON { [weak self] (response) in
+        sessionManager.request(route, method: .get, headers: authenticatedHeaders).validate().responseSwiftyJSON { [weak self] (response) in
             guard let _ = self else {
                 return
             }
@@ -328,7 +360,7 @@ extension ApiClient {
     func favorites(completionHandler: @escaping ((Result<SubmissionArray>) -> Void)) {
         let route = Router.favorites
 
-        sessionManager.request(route, method: .get, headers: additionalHeaders)
+        sessionManager.request(route, method: .get, headers: authenticatedHeaders)
             .validate()
             .responseSwiftyJSON { [weak self] (response) in
                 guard let _ = self else {
@@ -355,7 +387,7 @@ extension ApiClient {
     func favorite(submission: Submission, completionHandler: @escaping ((Result<SuccessResponse>) -> Void)) {
         let route = Router.favorite(submissionId: submission.id)
 
-        sessionManager.request(route, method: .post, headers: additionalHeaders)
+        sessionManager.request(route, method: .post, headers: authenticatedHeaders)
             .validate()
             .responseSwiftyJSON { [weak self] (response) in
                 guard let _ = self else {
@@ -374,7 +406,7 @@ extension ApiClient {
     func unfavorite(submission: Submission, completionHandler: @escaping ((Result<SuccessResponse>) -> Void)) {
         let route = Router.unfavorite(submissionId: submission.id)
 
-        sessionManager.request(route, method: .delete, headers: additionalHeaders)
+        sessionManager.request(route, method: .delete, headers: authenticatedHeaders)
             .validate()
             .responseSwiftyJSON { [weak self] (response) in
                 guard let _ = self else {
@@ -384,6 +416,67 @@ extension ApiClient {
                 switch response.result {
                 case .success(let json):
                     completionHandler(.success(SuccessResponse(json: json)))
+                case .failure(let error):
+                    completionHandler(.failure(error))
+                }
+        }
+    }
+
+}
+
+// MARK: - Reports
+
+extension ApiClient {
+
+    func submitReport(submissionId: Int, code: Int, userId: Int?, completionHandler: @escaping ((Result<SuccessResponse>) -> Void)) {
+        let route = Router.reports
+
+        var parameters: Parameters = [
+            "submission_id": submissionId,
+            "code": code
+        ]
+
+        if let userId = userId {
+            parameters["user_id"] = userId
+        }
+
+        sessionManager.request(route, method: .post, parameters: parameters)
+            .validate()
+            .responseSwiftyJSON { [weak self] (response) in
+                guard let _ = self else {
+                    return
+                }
+
+                switch response.result {
+                case .success(let json):
+                    completionHandler(.success(SuccessResponse(json: json)))
+                case .failure(let error):
+                    completionHandler(.failure(error))
+                }
+        }
+    }
+
+    func reportCodes(completionHandler: @escaping ((Result<ReportCodeArray>) -> Void)) {
+        let route = Router.reportsCodes
+
+        sessionManager.request(route, method: .get)
+            .validate()
+            .responseSwiftyJSON { [weak self] (response) in
+                guard let _ = self else {
+                    return
+                }
+
+                switch response.result {
+                case .success(let json):
+                    var reportCodes = ReportCodeArray()
+
+                    for raw in json["codes"].arrayValue {
+                        if let code = ReportCode(json: raw) {
+                            reportCodes.append(code)
+                        }
+                    }
+
+                    completionHandler(.success(reportCodes))
                 case .failure(let error):
                     completionHandler(.failure(error))
                 }

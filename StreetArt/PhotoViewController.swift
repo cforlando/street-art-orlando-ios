@@ -427,88 +427,11 @@ extension PhotoViewController {
         self.present(controller, animated: true, completion: nil)
     }
 
-    func displayReportEmail() {
-        guard MFMailComposeViewController.canSendMail() else {
-            let alertView = UIAlertController(title: REPORT_TEXT, message: EMAIL_NOT_CONFIGURED_TEXT, preferredStyle: .alert)
+    func displayReportController() {
+        let controller = ReportViewController(submission: submission)
+        let navController = UINavigationController(rootViewController: controller)
 
-            let okAction = UIAlertAction(title: OK_TEXT, style: .cancel, handler: nil)
-            alertView.addAction(okAction)
-
-            self.navigationController?.present(alertView, animated: true, completion: nil)
-            return
-        }
-
-        var emailBody = EMAIL_REPORT_BODY
-
-        var bodyLines = [String]()
-
-        bodyLines.append("ID: \(submission.id)")
-
-        if let submissionTitle = submission.title {
-            bodyLines.append("TITLE: \(submissionTitle)")
-        }
-
-        if let submissionArtist = submission.artist {
-            bodyLines.append("ARTIST: \(submissionArtist)")
-        }
-
-        if let submissionNickname = submission.nickname {
-            bodyLines.append("USER: \(submissionNickname)")
-        }
-
-        emailBody += "\n"
-        emailBody += bodyLines.joined(separator: "\n")
-
-        let controller = MFMailComposeViewController()
-        controller.mailComposeDelegate = self
-        controller.setToRecipients([Emails.report])
-        controller.setSubject(EMAIL_REPORT_SUBJECT)
-        controller.setMessageBody(emailBody, isHTML: false)
-
-        LocalAnalytics.shared.customEvent(.report, submission: submission)
-        self.present(controller, animated: true, completion: nil)
-    }
-
-    func displayReportUserEmail() {
-        guard MFMailComposeViewController.canSendMail() else {
-            let alertView = UIAlertController(title: REPORT_USER_TEXT, message: EMAIL_NOT_CONFIGURED_TEXT, preferredStyle: .alert)
-
-            let okAction = UIAlertAction(title: OK_TEXT, style: .cancel, handler: nil)
-            alertView.addAction(okAction)
-
-            self.navigationController?.present(alertView, animated: true, completion: nil)
-            return
-        }
-
-        var emailBody = EMAIL_REPORT_USER_BODY
-
-        var bodyLines = [String]()
-
-        bodyLines.append("ID: \(submission.id)")
-
-        if let submissionTitle = submission.title {
-            bodyLines.append("TITLE: \(submissionTitle)")
-        }
-
-        if let submissionArtist = submission.artist {
-            bodyLines.append("ARTIST: \(submissionArtist)")
-        }
-
-        if let submissionNickname = submission.nickname {
-            bodyLines.append("USER: \(submissionNickname)")
-        }
-
-        emailBody += "\n"
-        emailBody += bodyLines.joined(separator: "\n")
-
-        let controller = MFMailComposeViewController()
-        controller.mailComposeDelegate = self
-        controller.setToRecipients([Emails.report])
-        controller.setSubject(EMAIL_REPORT_USER_SUBJECT)
-        controller.setMessageBody(emailBody, isHTML: false)
-
-        LocalAnalytics.shared.customEvent(.reportUser, submission: submission)
-        self.present(controller, animated: true, completion: nil)
+        self.navigationController?.present(navController, animated: true, completion: nil)
     }
 
     func openMaps(from: CLLocationCoordinate2D) {
@@ -643,15 +566,10 @@ extension PhotoViewController {
         }
         actionSheet.addAction(correctionAction)
 
-        let reportAction = UIAlertAction(title: REPORT_TEXT, style: .default) { [unowned self] (action) in
-            self.displayReportEmail()
+        let reportAction = UIAlertAction(title: REPORT_TEXT, style: .destructive) { [unowned self] (action) in
+            self.displayReportController()
         }
         actionSheet.addAction(reportAction)
-
-        let reportUserAction = UIAlertAction(title: REPORT_USER_TEXT, style: .default) { [unowned self] (action) in
-            self.displayReportUserEmail()
-        }
-        actionSheet.addAction(reportUserAction)
 
         let cancelAction = UIAlertAction(title: CANCEL_TEXT, style: .cancel, handler: nil)
         actionSheet.addAction(cancelAction)

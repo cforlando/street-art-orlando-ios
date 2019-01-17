@@ -171,7 +171,9 @@ let PHOTO_TEXT = "Photo"
 let MAP_TEXT = "Map"
 let CORRECTION_TEXT = "Submit Correction"
 let REPORT_TEXT = "Report Photo"
-let REPORT_USER_TEXT = "Report User"
+let REPORT_CODES_ERROR_TEXT = "Error fetching report codes."
+let REPORT_QUESTION_TEXT = "Why are you reporting this photo?"
+let REPORT_SUCCESS_TEXT = "Photo reported successfully."
 let SHARE_TEXT = "Share Photo"
 let SHARE_IMAGE_NOT_AVAILABLE_TEXT = "Image not available"
 let SHARE_IMAGE_MESSAGE = "Check out this cool photo from the Street Art Orlando App."
@@ -200,12 +202,6 @@ let LOGIN_ERROR_SUBMIT_LOGIN_ALERT_MESSAGE = "You must be logged in submit your 
 
 let EMAIL_CORRECTION_SUBJECT = "Street Art Orlando Correction"
 let EMAIL_CORRECTION_BODY = "\n\nInclude your notes about what should be corrected above.\n\nDON'T EDIT TEXT BELOW THIS LINE\n----------\n"
-
-let EMAIL_REPORT_SUBJECT = "Street Art Orlando Report"
-let EMAIL_REPORT_BODY = "\n\nInclude the reasons why you believe this photo violates our Terms & Conditions above. One of our moderators will respond to your request within the next 24 hours.\n\nDON'T EDIT TEXT BELOW THIS LINE\n----------\n"
-
-let EMAIL_REPORT_USER_SUBJECT = "Street Art Orlando Report User"
-let EMAIL_REPORT_USER_BODY = "\n\nInclude the reasons why you believe this user is violating our Terms & Conditions above. One of our moderators will respond to your request within the next 24 hours.\n\nDON'T EDIT TEXT BELOW THIS LINE\n----------\n"
 
 // MARK: - Location
 

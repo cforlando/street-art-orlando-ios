@@ -16,6 +16,10 @@
 		164025A32095298E00784CAA /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164025A22095298E00784CAA /* RegisterViewController.swift */; };
 		164025A520952A8900784CAA /* UIButton+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164025A420952A8900784CAA /* UIButton+Additions.swift */; };
 		1661444720AC295D00F4E3A8 /* ForgotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1661444620AC295D00F4E3A8 /* ForgotViewController.swift */; };
+		1663FBD921E1EB9C00D3D7E8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1663FBD821E1EB9C00D3D7E8 /* User.swift */; };
+		1663FBDA21E1EB9C00D3D7E8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1663FBD821E1EB9C00D3D7E8 /* User.swift */; };
+		1663FBDC21E1EE2900D3D7E8 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1663FBDB21E1EE2900D3D7E8 /* DataManager.swift */; };
+		1663FBDD21E1EE2900D3D7E8 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1663FBDB21E1EE2900D3D7E8 /* DataManager.swift */; };
 		166674CB207947CE00387EC6 /* UIImage+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166674CA207947CE00387EC6 /* UIImage+Additions.swift */; };
 		166A5A342055ACF000FE5791 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166A5A332055ACF000FE5791 /* Settings.swift */; };
 		166A5A362055D12E00FE5791 /* ErrorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166A5A352055D12E00FE5791 /* ErrorUtils.swift */; };
@@ -95,6 +99,10 @@
 		16AB45B3205217FA008B6F8C /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AB45B2205217FA008B6F8C /* Utils.swift */; };
 		16AB45B52052182E008B6F8C /* FileUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AB45B42052182E008B6F8C /* FileUtils.swift */; };
 		16AB45B7205218A4008B6F8C /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AB45B6205218A4008B6F8C /* Color.swift */; };
+		16ACBBCA21EF7DDE0087BCCC /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16ACBBC921EF7DDE0087BCCC /* ReportViewController.swift */; };
+		16ACBBCB21EF7DDE0087BCCC /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16ACBBC921EF7DDE0087BCCC /* ReportViewController.swift */; };
+		16ACBBCD21EF84FE0087BCCC /* ReportCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16ACBBCC21EF84FE0087BCCC /* ReportCode.swift */; };
+		16ACBBCE21EF84FE0087BCCC /* ReportCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16ACBBCC21EF84FE0087BCCC /* ReportCode.swift */; };
 		16C23343211F7A4500F17217 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 16C23342211F7A4500F17217 /* GoogleService-Info.plist */; };
 		16C6BB332131CF2600048E81 /* LocalAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C6BB322131CF2600048E81 /* LocalAnalytics.swift */; };
 		16E600232050C1160002B4F0 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E600222050C1160002B4F0 /* PhotoCell.swift */; };
@@ -117,6 +125,8 @@
 		164025A22095298E00784CAA /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		164025A420952A8900784CAA /* UIButton+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Additions.swift"; sourceTree = "<group>"; };
 		1661444620AC295D00F4E3A8 /* ForgotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotViewController.swift; sourceTree = "<group>"; };
+		1663FBD821E1EB9C00D3D7E8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		1663FBDB21E1EE2900D3D7E8 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		166674CA207947CE00387EC6 /* UIImage+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Additions.swift"; sourceTree = "<group>"; };
 		166A5A332055ACF000FE5791 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		166A5A352055D12E00FE5791 /* ErrorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorUtils.swift; sourceTree = "<group>"; };
@@ -158,6 +168,8 @@
 		16AB45B2205217FA008B6F8C /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		16AB45B42052182E008B6F8C /* FileUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUtils.swift; sourceTree = "<group>"; };
 		16AB45B6205218A4008B6F8C /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		16ACBBC921EF7DDE0087BCCC /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
+		16ACBBCC21EF84FE0087BCCC /* ReportCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportCode.swift; sourceTree = "<group>"; };
 		16C23342211F7A4500F17217 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		16C6BB322131CF2600048E81 /* LocalAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAnalytics.swift; sourceTree = "<group>"; };
 		16E600222050C1160002B4F0 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
@@ -228,6 +240,7 @@
 				16845144205483BB00013A07 /* PhotoViewController.swift */,
 				16F9573920C0D74B0058699D /* ImageViewController.swift */,
 				169D3E87215B10AC00A4F1A3 /* WebViewController.swift */,
+				16ACBBC921EF7DDE0087BCCC /* ReportViewController.swift */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -334,6 +347,7 @@
 				168451492054967200013A07 /* ApiClient+Router.swift */,
 				166A5A332055ACF000FE5791 /* Settings.swift */,
 				16C6BB322131CF2600048E81 /* LocalAnalytics.swift */,
+				1663FBDB21E1EE2900D3D7E8 /* DataManager.swift */,
 			);
 			name = Singletons;
 			sourceTree = "<group>";
@@ -366,6 +380,8 @@
 				1670D967204F97B900E223ED /* Submission.swift */,
 				16A5395A205F26AB0051CE4F /* SubmissionUpload.swift */,
 				1691E2AD20A899920084B356 /* SuccessResponse.swift */,
+				1663FBD821E1EB9C00D3D7E8 /* User.swift */,
+				16ACBBCC21EF84FE0087BCCC /* ReportCode.swift */,
 			);
 			name = "Model + Data";
 			sourceTree = "<group>";
@@ -622,17 +638,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16ACBBCD21EF84FE0087BCCC /* ReportCode.swift in Sources */,
 				1670D968204F97B900E223ED /* Submission.swift in Sources */,
 				1661444720AC295D00F4E3A8 /* ForgotViewController.swift in Sources */,
 				162042E12078C78D00F3BE99 /* FavoritesViewController.swift in Sources */,
 				16906C8D208A66C70097CBDA /* FavoriteButton.swift in Sources */,
 				1691E2AE20A899920084B356 /* SuccessResponse.swift in Sources */,
+				1663FBDC21E1EE2900D3D7E8 /* DataManager.swift in Sources */,
 				1670D95B204F703A00E223ED /* ContentCell.swift in Sources */,
 				1670D95E204F73CD00E223ED /* ContentUtils.swift in Sources */,
 				16C6BB332131CF2600048E81 /* LocalAnalytics.swift in Sources */,
 				168451482054962B00013A07 /* ApiClient.swift in Sources */,
 				168451412054545400013A07 /* AppConfig.swift in Sources */,
 				16A5395B205F26AB0051CE4F /* SubmissionUpload.swift in Sources */,
+				16ACBBCA21EF7DDE0087BCCC /* ReportViewController.swift in Sources */,
 				16F9573A20C0D74B0058699D /* ImageViewController.swift in Sources */,
 				162E8D71207AAAD900A7E2D8 /* MapDot.swift in Sources */,
 				16AB45B52052182E008B6F8C /* FileUtils.swift in Sources */,
@@ -645,6 +664,7 @@
 				16AB45B7205218A4008B6F8C /* Color.swift in Sources */,
 				164025A520952A8900784CAA /* UIButton+Additions.swift in Sources */,
 				169D3E88215B10AC00A4F1A3 /* WebViewController.swift in Sources */,
+				1663FBD921E1EB9C00D3D7E8 /* User.swift in Sources */,
 				166A5A362055D12E00FE5791 /* ErrorUtils.swift in Sources */,
 				1670D966204F96E300E223ED /* AddViewController.swift in Sources */,
 				166CFC2F209808BB00BE69C0 /* SubmissionsViewController.swift in Sources */,
@@ -673,17 +693,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16ACBBCE21EF84FE0087BCCC /* ReportCode.swift in Sources */,
 				168C0A8B2143555100FFD7C0 /* Submission.swift in Sources */,
 				168C0A8C2143555100FFD7C0 /* ForgotViewController.swift in Sources */,
 				168C0A8D2143555100FFD7C0 /* FavoritesViewController.swift in Sources */,
 				168C0A8F2143555100FFD7C0 /* FavoriteButton.swift in Sources */,
 				168C0A902143555100FFD7C0 /* SuccessResponse.swift in Sources */,
+				1663FBDD21E1EE2900D3D7E8 /* DataManager.swift in Sources */,
 				168C0A912143555100FFD7C0 /* ContentCell.swift in Sources */,
 				168C0A922143555100FFD7C0 /* ContentUtils.swift in Sources */,
 				168C0A932143555100FFD7C0 /* LocalAnalytics.swift in Sources */,
 				168C0A942143555100FFD7C0 /* ApiClient.swift in Sources */,
 				168C0A952143555100FFD7C0 /* AppConfig.swift in Sources */,
 				168C0A962143555100FFD7C0 /* SubmissionUpload.swift in Sources */,
+				16ACBBCB21EF7DDE0087BCCC /* ReportViewController.swift in Sources */,
 				168C0A972143555100FFD7C0 /* ImageViewController.swift in Sources */,
 				168C0A982143555100FFD7C0 /* MapDot.swift in Sources */,
 				168C0A992143555100FFD7C0 /* FileUtils.swift in Sources */,
@@ -696,6 +719,7 @@
 				168C0AA02143555100FFD7C0 /* Color.swift in Sources */,
 				168C0AA12143555100FFD7C0 /* UIButton+Additions.swift in Sources */,
 				169D3E89215B10AC00A4F1A3 /* WebViewController.swift in Sources */,
+				1663FBDA21E1EB9C00D3D7E8 /* User.swift in Sources */,
 				168C0AA22143555100FFD7C0 /* ErrorUtils.swift in Sources */,
 				168C0AA32143555100FFD7C0 /* AddViewController.swift in Sources */,
 				168C0AA42143555100FFD7C0 /* SubmissionsViewController.swift in Sources */,

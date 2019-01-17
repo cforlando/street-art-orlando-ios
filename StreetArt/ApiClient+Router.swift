@@ -18,11 +18,14 @@ extension ApiClient {
         case passwordValidateToken
         case passwordReset
         case passwordUpdate
+        case me
         case submissions
         case mySubmissions
         case favorites
         case favorite(submissionId: Int)
         case unfavorite(submissionId: Int)
+        case reports
+        case reportsCodes
 
         static var URLString: String {
             let string = Config.URLString
@@ -47,6 +50,8 @@ extension ApiClient {
                 return "password/reset"
             case .passwordUpdate:
                 return "password/update"
+            case .me:
+                return "users/me"
             case .submissions:
                 return "submissions"
             case .mySubmissions:
@@ -57,6 +62,11 @@ extension ApiClient {
                 return "submissions/\(submissionId)/favorite"
             case .unfavorite(let submissionId):
                 return "submissions/\(submissionId)/unfavorite"
+            case .reports:
+                return "reports"
+            case .reportsCodes:
+                return "reports/codes"
+
             }
         }
 

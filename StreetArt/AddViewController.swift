@@ -560,7 +560,7 @@ extension AddViewController: UITableViewDelegate {
 
 // MARK: - PhotoCellDelegate Methods
 
-extension AddViewController: PhotoCellDelegate{
+extension AddViewController: PhotoCellDelegate {
 
     var enableImageReset: Bool {
         return true

@@ -122,6 +122,7 @@ extension SubmissionsViewController {
 
             switch result {
             case .success(let submissions):
+                DataManager.shared.fetchUser(completionHandler: nil)
                 weakSelf.submissions = submissions
                 weakSelf.updateDataSource()
             case .failure(let error):
