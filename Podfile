@@ -6,11 +6,11 @@ use_frameworks!
 
 def shared_pods
   # Pods for Street Art Orlando
-  pod 'Alamofire', '~> 4.6.0', inhibit_warnings: true
-  pod 'AlamofireImage', '~> 3.3.0', inhibit_warnings: true
-  pod 'SnapKit', '~> 4.0.0'
+  pod 'Alamofire', '~> 4.8.1', inhibit_warnings: true
+  pod 'AlamofireImage', '~> 3.5.0', inhibit_warnings: true
+  pod 'SnapKit', '~> 4.2.0'
   pod 'SwiftyJSON', '~> 4.0.0'
-  pod 'PKHUD', '~> 5.0.0', inhibit_warnings: true
+  pod 'PKHUD', '~> 5.2.1', inhibit_warnings: true
   pod 'Firebase/Core'
 end
 
