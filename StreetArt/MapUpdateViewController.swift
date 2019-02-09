@@ -23,9 +23,12 @@ class MapUpdateViewController: UIViewController {
 
     var isDotVisible = false
 
-    init(currentLocation: CLLocation? = nil) {
+    init(coordinate: CLLocationCoordinate2D? = nil) {
         super.init(nibName: nil, bundle: nil)
-        self.currentLocation = currentLocation
+
+        if let coordinate = coordinate {
+            self.currentLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        }
     }
 
     required init?(coder aDecoder: NSCoder) {

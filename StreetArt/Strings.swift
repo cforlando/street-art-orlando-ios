@@ -182,6 +182,8 @@ let CURRENT_LOCATION_TEXT = "Current Location"
 let STREET_ART_LOCATION_TEXT = "Street Art Location"
 
 let PHOTOS_NOT_SUPPORTED_ALERT = "Photos not supported in this device."
+let PHOTO_LIBRARY_NOT_SUPPORTED_TITLE = "Photo Library Error"
+let PHOTO_LIBRARY_NOT_SUPPORTED_ALERT = "Enable Photos permission in App Settings."
 
 let UPLOAD_REQUIRED_TITLE = "Submit"
 let UPLOAD_REQUIRED_NAME = "Name Required"

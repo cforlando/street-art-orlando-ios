@@ -36,19 +36,19 @@
 				<key>NSAllowsArbitraryLoads</key>
 				<true/>
 			</dict>
-            <key>streetartorlando.com</key>
-            <dict>
-                <key>NSThirdPartyExceptionAllowsInsecureHTTPLoads</key>
-                <true/>
-            </dict>
+			<key>streetartorlando.com</key>
+			<dict>
+				<key>NSThirdPartyExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Upload pictures of amazing street art in Orlando.</string>
+	<string>Take photos of amazing street art.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>We want to know where the Street Art is Located.</string>
+	<string>We want to know where the street art is located.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Upload pictures of amazing street art in Orlando.</string>
+	<string>Upload photos of amazing street art.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -68,6 +68,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-    <key>ITSAppUsesNonExemptEncryption</key><false/>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 </dict>
 </plist>

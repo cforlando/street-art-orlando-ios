@@ -9,6 +9,7 @@
 import UIKit
 import MobileCoreServices
 import MapKit
+import Photos
 import PKHUD
 
 class AddViewController: UIViewController {
@@ -39,9 +40,9 @@ class AddViewController: UIViewController {
 
     var dataSource = ContentSectionArray()
     var image: UIImage?
+    var photoCoordinate: CLLocationCoordinate2D?
 
     var locationManager: CLLocationManager!
-    var currentLocation: CLLocation?
 
     var completionBlock: (() -> Void)?
     var cancelBlock: (() -> Void)?
@@ -146,7 +147,7 @@ class AddViewController: UIViewController {
 
         locationManager.delegate = self
 
-        if currentLocation == nil {
+        if photoCoordinate == nil {
             locationManager.requestWhenInUseAuthorization()
             locationManager.startUpdatingLocation()
         }
@@ -242,13 +243,6 @@ extension AddViewController {
         tableView.reloadData()
     }
 
-}
-
-// MARK: -
-// MARK: Methods
-
-extension AddViewController {
-
     func showCamera() {
         let imageController = UIImagePickerController()
         imageController.view.backgroundColor = .white
@@ -261,15 +255,50 @@ extension AddViewController {
     }
 
     func showPhotoLibrary() {
-        let imageController = UIImagePickerController()
-        imageController.view.backgroundColor = .white
-        imageController.delegate = self
-        imageController.sourceType = .photoLibrary
-        imageController.allowsEditing = false
-        imageController.mediaTypes = [ kUTTypeImage as String ]
+        PHPhotoLibrary.requestAuthorization { [weak self] (status) in
+            switch status {
+            case .authorized:
+                DispatchQueue.main.async {
+                    let imageController = UIImagePickerController()
+                    imageController.view.backgroundColor = .white
+                    imageController.delegate = self
+                    imageController.sourceType = .photoLibrary
+                    imageController.allowsEditing = false
+                    imageController.mediaTypes = [ kUTTypeImage as String ]
 
-        self.navigationController?.present(imageController, animated: true, completion: nil)
+                    self?.navigationController?.present(imageController, animated: true, completion: nil)
+                }
+            case .denied, .restricted:
+                DispatchQueue.main.async {
+                    let alertView = UIAlertController(
+                        title: PHOTO_LIBRARY_NOT_SUPPORTED_TITLE,
+                        message: PHOTO_LIBRARY_NOT_SUPPORTED_ALERT,
+                        preferredStyle: .alert
+                    )
+
+                    let okAction = UIAlertAction(title: OK_TEXT, style: .cancel, handler: nil)
+                    alertView.addAction(okAction)
+
+                    self?.navigationController?.present(alertView, animated: true, completion: nil)
+                }
+            default:
+                break
+            }
+        }
     }
+
+    func updateMap(coordinate: CLLocationCoordinate2D, animated: Bool) {
+        for annotation in mapCell.mapView.annotations {
+            mapCell.mapView.removeAnnotation(annotation)
+        }
+
+        let annotation = SubmissionAnnotation(title: nil, coordinate: coordinate)
+        mapCell.mapView.addAnnotation(annotation)
+
+        let region = MKCoordinateRegion(center: annotation.coordinate, span: Defaults.mapSpan)
+        mapCell.mapView.setRegion(region, animated: animated)
+    }
+
 }
 
 // MARK: Selector Methods
@@ -313,7 +342,7 @@ extension AddViewController {
             return
         }
 
-        let coordinate = currentLocation?.coordinate ?? Defaults.mapCoordinate
+        let coordinate = photoCoordinate ?? Defaults.mapCoordinate
 
         let upload = SubmissionUpload(image: image!, coordinate: coordinate, title: artTitle)
         upload.artist = artist
@@ -505,12 +534,7 @@ extension AddViewController: UITableViewDelegate {
 
             self.navigationController?.present(actionSheet, animated: true, completion: nil)
         case GroupIdentifier.updateLocation:
-            let defaultLocation = CLLocation(
-                latitude: Defaults.mapCoordinate.latitude,
-                longitude: Defaults.mapCoordinate.longitude
-            )
-
-            let controller = MapUpdateViewController(currentLocation: currentLocation ?? defaultLocation)
+            let controller = MapUpdateViewController(coordinate: photoCoordinate ?? Defaults.mapCoordinate)
             controller.title = PHOTO_ART_LOCATION_TEXT
 
             controller.saveBlock = { [weak self] (coordinate) in
@@ -518,17 +542,8 @@ extension AddViewController: UITableViewDelegate {
                     return
                 }
 
-                weakSelf.currentLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-
-                for annotation in weakSelf.mapCell.mapView.annotations {
-                    weakSelf.mapCell.mapView.removeAnnotation(annotation)
-                }
-
-                let annotation = SubmissionAnnotation(title: nil, coordinate: coordinate)
-                weakSelf.mapCell.mapView.addAnnotation(annotation)
-
-                let region = MKCoordinateRegion(center: annotation.coordinate, span: Defaults.mapSpan)
-                weakSelf.mapCell.mapView.setRegion(region, animated: false)
+                weakSelf.photoCoordinate = coordinate
+                weakSelf.updateMap(coordinate: coordinate, animated: false)
 
                 weakSelf.navigationController?.dismiss(animated: true, completion: nil)
             }
@@ -575,6 +590,7 @@ extension AddViewController: PhotoCellDelegate {
             LocalAnalytics.shared.customEvent(.submissionResetPhoto)
             photoCell.set(image: nil)
             self.image = nil
+            self.photoCoordinate = nil
         }
         actionSheet.addAction(resetAction)
 
@@ -592,6 +608,12 @@ extension AddViewController: UIImagePickerControllerDelegate, UINavigationContro
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.originalImage] as? UIImage {
+            if let coordinate = (info[.phAsset] as? PHAsset)?.location?.coordinate, picker.sourceType == .photoLibrary {
+                dLog("photo coordinate: \(coordinate)")
+                photoCoordinate = coordinate
+                updateMap(coordinate: coordinate, animated: false)
+            }
+
             self.image = image.cfo_scaleAndRotate(withMaxResolution: Defaults.maxImageResizeInPixels)
             updateDataSource()
         }
@@ -614,17 +636,14 @@ extension AddViewController: CLLocationManagerDelegate {
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let _ = currentLocation {
+        if let _ = photoCoordinate {
             return
         }
 
         if let location = locations.first {
             manager.stopUpdatingLocation()
-            currentLocation = location
-
-            let region = MKCoordinateRegion(center: location.coordinate, span: Defaults.mapSpan)
-            mapCell.mapView.setRegion(region, animated: true)
-            mapCell.mapView.addAnnotation(SubmissionAnnotation(title: nil, coordinate: location.coordinate))
+            photoCoordinate = location.coordinate
+            updateMap(coordinate: location.coordinate, animated: true)
         }
     }
 
