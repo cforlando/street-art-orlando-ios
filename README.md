@@ -28,7 +28,7 @@ There are several ways to contribute:
 * Help with writing or editing documentation
 * Help us find potential users
 
-We welcome help and feedback. If this seems like a project you’re interested in dedicating time to, reach out to the project lead on the Code for Orlando Slack’s #streetart channel or in person at Community Action Night. 
+We welcome help and feedback. If this seems like a project you’re interested in dedicating time to, reach out to the project lead on the [Code for Orlando Slack](https://github.com/cforlando/wiki/wiki/Join-Slack) #streetart channel or in person at Community Action Night. 
 
 We use [Github issues](https://github.com/cforlando/street-art-orlando-ios/issues) to track tasks, features and bugs. Review the Github issues before submitting or tackling an issue. When you submit a bug report, please include as much information as possible, such as screenshots, operating system, etc. 
 
